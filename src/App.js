@@ -13,8 +13,8 @@ import ReactFlow, {
 // import CustomEdge from './CustomEdge';
 import SvgNode from "./SvgNode";
 
-import {nodesData, edgesData} from "./data"
-
+//import {nodesData, edgesData} from "./data"
+import {nodesData, edgesData} from "./exampleData1";
 
 
 //const edgeTypes = {

@@ -25,52 +25,44 @@ export default memo(({ data, isConnectable }) => {
 
     return (
         <>
-            <Handle
-                type="target"
-                position="left"
-                style={{ background: '#555' }}
-                onConnect={(params) => console.log('handle onConnect', params)}
-                isConnectable={isConnectable}
-            />
-            {/* <div className="wrap">
-                <div className="node-image">
-                <img src={SHAPES[data["shape"]]} alt={"shape"} style={{}}/>
-                <p className="text-on-image">{data.label}</p>
-                </div>
-            </div>
-            */}
             <svg width="50" height="50">
                 <image width="50" height="50" href={SHAPES[data.shape]}/>
                 <text fontSize="12px" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle">{data.label}</text>
             </svg>
 
-            {/*  <input
-                className="nodrag"
-                type="color"
-                onChange={data.onChange}
-                defaultValue={data.color}
-            />
-*/}
+
+
             <Handle
-                type="source"
-                position="bottom"
-                id="b"
-                // style={{ bottom: 10, top: 'auto', background: '#555' }}
-                //isConnectable={isConnectable}
+                type="target"
+                position="left"
+                id="left-target"
+                style={{ background: '#555' }}
+                onConnect={(params) => console.log('handle onConnect', params)}
+                isConnectable={isConnectable}
+            />
+
+            <Handle
+                type="target"
+                position="top"
+                id="top-target"
+                style={{ background: '#555' }}
+                onConnect={(params) => console.log('handle onConnect', params)}
+                isConnectable={isConnectable}
             />
 
             <Handle
                 type="source"
                 position="right"
-                id="a"
-                style={{ top: 10, background: '#555' }}
+                id="right-src"
+                style={{ background: '#555' }}
                 isConnectable={isConnectable}
             />
+
             <Handle
                 type="source"
-                position="right"
-                id="b"
-                style={{ bottom: 10, top: 'auto', background: '#555' }}
+                position="bottom"
+                id="bot-src"
+                style={{ background: '#555' }}
                 isConnectable={isConnectable}
             />
 
