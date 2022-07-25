@@ -1,25 +1,59 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useCallback } from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import ReactFlow, {
+  useNodesState,
+  useEdgesState,
+  addEdge,
+  MiniMap,
+  Controls,
+  Background,
+ // MarkerType,
+} from 'react-flow-renderer';
+
+// import CustomEdge from './CustomEdge';
+import SvgNode from "./SvgNode";
+
+import {nodesData, edgesData} from "./data"
+
+
+
+//const edgeTypes = {
+//  custom: CustomEdge,
+//};
+
+const nodeTypes = {
+  custom: SvgNode
 }
 
-export default App;
+const EdgesFlow = () => {
+  const [nodes, , onNodesChange] = useNodesState(nodesData);
+  const [edges, setEdges, onEdgesChange] = useEdgesState(edgesData);
+
+  const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), []);
+
+  return (
+      <>
+      <p>flow</p>
+      <div style={{height: window.innerHeight}}>
+        <ReactFlow
+          nodes={nodes}
+          edges={edges}
+          onNodesChange={onNodesChange}
+          onEdgesChange={onEdgesChange}
+          onConnect={onConnect}
+          snapToGrid={true}
+         // edgeTypes={edgeTypes}
+            nodeTypes = {nodeTypes}
+          fitView
+          attributionPosition="top-right"
+      >
+        <MiniMap />
+        <Controls />
+        <Background />
+      </ReactFlow>
+      </div>
+      </>
+  );
+};
+
+export default EdgesFlow;
