@@ -1,7 +1,6 @@
 import React, { memo } from 'react';
 
 import { Handle } from 'react-flow-renderer';
-import rhino from "./assets/rhino.jpg";
 
 import eightStar from "./assets/8-star.svg"
 import bigStar from "./assets/big-star.svg"
@@ -12,10 +11,14 @@ import note from "./assets/note.svg";
 import star from "./assets/star.svg";
 import triangle from "./assets/triangle.svg";
 
+import comunica from "./assets/comunica.svg";
+import rmlio from "./assets/rmlio.png"
+
 export default memo(({ data, isConnectable }) => {
 
     const SHAPES = {
-       "8-star": eightStar, "big-star": bigStar, "cylinder": cylinder, "diamond": diamond, "hexagon": hexagon, "note": note, "star": star, "triangle": triangle
+       "8-star": eightStar, "big-star": bigStar, "cylinder": cylinder, "diamond": diamond, "hexagon": hexagon, "note": note, "star": star, "triangle": triangle,
+        "comunica": comunica, "rmlio": rmlio
     };
 
     // console.log(`Data van SvgNode is ${JSON.stringify(data)}`);
@@ -38,7 +41,7 @@ export default memo(({ data, isConnectable }) => {
             */}
             <svg width="50" height="50">
                 <image width="50" height="50" href={SHAPES[data.shape]}/>
-                <text fontSize="12px" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle">Node 1</text>
+                <text fontSize="12px" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle">{data.label}</text>
             </svg>
 
             {/*  <input

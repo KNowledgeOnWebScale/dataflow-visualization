@@ -28,11 +28,20 @@ export const nodesData = [
     },
     {
         id: 'edges-8',
-        type: 'output',
-        data: { label: 'Output 8' },
+        type: 'custom',
+        data: { label: '', shape: "comunica" },
         position: { x: 525, y: 600 },
+
+    },
+    {
+        id: 'edges-9',
+        type: 'custom',
+        data: { label: '', shape: "rmlio" },
+        position: { x: 560, y: 600 },
+
     },
 ];
+
 
 export const edgesData = [
     {
