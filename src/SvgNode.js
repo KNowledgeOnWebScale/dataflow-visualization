@@ -48,20 +48,37 @@ export default memo(({data, isConnectable}) => {
 
                     {data.label.split("\n").map((e, i) => {
                         if (i !== 0) {
-                            return <tspan key={i} x="50%" dy="1.2em" dominantBaseline="middle" textAnchor="middle">{e}</tspan>
+                            return <tspan key={i} x="50%" dy="1.2em" dominantBaseline="middle"
+                                          textAnchor="middle">{e}</tspan>
                         } else {
-                            return <tspan key={i} x="50%" y={50-(data.label.split("\n").length-1)*10 + "%"} dominantBaseline="middle" textAnchor="middle">{e}</tspan>
+                            return <tspan key={i} x="50%" y={50 - (data.label.split("\n").length - 1) * 10 + "%"}
+                                          dominantBaseline="middle" textAnchor="middle">{e}</tspan>
                         }
                     })}
                 </text>
             </svg>
 
+            <Handle
+                type="source"
+                position="right"
+                id="right-source"
+                style={{visibility: "hidden"}}
+                isConnectable={isConnectable}
+            />
+
+            <Handle
+                type="source"
+                position="bottom"
+                id="bottom-source"
+                style={{visibility: "hidden"}}
+                isConnectable={isConnectable}
+            />
 
             <Handle
                 type="target"
                 position="left"
                 id="left-target"
-               // style={{background: '#555'}}
+                // style={{background: '#555'}}
                 style={{visibility: "hidden"}}
                 onConnect={(params) => console.log('handle onConnect', params)}
                 isConnectable={isConnectable}
@@ -78,16 +95,34 @@ export default memo(({data, isConnectable}) => {
 
             <Handle
                 type="source"
-                position="right"
-                id="right-source"
+                position="top"
+                id="top-source"
                 style={{visibility: "hidden"}}
+                onConnect={(params) => console.log('handle onConnect', params)}
                 isConnectable={isConnectable}
             />
 
             <Handle
                 type="source"
+                position="left"
+                id="left-source"
+                style={{visibility: "hidden"}}
+                onConnect={(params) => console.log('handle onConnect', params)}
+                isConnectable={isConnectable}
+            />
+
+            <Handle
+                type="target"
                 position="bottom"
-                id="bottom-source"
+                id="bottom-target"
+                style={{visibility: "hidden"}}
+                isConnectable={isConnectable}
+            />
+
+            <Handle
+                type="target"
+                position="right"
+                id="right-target"
                 style={{visibility: "hidden"}}
                 isConnectable={isConnectable}
             />
