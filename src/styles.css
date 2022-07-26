@@ -1,4 +1,4 @@
-.wrap {
+/*.wrap {
     position:relative;
     text-align: center;
 }
@@ -9,4 +9,11 @@
     top: 15%;
     left: 50%;
     transform: translate(-50%, -50%);
+}*/
+
+/*
+svg {
+    stroke: #def12a !important;
+    fill: #ca0ed0 !important;
 }
+ */

@@ -11,7 +11,7 @@ export const nodesData = [
     {id: "RML-JSON", type: "custom", data: {label: "RML\nTranslator", shape: "8-star"}, position: {x: 80, y: 30},},
     {id: "RML-XML", type: "custom", data: {label: "RML\nTranslator", shape: "8-star"}, position: {x: 80, y: 90},},
     {id: "RML-MySQL", type: "custom", data: {label: "RML\nTranslator", shape: "8-star"}, position: {x: 80, y: 150},},
-    {id: "RML-API", type: "custom", data: {label: "RML\nTranslator", shape: "8-star"}, position: {x: 80, y: 210},},
+    {id: "RML-API", style: {backgroundColor: "white"}, type: "custom", data: {label: "RML\nTranslator", shape: "8-star"}, position: {x: 80, y: 210},},
 
     {id: "RDF-CSV", type: "custom", data: {label: "RDF", shape: "cylinder", height: 30}, position: {x: 120, y: -20},},
     {id: "RDF-JSON", type: "custom", data: {label: "RDF", shape: "cylinder", height: 30}, position: {x: 120, y: 40},},
@@ -25,7 +25,7 @@ export const nodesData = [
     {id: "SPARQL", type: "custom", data: {label: "SPARQL", shape: "note"}, position: {x: 600, y: 180}},
 
     {id: "note1", type: "custom", data: {label:"RMLTranslator translates raw\ndata to RDF on-the-fly,\nbased on the sub-queries\nof comunica", shape: "note", width: 150, height: 150}, position: {x: 200, y:-100}},
-    {id: "note2", type: "custom", data: {label:"Comunica queries multiple\nRDF datasets SPARQL\nsub-queries goes in,\nresults come out", shape: "note", width: 150, height: 150}, position: {x: 450, y:-50}}
+    {id: "note2", style: {backgroundColor: "red"}, type: "custom", data: {label:"Comunica queries multiple\nRDF datasets SPARQL\nsub-queries goes in,\nresults come out", shape: "note", width: 150, height: 150}, position: {x: 450, y:-50}}
 
 
 ];

@@ -44,18 +44,19 @@ export default memo(({data, isConnectable}) => {
         <>
             <svg style={{width: width, height: height}}>
                 <image style={{width: width, height: height}} href={SHAPES[data.shape]}/>
-                <text fontSize="12px"  /*x="50%" y="50%"*/ /*dominantBaseline="middle" textAnchor="middle"*/>
 
+                <text fontSize="12px"  /*x="50%" y="50%"*/ /*dominantBaseline="middle" textAnchor="middle"*/>
                     {data.label.split("\n").map((e, i) => {
                         if (i !== 0) {
                             return <tspan key={i} x="50%" dy="12px" dominantBaseline="middle"
                                           textAnchor="middle">{e}</tspan>
                         } else {
-                            return <tspan key={i} x="50%" y={50 - ((data.label.split("\n").length - 1) * height/12/2) + "%"}  // height/12, want fontsize is 12
+                            return <tspan key={i} x="50%" y={50 - ((data.label.split("\n").length - 1) * height/12/2) + "%"}  // height/12, want fontsize is 12, TODO: dynamisch maken
                                           dominantBaseline="middle" textAnchor="middle">{e}</tspan>
                         }
                     })}
                 </text>
+
             </svg>
 
             <Handle
