@@ -1,13 +1,13 @@
-import React, { useCallback } from 'react';
+import React, {useCallback} from 'react';
 
 import ReactFlow, {
-  useNodesState,
-  useEdgesState,
-  addEdge,
-  MiniMap,
-  Controls,
-  Background,
- // MarkerType,
+    useNodesState,
+    useEdgesState,
+    addEdge,
+    MiniMap,
+    Controls,
+    Background,
+    // MarkerType,
 } from 'react-flow-renderer';
 
 // import CustomEdge from './CustomEdge';
@@ -16,7 +16,8 @@ import SvgNode from "./SvgNode";
 // import {nodesData, edgesData} from "./data"
 // import {nodesData, edgesData} from "./data/exampleData1";
 // import {nodesData, edgesData} from "./data/exampleData2";
-import {nodesData, edgesData} from "./data/exampleData3";
+// import {nodesData, edgesData} from "./data/exampleData3";
+import {nodesData, edgesData} from "./data/exampleData4";
 
 
 //const edgeTypes = {
@@ -24,38 +25,38 @@ import {nodesData, edgesData} from "./data/exampleData3";
 //};
 
 const nodeTypes = {
-  custom: SvgNode
+    custom: SvgNode
 }
 
 const EdgesFlow = () => {
-  const [nodes, , onNodesChange] = useNodesState(nodesData);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(edgesData);
+    const [nodes, , onNodesChange] = useNodesState(nodesData);
+    const [edges, setEdges, onEdgesChange] = useEdgesState(edgesData);
 
-  const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), []);
+    const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), []);
 
-  return (
-      <>
-      <p>flow</p>
-      <div style={{height: window.innerHeight}}>
-        <ReactFlow
-          nodes={nodes}
-          edges={edges}
-          onNodesChange={onNodesChange}
-          onEdgesChange={onEdgesChange}
-          onConnect={onConnect}
-          snapToGrid={true}
-         // edgeTypes={edgeTypes}
-            nodeTypes = {nodeTypes}
-          fitView
-          attributionPosition="top-right"
-      >
-        <MiniMap />
-        <Controls />
-        <Background />
-      </ReactFlow>
-      </div>
-      </>
-  );
+    return (
+        <>
+            <p>flow</p>
+            <div style={{height: window.innerHeight}}>
+                <ReactFlow
+                    nodes={nodes}
+                    edges={edges}
+                    onNodesChange={onNodesChange}
+                    onEdgesChange={onEdgesChange}
+                    onConnect={onConnect}
+                    snapToGrid={true}
+                    // edgeTypes={edgeTypes}
+                    nodeTypes={nodeTypes}
+                    fitView
+                    attributionPosition="top-right"
+                >
+                    <MiniMap/>
+                    <Controls/>
+                    <Background/>
+                </ReactFlow>
+            </div>
+        </>
+    );
 };
 
 export default EdgesFlow;
