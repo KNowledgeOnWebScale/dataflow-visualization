@@ -84,6 +84,7 @@ export const edgesData = [
         target: "RML-CSV",
         type: "straight",
         targetHandle: "right-target",
+        sourceHandle: "left-source",
         markerEnd: {
             type: MarkerType.ArrowClosed
         }
@@ -94,6 +95,7 @@ export const edgesData = [
         target: "RML-JSON",
         type: "straight",
         targetHandle: "right-target",
+        sourceHandle: "left-source",
         markerEnd: {
             type: MarkerType.ArrowClosed
         }
@@ -104,6 +106,7 @@ export const edgesData = [
         target: "RML-XML",
         type: "straight",
         targetHandle: "right-target",
+        sourceHandle: "left-source",
         markerEnd: {
             type: MarkerType.ArrowClosed
         }
@@ -114,6 +117,7 @@ export const edgesData = [
         target: "RML-MySQL",
         type: "straight",
         targetHandle: "right-target",
+        sourceHandle: "left-source",
         markerEnd: {
             type: MarkerType.ArrowClosed
         }
@@ -124,6 +128,7 @@ export const edgesData = [
         target: "RML-API",
         type: "straight",
         targetHandle: "right-target",
+        sourceHandle: "left-source",
         markerEnd: {
             type: MarkerType.ArrowClosed
         }

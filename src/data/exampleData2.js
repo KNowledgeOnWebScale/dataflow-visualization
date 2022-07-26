@@ -1,7 +1,7 @@
 import {MarkerType} from "react-flow-renderer";
 
 export const nodesData = [
-    {id: 'csv', type: "custom", data: { label: 'csv', shape: "cylinder" }, position: { x: 0, y: -30 },},
+    {id: 'csv', type: "custom", data: { label: 'CSV', shape: "cylinder" }, position: { x: 0, y: -30 },},
     {id: 'JSON', type: "custom", data: { label: 'JSON', shape: "cylinder" }, position: { x: 0, y: 30 },},
     {id: 'XML', type: "custom", data: { label: 'XML', shape: "cylinder" }, position: { x: 0, y: 90 },},
     {id: 'MySQL', type: "custom", data: { label: 'MySQL', shape: "cylinder" }, position: { x: 0, y: 150 },},
