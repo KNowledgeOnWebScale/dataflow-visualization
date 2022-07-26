@@ -27,7 +27,7 @@ export default memo(({ data, isConnectable }) => {
         <>
             <svg width="50" height="50">
                 <image width="50" height="50" href={SHAPES[data.shape]}/>
-                <text fontSize="12px" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle">{data.label}</text>
+                <text fontSize="12px" x="50%" y="50%" /*dominant-baseline="middle" text-anchor="middle"*/>{data.label}</text>
             </svg>
 
 
@@ -53,7 +53,7 @@ export default memo(({ data, isConnectable }) => {
             <Handle
                 type="source"
                 position="right"
-                id="right-src"
+                id="right-source"
                 style={{ background: '#555' }}
                 isConnectable={isConnectable}
             />
@@ -61,7 +61,7 @@ export default memo(({ data, isConnectable }) => {
             <Handle
                 type="source"
                 position="bottom"
-                id="bot-src"
+                id="bottom-source"
                 style={{ background: '#555' }}
                 isConnectable={isConnectable}
             />

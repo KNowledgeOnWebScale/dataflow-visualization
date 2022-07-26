@@ -11,7 +11,7 @@ export const nodesData = [
     { id: 'RDF', type:"custom", data: { label: 'RDF', shape: "cylinder" }, position: { x: 400, y: 55 } },
     {id: 'SPARQL-END', data: { label: 'SPARQL Endpoint' }, position: { x: 450, y: 70 } },
 
-    {id: "rmlio", type:"custom", data: {label: "rml.io", shape:"note"}, position:{x:300, y: 100}},
+    {id: "rmlio", type:"custom", data: {label: "rml.io", shape:"note"}, position:{x:300, y: 200}},
 
     {id: 'comunica', type: 'custom', data: { label: 'Output 7', shape: "comunica" }, position: { x: 500, y: 250 },},
     {id: "SPARQL", type: "custom", data: {label: "SPARQL", shape: "note"}, position: {x: 500, y: 400}}
@@ -78,6 +78,8 @@ export const edgesData = [
         source: "RML",
         target: "rmlio",
         type: "straight",
+        sourceHandle: "bottom-source",
+        targetHandle: "top-target",
         style: {strokeDasharray: 3}
     },
     {
@@ -85,6 +87,7 @@ export const edgesData = [
         source: "SPARQL-END",
         target: "comunica",
         type: "straight",
+        targetHandle: "top-target",
         markerEnd: {
             type: MarkerType.ArrowClosed
         }
@@ -94,6 +97,8 @@ export const edgesData = [
         source: "comunica",
         target: "SPARQL",
         type: "straight",
+        sourceHandle: "bottom-source",
+        targetHandle: "top-target",
         makerEnd: {
             type:MarkerType.ArrowClosed
         }
