@@ -5,11 +5,11 @@ export const nodesData = [
     {id: 'JSON', type: "custom", data: { label: 'JSON', shape: "cylinder" }, position: { x: 0, y: 70 },},
     {id: 'XML', type: "custom", data: { label: 'XML', shape: "cylinder" }, position: { x: 0, y: 140 },},
     {id: 'MySQL', type: "custom", data: { label: 'MySQL', shape: "cylinder" }, position: { x: 0, y: 210 },},
-    {id: 'API', type: "input", data: { label: 'API' }, position: { x: 0, y: 280 },},
+    {id: 'API', type: "custom", data: { label: 'API', shape: "circle" }, position: { x: 0, y: 280 },},
 
     { id: 'RML', type:"custom", data: { label: 'RML Mapper', shape:"8-star" }, position: { x: 300, y: 55 } },
     { id: 'RDF', type:"custom", data: { label: 'RDF', shape: "cylinder" }, position: { x: 400, y: 55 } },
-    {id: 'SPARQL-END', data: { label: 'SPARQL Endpoint' }, position: { x: 450, y: 70 } },
+    {id: 'SPARQL-END', type: "custom", data: { label: 'SPARQL\nEndpoint', shape: "square" }, position: { x: 450, y: 70 } },
 
     {id: "rmlio", type:"custom", data: {label: "rml.io", shape:"note"}, position:{x:300, y: 200}},
 
@@ -87,6 +87,7 @@ export const edgesData = [
         source: "SPARQL-END",
         target: "comunica",
         type: "straight",
+        sourceHandle: "bottom-source",
         targetHandle: "top-target",
         markerEnd: {
             type: MarkerType.ArrowClosed
