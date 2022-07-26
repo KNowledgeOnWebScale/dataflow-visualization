@@ -7,14 +7,22 @@ export const nodesData = [
     {id: 'MySQL', type: "custom", data: { label: 'MySQL', shape: "cylinder" }, position: { x: 0, y: 210 },},
     {id: 'API', type: "custom", data: { label: 'API', shape: "circle" }, position: { x: 0, y: 280 },},
 
-    { id: 'RML', type:"custom", data: { label: 'RML Mapper', shape:"8-star" }, position: { x: 300, y: 55 } },
-    { id: 'RDF', type:"custom", data: { label: 'RDF', shape: "cylinder" }, position: { x: 400, y: 55 } },
-    {id: 'SPARQL-END', type: "custom", data: { label: 'SPARQL\nEndpoint', shape: "square" }, position: { x: 450, y: 70 } },
+    { id: 'RML', type:"custom", data: { label: 'RML\nMapper', shape:"8-star", width: "70px", height: "70px" }, position: { x: 300, y: 55 } },
+    { id: 'RDF', type:"custom", data: { label: 'RDF', shape: "cylinder" }, position: { x: 400, y: 65 } },
+    {id: 'SPARQL-END', type: "custom", data: { label: 'SPARQL\nEndpoint', shape: "square" }, position: { x: 450, y: 65 } },
 
-    {id: "rmlio", type:"custom", data: {label: "rml.io", shape:"note"}, position:{x:300, y: 200}},
+    {id: "rmlio", type:"custom", data: {label: "rml.io", shape:"note"}, position:{x:310, y: 200}},
 
-    {id: 'comunica', type: 'custom', data: { label: 'Output 7', shape: "comunica" }, position: { x: 500, y: 250 },},
-    {id: "SPARQL", type: "custom", data: {label: "SPARQL", shape: "note"}, position: {x: 500, y: 400}}
+    {id: 'comunica', type: 'custom', data: { label: '', shape: "comunica" }, position: { x: 600, y: 65 },},
+    {id: "SPARQL", type: "custom", data: {label: "SPARQL", shape: "note"}, position: {x: 600, y: 200}},
+
+
+    {id: "note1", type: "custom", data: {label:"The RML Mapper\npulls data from the\nheterogeneous data\nsources", width: 110, height: 110, shape: "note"}, position: {x: 100, y: -100} },
+    {id: "note2", type: "custom", data: {label:"The RML Mapper\npushes an RDF graph", width: 110, height: 110, shape: "note"}, position: {x: 330, y: -60} },
+    {id: "note3", type: "custom", data: {label:"Comunica queries the\nSPARQL endpoint:\nSPARQL query\ngoes in,\nresults come out", width: 110, height: 110, shape: "note"}, position: {x: 500, y: -60} }
+
+
+
 ];
 
 
@@ -87,10 +95,14 @@ export const edgesData = [
         source: "SPARQL-END",
         target: "comunica",
         type: "straight",
-        sourceHandle: "bottom-source",
-        targetHandle: "top-target",
+        sourceHandle: "right-source",
+        targetHandle: "left-target",
         markerEnd: {
             type: MarkerType.ArrowClosed
+        },
+        markerStart: {
+            type: MarkerType.ArrowClosed,
+            orient: "auto-start-reverse"
         }
     },
     {
@@ -100,9 +112,7 @@ export const edgesData = [
         type: "straight",
         sourceHandle: "bottom-source",
         targetHandle: "top-target",
-        makerEnd: {
-            type:MarkerType.ArrowClosed
-        }
+        style: {strokeDasharray: 3}
     }
 
 ];

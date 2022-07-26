@@ -35,12 +35,16 @@ export default memo(({data, isConnectable}) => {
 
     //console.log(`Data van SvgNode is ${JSON.stringify(data)}`);
 
+    //alert(JSON.stringify(data))
+
+    let width = data["width"] || "50px";
+    let height = data["height"] || "50px";
+
     return (
         <>
-            <svg width="70" height="70">
-                <image style={{width: 70, height: 70}} href={SHAPES[data.shape]}/>
+            <svg style={{width: width, height: height}}>
+                <image style={{width: width, height: height}} href={SHAPES[data.shape]}/>
                 <text fontSize="12px"  /*x="50%" y="50%"*/ /*dominantBaseline="middle" textAnchor="middle"*/>
-
 
                     {data.label.split("\n").map((e, i) => {
                         if (i !== 0) {
@@ -57,7 +61,8 @@ export default memo(({data, isConnectable}) => {
                 type="target"
                 position="left"
                 id="left-target"
-                style={{background: '#555'}}
+               // style={{background: '#555'}}
+                style={{visibility: "hidden"}}
                 onConnect={(params) => console.log('handle onConnect', params)}
                 isConnectable={isConnectable}
             />
@@ -66,7 +71,7 @@ export default memo(({data, isConnectable}) => {
                 type="target"
                 position="top"
                 id="top-target"
-                style={{background: '#555'}}
+                style={{visibility: "hidden"}}
                 onConnect={(params) => console.log('handle onConnect', params)}
                 isConnectable={isConnectable}
             />
@@ -75,7 +80,7 @@ export default memo(({data, isConnectable}) => {
                 type="source"
                 position="right"
                 id="right-source"
-                style={{background: '#555'}}
+                style={{visibility: "hidden"}}
                 isConnectable={isConnectable}
             />
 
@@ -83,7 +88,7 @@ export default memo(({data, isConnectable}) => {
                 type="source"
                 position="bottom"
                 id="bottom-source"
-                style={{background: '#555'}}
+                style={{visibility: "hidden"}}
                 isConnectable={isConnectable}
             />
 
