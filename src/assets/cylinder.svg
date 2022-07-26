@@ -1,6 +1,6 @@
-<svg xml:space="preserve" width="50" height="50" xmlns="http://www.w3.org/2000/svg">
-  <ellipse style="fill:none;fill-rule:evenodd;stroke:#000;stroke-width:1.0119;stroke-dasharray:none;paint-order:markers fill stroke" cx="25.017" cy="4.517" rx="22.494" ry="3.994"/>
-   <path style="fill:none;fill-rule:evenodd;stroke:#000;stroke-width:.924211;stroke-dasharray:none;paint-order:markers fill stroke" d="M2.5 4.5v41"/>
-   <path style="fill:none;fill-rule:evenodd;stroke:#000;stroke-width:.950307;stroke-dasharray:none;paint-order:markers fill stroke" d="M47.5 4.684v41"/>
-   <path style="fill:none;fill-rule:evenodd;stroke:#000;stroke-width:1;stroke-dasharray:none;paint-order:markers fill stroke" d="M47.443 45.18a22.494 3.994 0 0 1 .051.268A22.494 3.994 0 0 1 25 49.442a22.494 3.994 0 0 1-22.494-3.994 22.494 3.994 0 0 1 0-.007"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+    <ellipse style="fill:none;fill-rule:evenodd;stroke:#000;stroke-width:1.0119;stroke-dasharray:none;paint-order:markers fill stroke" cx="25.017" cy="4.517" rx="22.494" ry="3.994"/>
+    <path style="fill:none;fill-rule:evenodd;stroke:#000;stroke-width:.924211;stroke-dasharray:none;paint-order:markers fill stroke" d="M2.5 4.5v41"/>
+    <path style="fill:none;fill-rule:evenodd;stroke:#000;stroke-width:.950307;stroke-dasharray:none;paint-order:markers fill stroke" d="M47.5 4.684v41"/>
+    <path style="fill:none;fill-rule:evenodd;stroke:#000;stroke-width:1;stroke-dasharray:none;paint-order:markers fill stroke" d="M47.443 45.18a22.494 3.994 0 0 1 .051.268A22.494 3.994 0 0 1 25 49.442a22.494 3.994 0 0 1-22.494-3.994 22.494 3.994 0 0 1 0-.007"/>
 </svg>
