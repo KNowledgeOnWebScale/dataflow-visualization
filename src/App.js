@@ -15,7 +15,8 @@ import SvgNode from "./SvgNode";
 
 // import {nodesData, edgesData} from "./data"
 // import {nodesData, edgesData} from "./data/exampleData1";
-import {nodesData, edgesData} from "./data/exampleData2";
+// import {nodesData, edgesData} from "./data/exampleData2";
+import {nodesData, edgesData} from "./data/exampleData3";
 
 
 //const edgeTypes = {
