@@ -37,8 +37,8 @@ export default memo(({data, isConnectable}) => {
 
     //alert(JSON.stringify(data))
 
-    let width = data["width"] || "50px";
-    let height = data["height"] || "50px";
+    let width = data["width"] || 50;
+    let height = data["height"] || 50;
 
     return (
         <>
@@ -48,10 +48,10 @@ export default memo(({data, isConnectable}) => {
 
                     {data.label.split("\n").map((e, i) => {
                         if (i !== 0) {
-                            return <tspan key={i} x="50%" dy="1.2em" dominantBaseline="middle"
+                            return <tspan key={i} x="50%" dy="12px" dominantBaseline="middle"
                                           textAnchor="middle">{e}</tspan>
                         } else {
-                            return <tspan key={i} x="50%" y={50 - (data.label.split("\n").length - 1) * 10 + "%"}
+                            return <tspan key={i} x="50%" y={50 - ((data.label.split("\n").length - 1) * height/12/2) + "%"}  // height/12, want fontsize is 12
                                           dominantBaseline="middle" textAnchor="middle">{e}</tspan>
                         }
                     })}
