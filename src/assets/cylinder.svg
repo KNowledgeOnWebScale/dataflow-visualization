@@ -1,6 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 50 50" style="enable-background:new 0 0 58 58" width="50" height="50">
+  <g>
+    <path style="fill:#556080" stroke="black" d="M25 6.897C11.669 6.897 0.862 5.353 0.862 3.448v43.103c0 1.904 10.807 3.448 24.138 3.448s24.138 -1.544 24.138 -3.448V3.448C49.138 5.353 38.331 6.897 25 6.897z" stroke-width="0.8620689655172413"/>
+      <path stroke="black" style="fill:#7383BF" cx="29" cy="4" rx="28" ry="4" d="M49.138 3.448A24.138 3.448 0 0 1 25 6.897A24.138 3.448 0 0 1 0.862 3.448A24.138 3.448 0 0 1 49.138 3.448z" stroke-width="0.8620689655172413"/>
+      <path style="fill:green" cx="29" cy="54" rx="28" ry="4" d="M49.138 46.552A24.138 3.448 0 0 1 25 50A24.138 3.448 0 0 1 0.862 46.552A24.138 3.448 0 0 1 49.138 46.552z"/>
+  </g>
+</svg>
+
+
+<!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
     <ellipse style="fill:none;fill-rule:evenodd;stroke:#000;stroke-width:1.0119;stroke-dasharray:none;paint-order:markers fill stroke" cx="25.017" cy="4.517" rx="22.494" ry="3.994"/>
     <path style="fill:none;fill-rule:evenodd;stroke:#000;stroke-width:.924211;stroke-dasharray:none;paint-order:markers fill stroke" d="M2.5 4.5v41"/>
     <path style="fill:none;fill-rule:evenodd;stroke:#000;stroke-width:.950307;stroke-dasharray:none;paint-order:markers fill stroke" d="M47.5 4.684v41"/>
     <path style="fill:none;fill-rule:evenodd;stroke:#000;stroke-width:1;stroke-dasharray:none;paint-order:markers fill stroke" d="M47.443 45.18a22.494 3.994 0 0 1 .051.268A22.494 3.994 0 0 1 25 49.442a22.494 3.994 0 0 1-22.494-3.994 22.494 3.994 0 0 1 0-.007"/>
-</svg>
+</svg> -->
