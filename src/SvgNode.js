@@ -4,6 +4,7 @@ import {Handle} from 'react-flow-renderer';
 
 import comunica from "./assets/comunica.svg";
 import rmlio from "./assets/rmlio.png";
+import solid from "./assets/solid.svg";
 
 
 /*const SHAPES = {
@@ -150,7 +151,8 @@ export function getShape(shapeId, fill, stroke, strokeWidth ) {
             </svg>,
 
         "comunica": <image href={comunica} width="100%" height="100%" preserveAspectRatio="xMinYMin slice"/>,
-        "rmlio": <image href={rmlio} width="100%" height="100%" preserveAspectRatio="xMinYMin slice"/>
+        "rmlio": <image href={rmlio} width="100%" height="100%" preserveAspectRatio="xMinYMin slice"/>,
+        "solid": <image href={solid} width="100%" height="100%" preserveAspectRatio="xMinYMin slice" />
     }
 
     return SHAPES[shapeId];
@@ -165,10 +167,11 @@ export default memo(({data, isConnectable}) => {
     let element = getShape(data.shape || "square", data.fill || "white", data.stroke || "black", data.strokeWidth || 1);
     // console.log(element)
 
+   // console.log(getShape("rmlio"))
+
     return (
         <>
             <svg style={{width: width, height: height}}>
-                getShape("8-star")
                 <svg style={{width: width}}>
 
                     {
@@ -180,6 +183,13 @@ export default memo(({data, isConnectable}) => {
                 {/*<image style={{width: width, height: height}} href={SHAPES[data.shape]}/>*/}
 
                 {/* <image href={rmlio} width="100%" height="100%" preserveAspectRatio="xMinYMin slice"/> */}
+
+                <svg style={{width: width, height:height}}>
+                    {data.image &&
+                        (getShape(data.image) || <image href={data.image} width="100%" height="100%" preserveAspectRatio="xMinYMin slice"/>)
+                    }
+                </svg>
+
 
                 <text fontSize="12px"  /*x="50%" y="50%"*/ /*dominantBaseline="middle" textAnchor="middle"*/>
                     {data.title &&

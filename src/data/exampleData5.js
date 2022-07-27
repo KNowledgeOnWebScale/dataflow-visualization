@@ -11,9 +11,15 @@ export const nodesData = [
         // PARENTNODE
         id: 'solid',
         type:"custom",
-        data: { title: 'Solid Pod', shape:"rectangle", strokeWidth: 2, stroke:"#8370fb", fill:"lightgray", width:300, height: 100 },
+        data: { title: 'Solid Pod', shape:"rectangle", strokeWidth: 5, stroke:"#8370fb", fill:"#12121212", width:300, height: 100 },
         position: { x: 0, y: 200 },
        // style: { backgroundColor: 'rgba(255, 0, 0, 0.2)', width: 300, height: 300 },
+    },
+    {
+        id: "solid-logo",
+        type: "custom",
+        data:{image: "solid", stroke: "#fff"},
+        position: {x:-50, y:225}
     },
     {
         id: 'RDF-1',
@@ -51,25 +57,25 @@ export const nodesData = [
     {
         id:"rmlio",
         type:"custom",
-        data: {label: "rmlio"},
+        data: {stroke: "#fff", image: "rmlio"},
         position: {x: 80, y: 350}
     },
     {
         id:"flickr",
         type:"custom",
-        data: {label: "flickr"},
+        data: {stroke: "#fff", image: "https://cdn.worldvectorlogo.com/logos/flickr-1.svg"},
         position: {x: 20, y: 450}
     },
     {
         id:"imgur",
         type:"custom",
-        data: {label: "imgur"},
+        data: {stroke: "#fff", image:"https://cdn.worldvectorlogo.com/logos/imgur-logo.svg"},
         position: {x: 80, y: 450}
     },
     {
         id:"google",
         type:"custom",
-        data: {label: "google"},
+        data: {stroke: "#fff", image: "https://cdn.cdnlogo.com/logos/g/82/google-g-2015.svg"},
         position: {x: 140, y: 450}
     }
 
