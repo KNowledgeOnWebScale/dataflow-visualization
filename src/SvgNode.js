@@ -105,6 +105,9 @@ export function getShape(shapeId, fill, stroke, strokeWidth ) {
                       d="M55.263 42.105l-13.166 13.158H10.521A2.621 2.621 0 0 1 7.895 52.65V10.508C7.895 9.066 9.066 7.895 10.508 7.895h42.142c1.442 0 2.613 1.176 2.613 2.629V42.105z"/>
             </svg>,
 
+        "rectangle":
+                <rect style={{fill:fill, stroke:stroke, strokeWidth: strokeWidth}} width="100%" height="100%" rx="3" />,
+
         "square":
             <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
                 <path style={{
@@ -176,16 +179,22 @@ export default memo(({data, isConnectable}) => {
 
                 {/*<image style={{width: width, height: height}} href={SHAPES[data.shape]}/>*/}
 
+                {/* <image href={rmlio} width="100%" height="100%" preserveAspectRatio="xMinYMin slice"/> */}
+
                 <text fontSize="12px"  /*x="50%" y="50%"*/ /*dominantBaseline="middle" textAnchor="middle"*/>
-                    {data.label.split("\n").map((e, i) => {
-                        if (i !== 0) {
-                            return <tspan key={i} x="50%" dy="12px" dominantBaseline="middle"
-                                          textAnchor="middle">{e}</tspan>
-                        } else {
-                            return <tspan key={i} x="50%"
-                                          y={50 - ((data.label.split("\n").length - 1) * height / 12 / 2) + "%"}  // height/12, want fontsize is 12, TODO: dynamisch maken
-                                          dominantBaseline="middle" textAnchor="middle">{e}</tspan>
-                        }
+                    {data.title &&
+                           <tspan key={Math.random()} x="50%" y={(data.strokeWidth || 1) + 12} dominantBaseline="middle" textAnchor="middle">{data.title}</tspan>
+                    }
+                    {data.label &&
+                        data.label.split("\n").map((e, i) => {
+                            if (i !== 0) {
+                                return <tspan key={i} x="50%" dy="12px" dominantBaseline="middle"
+                                              textAnchor="middle">{e}</tspan>
+                            } else {
+                                return <tspan key={i} x="50%"
+                                              y={50 - ((data.label.split("\n").length - 1) * height / 12 / 2) + "%"}  // height/12, want fontsize is 12, TODO: dynamisch maken
+                                              dominantBaseline="middle" textAnchor="middle">{e}</tspan>
+                            }
                     })}
                 </text>
 
