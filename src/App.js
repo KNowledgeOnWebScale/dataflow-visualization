@@ -13,13 +13,14 @@ import ReactFlow, {
 // import CustomEdge from './CustomEdge';
 import SvgNode from "./SvgNode";
 
-// import {nodesData, edgesData} from "./data"
-//import {nodesData, edgesData} from "./data/exampleData1";
-//import {nodesData, edgesData} from "./data/exampleData2";
-//import {nodesData, edgesData} from "./data/exampleData3";
-// import {nodesData, edgesData} from "./data/exampleData4";
-import {nodesData, edgesData} from "./data/exampleData5";
+// import {globalDefaults, nodesData, edgesData} from "./data"
+// import {globalDefaults, nodesData, edgesData} from "./data/exampleData1";
+// import {globalDefaults, nodesData, edgesData} from "./data/exampleData2";
+// import {globalDefaults, nodesData, edgesData} from "./data/exampleData3";
+// import {globalDefaults, nodesData, edgesData} from "./data/exampleData4";
+import {globalDefaults, nodesData, edgesData} from "./data/exampleData5";
 
+import {parseNodes, parseEdges, parseGlobalDefaults} from "./util";
 
 //const edgeTypes = {
 //  custom: CustomEdge,
@@ -29,9 +30,14 @@ const nodeTypes = {
     custom: SvgNode
 }
 
+let defaults = parseGlobalDefaults(globalDefaults);
+let parsedNodes = parseNodes(defaults, nodesData);
+let parsedEdges = parseEdges(defaults, edgesData);
+
 const EdgesFlow = () => {
-    const [nodes, , onNodesChange] = useNodesState(nodesData);
-    const [edges, setEdges, onEdgesChange] = useEdgesState(edgesData);
+
+    const [nodes, , onNodesChange] = useNodesState(parsedNodes);
+    const [edges, setEdges, onEdgesChange] = useEdgesState(parsedEdges);
 
     const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), []);
 
@@ -51,9 +57,9 @@ const EdgesFlow = () => {
                     fitView
                     attributionPosition="top-right"
                 >
-                    <MiniMap/>
+                    {/*<MiniMap/>*/}
                     <Controls/>
-                    <Background/>
+                    {/*<Background/>*/}
                 </ReactFlow>
             </div>
         </>

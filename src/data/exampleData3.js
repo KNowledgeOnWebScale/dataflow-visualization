@@ -1,26 +1,29 @@
 import {MarkerType} from "react-flow-renderer";
 
+export const globalDefaults = {
+};
+
 export const nodesData = [
-    {id: 'RDF', type: "custom", data: {label: 'RDF', shape: "cylinder"}, position: {x: 0, y: -30},},
-    {id: "RDF'", type: "custom", data: {label: "RDF'", shape: "cylinder"}, position: {x: 0, y: 30},},
-    {id: "RDF''", type: "custom", data: {label: "RDF''", shape: "cylinder"}, position: {x: 0, y: 90},},
-    {id: "RDF'''", type: "custom", data: {label: "RDF'''", shape: "cylinder"}, position: {x: 0, y: 150},},
-    {id: "RDF''''", type: "custom", data: {label: "RDF''''", shape: "cylinder"}, position: {x: 0, y: 210},},
+    {id: 'RDF', type: "custom", label: 'RDF', shape: "cylinder", position: {x: 0, y: -30},},
+    {id: "RDF'", type: "custom", label: "RDF'", shape: "cylinder", position: {x: 0, y: 30},},
+    {id: "RDF''", type: "custom", label: "RDF''", shape: "cylinder", position: {x: 0, y: 90},},
+    {id: "RDF'''", type: "custom", label: "RDF'''", shape: "cylinder", position: {x: 0, y: 150},},
+    {id: "RDF''''", type: "custom", label: "RDF''''", shape: "cylinder", position: {x: 0, y: 210},},
 
 
-    {id: 'comunica', type: 'custom', data: {label: '', shape: "comunica"}, position: {x: 600, y: 90},},
-    {id: "SPARQL", type: "custom", data: {label: "SPARQL", shape: "note"}, position: {x: 600, y: 180}},
+    {id: 'comunica', type: 'custom', label: '', shape: "comunica", position: {x: 600, y: 90},},
+    {id: "SPARQL", type: "custom", label: "SPARQL", shape: "note", position: {x: 600, y: 180}},
 
 
     {
         id: "note1",
         type: "custom",
-        data: {
+
             label: "Comunica queries\nmultiple RDF\ndatasets\nSPARQL sub-query\ngoes in, results\ncome out",
             width: 120,
             height: 120,
-            shape: "note"
-        },
+            shape: "note",
+
         position: {x: 500, y: -10}
     },
 

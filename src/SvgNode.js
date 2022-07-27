@@ -161,8 +161,10 @@ export function getShape(shapeId, fill, stroke, strokeWidth ) {
 
 export default memo(({data, isConnectable}) => {
 
-    let width = data["width"] || 50;
-    let height = data["height"] || 50;
+    let width = data.width || 50;
+    let height = data.height || 50;
+
+    //console.log(`data.width is: ${data.width} en width is ${width}`)
 
     let element = getShape(data.shape || "square", data.fill || "white", data.stroke || "black", data.strokeWidth || 1);
     // console.log(element)
@@ -172,9 +174,9 @@ export default memo(({data, isConnectable}) => {
     return (
         <>
             <svg style={{width: width, height: height}}>
-                <svg style={{width: width}}>
+                <svg style={{width: width}} key={Math.random()}>
 
-                    {
+                     {
                         element
                     }
 
@@ -184,11 +186,12 @@ export default memo(({data, isConnectable}) => {
 
                 {/* <image href={rmlio} width="100%" height="100%" preserveAspectRatio="xMinYMin slice"/> */}
 
-                <svg style={{width: width, height:height}}>
+                  <svg style={{width: width, height:height}}>
                     {data.image &&
-                        (getShape(data.image) || <image href={data.image} width="100%" height="100%" preserveAspectRatio="xMinYMin slice"/>)
+                        (getShape(data.image) || <image key={Math.random()} href={data.image} width="100%" height="100%" preserveAspectRatio="xMinYMin slice"/>)
                     }
                 </svg>
+
 
 
                 <text fontSize="12px"  /*x="50%" y="50%"*/ /*dominantBaseline="middle" textAnchor="middle"*/>
@@ -206,6 +209,7 @@ export default memo(({data, isConnectable}) => {
                                               dominantBaseline="middle" textAnchor="middle">{e}</tspan>
                             }
                     })}
+
                 </text>
 
             </svg>
