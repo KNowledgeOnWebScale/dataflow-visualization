@@ -4,9 +4,9 @@ import ReactFlow, {
     useNodesState,
     useEdgesState,
     addEdge,
-    MiniMap,
+    //MiniMap,
     Controls,
-    Background,
+    //Background,
     // MarkerType,
 } from 'react-flow-renderer';
 
