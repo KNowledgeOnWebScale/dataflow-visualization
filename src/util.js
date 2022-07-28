@@ -10,7 +10,8 @@ const GLOBAL_DEFAULT_KEY_VALUES = {
     "STROKE": {"id": "stroke", "value": "black"},             // Color of stroke of node
     "STROKE_WIDTH": {"id": "strokeWidth", "value": 1},        // Width of stroke of node
     "HEIGHT": {"id": "height", "value": 50},                  // Height of node
-    "WIDTH": {"id": "width", "value": 50}                     // Width of node
+    "WIDTH": {"id": "width", "value": 50},                    // Width of node
+    "ORIENTATION": {"id": "orientation", "value": "horizontal"} // Orientation of flow
 };
 
 // Keys, not supported by the library, that can be used in the JSON representation of nodes
@@ -87,10 +88,11 @@ export function parseNodes(globalDefaults, nodes) {
     return nodes;
 }
 
-// TODO: sourceHandle and targetHandle optioneel maken, als die keys ontbreken, gewoon kijken of source onder/boven, links/rechts van target is
 
+export function parseEdges(globalDefaults, edges, nodes) {
 
-export function parseEdges(globalDefaults, edges) {
+    //console.log(`nodes in het begin van de functie:`)
+    //console.log(JSON.stringify(nodes));
 
     for (let edge of edges) {
 
@@ -116,8 +118,64 @@ export function parseEdges(globalDefaults, edges) {
             edge["markerStart"]["color"] = edge["style"]["stroke"];
         }
 
+        fix_sourceHandle_targetHandle(globalDefaults, edge, nodes);
+
     }
 
     return edges;
 }
 
+function fix_sourceHandle_targetHandle(globalDefaults, edge, nodes){
+    // Although there are more source and target handles in the nodes, react flow does not choose them wisely
+    // So let's fix that, e.g. if target is left from the source, the sourceHandle should be right and the targetHandle should be left
+    // This code below checks the different possibilities
+
+    const sourceNode = nodes.find(n => n.id === edge["source"]);
+    const targetNode = nodes.find(n => n.id === edge["target"]);
+
+    let sourceNodePos = {...sourceNode.position};
+    let targetNodePos = {...targetNode.position};
+
+    // You can't just compare coordinates, because source and/or target could be in a parent
+    // If a node is in a parent, its x and y are relative to the parent
+    if (sourceNode.hasOwnProperty("parentNode")) {
+        let parent = nodes.find(n => n.id === sourceNode["parentNode"]);
+        sourceNodePos.x += parent.position.x;
+        sourceNodePos.y += parent.position.y;
+    }
+    if (targetNode.hasOwnProperty("parentNode")) {
+        let parent = nodes.find(n => n.id === targetNode["parentNode"]);
+        targetNodePos.x += parent.position.x;
+        targetNodePos.y += parent.position.y;
+    }
+
+    const verticalCheck = [
+        [sourceNodePos.y < targetNodePos.y, "bottom-source", "top-target"],
+        [sourceNodePos.y > targetNodePos.y, "top-source", "bottom-target"]
+    ];
+
+    const horizontalCheck = [
+        [sourceNodePos.x < targetNodePos.x, "right-source", "left-target"],
+        [sourceNodePos.x > targetNodePos.x, "left-source", "right-target"]
+    ];
+
+    const check = {
+        "vertical": [...verticalCheck, ...horizontalCheck],
+        "horizontal": [...horizontalCheck, ...verticalCheck]
+    }[globalDefaults[GLOBAL_DEFAULT_KEY_VALUES.ORIENTATION.id]];
+
+    let i = 0;
+    while (i < check.length && !check[i][0]) {
+        i++;
+    }
+
+    if (i < check.length) {
+        if (!edge.hasOwnProperty("sourceHandle")) {
+            edge["sourceHandle"] = check[i][1];
+        }
+        if (!edge.hasOwnProperty("targetHandle")) {
+            edge["targetHandle"] = check[i][2];
+        }
+    }
+
+}

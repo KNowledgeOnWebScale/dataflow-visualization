@@ -100,8 +100,8 @@ export const edgesData = [
         source: "SPARQL-END",
         target: "comunica",
         type: "straight",
-        sourceHandle: "right-source",
-        targetHandle: "left-target",
+      //  sourceHandle: "right-source",
+       // targetHandle: "left-target",
         markerEnd: {
             type: MarkerType.ArrowClosed
         },
@@ -115,8 +115,8 @@ export const edgesData = [
         source: "comunica",
         target: "SPARQL",
         type: "straight",
-        sourceHandle: "bottom-source",
-        targetHandle: "top-target",
+     //   sourceHandle: "bottom-source",
+      //  targetHandle: "top-target",
         style: {strokeDasharray: 3}
     }
 

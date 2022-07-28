@@ -8,7 +8,8 @@ export const globalDefaults = {
     //edgeThickness: 1,
     fill: "white",
     stroke: "black",
-    strokeWidth: 1
+    strokeWidth: 1,
+    orientation: "vertical"
 };
 
 export const nodesData = [
@@ -104,18 +105,18 @@ export const nodesData = [
 ];
 
 export const edgesData = [
-    { source: 'comunica', target: 'RDF-1', animated: true, sourceHandle: "bottom-source", targetHandle: "top-target", type: "straight", zIndex:1 },
-    { source: 'comunica', target: 'RDF-2', animated:true, sourceHandle: "bottom-source", targetHandle: "top-target", type: "straight", zIndex:1 },
-    { source: 'comunica', target: 'RDF-3', animated:true, sourceHandle: "bottom-source", targetHandle: "top-target", type: "straight", zIndex:1 },
-    { source: 'comunica', target: 'RDF-4', animated:true, sourceHandle: "right-source", targetHandle: "top-target", type: "step", markerEnd: {type: "arrowclosed"}, zIndex:1 },
+    { source: 'comunica', target: 'RDF-1', animated: true, type: "straight", zIndex:1 },
+    { source: 'comunica', target: 'RDF-2', animated:true, type: "straight", zIndex:1 },
+    { source: 'comunica', target: 'RDF-3', animated:true, type: "straight", zIndex:1 },
+    { source: 'comunica', target: 'RDF-4', animated:true, type: "step", sourceHandle:"right-source", markerEnd: {type: "arrowclosed"}, zIndex:1 },
 
-    { source: 'RDF-1', target: 'rmlio', animated: true, sourceHandle: "bottom-source", targetHandle: "top-target", type: "straight", zIndex:1 },
-    { source: 'RDF-2', target: 'rmlio', animated:true, sourceHandle: "bottom-source", targetHandle: "top-target", type: "straight", zIndex:1 },
-    { source: 'RDF-3', target: 'rmlio', animated:true, sourceHandle: "bottom-source", targetHandle: "top-target", type: "straight", zIndex:1 },
+    { source: 'RDF-1', target: 'rmlio', animated: true, type: "straight", zIndex:1 },
+    { source: 'RDF-2', target: 'rmlio', animated:true, type: "straight", zIndex:1 },
+    { source: 'RDF-3', target: 'rmlio', animated:true, type: "straight", zIndex:1 },
 
-    { source: 'flickr', target: 'rmlio', animated: false, sourceHandle: "top-source", targetHandle: "bottom-target", type: "straight", style:{strokeDasharray: "5 3",  strokeWidth: 20/*, stroke: "red"*/}, edgeColor:"green" },
-    { source: 'imgur', target: 'rmlio', animated:false, sourceHandle: "top-source", targetHandle: "bottom-target", type: "straight", style:{strokeDasharray: "5 3" }},
-    { source: 'google', target: 'rmlio', animated:false, sourceHandle: "top-source", targetHandle: "bottom-target", type: "straight", style:{strokeDasharray: "5 3" }},
+    { source: 'flickr', target: 'rmlio', animated: false, type: "straight", style:{strokeDasharray: "5 3",  strokeWidth: 20/*, stroke: "red"*/}, edgeColor:"green" },
+    { source: 'imgur', target: 'rmlio', animated:false, type: "straight", style:{strokeDasharray: "5 3" }},
+    { source: 'google', target: 'rmlio', animated:false, type: "straight", style:{strokeDasharray: "5 3" }},
 
 
 ];

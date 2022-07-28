@@ -102,8 +102,8 @@ export const edgesData = [
         source: "comunica",
         target: "SPARQL",
         type: "straight",
-        sourceHandle: "bottom-source",
-        targetHandle: "top-target",
+       // sourceHandle: "bottom-source",
+       // targetHandle: "top-target",
         style: {
             strokeDasharray: 3,
             animationDirection: "reverse"

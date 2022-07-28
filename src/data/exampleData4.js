@@ -28,7 +28,7 @@ export const nodesData = [
     {id: "SPARQL", type: "custom", label: "SPARQL", shape: "note", fill:"steelblue", position: {x: 600, y: 180}},
 
     {id: "note1", type: "custom", label:"RMLTranslator translates raw\ndata to RDF on-the-fly,\nbased on the sub-queries\nof comunica", shape: "note", width: 150, height: 150, fill:"lightyellow", strokeWidth:0.1, stroke:"khaki", position: {x: 200, y:-100}},
-    {id: "note2", /*style: {backgroundColor: "red"},*/ type: "custom", label:"Comunica queries multiple\nRDF datasets SPARQL\nsub-queries goes in,\nresults come out", shape: "note", width: 150, height: 150, fill:"lightyellow", strokeWidth:0.1, stroke:"khaki", position: {x: 450, y:-50}}
+    {id: "note2", /*style: {backgroundColor: "red"},*/ type: "custom", label:"Comunica queries multiple\nRDF datasets SPARQL\nsub-queries go in,\nresults come out", shape: "note", width: 150, height: 150, fill:"lightyellow", strokeWidth:0.1, stroke:"khaki", position: {x: 450, y:-50}}
 
 
 ];
@@ -86,8 +86,8 @@ export const edgesData = [
         source: "comunica",
         target: "RML-CSV",
         type: "straight",
-        targetHandle: "right-target",
-        sourceHandle: "left-source",
+        //targetHandle: "right-target",
+        //sourceHandle: "left-source",
         markerEnd: {
             type: MarkerType.ArrowClosed
         }
@@ -97,8 +97,8 @@ export const edgesData = [
         source: "comunica",
         target: "RML-JSON",
         type: "straight",
-        targetHandle: "right-target",
-        sourceHandle: "left-source",
+        //targetHandle: "right-target",
+        //sourceHandle: "left-source",
         markerEnd: {
             type: MarkerType.ArrowClosed
         }
@@ -108,8 +108,8 @@ export const edgesData = [
         source: "comunica",
         target: "RML-XML",
         type: "straight",
-        targetHandle: "right-target",
-        sourceHandle: "left-source",
+        //targetHandle: "right-target",
+        //sourceHandle: "left-source",
         markerEnd: {
             type: MarkerType.ArrowClosed
         }
@@ -119,8 +119,8 @@ export const edgesData = [
         source: "comunica",
         target: "RML-MySQL",
         type: "straight",
-        targetHandle: "right-target",
-        sourceHandle: "left-source",
+        //targetHandle: "right-target",
+       // sourceHandle: "left-source",
         markerEnd: {
             type: MarkerType.ArrowClosed
         }
@@ -130,8 +130,8 @@ export const edgesData = [
         source: "comunica",
         target: "RML-API",
         type: "straight",
-        targetHandle: "right-target",
-        sourceHandle: "left-source",
+        //targetHandle: "right-target",
+        //sourceHandle: "left-source",
         markerEnd: {
             type: MarkerType.ArrowClosed
         }
@@ -142,8 +142,8 @@ export const edgesData = [
         source: "RML-CSV",
         target: "rmlio",
         type: "straight",
-        sourceHandle: "bottom-source",
-        targetHandle: "top-target",
+        //sourceHandle: "bottom-source",
+        //targetHandle: "top-target",
         style: {strokeDasharray: "6 3"}
     },
 
@@ -151,8 +151,8 @@ export const edgesData = [
         id:"comunica to sparql",
         source: "comunica",
         target: "SPARQL",
-        sourceHandle: "bottom-source",
-        targetHandle: "top-target",
+        //sourceHandle: "bottom-source",
+        //targetHandle: "top-target",
         style:{strokeDasharray: "6 3"}
     }
 
