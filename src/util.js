@@ -12,8 +12,6 @@ const GLOBAL_DEFAULT_KEY_VALUES = {
     "HEIGHT": {"id": "height", "value": 50},                  // Height of node
     "WIDTH": {"id": "width", "value": 50}                     // Width of node
 };
-/// TODO bv fontsize aanpassen heeft nog geen invloed, want nog hardcoded in SvgNode (en mss nog paar andere dingen die ook nog niet werken)
-
 
 // Keys, not supported by the library, that can be used in the JSON representation of nodes
 export const NODE_KEYS = {
@@ -50,7 +48,6 @@ export function parseGlobalDefaults(globalDefaults) {
 }
 
 
-// TODO: position optioneel maken, als dat mist, gwn renderen op 0,0 ofz (nu wordt dat gewoon niet getoond)
 export function parseNodes(globalDefaults, nodes) {
 
     // The values of NODE_KEYS should come in a data object, which will be passed to SvgNode
@@ -74,9 +71,19 @@ export function parseNodes(globalDefaults, nodes) {
         }
 
         node["data"] = data;
+
+        // There must be a position with keys x and y
+        if (node.hasOwnProperty('position') && !node["position"].hasOwnProperty('x')) {
+            node["position"]["x"] = 0;
+        }
+        if (node.hasOwnProperty('position') && !node["position"].hasOwnProperty('y')) {
+            node["position"]["y"] = 0;
+        } else if (!node.hasOwnProperty('position')) {
+            node["position"] = {x: 0, y: 0};
+        }
+
     }
 
-    console.log(nodes)
     return nodes;
 }
 
@@ -110,9 +117,6 @@ export function parseEdges(globalDefaults, edges) {
         }
 
     }
-
-    //console.log(globalDefaults)
-   // console.log(edges)
 
     return edges;
 }
