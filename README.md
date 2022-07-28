@@ -1,70 +1,32 @@
-# Getting Started with Create React App
+# Flow Visualization
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is an application to generate flow graphs from JSON.
 
-## Available Scripts
+## How to run
+Visit https://tibostr.github.io/dataflow-visualization/. If you want to run this application run locally, run `npm start` and open http://localhost:3000/.
 
-In the project directory, you can run:
+## Documentation
 
-### `npm start`
+If you [run the application](#how-to-run), you'll see that there are three editors. One to set [global defaults](#global-defaults), one to describe the [nodes](#nodes) and one for the [connections](#edges) between these nodes.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Global defaults
+Global defaults are useful when a lot of nodes and/or edges have the same properties and you don't want to repeat yourself everytime. These global default values are used as fallbacks if certain properties are not specified within the nodes or edges.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+|       Key       |                                                                                 Possible Values                                                                                  | Default        | Explanation                                                                                                                    |  
+|:---------------:|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:---------------|:-------------------------------------------------------------------------------------------------------------------------------|
+|   `edgeColor`   |                                                Any css color is valid, e.g. `"steelblue"`, `"#FFD700"`, `"rgb(65, 105, 225)"` ...                                                | `"black"`      | The color of the edges between the nodes.                                                                                      |
+| `edgeThickness` |                                                                                    Any number                                                                                    | `1.2`          | The thickness of the edges between the nodes.                                                                                  |
+|     `fill`      |                                                                                  Any css color                                                                                   | `white`        | The color of the nodes.                                                                                                        |  
+ |   `fontsize`    |                                                                                    Any number                                                                                    | `12`           | The fontsize of the text in the nodes.                                                                                         |
+ |     `shape`     | `"8-star"`, `"big-star"`, `"circle"`, `"cylinder"`, `"diamond"`, `"hexagon"`, `"note"`, `"rectangle"`, `"square"`, `"star"`, `"triangle"`,<br/>`"comunica"`,`"rmlio"`, `"solid"` | `"square"`     | The shape of the nodes.                                                                                                        |
+|    `stroke`     |                                                                                  Any css color                                                                                   | `"black"`      | The color of the stroke of the nodes.                                                                                          |
+|  `strokeWidth`  |                                                                                    Any number                                                                                    | `1`            | The thickness of hte stroke of the nodes.                                                                                      |
+|  `orientation`  |                                                                           `"horizontal"`, `"vertical"`                                                                           | `"horizontal"` | The orientation of the graph. If you want to work from top to bottom or from bottom to top, set `orientation` to `"vertical"`. |
+|    `height`     |                                                                                    Any number                                                                                    | `50`           | The height of the nodes.                                                                                                       |
+|     `width`     |                                                                                    Any number                                                                                    | `50`           | The width of the nodes. It is recommended to use the same value for `width` and `height`.                                      |
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Nodes
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Edges
