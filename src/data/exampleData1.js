@@ -1,9 +1,11 @@
 import {MarkerType} from "react-flow-renderer";
 
-export const globalDefaults = {
+export const globalDefaultsJSON = {
+    fontsize:10,
+    edgeThickness: 0.5
 };
 
-export const nodesData = [
+export const nodesJSON = [
     {id: 'csv', type: "custom", label: 'csv', shape: "cylinder", position: { x: 0, y: 0 },},
     {id: 'JSON', type: "custom", label: 'JSON', shape: "cylinder", position: { x: 0, y: 70 },},
     {id: 'XML', type: "custom", label: 'XML', shape: "cylinder" , position: { x: 0, y: 140 },},
@@ -29,7 +31,7 @@ export const nodesData = [
 ];
 
 
-export const edgesData = [
+export const edgesJSON = [
     {
         id: 'csv to rml',
         source: 'csv',

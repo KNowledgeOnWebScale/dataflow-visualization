@@ -1,20 +1,20 @@
 import {MarkerType} from "react-flow-renderer";
 
-export const globalDefaults = {
+export const globalDefaultsJSON = {
 };
 
-export const nodesData = [
+export const nodesJSON = [
     {id: 'CSV', type: "custom", label: 'CSV', shape: "cylinder", fill:"indianred", position: {x: 0, y: -30},},
     {id: "JSON", type: "custom", label: "JSON", shape: "cylinder", fill:"lightcoral", position: {x: 0, y: 30},},
     {id: "XML", type: "custom", label: "XML", shape: "cylinder", fill:"sandybrown", position: {x: 0, y: 90},},
     {id: "MySQL", type: "custom", label: "MySQL", shape: "cylinder", fill:"khaki", position: {x: 0, y: 150},},
     {id: "API", type: "custom", label: "API", shape: "square", fill:"darkseagreen", position: {x: 0, y: 210},},
 
-    {id: "RML-CSV", type: "custom", label: "RML\nTranslator", shape: "8-star", fill:"dodgerblue", position: {x: 80, y: -30},},
-    {id: "RML-JSON", type: "custom", label: "RML\nTranslator", shape: "8-star", fill:"dodgerblue", position: {x: 80, y: 30},},
-    {id: "RML-XML", type: "custom", label: "RML\nTranslator", shape: "8-star", fill:"dodgerblue", position: {x: 80, y: 90},},
-    {id: "RML-MySQL", type: "custom", label: "RML\nTranslator", shape: "8-star", fill:"dodgerblue", position: {x: 80, y: 150},},
-    {id: "RML-API", /*style: {backgroundColor: "white"},*/ type: "custom", label: "RML\nTranslator", shape: "8-star", fill:"dodgerblue", position: {x: 80, y: 210},},
+    {id: "RML-CSV", type: "custom", label: "RML\nTranslator", shape: "8-star", fill:"dodgerblue", position: {x: 80, y: -30}, width: 60},
+    {id: "RML-JSON", type: "custom", label: "RML\nTranslator", shape: "8-star", fill:"dodgerblue", position: {x: 80, y: 30}, width: 60},
+    {id: "RML-XML", type: "custom", label: "RML\nTranslator", shape: "8-star", fill:"dodgerblue", position: {x: 80, y: 90}, width: 60},
+    {id: "RML-MySQL", type: "custom", label: "RML\nTranslator", shape: "8-star", fill:"dodgerblue", position: {x: 80, y: 150}, width: 60},
+    {id: "RML-API", /*style: {backgroundColor: "white"},*/ type: "custom", label: "RML\nTranslator", shape: "8-star", fill:"dodgerblue", position: {x: 80, y: 210}, width: 60},
 
     {id: "RDF-CSV", type: "custom", label: "RDF", shape: "cylinder", height: 30, fill:"lightgreen", position: {x: 130, y: -20},},
     {id: "RDF-JSON", type: "custom", label: "RDF", shape: "cylinder", height: 30, fill:"lightgreen", position: {x: 130, y: 40},},
@@ -22,19 +22,19 @@ export const nodesData = [
     {id: "RDF-MySQL", type: "custom", label: "RDF", shape: "cylinder", height: 30, fill:"lightgreen", position: {x: 130, y: 160},},
     {id: "RDF-API", type: "custom", label: "RDF", shape: "cylinder", height: 30, fill:"lightgreen", position: {x: 130, y: 220},},
 
-    {id: "rmlio", type: "custom", label: "rml.io", shape: "note", fill:"steelblue", position: {x: 80, y: 280}},
+    {id: "rmlio", type: "custom", image: "rmlio", shape: "note", fill:"steelblue", position: {x: 80, y: 280}},
 
     {id: 'comunica', type: 'custom', label: '', shape: "comunica", position: {x: 600, y: 90},},
     {id: "SPARQL", type: "custom", label: "SPARQL", shape: "note", fill:"steelblue", position: {x: 600, y: 180}},
 
-    {id: "note1", type: "custom", label:"RMLTranslator translates raw\ndata to RDF on-the-fly,\nbased on the sub-queries\nof comunica", shape: "note", width: 150, height: 150, fill:"lightyellow", strokeWidth:0.1, stroke:"khaki", position: {x: 200, y:-100}},
-    {id: "note2", /*style: {backgroundColor: "red"},*/ type: "custom", label:"Comunica queries multiple\nRDF datasets SPARQL\nsub-queries go in,\nresults come out", shape: "note", width: 150, height: 150, fill:"lightyellow", strokeWidth:0.1, stroke:"khaki", position: {x: 450, y:-50}}
+    {id: "note1", type: "custom", label:"RMLTranslator translates\n raw data to RDF on-the-fly,\nbased on the sub-queries\nof comunica", shape: "note", width: 150, height: 150, fill:"lightyellow", strokeWidth:0.1, stroke:"khaki", position: {x: 200, y:-100}},
+    {id: "note2", /*style: {backgroundColor: "red"},*/ type: "custom", label:"Comunica queries\nmultiple RDF\ndatasets.\nSPARQL sub-queries go in,\nresults come out", shape: "note", width: 150, height: 150, fill:"lightyellow", strokeWidth:0.1, stroke:"khaki", position: {x: 450, y:-50}}
 
 
 ];
 
 
-export const edgesData = [
+export const edgesJSON = [
     {
         id: "csv to rml",
         source: "CSV",

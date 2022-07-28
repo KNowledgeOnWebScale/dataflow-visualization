@@ -1,7 +1,7 @@
 import {MarkerType} from "react-flow-renderer";
 
 
-export const globalDefaults = {
+export const globalDefaultsJSON = {
     //fontsize: 12,
    // width: 50,
     height: 50,
@@ -12,7 +12,7 @@ export const globalDefaults = {
     orientation: "vertical"
 };
 
-export const nodesData = [
+export const nodesJSON = [
     {
         id: 'comunica',
        // type: 'custom',
@@ -104,7 +104,7 @@ export const nodesData = [
 
 ];
 
-export const edgesData = [
+export const edgesJSON = [
     { source: 'comunica', target: 'RDF-1', animated: true, type: "straight", zIndex:1 },
     { source: 'comunica', target: 'RDF-2', animated:true, type: "straight", zIndex:1 },
     { source: 'comunica', target: 'RDF-3', animated:true, type: "straight", zIndex:1 },
@@ -114,7 +114,7 @@ export const edgesData = [
     { source: 'RDF-2', target: 'rmlio', animated:true, type: "straight", zIndex:1 },
     { source: 'RDF-3', target: 'rmlio', animated:true, type: "straight", zIndex:1 },
 
-    { source: 'flickr', target: 'rmlio', animated: false, type: "straight", style:{strokeDasharray: "5 3",  strokeWidth: 20/*, stroke: "red"*/}, edgeColor:"green" },
+    { source: 'flickr', target: 'rmlio', animated: false, type: "straight", style:{strokeDasharray: "5 3",  /*strokeWidth: 20*//*, stroke: "red"*/}/*, edgeColor:"green"*/ },
     { source: 'imgur', target: 'rmlio', animated:false, type: "straight", style:{strokeDasharray: "5 3" }},
     { source: 'google', target: 'rmlio', animated:false, type: "straight", style:{strokeDasharray: "5 3" }},
 

@@ -1,9 +1,9 @@
 import {MarkerType} from "react-flow-renderer";
 
-export const globalDefaults = {
+export const globalDefaultsJSON = {
 };
 
-export const nodesData = [
+export const nodesJSON = [
     {id: 'RDF', type: "custom", label: 'RDF', shape: "cylinder", position: {x: 0, y: -30},},
     {id: "RDF'", type: "custom", label: "RDF'", shape: "cylinder", position: {x: 0, y: 30},},
     {id: "RDF''", type: "custom", label: "RDF''", shape: "cylinder", position: {x: 0, y: 90},},
@@ -30,7 +30,7 @@ export const nodesData = [
 ];
 
 
-export const edgesData = [
+export const edgesJSON = [
     {
         id: "RDF to comunica",
         source: 'RDF',
