@@ -166,6 +166,8 @@ export default memo(({data, isConnectable}) => {
     let width = data[NODE_KEYS.WIDTH];
     let height = data[NODE_KEYS.HEIGHT];
 
+    let fontsize = data[NODE_KEYS.FONTSIZE];
+
     //console.log(`data.width is: ${data.width} en width is ${width}`)
 
     let element = getShape(data[NODE_KEYS.SHAPE], data[NODE_KEYS.FILL], data[NODE_KEYS.STROKE], data[NODE_KEYS.STROKE_WIDTH]);
@@ -196,19 +198,19 @@ export default memo(({data, isConnectable}) => {
                 </svg>
 
 
-                <text fontSize="12px"  /*x="50%" y="50%"*/ /*dominantBaseline="middle" textAnchor="middle"*/>
+                <text fontSize={fontsize}  /*x="50%" y="50%"*/ /*dominantBaseline="middle" textAnchor="middle"*/>
                     {data[NODE_KEYS.TITLE] &&
-                        <tspan key={Math.random()} x="50%" y={(data[NODE_KEYS.STROKE_WIDTH] || 1) + 12}
+                        <tspan key={Math.random()} x="50%" y={(data[NODE_KEYS.STROKE_WIDTH] || 1) + fontsize}
                                dominantBaseline="middle" textAnchor="middle">{data.title}</tspan>
                     }
                     {data[NODE_KEYS.LABEL] &&
                         data.label.split("\n").map((e, i) => {
                             if (i !== 0) {
-                                return <tspan key={i} x="50%" dy="12px" dominantBaseline="middle"
+                                return <tspan key={i} x="50%" dy={fontsize} dominantBaseline="middle"
                                               textAnchor="middle">{e}</tspan>
                             } else {
                                 return <tspan key={i} x="50%"
-                                              y={50 - ((data[NODE_KEYS.LABEL].split("\n").length - 1) * height / 12 / 2) + "%"}  // height/12, want fontsize is 12, TODO: fontsize dynamisch maken
+                                              y={50 - ((data[NODE_KEYS.LABEL].split("\n").length - 1) * height / fontsize / 2) + "%"}
                                               dominantBaseline="middle" textAnchor="middle">{e}</tspan>
                             }
                         })}

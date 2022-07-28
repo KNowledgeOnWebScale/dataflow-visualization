@@ -76,6 +76,7 @@ export function parseNodes(globalDefaults, nodes) {
         node["data"] = data;
     }
 
+    console.log(nodes)
     return nodes;
 }
 
@@ -110,8 +111,8 @@ export function parseEdges(globalDefaults, edges) {
 
     }
 
-    console.log(globalDefaults)
-    console.log(edges)
+    //console.log(globalDefaults)
+   // console.log(edges)
 
     return edges;
 }

@@ -2,7 +2,7 @@ import {MarkerType} from "react-flow-renderer";
 
 
 export const globalDefaults = {
-    fontSize: 12,
+    //fontsize: 12,
    // width: 50,
     height: 50,
     //edgeThickness: 1,
