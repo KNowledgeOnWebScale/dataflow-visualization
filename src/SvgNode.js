@@ -2,6 +2,8 @@ import React, {memo} from 'react';
 
 import {Handle} from 'react-flow-renderer';
 
+import {NODE_KEYS} from "./util";
+
 import comunica from "./assets/comunica.svg";
 import rmlio from "./assets/rmlio.png";
 import solid from "./assets/solid.svg";
@@ -22,7 +24,7 @@ import solid from "./assets/solid.svg";
     "rmlio": rmlio
 };*/
 
-export function getShape(shapeId, fill, stroke, strokeWidth ) {
+export function getShape(shapeId, fill, stroke, strokeWidth) {
     const SHAPES = {
         "8-star":
             <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
@@ -107,7 +109,7 @@ export function getShape(shapeId, fill, stroke, strokeWidth ) {
             </svg>,
 
         "rectangle":
-                <rect style={{fill:fill, stroke:stroke, strokeWidth: strokeWidth}} width="100%" height="100%" rx="3" />,
+            <rect style={{fill: fill, stroke: stroke, strokeWidth: strokeWidth}} width="100%" height="100%" rx="3"/>,
 
         "square":
             <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
@@ -152,7 +154,7 @@ export function getShape(shapeId, fill, stroke, strokeWidth ) {
 
         "comunica": <image href={comunica} width="100%" height="100%" preserveAspectRatio="xMinYMin slice"/>,
         "rmlio": <image href={rmlio} width="100%" height="100%" preserveAspectRatio="xMinYMin slice"/>,
-        "solid": <image href={solid} width="100%" height="100%" preserveAspectRatio="xMinYMin slice" />
+        "solid": <image href={solid} width="100%" height="100%" preserveAspectRatio="xMinYMin slice"/>
     }
 
     return SHAPES[shapeId];
@@ -161,22 +163,22 @@ export function getShape(shapeId, fill, stroke, strokeWidth ) {
 
 export default memo(({data, isConnectable}) => {
 
-    let width = data.width || 50;
-    let height = data.height || 50;
+    let width = data[NODE_KEYS.WIDTH];
+    let height = data[NODE_KEYS.HEIGHT];
 
     //console.log(`data.width is: ${data.width} en width is ${width}`)
 
-    let element = getShape(data.shape || "square", data.fill || "white", data.stroke || "black", data.strokeWidth || 1);
+    let element = getShape(data[NODE_KEYS.SHAPE], data[NODE_KEYS.FILL], data[NODE_KEYS.STROKE], data[NODE_KEYS.STROKE_WIDTH]);
     // console.log(element)
 
-   // console.log(getShape("rmlio"))
+    // console.log(getShape("rmlio"))
 
     return (
         <>
             <svg style={{width: width, height: height}}>
                 <svg style={{width: width}} key={Math.random()}>
 
-                     {
+                    {
                         element
                     }
 
@@ -186,29 +188,30 @@ export default memo(({data, isConnectable}) => {
 
                 {/* <image href={rmlio} width="100%" height="100%" preserveAspectRatio="xMinYMin slice"/> */}
 
-                  <svg style={{width: width, height:height}}>
-                    {data.image &&
-                        (getShape(data.image) || <image key={Math.random()} href={data.image} width="100%" height="100%" preserveAspectRatio="xMinYMin slice"/>)
+                <svg style={{width: width, height: height}}>
+                    {data[NODE_KEYS.IMAGE] &&
+                        (getShape(data[NODE_KEYS.IMAGE]) || <image key={Math.random()} href={data[NODE_KEYS.IMAGE]} width="100%" height="100%"
+                                                        preserveAspectRatio="xMinYMin slice"/>)
                     }
                 </svg>
 
 
-
                 <text fontSize="12px"  /*x="50%" y="50%"*/ /*dominantBaseline="middle" textAnchor="middle"*/>
-                    {data.title &&
-                           <tspan key={Math.random()} x="50%" y={(data.strokeWidth || 1) + 12} dominantBaseline="middle" textAnchor="middle">{data.title}</tspan>
+                    {data[NODE_KEYS.TITLE] &&
+                        <tspan key={Math.random()} x="50%" y={(data[NODE_KEYS.STROKE_WIDTH] || 1) + 12}
+                               dominantBaseline="middle" textAnchor="middle">{data.title}</tspan>
                     }
-                    {data.label &&
+                    {data[NODE_KEYS.LABEL] &&
                         data.label.split("\n").map((e, i) => {
                             if (i !== 0) {
                                 return <tspan key={i} x="50%" dy="12px" dominantBaseline="middle"
                                               textAnchor="middle">{e}</tspan>
                             } else {
                                 return <tspan key={i} x="50%"
-                                              y={50 - ((data.label.split("\n").length - 1) * height / 12 / 2) + "%"}  // height/12, want fontsize is 12, TODO: dynamisch maken
+                                              y={50 - ((data[NODE_KEYS.LABEL].split("\n").length - 1) * height / 12 / 2) + "%"}  // height/12, want fontsize is 12, TODO: fontsize dynamisch maken
                                               dominantBaseline="middle" textAnchor="middle">{e}</tspan>
                             }
-                    })}
+                        })}
 
                 </text>
 

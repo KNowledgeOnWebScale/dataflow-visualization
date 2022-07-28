@@ -5,7 +5,7 @@ export const globalDefaults = {
     fontSize: 12,
    // width: 50,
     height: 50,
-  //  edgeThickness: 1,
+    //edgeThickness: 1,
     fill: "white",
     stroke: "black",
     strokeWidth: 1
