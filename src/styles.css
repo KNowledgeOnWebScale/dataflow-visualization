@@ -1,19 +1,18 @@
-/*.wrap {
-    position:relative;
-    text-align: center;
+.code-editor {
+    width: 97%;
+    margin: auto;
+    height: 100%;
+    position: relative;
 }
 
-
-.text-on-image {
-    position: absolute;
-    top: 15%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}*/
-
-/*
-svg {
-    stroke: #def12a !important;
-    fill: #ca0ed0 !important;
+.node-edge-editor {
+    width: 95%;
+    height: 100%;
+    margin: auto auto 5px 5px;
 }
- */
+
+.resizable {
+    overflow: auto;
+    resize: vertical;
+    *border: 1px solid;
+}

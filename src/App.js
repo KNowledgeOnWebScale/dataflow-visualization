@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, useState} from 'react';
 
 import ReactFlow, {
     useNodesState,
@@ -10,6 +10,9 @@ import ReactFlow, {
     // MarkerType,
 } from 'react-flow-renderer';
 
+import CodeEditor from '@uiw/react-textarea-code-editor';
+
+
 // import CustomEdge from './CustomEdge';
 import SvgNode from "./SvgNode";
 
@@ -18,9 +21,10 @@ import SvgNode from "./SvgNode";
 // import {globalDefaults, nodesData, edgesData} from "./data/exampleData2";
 // import {globalDefaults, nodesData, edgesData} from "./data/exampleData3";
 // import {globalDefaults, nodesData, edgesData} from "./data/exampleData4";
- import {globalDefaults, nodesData, edgesData} from "./data/exampleData5";
+import {globalDefaults, nodesData, edgesData} from "./data/exampleData5";
 
 import {parseNodes, parseEdges, parseGlobalDefaults} from "./util";
+import {Button, FloatingLabel, Form} from "react-bootstrap";
 
 //const edgeTypes = {
 //  custom: CustomEdge,
@@ -40,15 +44,103 @@ let parsedEdges = parseEdges(defaults, edgesData, nodesData);
 
 const EdgesFlow = () => {
 
-    const [nodes, , onNodesChange] = useNodesState(parsedNodes);
+    const [nodes, setNodes , onNodesChange] = useNodesState(parsedNodes);
     const [edges, setEdges, onEdgesChange] = useEdgesState(parsedEdges);
 
     const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), []);
 
+
+    const [globalDefaults, setGlobalDefaults] = useState(JSON.stringify(defaults));
+    const [nodesData, setNodesData] = useState(JSON.stringify(parsedNodes));
+    const [edgesData, setEdgesData] = useState(JSON.stringify(parsedEdges));
+
+    function handleConvert(e) {
+        e.preventDefault();
+
+        let de = parseGlobalDefaults(JSON.parse(globalDefaults));
+        let no = parseNodes(de, JSON.parse(nodesData));
+        let ed = parseEdges(de,JSON.parse(edgesData), no);
+
+        setNodes(no);
+        setEdges(ed);
+
+    }
+
     return (
         <>
             <p>flow</p>
-            <div style={{height: window.innerHeight}}>
+
+
+            <div className="edit-area">
+                <div className="code-editor resizable">
+                    <h5>Global defaults editor</h5>
+                    <CodeEditor
+                        value={globalDefaults}
+                        language="json"
+                        placeholder="Please enter global defaults in JSON."
+                        onChange={(evn) => setGlobalDefaults(evn.target.value)}
+                        padding={15}
+                        style={{
+                            fontSize: 15,
+                            backgroundColor: "#f5f5f5",
+                            width: "100%",
+                            minHeight: "200px",
+                            height: "100%",
+                            margin: "auto",
+                            color: "black",
+                        }}
+                    />
+                </div>
+
+                <div className="d-flex resizable code-editor" /*style={{width: "97%", margin: "auto"}}*/>
+
+                    <div className="node-edge-editor">
+                        <h5>Node editor</h5>
+                        <CodeEditor
+                            value={nodesData}
+                            language="json"
+                            placeholder="Please enter nodes in JSON."
+                            onChange={(evn) => setNodesData(evn.target.value)}
+                            padding={15}
+                            style={{
+                                fontSize: 15,
+                                backgroundColor: "#f5f5f5",
+                                width: "100%",
+                                minHeight: "250px",
+                                height: "100%",
+                                margin: "auto",
+                                color: "black"
+                            }}
+                        />
+                    </div>
+
+                    <div className="node-edge-editor">
+                        <h5>Edge editor</h5>
+                        <CodeEditor
+                            value={edgesData}
+                            language="json"
+                            placeholder="Please enter edges in JSON."
+                            onChange={(evn) => setEdgesData(evn.target.value)}
+                            padding={15}
+                            style={{
+                                fontSize: 15,
+                                backgroundColor: "#f5f5f5",
+                                width: "100%",
+                                height: "100%",
+                                minHeight: "250px",
+                                margin: "auto",
+                                color: "black"
+                            }}
+                        />
+                    </div>
+                </div>
+
+                <Button variant="primary" onClick={e => handleConvert(e)}>Convert</Button>
+
+            </div>
+
+
+            <div style={{width: window.innerWidth*0.95, height: window.innerHeight*0.95, border: "solid 1px black", margin: "10px auto 10px auto"}}>
                 <ReactFlow
                     nodes={nodes}
                     edges={edges}
@@ -61,7 +153,6 @@ const EdgesFlow = () => {
                     fitView
                     attributionPosition="top-right"
                 >
-                    {/*<MiniMap/>*/}
                     <Controls/>
                     {/*<Background/>*/}
                 </ReactFlow>
