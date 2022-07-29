@@ -95,29 +95,13 @@ const EdgesFlow = () => {
             </div>
 
             <div className="edit-area">
-                <div className="code-editor resizable">
+                <div className="code-editor resizable" style={{height: "200px"}}>
                     <h5>Global defaults editor</h5>
-                    {/*<CodeEditor
-                        value={globalDefaults}
-                        language="json"
-                        placeholder="Please enter global defaults in JSON."
-                        onChange={(evn) => setGlobalDefaults(evn.target.value)}
-                        padding={15}
-                        style={{
-                            fontSize: 15,
-                            backgroundColor: "#f5f5f5",
-                            width: "100%",
-                            minHeight: "200px",
-                            height: "100%",
-                            margin: "auto",
-                            color: "black",
-                        }}
-                    />*/}
                     <Editor
-                        height="250px"
                         defaultLanguage="json"
                         value={globalDefaults}
                         onChange={content => setGlobalDefaults(content)}
+                        theme="vs-dark"
                         style = {{
                             width: "100%",
                             height: "100%",
@@ -127,30 +111,15 @@ const EdgesFlow = () => {
                     />
                 </div>
 
-                <div className="d-flex resizable code-editor" /*style={{width: "97%", margin: "auto"}}*/>
+                <div className="d-flex resizable code-editor" style={{height: "260px"}}/*style={{width: "97%", margin: "auto"}}*/>
 
-                    <div className="node-edge-editor">
+                    <div className="node-edge-editor" >
                         <h5>Node editor</h5>
-                        {/*<CodeEditor
-                            value={nodesData}
-                            language="json"
-                            placeholder="Please enter nodes in JSON."
-                            onChange={(evn) => setNodesData(evn.target.value)}
-                            padding={15}
-                            style={{
-                                fontSize: 15,
-                                backgroundColor: "#f5f5f5",
-                                width: "100%",
-                                minHeight: "250px",
-                                height: "100%",
-                                margin: "auto",
-                                color: "black"
-                            }}
-                        />*/}
                         <Editor
                             defaultLanguage="json"
                             value={nodesData}
                             onChange={content=>setNodesData(content)}
+                            theme="vs-dark"
                             style = {{
                                 width: "100%",
                                 height: "100%",
@@ -162,28 +131,11 @@ const EdgesFlow = () => {
 
                     <div className="node-edge-editor">
                         <h5>Edge editor</h5>
-                        {/*<CodeEditor
-                            value={edgesData}
-                            language="json"
-                            placeholder="Please enter edges in JSON."
-                            onChange={(evn) => setEdgesData(evn.target.value)}
-                            padding={15}
-                            style={{
-                                fontSize: 15,
-                                backgroundColor: "#f5f5f5",
-                                width: "100%",
-                                height: "100%",
-                                minHeight: "250px",
-                                margin: "auto",
-                                color: "black"
-                            }}
-                        />
-                        */}
-
                         <Editor
                             defaultLanguage="json"
                             value={edgesData}
                             onChange={content => setEdgesData(content)}
+                            theme="vs-dark"
                             style = {{
                                 width: "100%",
                                 height: "100%",
