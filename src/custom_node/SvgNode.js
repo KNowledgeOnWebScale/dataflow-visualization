@@ -2,11 +2,11 @@ import React, {memo} from 'react';
 
 import {Handle} from 'react-flow-renderer';
 
-import {NODE_KEYS} from "./util";
+import {NODE_KEYS} from "../util";
 
-import comunica from "./assets/comunica.svg";
-import rmlio from "./assets/rmlio.png";
-import solid from "./assets/solid.svg";
+import comunica from "../assets/comunica.svg";
+import rmlio from "../assets/rmlio.png";
+import solid from "../assets/solid.svg";
 
 
 /*const SHAPES = {

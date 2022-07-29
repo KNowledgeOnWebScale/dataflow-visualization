@@ -15,7 +15,7 @@ import Editor, {DiffEditor, useMonaco, loader} from "@monaco-editor/react";
 
 
 // import CustomEdge from './CustomEdge';
-import SvgNode from "./SvgNode";
+import SvgNode from "./custom_node/SvgNode";
 
 // import {globalDefaultsJSON, nodesJSON, edgesJSON} from "./data"
 import {
@@ -97,7 +97,7 @@ const EdgesFlow = () => {
 
         let jsonValue;
         try {
-            jsonValue = JSON.stringify(YAML.load(yamlData.toString()));
+            jsonValue = JSON.stringify(YAML.load(yamlData.toString()),null, "\t");
             return jsonValue;
         } catch (e) {
             return e;
@@ -156,9 +156,9 @@ const EdgesFlow = () => {
 
         let example = examples[number - 1];
 
-        let defaults = JSON.stringify(example[0]);
-        let nodes = JSON.stringify(example[1]);
-        let edges = JSON.stringify(example[2]);
+        let defaults = JSON.stringify(example[0], null, "\t");
+        let nodes = JSON.stringify(example[1], null, "\t");
+        let edges = JSON.stringify(example[2], null, "\t");
 
         if (language === "yaml") {
             defaults = json2yaml(defaults);
