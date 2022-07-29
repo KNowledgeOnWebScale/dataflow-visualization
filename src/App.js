@@ -43,6 +43,11 @@ import {
     nodesJSON as nodesJSON5,
     edgesJSON as edgesJSON5
 } from "./data/exampleData5";
+import {
+    globalDefaultsJSON as globalDefaultsJSON6,
+    nodesJSON as nodesJSON6,
+    edgesJSON as edgesJSON6
+} from "./data/exampleData6";
 
 import {parseNodes, parseEdges, parseGlobalDefaults} from "./util";
 import {Button} from "react-bootstrap";
@@ -97,7 +102,7 @@ const EdgesFlow = () => {
 
         let jsonValue;
         try {
-            jsonValue = JSON.stringify(YAML.load(yamlData.toString()),null, "\t");
+            jsonValue = JSON.stringify(YAML.load(yamlData.toString()), null, "\t");
             return jsonValue;
         } catch (e) {
             return e;
@@ -148,7 +153,7 @@ const EdgesFlow = () => {
     const examples = [
         [globalDefaultsJSON1, nodesJSON1, edgesJSON1], [globalDefaultsJSON2, nodesJSON2, edgesJSON2],
         [globalDefaultsJSON3, nodesJSON3, edgesJSON3], [globalDefaultsJSON4, nodesJSON4, edgesJSON4],
-        [globalDefaultsJSON5, nodesJSON5, edgesJSON5]
+        [globalDefaultsJSON5, nodesJSON5, edgesJSON5], [globalDefaultsJSON6, nodesJSON6, edgesJSON6]
     ];
 
     function loadExample(e, number) {
@@ -174,11 +179,12 @@ const EdgesFlow = () => {
     return (
         <>
             <div className="d-flex">
-                <Button className="primary" onClick={e => loadExample(e, 1)}>example 1</Button>
-                <Button className="primary" onClick={e => loadExample(e, 2)}>example 2</Button>
-                <Button className="primary" onClick={e => loadExample(e, 3)}>example 3</Button>
-                <Button className="primary" onClick={e => loadExample(e, 4)}>example 4</Button>
-                <Button className="primary" onClick={e => loadExample(e, 5)}>example 5</Button>
+                {
+                    examples.map((_, i) => (
+                            <Button className="primary" onClick={e => loadExample(e, i + 1)}>example {i+1}</Button>
+                        )
+                    )
+                }
             </div>
 
             <Dropdown onSelect={changeLanguage}>
