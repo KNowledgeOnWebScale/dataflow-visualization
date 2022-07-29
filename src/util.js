@@ -51,16 +51,48 @@ export function parseGlobalDefaults(globalDefaults) {
 
 export function parseNodes(globalDefaults, nodes) {
 
-    // The values of NODE_KEYS should come in a data object, which will be passed to SvgNode
 
     for (let node of nodes) {
 
         // Each node needs to have an id
         if (!node.hasOwnProperty('id')) {
-            node.id = "" + Math.random();
+            // If the node is the only one with its label that does not have an ID, the label becomes the id
+            // If the node does not have a label and the shape is unique, the shape becomes the id
+            // If the node does not have an id, label or shape, we look if the image is unique
+
+            const labelId = NODE_KEYS.LABEL;
+            const shapeId = GLOBAL_DEFAULT_KEY_VALUES.SHAPE.id;
+            const imageId = NODE_KEYS.IMAGE;
+
+            function checkForPossibleId(key) {
+                if (node.hasOwnProperty(key)) {
+                    //let hits = nodes.filter(n => !(n.hasOwnProperty("id") || n["id"] !== key) && n.hasOwnProperty(key) && n[key] === node[key]);
+                    let hits = nodes.filter(n => (n.hasOwnProperty("id") && n["id"] === node[key]) || (n.hasOwnProperty(key) && n[key] === node[key]));
+                    console.log(key)
+                    console.log(hits)
+
+                    if (hits.length === 1) {
+                        node["id"] = node[key];
+                        return true;
+                    }
+
+                }
+                return false;
+            }
+
+            if (!checkForPossibleId(labelId)) {
+                if (!checkForPossibleId(shapeId)) {
+                    if (!checkForPossibleId(imageId)) {
+                        node["id"] = "" + Math.random();
+                    }
+                }
+            }
+
         }
+
         node.type = "custom";
 
+        // The values of NODE_KEYS should come in a data object, which will be passed to SvgNode
         let data = {};
 
         for (let key in NODE_KEYS) {
@@ -125,7 +157,7 @@ export function parseEdges(globalDefaults, edges, nodes) {
     return edges;
 }
 
-function fix_sourceHandle_targetHandle(globalDefaults, edge, nodes){
+function fix_sourceHandle_targetHandle(globalDefaults, edge, nodes) {
     // Although there are more source and target handles in the nodes, react flow does not choose them wisely
     // So let's fix that, e.g. if target is left from the source, the sourceHandle should be right and the targetHandle should be left
     // This code below checks the different possibilities

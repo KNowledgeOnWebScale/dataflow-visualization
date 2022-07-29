@@ -4,11 +4,11 @@ export const globalDefaultsJSON = {
 };
 
 export const nodesJSON = [
-    {id: 'CSV', type: "custom", label: 'CSV', shape: "cylinder", fill:"indianred", position: {x: 0, y: -30},},
-    {id: "JSON", type: "custom", label: "JSON", shape: "cylinder", fill:"lightcoral", position: {x: 0, y: 30},},
-    {id: "XML", type: "custom", label: "XML", shape: "cylinder", fill:"sandybrown", position: {x: 0, y: 90},},
-    {id: "MySQL", type: "custom", label: "MySQL", shape: "cylinder", fill:"khaki", position: {x: 0, y: 150},},
-    {id: "API", type: "custom", label: "API", shape: "square", fill:"darkseagreen", position: {x: 0, y: 210},},
+    { label: 'CSV', shape: "cylinder", fill:"indianred", position: {x: 0, y: -30},},
+    { label: "JSON", shape: "cylinder", fill:"lightcoral", position: {x: 0, y: 30},},
+    {label: "XML", shape: "cylinder", fill:"sandybrown", position: {x: 0, y: 90},},
+    {label: "MySQL", shape: "cylinder", fill:"khaki", position: {x: 0, y: 150},},
+    {label: "API", shape: "square", fill:"darkseagreen", position: {x: 0, y: 210},},
 
     {id: "RML-CSV", type: "custom", label: "RML\nTranslator", shape: "8-star", fill:"dodgerblue", position: {x: 80, y: -30}, width: 60},
     {id: "RML-JSON", type: "custom", label: "RML\nTranslator", shape: "8-star", fill:"dodgerblue", position: {x: 80, y: 30}, width: 60},
@@ -22,10 +22,10 @@ export const nodesJSON = [
     {id: "RDF-MySQL", type: "custom", label: "RDF", shape: "cylinder", height: 30, fill:"lightgreen", position: {x: 130, y: 160},},
     {id: "RDF-API", type: "custom", label: "RDF", shape: "cylinder", height: 30, fill:"lightgreen", position: {x: 130, y: 220},},
 
-    {id: "rmlio", type: "custom", image: "rmlio", shape: "note", fill:"steelblue", position: {x: 80, y: 280}},
+    { shape: "rmlio", fill:"steelblue", position: {x: 80, y: 280}},
 
-    {id: 'comunica', type: 'custom', label: '', shape: "comunica", position: {x: 600, y: 90},},
-    {id: "SPARQL", type: "custom", label: "SPARQL", shape: "note", fill:"steelblue", position: {x: 600, y: 180}},
+    {shape: "comunica", position: {x: 600, y: 90},},
+    {label: "SPARQL", shape: "note", fill:"steelblue", position: {x: 600, y: 180}},
 
     {id: "note1", type: "custom", label:"RMLTranslator translates\n raw data to RDF on-the-fly,\nbased on the sub-queries\nof comunica", shape: "note", width: 150, height: 150, fill:"lightyellow", strokeWidth:0.1, stroke:"khaki", position: {x: 200, y:-100}},
     {id: "note2", /*style: {backgroundColor: "red"},*/ type: "custom", label:"Comunica queries\nmultiple RDF\ndatasets.\nSPARQL sub-queries go in,\nresults come out", shape: "note", width: 150, height: 150, fill:"lightyellow", strokeWidth:0.1, stroke:"khaki", position: {x: 450, y:-50}}

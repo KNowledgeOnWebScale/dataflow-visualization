@@ -4,21 +4,19 @@ export const globalDefaultsJSON = {
 };
 
 export const nodesJSON = [
-    {id: 'RDF', type: "custom", label: 'RDF', shape: "cylinder", position: {x: 0, y: -30},},
-    {id: "RDF'", type: "custom", label: "RDF'", shape: "cylinder", position: {x: 0, y: 30},},
-    {id: "RDF''", type: "custom", label: "RDF''", shape: "cylinder", position: {x: 0, y: 90},},
-    {id: "RDF'''", type: "custom", label: "RDF'''", shape: "cylinder", position: {x: 0, y: 150},},
-    {id: "RDF''''", type: "custom", label: "RDF''''", shape: "cylinder", position: {x: 0, y: 210},},
+    {label: 'RDF', shape: "cylinder", position: {x: 0, y: -30},},
+    {label: "RDF'", shape: "cylinder", position: {x: 0, y: 30},},
+    {label: "RDF''", shape: "cylinder", position: {x: 0, y: 90},},
+    {label: "RDF'''", shape: "cylinder", position: {x: 0, y: 150},},
+    {label: "RDF''''", shape: "cylinder", position: {x: 0, y: 210},},
 
 
-    {id: 'comunica', type: 'custom', label: '', shape: "comunica", position: {x: 600, y: 90},},
-    {id: "SPARQL", type: "custom", label: "SPARQL", shape: "note", position: {x: 600, y: 180}},
+    {shape: "comunica", position: {x: 600, y: 90},},
+    {label: "SPARQL", shape: "note", position: {x: 600, y: 180}},
 
 
     {
         id: "note1",
-        type: "custom",
-
             label: "Comunica queries\nmultiple RDF\ndatasets\nSPARQL sub-query\ngoes in, results\ncome out",
             width: 120,
             height: 120,

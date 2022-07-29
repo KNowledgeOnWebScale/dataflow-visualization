@@ -14,8 +14,6 @@ export const globalDefaultsJSON = {
 
 export const nodesJSON = [
     {
-        id: 'comunica',
-       // type: 'custom',
         shape:"comunica",
         position: { x: 80, y: 90 },
     },
@@ -34,7 +32,7 @@ export const nodesJSON = [
        // style: { backgroundColor: 'rgba(255, 0, 0, 0.2)', width: 300, height: 300 },
     },
     {
-       // id: "solidLogo",
+      //  id: "solidLogo",
       //  type: "custom",
         image: "solid",
         stroke: "#fff",
