@@ -6,6 +6,7 @@
   "private": true,
   "homepage": "https://tibostr.github.io/dataflow-visualization",
   "dependencies": {
+    "@monaco-editor/react": "^4.4.5",
     "@uiw/react-textarea-code-editor": "^2.0.3",
     "bootstrap": "^5.2.0",
     "react": "^18.2.0",

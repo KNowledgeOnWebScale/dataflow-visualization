@@ -10,7 +10,8 @@ import ReactFlow, {
     // MarkerType,
 } from 'react-flow-renderer';
 
-import CodeEditor from '@uiw/react-textarea-code-editor';
+//import CodeEditor from '@uiw/react-textarea-code-editor';
+import Editor, { DiffEditor, useMonaco, loader } from "@monaco-editor/react";
 
 
 // import CustomEdge from './CustomEdge';
@@ -96,7 +97,7 @@ const EdgesFlow = () => {
             <div className="edit-area">
                 <div className="code-editor resizable">
                     <h5>Global defaults editor</h5>
-                    <CodeEditor
+                    {/*<CodeEditor
                         value={globalDefaults}
                         language="json"
                         placeholder="Please enter global defaults in JSON."
@@ -111,6 +112,18 @@ const EdgesFlow = () => {
                             margin: "auto",
                             color: "black",
                         }}
+                    />*/}
+                    <Editor
+                        height="250px"
+                        defaultLanguage="json"
+                        value={globalDefaults}
+                        onChange={content => setGlobalDefaults(content)}
+                        style = {{
+                            width: "100%",
+                            height: "100%",
+                            minHeight: "250px",
+                            margin: "auto"
+                        }}
                     />
                 </div>
 
@@ -118,7 +131,7 @@ const EdgesFlow = () => {
 
                     <div className="node-edge-editor">
                         <h5>Node editor</h5>
-                        <CodeEditor
+                        {/*<CodeEditor
                             value={nodesData}
                             language="json"
                             placeholder="Please enter nodes in JSON."
@@ -133,12 +146,23 @@ const EdgesFlow = () => {
                                 margin: "auto",
                                 color: "black"
                             }}
+                        />*/}
+                        <Editor
+                            defaultLanguage="json"
+                            value={nodesData}
+                            onChange={content=>setNodesData(content)}
+                            style = {{
+                                width: "100%",
+                                height: "100%",
+                                minHeight: "250px",
+                                margin: "auto"
+                            }}
                         />
                     </div>
 
                     <div className="node-edge-editor">
                         <h5>Edge editor</h5>
-                        <CodeEditor
+                        {/*<CodeEditor
                             value={edgesData}
                             language="json"
                             placeholder="Please enter edges in JSON."
@@ -154,6 +178,21 @@ const EdgesFlow = () => {
                                 color: "black"
                             }}
                         />
+                        */}
+
+                        <Editor
+                            defaultLanguage="json"
+                            value={edgesData}
+                            onChange={content => setEdgesData(content)}
+                            style = {{
+                                width: "100%",
+                                height: "100%",
+                                minHeight: "250px",
+                                margin: "auto"
+                            }}
+                        />
+
+
                     </div>
                 </div>
 
