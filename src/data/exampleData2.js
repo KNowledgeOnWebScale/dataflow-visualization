@@ -6,20 +6,20 @@ export const globalDefaultsJSON = {
 };
 
 export const nodesJSON = [
-    {vgroup: "vgroup1", label: 'csv', shape: "cylinder", position: { x: 1, y: -160 },},
+    {vgroup: "vgroup1", label: 'csv', shape: "cylinder", position: { x: 1, y: -85 },},
     {vgroup: "vgroup1", label: 'JSON', shape: "cylinder", /*position: { x: 0, y: 70 },*/ },
     {vgroup: "vgroup1", label: 'XML', shape: "cylinder" /*, position: { x: 0, y: 140 },*/},
     {vgroup: "vgroup1", label: 'MySQL', shape: "cylinder"/*, position: { x: 0, y: 210 },*/},
     {vgroup: "vgroup1", label: 'API', shape: "circle"/*, position: { x: 0, y: 280 },*/},
 
-    { id: 'RML',/*, type:"custom",*/ label: 'RML\nMapper', shape:"8-star", width: "70", height: "70" , position: { x: 300, y: 55 } },
+    { id: 'RML', vgroup: "vgroup3",/*, type:"custom",*/ label: 'RML\nMapper', shape:"8-star", width: 70, height: 70 , position: { x: 300, y: 55 } },
     { /*id: 'RDF', type:"custom",*/ label: 'RDF', shape: "cylinder", position: { x: 400, y: 65 } },
-    {id: 'SPARQL-END', type: "custom",label: 'SPARQL\nEndpoint', shape: "square" , position: { x: 450, y: 65 } },
+    {hgroup: "hgroup1", id: 'SPARQL-END',label: 'SPARQL\nEndpoint', shape: "square" , position: { x: 450, y: 65 } },
 
-    {id: "rmlio", type:"custom", image: "rmlio", shape:"note", position:{x:310, y: 200}},
+    {vgroup: "vgroup3", image: "rmlio", stroke:"white" /*TODO: die stroke autom fixen*/  /*, position:{x:310, y: 200}*/},
 
-    {shape: "comunica" , position: { x: 600, y: 65 },},
-    {id: "SPARQL", type: "custom", label: "SPARQL", shape: "note", position: {x: 600, y: 200}},
+    {hgroup: "hgroup1", vgroup: "vgroup2", shape: "comunica" /*, position: { x: 600, y: 65 },*/},
+    {id: "SPARQL", vgroup: "vgroup2", label: "SPARQL", shape: "note"/*, position: {x: 600, y: 200}*/},
 
 
     {id: "note1", label:"The RML Mapper\npulls data from the\nheterogeneous data\nsources", width: 110, height: 110, shape: "note", position: {x: 100, y: -100} },

@@ -75,8 +75,7 @@ export function parseNodes(globalDefaults, nodes) {
                 if (node.hasOwnProperty(key)) {
                     //let hits = nodes.filter(n => !(n.hasOwnProperty("id") || n["id"] !== key) && n.hasOwnProperty(key) && n[key] === node[key]);
                     let hits = nodes.filter(n => (n.hasOwnProperty("id") && n["id"] === node[key]) || (n.hasOwnProperty(key) && n[key] === node[key]));
-                  //  console.log(key)
-                   // console.log(hits)
+
 
                     if (hits.length === 1) {
                         node["id"] = node[key];
@@ -133,8 +132,6 @@ export function parseNodes(globalDefaults, nodes) {
 
 export function parseEdges(globalDefaults, edges, nodes) {
 
-    //console.log(`nodes in het begin van de functie:`)
-    //console.log(JSON.stringify(nodes));
 
     for (let edge of edges) {
 
@@ -224,8 +221,7 @@ function fix_sourceHandle_targetHandle(globalDefaults, edge, nodes) {
 
 
 export function getLayoutedElementsDagre(dagreGraph, nodes, edges, globalDefaults) {
-   // console.log(globalDefaults.orientation)
-    //const isHorizontal = globalDefaults.orientation === "horizontal";
+
     dagreGraph.setGraph({ rankdir: globalDefaults.orientation === "horizontal" ? "LR" : "TB" });
 
     nodes.forEach((node) => {
@@ -256,9 +252,10 @@ export function getLayoutedElementsDagre(dagreGraph, nodes, edges, globalDefault
 
 function fixNodeGroups(nodes) {
     // loop over nodes and store all groups
-    let groups = {"vgroups": new Set(), "hgroups": new Set()}
-
-    for (let n of nodes) {
+   // let groups = {"vgroups": new Set(), "hgroups": new Set()}
+    let groupsHash = new Set();
+    let groups = [];
+    /*for (let n of nodes) {
         // TODO: met ID's werken voor vgroup en hgroup
         if (n.hasOwnProperty("vgroup")) {
             groups["vgroups"].add(n["vgroup"]);
@@ -269,7 +266,26 @@ function fixNodeGroups(nodes) {
     }
 
     groups["vgroups"].forEach(g => fixVgroups(nodes, g));
-    //groups["hgroups"].forEach(g => fixHgroups(nodes, g));
+    groups["hgroups"].forEach(g => fixHgroups(nodes, g));*/
+
+    for (let n of nodes) {
+        if (n.hasOwnProperty("vgroup") && !groupsHash.has(n["vgroup"])) {
+            groups.push(["vgroup", n["vgroup"]]);
+            groupsHash.add(n["vgroup"])
+        }
+        if (n.hasOwnProperty("hgroup") && !groupsHash.has(n["hgroup"])) {
+            groups.push(["hgroup", n["hgroup"]]);
+            groupsHash.add(n["hgroup"]);
+        }
+    }
+
+    for (let g of groups) {
+        if (g[0] === "vgroup") {
+            fixVgroups(nodes, g[1]);
+        } else {
+            fixHgroups(nodes, g[1])
+        }
+    }
 
 }
 
@@ -297,13 +313,64 @@ function fixVgroups(allNodes, vgroupId) {
         i++;
     }
 
+    let referenceNode = nodes.slice(i, 1)[0];
+
     let deltaY = maxHeight / 2;  //TODO mss als de orientatie horizontaal is, beetje dichter en als de orientatie verticaal is, wat verder
     let previousY = pos.y;
-    let previousHeight = nodes.slice(i, 1)[0].data.height;
+    let previousHeight = referenceNode.data.height;
+    let previousWidth = referenceNode.data.width;
 
-    for (let n of [...nodes.slice(0, i), ...nodes.slice(-i)]) {
-        n.position.x = pos.x;
+    for (let n of nodes.filter((_, index) => index !== i)) {
+        n.position.x = pos.x + (previousWidth-n.data.width)/2;
         n.position.y = previousY + previousHeight + deltaY;
         previousY = n.position.y
+        previousWidth = n.data.width;
+        previousHeight = n.data.height;
     }
+
+}
+
+function fixHgroups(allNodes, hgroupId) {
+    // search all nodes within that vgroup
+    let nodes = allNodes.filter(n => n.hgroup === hgroupId);
+
+
+    // Look for reference position
+    let pos = {x: 0, y: 0};
+    let i = 0;
+    while (i < nodes.length && nodes[i].position.y === 0) {
+        i++;
+    }
+    if (i < nodes.length) {
+        pos.x = nodes[i].position.x;
+        pos.y = nodes[i].position.y;
+    }
+
+
+    // Look for highest node height, the vertical space between the nodes will be this value
+    let maxWidth = Math.max(...nodes.map(n => n.data.width))
+
+
+    i = 0;
+    while (nodes[i].position.x !== pos.x && nodes[i].position.y !== pos.y) {
+        i++;
+    }
+
+
+    let referenceNode = nodes.slice(i, 1)[0];
+
+    let deltaX = maxWidth /// 2;  //TODO mss als de orientatie horizontaal is, beetje dichter en als de orientatie verticaal is, wat verder
+    let previousX = pos.x;
+    let previousHeight = referenceNode.data.height;
+    let previousWidth = referenceNode.data.width;
+
+    for (let n of nodes.filter((_, index) => index !== i)) {
+        n.position.y = pos.y + (previousHeight-n.data.width)/2;
+        n.position.x = previousX + previousWidth + deltaX ;
+        previousX = n.position.x
+        previousWidth = n.data.width;
+        previousHeight = n.data.height;
+    }
+
+
 }
