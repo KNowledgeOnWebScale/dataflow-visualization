@@ -61,10 +61,12 @@ export function parseNodes(globalDefaults, nodes) {
 
         // Each node needs to have an id
         if (!node.hasOwnProperty('id')) {
+            // If the node is the only one with its title that does not have an ID, the title becomes the id
             // If the node is the only one with its label that does not have an ID, the label becomes the id
-            // If the node does not have a label and the shape is unique, the shape becomes the id
+            // If the node does not have a label and the shape is unique among the nodes with no id's, the shape becomes the id
             // If the node does not have an id, label or shape, we look if the image is unique
 
+            const titleId = NODE_KEYS.TITLE;
             const labelId = NODE_KEYS.LABEL;
             const shapeId = GLOBAL_DEFAULT_KEY_VALUES.SHAPE.id;
             const imageId = NODE_KEYS.IMAGE;
@@ -85,10 +87,12 @@ export function parseNodes(globalDefaults, nodes) {
                 return false;
             }
 
-            if (!checkForPossibleId(labelId)) {
-                if (!checkForPossibleId(shapeId)) {
-                    if (!checkForPossibleId(imageId)) {
-                        node["id"] = "" + Math.random();
+            if (!checkForPossibleId(titleId)) {
+                if (!checkForPossibleId(labelId)) {
+                    if (!checkForPossibleId(shapeId)) {
+                        if (!checkForPossibleId(imageId)) {
+                            node["id"] = "" + Math.random();
+                        }
                     }
                 }
             }
@@ -218,7 +222,7 @@ function fix_sourceHandle_targetHandle(globalDefaults, edge, nodes) {
 }
 
 
-export function getLayoutedElements(dagreGraph, nodes, edges, globalDefaults) {
+export function getLayoutedElementsDagre(dagreGraph, nodes, edges, globalDefaults) {
    // console.log(globalDefaults.orientation)
     //const isHorizontal = globalDefaults.orientation === "horizontal";
     dagreGraph.setGraph({ rankdir: globalDefaults.orientation === "horizontal" ? "LR" : "TB" });

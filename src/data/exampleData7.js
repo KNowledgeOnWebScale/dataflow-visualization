@@ -8,7 +8,7 @@ export const globalDefaultsJSON = {
 export const nodesJSON = [
     {
         // PARENTNODE 1
-        id: 'client 1',  // TODO: bij lack aan id ook kijken naar title
+       // id: 'client 1',  // TODO: bij lack aan id ook kijken naar title
         title: 'Client 1',
         shape:"rectangle",
         stroke:"royalblue",
@@ -19,7 +19,7 @@ export const nodesJSON = [
     },
     {
         // PARENTNODE 1
-        id: 'client 2',  // TODO: bij lack aan id ook kijken naar title
+       // id: 'client 2',  // TODO: bij lack aan id ook kijken naar title
         title: 'Client 2',
         shape:"rectangle",
         stroke:"royalblue",
@@ -30,7 +30,7 @@ export const nodesJSON = [
     },
     {
         // PARENTNODE 1
-        id: 'client 3',  // TODO: bij lack aan id ook kijken naar title
+       // id: 'client 3',  // TODO: bij lack aan id ook kijken naar title
         title: 'Client 3',
         shape:"rectangle",
         stroke:"royalblue",
@@ -39,23 +39,23 @@ export const nodesJSON = [
         height: 190,
         position: { x: -5, y: 400 },
     },
-    {id: "hd-1", parentNode: "client 1", shape: "cylinder", "label": "Heterogeneous\ndata sources", position: {x:0, y:10}},
-    { id: "rml-rules-1", parentNode: "client 1", shape: "hexagon", label: "RML mapping\nrules", position: {x: 0, y:100}},
-    {id: "rml-1", parentNode: "client 1", shape: "rectangle", height: 60, "label": "RML mapper", position:{x: 120, y:60}},
-    {id: "rdf-1", parentNode: "client 1", shape: "cylinder", label: "RDF data", position: {x:240, y: 50}},
-    {id: "sparql-1", parentNode: "client 1", shape: "rectangle", height: 60, label: "SPARQL\nEndpoint", position: {x:360, y: 60}},
+    {id: "hd-1", parentNode: "Client 1", shape: "cylinder", "label": "Heterogeneous\ndata sources", position: {x:0, y:10}},
+    { id: "rml-rules-1", parentNode: "Client 1", shape: "hexagon", label: "RML mapping\nrules", position: {x: 0, y:100}},
+    {id: "rml-1", parentNode: "Client 1", shape: "rectangle", height: 60, "label": "RML mapper", position:{x: 120, y:60}},
+    {id: "rdf-1", parentNode: "Client 1", shape: "cylinder", label: "RDF data", position: {x:240, y: 50}},
+    {id: "sparql-1", parentNode: "Client 1", shape: "rectangle", height: 60, label: "SPARQL\nEndpoint", position: {x:360, y: 60}},
 
-    {id: "hd-2", parentNode: "client 2", shape: "cylinder", "label": "Heterogeneous\ndata sources", position: {x:0, y:10}},
-    { id: "rml-rules-2", parentNode: "client 2", shape: "hexagon", label: "RML mapping\nrules", position: {x: 0, y:100}},
-    {id: "rml-2", parentNode: "client 2", shape: "rectangle", height: 60, "label": "RML mapper", position:{x: 120, y:60}},
-    {id: "rdf-2", parentNode: "client 2", shape: "cylinder", label: "RDF data", position: {x:240, y: 50}},
-    {id: "sparql-2", parentNode: "client 2", shape: "rectangle", height: 60, label: "SPARQL\nEndpoint", position: {x:360, y: 60}},
+    {id: "hd-2", parentNode: "Client 2", shape: "cylinder", "label": "Heterogeneous\ndata sources", position: {x:0, y:10}},
+    { id: "rml-rules-2", parentNode: "Client 2", shape: "hexagon", label: "RML mapping\nrules", position: {x: 0, y:100}},
+    {id: "rml-2", parentNode: "Client 2", shape: "rectangle", height: 60, "label": "RML mapper", position:{x: 120, y:60}},
+    {id: "rdf-2", parentNode: "Client 2", shape: "cylinder", label: "RDF data", position: {x:240, y: 50}},
+    {id: "sparql-2", parentNode: "Client 2", shape: "rectangle", height: 60, label: "SPARQL\nEndpoint", position: {x:360, y: 60}},
 
-    {id: "hd-3", parentNode: "client 3", shape: "cylinder", "label": "Heterogeneous\ndata sources", position: {x:0, y:10}},
-    { id: "rml-rules-3", parentNode: "client 3", shape: "hexagon", label: "RML mapping\nrules", position: {x: 0, y:100}},
-    {id: "rml-3", parentNode: "client 3", shape: "rectangle", height: 60, "label": "RML mapper", position:{x: 120, y:60}},
-    {id: "rdf-3", parentNode: "client 3", shape: "cylinder", label: "RDF data", position: {x:240, y: 50}},
-    {id: "sparql-3", parentNode: "client 3", shape: "rectangle", height: 60, label: "SPARQL\nEndpoint", position: {x:360, y: 60}},
+    {id: "hd-3", parentNode: "Client 3", shape: "cylinder", "label": "Heterogeneous\ndata sources", position: {x:0, y:10}},
+    { id: "rml-rules-3", parentNode: "Client 3", shape: "hexagon", label: "RML mapping\nrules", position: {x: 0, y:100}},
+    {id: "rml-3", parentNode: "Client 3", shape: "rectangle", height: 60, "label": "RML mapper", position:{x: 120, y:60}},
+    {id: "rdf-3", parentNode: "Client 3", shape: "cylinder", label: "RDF data", position: {x:240, y: 50}},
+    {id: "sparql-3", parentNode: "Client 3", shape: "rectangle", height: 60, label: "SPARQL\nEndpoint", position: {x:360, y: 60}},
 
     {id: "sparql", shape: "rectangle", height: 60, label: "SPARQL\nqueries to\nComunica", position: {x: 550, y: 260}}
 ];

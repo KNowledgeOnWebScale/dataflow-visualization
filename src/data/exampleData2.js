@@ -6,11 +6,11 @@ export const globalDefaultsJSON = {
 };
 
 export const nodesJSON = [
-    {/*id: 'csv', type: "custom",*/ label: 'csv', shape: "cylinder", position: { x: 0, y: 0 },},
-    {/*id: 'JSON', type: "custom",*/ label: 'JSON', shape: "cylinder", position: { x: 0, y: 70 },},
-    {/*id: 'XML', type: "custom",*/ label: 'XML', shape: "cylinder" , position: { x: 0, y: 140 },},
-    {/*id: 'MySQL', type: "custom",*/ label: 'MySQL', shape: "cylinder", position: { x: 0, y: 210 },},
-    {/*id: 'API', type: "custom",*/ label: 'API', shape: "circle", position: { x: 0, y: 280 },},
+    {vgroup: "vgroup1", label: 'csv', shape: "cylinder", position: { x: 0, y: 0 },},
+    {vgroup: "vgroup1", label: 'JSON', shape: "cylinder", /*position: { x: 0, y: 70 },*/ },
+    {vgroup: "vgroup1", label: 'XML', shape: "cylinder" /*, position: { x: 0, y: 140 },*/},
+    {vgroup: "vgroup1", label: 'MySQL', shape: "cylinder"/*, position: { x: 0, y: 210 },*/},
+    {vgroup: "vgroup1", label: 'API', shape: "circle"/*, position: { x: 0, y: 280 },*/},
 
     { id: 'RML',/*, type:"custom",*/ label: 'RML\nMapper', shape:"8-star", width: "70", height: "70" , position: { x: 300, y: 55 } },
     { /*id: 'RDF', type:"custom",*/ label: 'RDF', shape: "cylinder", position: { x: 400, y: 65 } },

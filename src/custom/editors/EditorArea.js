@@ -41,7 +41,7 @@ import {
     nodesJSON as nodesJSON7
 } from "../../data/exampleData7";
 
-import {getLayoutedElements, parseEdges, parseGlobalDefaults, parseNodes} from "./editorUtil";
+import {getLayoutedElementsDagre, parseEdges, parseGlobalDefaults, parseNodes} from "./editorUtil";
 
 
 const EditorArea = ({setNodes, setEdges}) => {
@@ -146,7 +146,7 @@ const EditorArea = ({setNodes, setEdges}) => {
         dagreGraph.setDefaultEdgeLabel(() => ({}));
 
         if (defaults["autoLayout"]) {
-            [nodes, edges] = getLayoutedElements(dagreGraph, nodes, edges, defaults);
+            [nodes, edges] = getLayoutedElementsDagre(dagreGraph, nodes, edges, defaults);
         }
 
         setNodes(nodes);
