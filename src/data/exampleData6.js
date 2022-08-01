@@ -1,86 +1,120 @@
+import {MarkerType} from "react-flow-renderer";
+
+
 export const globalDefaultsJSON = {
-    height: 80,
-    width: 90,
-    fontsize: 10,
-    strokeWidth: 0.7
+    //fontsize: 12,
+   // width: 50,
+    height: 50,
+    //edgeThickness: 1,
+    fill: "white",
+    stroke: "black",
+    strokeWidth: 1,
+    orientation: "vertical"
 };
 
 export const nodesJSON = [
     {
-        // PARENTNODE 1
-        id: 'client 1',  // TODO: bij lack aan id ook kijken naar title
-        title: 'Client 1',
-        shape:"rectangle",
-        stroke:"royalblue",
-        strokeWidth:3,
-        width:455,
-        height: 190,
-        position: { x: -5, y: 0 },
+        shape:"comunica",
+        position: { x: 80, y: 90 },
     },
     {
-        // PARENTNODE 1
-        id: 'client 2',  // TODO: bij lack aan id ook kijken naar title
-        title: 'Client 2',
+        // PARENTNODE
+        id: 'solid',
+       // type:"custom",
+        title: 'Solid Pod',
         shape:"rectangle",
-        stroke:"royalblue",
-        strokeWidth:3,
-        width:455,
-        height: 190,
-        position: { x: -5, y: 200 },
+        strokeWidth: 5,
+        stroke:"#8370fb",
+        fill:"#12121212",
+        width:300,
+        height: 100,
+        position: { x: 0, y: 200 },
+       // style: { backgroundColor: 'rgba(255, 0, 0, 0.2)', width: 300, height: 300 },
     },
     {
-        // PARENTNODE 1
-        id: 'client 3',  // TODO: bij lack aan id ook kijken naar title
-        title: 'Client 3',
-        shape:"rectangle",
-        stroke:"royalblue",
-        strokeWidth:3,
-        width:455,
-        height: 190,
-        position: { x: -5, y: 400 },
+      //  id: "solidLogo",
+      //  type: "custom",
+        image: "solid",
+        stroke: "#fff",
+        position: {x:-50, y:225}
     },
-    {id: "hd-1", parentNode: "client 1", shape: "cylinder", "label": "Heterogeneous\ndata sources", position: {x:0, y:10}},
-    { id: "rml-rules-1", parentNode: "client 1", shape: "hexagon", label: "RML mapping\nrules", position: {x: 0, y:100}},
-    {id: "rml-1", parentNode: "client 1", shape: "rectangle", height: 60, "label": "RML mapper", position:{x: 120, y:60}},
-    {id: "rdf-1", parentNode: "client 1", shape: "cylinder", label: "RDF data", position: {x:240, y: 50}},
-    {id: "sparql-1", parentNode: "client 1", shape: "rectangle", height: 60, label: "SPARQL\nEndpoint", position: {x:360, y: 60}},
+    {
+        id: 'RDF-1',
+         label: 'RDF',
+        //type: "custom",
+        position: { x: 25, y: 25 },
+        parentNode: 'solid',
+        //extent: 'parent',
+    },
+    {
+        id: 'RDF-2',
+         label: 'RDF',
+       // type: "custom",
+        position: { x: 80, y: 25 },
+        parentNode: 'solid',
+        //extent: 'parent',
+    },
+    {
+        id: 'RDF-3',
+        label: 'RDF',
+        //type: "custom",
+        position: { x: 145, y: 25 },
+        parentNode: 'solid',
+        //extent: 'parent',
+    },
 
-    {id: "hd-2", parentNode: "client 2", shape: "cylinder", "label": "Heterogeneous\ndata sources", position: {x:0, y:10}},
-    { id: "rml-rules-2", parentNode: "client 2", shape: "hexagon", label: "RML mapping\nrules", position: {x: 0, y:100}},
-    {id: "rml-2", parentNode: "client 2", shape: "rectangle", height: 60, "label": "RML mapper", position:{x: 120, y:60}},
-    {id: "rdf-2", parentNode: "client 2", shape: "cylinder", label: "RDF data", position: {x:240, y: 50}},
-    {id: "sparql-2", parentNode: "client 2", shape: "rectangle", height: 60, label: "SPARQL\nEndpoint", position: {x:360, y: 60}},
+    {
+        id: 'RDF-4',
+        label: 'RDF',
+      //  type: "custom",
+        position: { x: 230, y: 25 },
+        parentNode: 'solid',
+       // extent: 'parent',
+    },
+    {
+        id:"rmlio",
+       // type:"custom",
+        stroke: "#fff",
+        image: "rmlio",
+        position: {x: 80, y: 350}
+    },
+    {
+        id:"flickr",
+       // type:"custom",
+        stroke: "#fff",
+        image: "https://cdn.worldvectorlogo.com/logos/flickr-1.svg",
+        position: {x: 20, y: 450}
+    },
+    {
+        id:"imgur",
+       // type:"custom",
+        stroke: "#fff",
+        image:"https://cdn.worldvectorlogo.com/logos/imgur-logo.svg",
+        position: {x: 80, y: 450}
+    },
+    {
+        id:"google",
+       // type:"custom",
+        stroke: "#fff",
+        image: "https://cdn.cdnlogo.com/logos/g/82/google-g-2015.svg",
+        position: {x: 140, y: 450}
+    }
 
-    {id: "hd-3", parentNode: "client 3", shape: "cylinder", "label": "Heterogeneous\ndata sources", position: {x:0, y:10}},
-    { id: "rml-rules-3", parentNode: "client 3", shape: "hexagon", label: "RML mapping\nrules", position: {x: 0, y:100}},
-    {id: "rml-3", parentNode: "client 3", shape: "rectangle", height: 60, "label": "RML mapper", position:{x: 120, y:60}},
-    {id: "rdf-3", parentNode: "client 3", shape: "cylinder", label: "RDF data", position: {x:240, y: 50}},
-    {id: "sparql-3", parentNode: "client 3", shape: "rectangle", height: 60, label: "SPARQL\nEndpoint", position: {x:360, y: 60}},
-
-    {id: "sparql", shape: "rectangle", height: 60, label: "SPARQL\nqueries to\nComunica", position: {x: 550, y: 260}}
 ];
 
-//TODO: zIndex als het in een parent zit moet automatisch aangepast worden
-//  die marker end moet ook simpeler (en mss ook in globalDefault)
 export const edgesJSON = [
-    { source: 'hd-1', target: 'rml-1', type: "straight", zIndex:1, markerEnd: {type: "arrowclosed"} },
-    { source: 'rml-rules-1', target: 'rml-1', type: "straight", zIndex:1, markerEnd: {type: "arrowclosed"} },
-    { source: 'rml-1', target: 'rdf-1', type: "straight", zIndex:1, markerEnd: {type: "arrowclosed"} },
-    { source: 'rdf-1', target: 'sparql-1', type: "straight", zIndex:1, markerEnd: {type: "arrowclosed"} },
+    { source: 'comunica', target: 'RDF-1', animated: true, type: "straight", zIndex:1 },
+    { source: 'comunica', target: 'RDF-2', animated:true, type: "straight", zIndex:1 },
+    { source: 'comunica', target: 'RDF-3', animated:true, type: "straight", zIndex:1 },
+    { source: 'comunica', target: 'RDF-4', animated:true, type: "step", sourceHandle:"right-source", markerEnd: {type: "arrowclosed"}, zIndex:1 },
 
-    { source: 'hd-2', target: 'rml-2', type: "straight", zIndex:1, markerEnd: {type: "arrowclosed"} },
-    { source: 'rml-rules-2', target: 'rml-2', type: "straight", zIndex:1, markerEnd: {type: "arrowclosed"} },
-    { source: 'rml-2', target: 'rdf-2', type: "straight", zIndex:1, markerEnd: {type: "arrowclosed"} },
-    { source: 'rdf-2', target: 'sparql-2', type: "straight", zIndex:1, markerEnd: {type: "arrowclosed"} },
+    { source: 'RDF-1', target: 'rmlio', animated: true, type: "straight", zIndex:1 },
+    { source: 'RDF-2', target: 'rmlio', animated:true, type: "straight", zIndex:1 },
+    { source: 'RDF-3', target: 'rmlio', animated:true, type: "straight", zIndex:1 },
 
-    { source: 'hd-3', target: 'rml-3', type: "straight", zIndex:1, markerEnd: {type: "arrowclosed"} },
-    { source: 'rml-rules-3', target: 'rml-3', type: "straight", zIndex:1, markerEnd: {type: "arrowclosed"} },
-    { source: 'rml-3', target: 'rdf-3', type: "straight", zIndex:1, markerEnd: {type: "arrowclosed"} },
-    { source: 'rdf-3', target: 'sparql-3', type: "straight", zIndex:1, markerEnd: {type: "arrowclosed"} },
-
-    {source: "sparql-1", target: "sparql", style: {animation: "dashdraw .2s linear infinite", "stroke-dasharray": "4 4"}, markerEnd: {type: "arrowclosed"}},
-    {source: "sparql-2",  target: "sparql", style: {animation: "dashdraw .3s linear infinite", "stroke-dasharray": "6 6"}, markerEnd: {type: "arrowclosed"}},
-    {source: "sparql-3",  target: "sparql", animated: true, style: {animation: "dashdraw 1s linear infinite", "stroke-dasharray": "9 3 1 3"}, markerEnd: {type: "arrowclosed"}},
+    { source: 'flickr', target: 'rmlio', animated: false, type: "straight", style:{strokeDasharray: "5 3",  /*strokeWidth: 20*//*, stroke: "red"*/}/*, edgeColor:"green"*/ },
+    { source: 'imgur', target: 'rmlio', animated:false, type: "straight", style:{strokeDasharray: "5 3" }},
+    { source: 'google', target: 'rmlio', animated:false, type: "straight", style:{strokeDasharray: "5 3" }},
 
 
 ];

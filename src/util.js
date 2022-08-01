@@ -1,7 +1,10 @@
+import dagre from 'dagre';
+
 // These are the keys that can be used in globalDefaults
 // These keys are not standard supported by the library, that's why they are in a dict
 // The values of this dict should be used in the JSON representation
 const GLOBAL_DEFAULT_KEY_VALUES = {
+    "AUTO_LAYOUT": {"id": "autoLayout", "value": false},
     "EDGE_COLOR": {"id": "edgeColor", "value": "black"},      // color of edge
     "EDGE_THICKNESS": {"id": "edgeThickness", "value": 1.2},  // Thickness of edge (= connections between nodes)
     "FILL": {"id": "fill", "value": "white"},                 // Color of node
@@ -19,6 +22,8 @@ export const NODE_KEYS = {
     "IMAGE": "image",
     "LABEL": "label",
     "TITLE": "title",
+
+    "PARENT": "parentNode",
 
     "FILL": GLOBAL_DEFAULT_KEY_VALUES.FILL.id,
     "FONTSIZE": GLOBAL_DEFAULT_KEY_VALUES.FONTSIZE.id,
@@ -68,8 +73,8 @@ export function parseNodes(globalDefaults, nodes) {
                 if (node.hasOwnProperty(key)) {
                     //let hits = nodes.filter(n => !(n.hasOwnProperty("id") || n["id"] !== key) && n.hasOwnProperty(key) && n[key] === node[key]);
                     let hits = nodes.filter(n => (n.hasOwnProperty("id") && n["id"] === node[key]) || (n.hasOwnProperty(key) && n[key] === node[key]));
-                    console.log(key)
-                    console.log(hits)
+                  //  console.log(key)
+                   // console.log(hits)
 
                     if (hits.length === 1) {
                         node["id"] = node[key];
@@ -182,13 +187,13 @@ function fix_sourceHandle_targetHandle(globalDefaults, edge, nodes) {
     }
 
     const verticalCheck = [
-        [sourceNodePos.y < targetNodePos.y, "bottom-source", "top-target"],
-        [sourceNodePos.y > targetNodePos.y, "top-source", "bottom-target"]
+        [sourceNodePos.y <= targetNodePos.y, "bottom-source", "top-target"],
+        [sourceNodePos.y >= targetNodePos.y, "top-source", "bottom-target"]
     ];
 
     const horizontalCheck = [
-        [sourceNodePos.x < targetNodePos.x, "right-source", "left-target"],
-        [sourceNodePos.x > targetNodePos.x, "left-source", "right-target"]
+        [sourceNodePos.x <= targetNodePos.x, "right-source", "left-target"],
+        [sourceNodePos.x >= targetNodePos.x, "left-source", "right-target"]
     ];
 
     const check = {
@@ -209,5 +214,37 @@ function fix_sourceHandle_targetHandle(globalDefaults, edge, nodes) {
             edge["targetHandle"] = check[i][2];
         }
     }
+
+}
+
+
+export function getLayoutedElements(dagreGraph, nodes, edges, globalDefaults) {
+   // console.log(globalDefaults.orientation)
+    //const isHorizontal = globalDefaults.orientation === "horizontal";
+    dagreGraph.setGraph({ rankdir: globalDefaults.orientation === "horizontal" ? "LR" : "TB" });
+
+    nodes.forEach((node) => {
+        dagreGraph.setNode(node.id, { width: node.width || globalDefaults.width, height: node.height || globalDefaults.height });
+    });
+
+    edges.forEach((edge) => {
+        dagreGraph.setEdge(edge.source, edge.target);
+    });
+
+    dagre.layout(dagreGraph);
+
+    nodes.forEach((node) => {
+        const nodeWithPosition = dagreGraph.node(node.id);
+
+        node.position = {
+            x: nodeWithPosition.x - (node.width || globalDefaults.width) / 2,
+            y: nodeWithPosition.y - (node.height || globalDefaults.height) / 2,
+        };
+
+        return node;
+    });
+
+    return [nodes, edges];
+
 
 }

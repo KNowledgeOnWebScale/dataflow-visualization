@@ -48,12 +48,18 @@ import {
     nodesJSON as nodesJSON6,
     edgesJSON as edgesJSON6
 } from "./data/exampleData6";
+import {
+    globalDefaultsJSON as globalDefaultsJSON7,
+    nodesJSON as nodesJSON7,
+    edgesJSON as edgesJSON7
+} from "./data/exampleData7";
 
-import {parseNodes, parseEdges, parseGlobalDefaults} from "./util";
+import {parseNodes, parseEdges, parseGlobalDefaults, getLayoutedElements} from "./util";
 import {Button} from "react-bootstrap";
 import Dropdown from 'react-bootstrap/Dropdown';
 
 import YAML from "js-yaml";
+import dagre from "dagre";
 
 
 //const edgeTypes = {
@@ -141,19 +147,32 @@ const EdgesFlow = () => {
             ed = yaml2json(edgesData);
         }
 
+
         let defaults = parseGlobalDefaults(JSON.parse(gd));
         let nodes = parseNodes(defaults, JSON.parse(nd));
         let edges = parseEdges(defaults, JSON.parse(ed), nodes);
 
+
+
+        const dagreGraph = new dagre.graphlib.Graph();
+        dagreGraph.setDefaultEdgeLabel(() => ({}));
+
+        if (defaults["autoLayout"]) {
+            [nodes, edges] = getLayoutedElements(dagreGraph, nodes, edges, defaults);
+        }
+       // setNodes(nodes);
+       // setEdges(edges);
+
         setNodes(nodes);
-        setEdges(edges);
+         setEdges(edges);
 
     }
 
     const examples = [
         [globalDefaultsJSON1, nodesJSON1, edgesJSON1], [globalDefaultsJSON2, nodesJSON2, edgesJSON2],
         [globalDefaultsJSON3, nodesJSON3, edgesJSON3], [globalDefaultsJSON4, nodesJSON4, edgesJSON4],
-        [globalDefaultsJSON5, nodesJSON5, edgesJSON5], [globalDefaultsJSON6, nodesJSON6, edgesJSON6]
+        [globalDefaultsJSON5, nodesJSON5, edgesJSON5], [globalDefaultsJSON6, nodesJSON6, edgesJSON6],
+        [globalDefaultsJSON7, nodesJSON7, edgesJSON7]
     ];
 
     function loadExample(e, number) {
