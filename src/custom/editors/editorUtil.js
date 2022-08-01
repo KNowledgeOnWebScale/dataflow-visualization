@@ -25,6 +25,8 @@ export const NODE_KEYS = {
 
     "PARENT": "parentNode",
 
+    //TODO: vgroup, hgroup
+
     "FILL": GLOBAL_DEFAULT_KEY_VALUES.FILL.id,
     "FONTSIZE": GLOBAL_DEFAULT_KEY_VALUES.FONTSIZE.id,
     "SHAPE": GLOBAL_DEFAULT_KEY_VALUES.SHAPE.id,
