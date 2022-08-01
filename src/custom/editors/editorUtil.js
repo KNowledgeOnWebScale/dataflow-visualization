@@ -125,6 +125,7 @@ export function parseNodes(globalDefaults, nodes) {
         }
 
     }
+    fixNodeGroups(nodes);
 
     return nodes;
 }
@@ -251,4 +252,58 @@ export function getLayoutedElementsDagre(dagreGraph, nodes, edges, globalDefault
     return [nodes, edges];
 
 
+}
+
+function fixNodeGroups(nodes) {
+    // loop over nodes and store all groups
+    let groups = {"vgroups": new Set(), "hgroups": new Set()}
+
+    for (let n of nodes) {
+        // TODO: met ID's werken voor vgroup en hgroup
+        if (n.hasOwnProperty("vgroup")) {
+            groups["vgroups"].add(n["vgroup"]);
+        }
+        if (n.hasOwnProperty("hgroup")) {
+            groups["hgroups"].add(n["hgroup"]);
+        }
+    }
+
+    groups["vgroups"].forEach(g => fixVgroups(nodes, g));
+    //groups["hgroups"].forEach(g => fixHgroups(nodes, g));
+
+}
+
+function fixVgroups(allNodes, vgroupId) {
+    // search all nodes within that vgroup
+    let nodes = allNodes.filter(n => n.vgroup === vgroupId);
+
+    // Look for reference position
+    let pos = {x: 0, y: 0};
+    let i = 0;
+    while (i < nodes.length && nodes[i].position.x === 0) {
+        i++;
+    }
+    if (i < nodes.length) {
+        pos.x = nodes[i].position.x;
+        pos.y = nodes[i].position.y;
+    }
+
+    // Look for highest node height, the vertical space between the nodes will be this value
+    let maxHeight = Math.max(...nodes.map(n => n.data.height))
+
+
+    i = 0;
+    while (nodes[i].position.x !== pos.x && nodes[i].position.y !== pos.y) {
+        i++;
+    }
+
+    let deltaY = maxHeight / 2;  //TODO mss als de orientatie horizontaal is, beetje dichter en als de orientatie verticaal is, wat verder
+    let previousY = pos.y;
+    let previousHeight = nodes.slice(i, 1)[0].data.height;
+
+    for (let n of [...nodes.slice(0, i), ...nodes.slice(-i)]) {
+        n.position.x = pos.x;
+        n.position.y = previousY + previousHeight + deltaY;
+        previousY = n.position.y
+    }
 }

@@ -6,7 +6,7 @@ export const globalDefaultsJSON = {
 };
 
 export const nodesJSON = [
-    {vgroup: "vgroup1", label: 'csv', shape: "cylinder", position: { x: 0, y: 0 },},
+    {vgroup: "vgroup1", label: 'csv', shape: "cylinder", position: { x: 1, y: -160 },},
     {vgroup: "vgroup1", label: 'JSON', shape: "cylinder", /*position: { x: 0, y: 70 },*/ },
     {vgroup: "vgroup1", label: 'XML', shape: "cylinder" /*, position: { x: 0, y: 140 },*/},
     {vgroup: "vgroup1", label: 'MySQL', shape: "cylinder"/*, position: { x: 0, y: 210 },*/},
