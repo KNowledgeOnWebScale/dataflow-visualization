@@ -296,7 +296,7 @@ function fixVgroups(allNodes, vgroupId) {
     // Look for reference position
     let pos = {x: 0, y: 0};
     let i = 0;
-    while (i < nodes.length && nodes[i].position.x === 0) {
+    while (i < nodes.length && nodes[i].position.x === 0 && nodes[i].position.y === 0) {
         i++;
     }
     if (i < nodes.length) {
@@ -338,7 +338,7 @@ function fixHgroups(allNodes, hgroupId) {
     // Look for reference position
     let pos = {x: 0, y: 0};
     let i = 0;
-    while (i < nodes.length && nodes[i].position.y === 0) {
+    while (i < nodes.length && nodes[i].position.x === 0 && nodes[i].position.y === 0) {
         i++;
     }
     if (i < nodes.length) {
@@ -359,13 +359,13 @@ function fixHgroups(allNodes, hgroupId) {
 
     let referenceNode = nodes.slice(i, 1)[0];
 
-    let deltaX = maxWidth /// 2;  //TODO mss als de orientatie horizontaal is, beetje dichter en als de orientatie verticaal is, wat verder
+    let deltaX = maxWidth / 2;  //TODO mss als de orientatie horizontaal is, beetje dichter en als de orientatie verticaal is, wat verder
     let previousX = pos.x;
     let previousHeight = referenceNode.data.height;
     let previousWidth = referenceNode.data.width;
 
     for (let n of nodes.filter((_, index) => index !== i)) {
-        n.position.y = pos.y + (previousHeight-n.data.width)/2;
+        n.position.y = pos.y + (previousHeight-n.data.height)/2;
         n.position.x = previousX + previousWidth + deltaX ;
         previousX = n.position.x
         previousWidth = n.data.width;

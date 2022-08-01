@@ -15,7 +15,7 @@ export const globalDefaultsJSON = {
 export const nodesJSON = [
     {
         shape:"comunica",
-        position: { x: 80, y: 90 },
+        position: { x: 20, y: 90 },
     },
     {
         // PARENTNODE
@@ -42,7 +42,8 @@ export const nodesJSON = [
         id: 'RDF-1',
          label: 'RDF',
         //type: "custom",
-        position: { x: 25, y: 25 },
+       hgroup: "hgroup1",
+         position: { x: 20, y: 25 },
         parentNode: 'solid',
         //extent: 'parent',
     },
@@ -50,7 +51,8 @@ export const nodesJSON = [
         id: 'RDF-2',
          label: 'RDF',
        // type: "custom",
-        position: { x: 80, y: 25 },
+       hgroup: "hgroup1",
+        // position: { x: 80, y: 25 },
         parentNode: 'solid',
         //extent: 'parent',
     },
@@ -58,7 +60,8 @@ export const nodesJSON = [
         id: 'RDF-3',
         label: 'RDF',
         //type: "custom",
-        position: { x: 145, y: 25 },
+        hgroup: "hgroup1",
+        //position: { x: 145, y: 25 },
         parentNode: 'solid',
         //extent: 'parent',
     },
@@ -72,11 +75,9 @@ export const nodesJSON = [
        // extent: 'parent',
     },
     {
-        id:"rmlio",
-       // type:"custom",
         stroke: "#fff",
         image: "rmlio",
-        position: {x: 80, y: 350}
+        position: {x: 95, y: 350}
     },
     {
         id:"flickr",
@@ -90,14 +91,14 @@ export const nodesJSON = [
        // type:"custom",
         stroke: "#fff",
         image:"https://cdn.worldvectorlogo.com/logos/imgur-logo.svg",
-        position: {x: 80, y: 450}
+        position: {x: 95, y: 450}
     },
     {
         id:"google",
        // type:"custom",
         stroke: "#fff",
         image: "https://cdn.cdnlogo.com/logos/g/82/google-g-2015.svg",
-        position: {x: 140, y: 450}
+        position: {x: 170, y: 450}
     }
 
 ];

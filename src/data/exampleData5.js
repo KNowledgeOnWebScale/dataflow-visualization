@@ -4,25 +4,25 @@ export const globalDefaultsJSON = {
 };
 
 export const nodesJSON = [
-    { label: 'CSV', shape: "cylinder", fill:"indianred", position: {x: 0, y: -30},},
-    { label: "JSON", shape: "cylinder", fill:"lightcoral", position: {x: 0, y: 30},},
-    {label: "XML", shape: "cylinder", fill:"sandybrown", position: {x: 0, y: 90},},
-    {label: "MySQL", shape: "cylinder", fill:"khaki", position: {x: 0, y: 150},},
-    {label: "API", shape: "square", fill:"darkseagreen", position: {x: 0, y: 210},},
+    { label: 'CSV', shape: "cylinder", fill:"indianred", position: {x: 0, y: -30}, vgroup: "vgroup1" },
+    { label: "JSON", shape: "cylinder", fill:"lightcoral",vgroup: "vgroup1",},
+    {label: "XML", shape: "cylinder", fill:"sandybrown", vgroup: "vgroup1"},
+    {label: "MySQL", shape: "cylinder", fill:"khaki",vgroup: "vgroup1"},
+    {label: "API", shape: "square", fill:"darkseagreen",vgroup: "vgroup1"},
 
-    {id: "RML-CSV", type: "custom", label: "RML\nTranslator", shape: "8-star", fill:"dodgerblue", position: {x: 80, y: -30}, width: 60},
-    {id: "RML-JSON", type: "custom", label: "RML\nTranslator", shape: "8-star", fill:"dodgerblue", position: {x: 80, y: 30}, width: 60},
-    {id: "RML-XML", type: "custom", label: "RML\nTranslator", shape: "8-star", fill:"dodgerblue", position: {x: 80, y: 90}, width: 60},
-    {id: "RML-MySQL", type: "custom", label: "RML\nTranslator", shape: "8-star", fill:"dodgerblue", position: {x: 80, y: 150}, width: 60},
-    {id: "RML-API", /*style: {backgroundColor: "white"},*/ type: "custom", label: "RML\nTranslator", shape: "8-star", fill:"dodgerblue", position: {x: 80, y: 210}, width: 60},
+    {id: "RML-CSV", type: "custom", label: "RML\nTranslator", shape: "8-star", fill:"dodgerblue", position: {x: 80, y: -30}, width: 60, vgroup: "vgroup2", hgroup:"RDF-CSV"},
+    {id: "RML-JSON", type: "custom", label: "RML\nTranslator", shape: "8-star", fill:"dodgerblue", vgroup: "vgroup2", width: 60, hgroup: "RDF-JSON"},
+    {id: "RML-XML", type: "custom", label: "RML\nTranslator", shape: "8-star", fill:"dodgerblue", vgroup: "vgroup2", width: 60, hgroup: "RDF-XML"},
+    {id: "RML-MySQL", type: "custom", label: "RML\nTranslator", shape: "8-star", fill:"dodgerblue", vgroup: "vgroup2", width: 60, hgroup: "RDF-MySQL"},
+    {id: "RML-API", /*style: {backgroundColor: "white"},*/ type: "custom", label: "RML\nTranslator", shape: "8-star", fill:"dodgerblue", vgroup: "vgroup2",hgroup:"RDF-API", width: 60},
 
-    {id: "RDF-CSV", type: "custom", label: "RDF", shape: "cylinder", height: 30, fill:"lightgreen", position: {x: 130, y: -20},},
-    {id: "RDF-JSON", type: "custom", label: "RDF", shape: "cylinder", height: 30, fill:"lightgreen", position: {x: 130, y: 40},},
-    {id: "RDF-XML", type: "custom", label: "RDF", shape: "cylinder", height: 30, fill:"lightgreen", position: {x: 130, y: 100},},
-    {id: "RDF-MySQL", type: "custom", label: "RDF", shape: "cylinder", height: 30, fill:"lightgreen", position: {x: 130, y: 160},},
-    {id: "RDF-API", type: "custom", label: "RDF", shape: "cylinder", height: 30, fill:"lightgreen", position: {x: 130, y: 220},},
+    {id: "RDF-CSV", type: "custom", label: "RDF", shape: "cylinder", height: 30, fill:"lightgreen", hgroup:"RDF-CSV",},
+    {id: "RDF-JSON", type: "custom", label: "RDF", shape: "cylinder", height: 30, fill:"lightgreen", hgroup:"RDF-JSON"},
+    {id: "RDF-XML", type: "custom", label: "RDF", shape: "cylinder", height: 30, fill:"lightgreen", hgroup:"RDF-XML"},
+    {id: "RDF-MySQL", type: "custom", label: "RDF", shape: "cylinder", height: 30, fill:"lightgreen", hgroup:"RDF-MySQL"},
+    {id: "RDF-API", type: "custom", label: "RDF", shape: "cylinder", height: 30, fill:"lightgreen", hgroup:"RDF-API",},
 
-    { shape: "rmlio", fill:"steelblue", position: {x: 80, y: 280}},
+    { shape: "rmlio", fill:"steelblue", position: {x: 85, y: 350}},
 
     {shape: "comunica", position: {x: 600, y: 90},},
     {label: "SPARQL", shape: "note", fill:"steelblue", position: {x: 600, y: 180}},

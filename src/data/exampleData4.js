@@ -4,15 +4,15 @@ export const globalDefaultsJSON = {
 };
 
 export const nodesJSON = [
-    {label: 'RDF', shape: "cylinder", position: {x: 0, y: -30},},
-    {label: "RDF'", shape: "cylinder", position: {x: 0, y: 30},},
-    {label: "RDF''", shape: "cylinder", position: {x: 0, y: 90},},
-    {label: "RDF'''", shape: "cylinder", position: {x: 0, y: 150},},
-    {label: "RDF''''", shape: "cylinder", position: {x: 0, y: 210},},
+    {label: 'RDF', shape: "cylinder", vgroup:"group1"},
+    {label: "RDF'", shape: "cylinder",  vgroup:"group1"},
+    {label: "RDF''", shape: "cylinder",  vgroup:"group1"},
+    {label: "RDF'''", shape: "cylinder",  vgroup:"group1"},
+    {label: "RDF''''", shape: "cylinder", vgroup:"group1"},
 
 
-    {shape: "comunica", position: {x: 600, y: 90},},
-    {label: "SPARQL", shape: "note", position: {x: 600, y: 180}},
+    {shape: "comunica", position: {x: 600, y: 90},  vgroup:"group2"},
+    {label: "SPARQL", shape: "note",  vgroup:"group2"},
 
 
     {
