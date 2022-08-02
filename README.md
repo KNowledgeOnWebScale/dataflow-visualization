@@ -1,6 +1,6 @@
 # Flow Visualization
 
-This is an application to generate flow graphs from JSON.
+This is an application to generate flow graphs from [JSON](www.json.org) or [YAML](https://yaml.org/).
 
 ## How to run
 
@@ -11,7 +11,10 @@ and open http://localhost:3000/.
 
 If you [run the application](#how-to-run), you'll see that there are three editors. One to
 set [global defaults](#global-defaults), one to describe the [nodes](#nodes) and one for the [connections](#edges)
-between these nodes.
+between these nodes (edges).    
+
+
+Note when reading this documentation: this is a [React](https://reactjs.org/) application, so all ID's/properties are written in [camelCase](https://en.wikipedia.org/wiki/Camel_case).
 
 ### Global defaults
 
@@ -94,6 +97,16 @@ your example will automatically be generated.
 
 ### Edges
 
-TODO: alle properties in een tabelletje zetten
-ook uitleggen da het eignl met style kan
-voorbeelden geven hoe je animaties doet (ook reverse animaties enz)
+`edgeColor`, `edgeThickness`, `strokeDasharray`, `markerStart` and `markerEnd` are explained in the
+section [Global defaults](#global-defaults).
+
+Note that you can also set `edgeColor`, `edgeThickness` and `strokeDasharray` as CSS properties in `style`. If that
+happens, `stroke`, `strokeWidth` or `strokeDasharray` in `style` are of course not overwritten by possible values in
+global defaults.
+
+#### Animations
+There is a key `animated`, which you can set to `true`. But if you want custom animations, you should use
+the `animation` property. An example of the standard `animated` key can be found in example 3. Custom animations can be
+found in example 7. For more information about the `animation` property, please check out
+the [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/animation).
+

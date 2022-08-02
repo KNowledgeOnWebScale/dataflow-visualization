@@ -78,9 +78,9 @@ export const edgesJSON = [
     { source: 'rml-3', target: 'rdf-3', type: "straight", zIndex:1, markerEnd: {type: "arrowclosed"} },
     { source: 'rdf-3', target: 'sparql-3', type: "straight", zIndex:1, markerEnd: {type: "arrowclosed"} },
 
-    {source: "sparql-1", target: "sparql", style: {animation: "dashdraw .2s linear infinite", "stroke-dasharray": "4 4"}, markerEnd: {type: "arrowclosed"}},
-    {source: "sparql-2",  target: "sparql", style: {animation: "dashdraw .3s linear infinite", "stroke-dasharray": "6 6"}, markerEnd: {type: "arrowclosed"}},
-    {source: "sparql-3",  target: "sparql", animated: true, style: {animation: "dashdraw 1s linear infinite", "stroke-dasharray": "9 3 1 3"}, markerEnd: {type: "arrowclosed"}},
+    {source: "sparql-1", target: "sparql", style: {animation: "dashdraw .2s linear infinite", "strokeDasharray": "4 4"}, markerEnd: {type: "arrowclosed"}},
+    {source: "sparql-2",  target: "sparql", style: {animation: "dashdraw .3s linear infinite", "strokeDasharray": "6 6"}, markerEnd: {type: "arrowclosed"}},
+    {source: "sparql-3",  target: "sparql", animated: true, style: {animation: "dashdraw 1s linear infinite", "strokeDasharray": "9 3 1 3"}, markerEnd: {type: "arrowclosed"}},
 
 
 ];
