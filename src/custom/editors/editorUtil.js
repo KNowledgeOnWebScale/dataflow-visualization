@@ -1,18 +1,17 @@
-
 // These are the keys that can be used in globalDefaults
 // These keys are not standard supported by the library, that's why they are in a dict
 // The values of this dict should be used in the JSON representation
 import {fixNodeGroups} from "./editorUtilPositioning";
 
 const GLOBAL_DEFAULT_KEY_VALUES = {
-    "ANIMATED": {"id":"animated", "value": false},              // Standard animation supported by React Flow
+    "ANIMATED": {"id": "animated", "value": false},              // Standard animation supported by React Flow
     "ANIMATION": {"id": "animation", "value": undefined},          // Custom animation
     "TYPE": {"id": "type", "value": "default"},                 // Type of edge (default, step, smoothstep, straight)
     "EDGE_COLOR": {"id": "edgeColor", "value": "black"},        // Color of edge
     "EDGE_THICKNESS": {"id": "edgeThickness", "value": 1.2},    // Thickness of edge
     "MARKER_END": {"id": "markerEnd", "value": {}},             // Marker at end of the edge
     "MARKER_START": {"id": "markerStart", "value": {}},         // Marker at beginning of the edge
-    "STROKE_DASHARRAY": { "id": "strokeDasharray", "value": 0 },  // The stroke dasharray of the edges
+    "STROKE_DASHARRAY": {"id": "strokeDasharray", "value": 0},  // The stroke dasharray of the edges
 
 
     "FILL": {"id": "fill", "value": "white"},                 // Color of node
@@ -60,8 +59,8 @@ const EDGE_KEYS_WITH_CSS_PROPERTY = {
 const EDGE_KEYS_NO_CSS_PROPERTY = {
     "ANIMATED": GLOBAL_DEFAULT_KEY_VALUES.ANIMATED.id,
     "TYPE": GLOBAL_DEFAULT_KEY_VALUES.TYPE.id,
-    "MARKER_END":  GLOBAL_DEFAULT_KEY_VALUES.MARKER_END.id,
-    "MARKER_START":  GLOBAL_DEFAULT_KEY_VALUES.MARKER_START.id
+    "MARKER_END": GLOBAL_DEFAULT_KEY_VALUES.MARKER_END.id,
+    "MARKER_START": GLOBAL_DEFAULT_KEY_VALUES.MARKER_START.id
 }
 
 
@@ -197,7 +196,6 @@ export function parseEdges(globalDefaults, edges, nodes) {
             edge[EDGE_KEYS_NO_CSS_PROPERTY.MARKER_START]["orient"] = "auto-start-reverse";
         }
 
-
         // If edge has markerEnd and/or markerStart with no color set, set the color to the color of the edge
         if (!edge[EDGE_KEYS_NO_CSS_PROPERTY.MARKER_END].hasOwnProperty("color")) {
             edge[EDGE_KEYS_NO_CSS_PROPERTY.MARKER_END]["color"] = edge["style"]["stroke"];
@@ -213,6 +211,19 @@ export function parseEdges(globalDefaults, edges, nodes) {
         }
 
 
+        // If the edge has no zIndex and connects 2 nodes that are in the same parent, set the zIndex of the edge to 1
+        if (!edge.hasOwnProperty("zIndex")) {
+            const [srcNode, targetNode] = getSourceNode_targetNode_fromId(edge, nodes);
+            if (
+                srcNode.hasOwnProperty(NODE_KEYS.PARENT) && targetNode.hasOwnProperty(NODE_KEYS.PARENT)
+                && srcNode[NODE_KEYS.PARENT] === targetNode[NODE_KEYS.PARENT]
+            ) {
+                edge["zIndex"] = 1;
+
+            }
+        }
+
+
         fix_sourceHandle_targetHandle(globalDefaults, edge, nodes);
 
     }
@@ -225,8 +236,10 @@ function fix_sourceHandle_targetHandle(globalDefaults, edge, nodes) {
     // So let's fix that, e.g. if target is left from the source, the sourceHandle should be right and the targetHandle should be left
     // This code below checks the different possibilities
 
-    const sourceNode = nodes.find(n => n.id === edge["source"]);
-    const targetNode = nodes.find(n => n.id === edge["target"]);
+
+    const [sourceNode, targetNode] = getSourceNode_targetNode_fromId(edge, nodes);
+    //const sourceNode = nodes.find(n => n.id === edge["source"]);
+    //const targetNode = nodes.find(n => n.id === edge["target"]);
 
     let sourceNodePos = {...sourceNode.position};
     let targetNodePos = {...targetNode.position};
@@ -273,5 +286,11 @@ function fix_sourceHandle_targetHandle(globalDefaults, edge, nodes) {
         }
     }
 
+}
+
+function getSourceNode_targetNode_fromId(edge, nodes) {
+    const sourceNode = nodes.find(n => n.id === edge["source"]);
+    const targetNode = nodes.find(n => n.id === edge["target"]);
+    return [sourceNode, targetNode];
 }
 

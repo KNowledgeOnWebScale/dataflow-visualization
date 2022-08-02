@@ -61,20 +61,20 @@ export const nodesJSON = [
 
 //TODO: zIndex als het in een parent zit moet automatisch aangepast worden
 export const edgesJSON = [
-    { source: 'hd-1', target: 'rml-1' , zIndex:1 },
-    { source: 'rml-rules-1', target: 'rml-1', zIndex:1},
-    { source: 'rml-1', target: 'rdf-1', zIndex:1 },
-    { source: 'rdf-1', target: 'sparql-1', zIndex:1 },
+    { source: 'hd-1', target: 'rml-1'},
+    { source: 'rml-rules-1', target: 'rml-1'},
+    { source: 'rml-1', target: 'rdf-1' },
+    { source: 'rdf-1', target: 'sparql-1' },
 
-    { source: 'hd-2', target: 'rml-2', zIndex:1 },
-    { source: 'rml-rules-2', target: 'rml-2', zIndex:1 },
-    { source: 'rml-2', target: 'rdf-2', zIndex:1},
-    { source: 'rdf-2', target: 'sparql-2', zIndex:1 },
+    { source: 'hd-2', target: 'rml-2' },
+    { source: 'rml-rules-2', target: 'rml-2',},
+    { source: 'rml-2', target: 'rdf-2'},
+    { source: 'rdf-2', target: 'sparql-2'},
 
-    { source: 'hd-3', target: 'rml-3', zIndex:1 },
-    { source: 'rml-rules-3', target: 'rml-3', zIndex:1 },
-    { source: 'rml-3', target: 'rdf-3', zIndex:1 },
-    { source: 'rdf-3', target: 'sparql-3', zIndex:1 },
+    { source: 'hd-3', target: 'rml-3' },
+    { source: 'rml-rules-3', target: 'rml-3' },
+    { source: 'rml-3', target: 'rdf-3' },
+    { source: 'rdf-3', target: 'sparql-3'},
 
     {source: "sparql-1", target: "sparql", type: 'default', style: {animation: "dashdraw .2s linear infinite", "strokeDasharray": "4 4"}},
     {source: "sparql-2",  target: "sparql", type: 'default', style: {animation: "dashdraw .3s linear infinite", "strokeDasharray": "6 6"}},
