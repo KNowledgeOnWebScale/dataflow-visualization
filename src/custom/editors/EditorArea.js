@@ -37,7 +37,8 @@ import {
 } from "../../data/exampleData6";
 
 
-import {getLayoutedElementsDagre, parseEdges, parseGlobalDefaults, parseNodes} from "./editorUtil";
+import {parseEdges, parseGlobalDefaults, parseNodes} from "./editorUtil";
+import {getLayoutedElementsDagre} from "./editorUtilPositioning";
 
 
 const EditorArea = ({setNodes, setEdges}) => {

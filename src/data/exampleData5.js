@@ -55,25 +55,21 @@ export const nodesJSON = [
         parentNode: 'solid',
     },
     {
-        stroke: "#fff",
         image: "rmlio",
         position: {x: 95, y: 350}
     },
     {
         id:"flickr",
-        stroke: "#fff",
         image: "https://cdn.worldvectorlogo.com/logos/flickr-1.svg",
         position: {x: 20, y: 450}
     },
     {
         id:"imgur",
-        stroke: "#fff",
         image:"https://cdn.worldvectorlogo.com/logos/imgur-logo.svg",
         position: {x: 95, y: 450}
     },
     {
         id:"google",
-        stroke: "#fff",
         image: "https://cdn.cdnlogo.com/logos/g/82/google-g-2015.svg",
         position: {x: 170, y: 450}
     }
