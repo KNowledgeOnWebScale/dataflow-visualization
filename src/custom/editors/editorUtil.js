@@ -4,16 +4,20 @@ import dagre from 'dagre';
 // These keys are not standard supported by the library, that's why they are in a dict
 // The values of this dict should be used in the JSON representation
 const GLOBAL_DEFAULT_KEY_VALUES = {
-    "EDGE_COLOR": {"id": "edgeColor", "value": "black"},        // color of edge
+    "ANIMATED": {"id":"animated", "value": false},              // Standard animation supported by React Flow
+    "ANIMATION": {"id": "animation", "value": undefined},          // Custom animation
+    "TYPE": {"id": "type", "value": "default"},                 // Type of edge (default, step, smoothstep, straight)
+    "EDGE_COLOR": {"id": "edgeColor", "value": "black"},        // Color of edge
     "EDGE_THICKNESS": {"id": "edgeThickness", "value": 1.2},    // Thickness of edge
     "MARKER_END": {"id": "markerEnd", "value": {}},             // Marker at end of the edge
     "MARKER_START": {"id": "markerStart", "value": {}},         // Marker at beginning of the edge
+    "STROKE_DASHARRAY": { "id": "strokeDasharray", "value": 0 },  // The stroke dasharray of the edges
+
 
     "FILL": {"id": "fill", "value": "white"},                 // Color of node
     "FONTSIZE": {"id": "fontsize", "value": 12},              // Fontsize of text in nodes TODO: fontsize op edges???
     "SHAPE": {"id": "shape", "value": "square"},              // Shape of node
     "STROKE": {"id": "stroke", "value": "black"},             // Color of stroke of node
-    "STROKE_DASHARRAY": { "id": "strokeDasharray", "value": 0 },  // The stroke dasharray of the edges
     "STROKE_WIDTH": {"id": "strokeWidth", "value": 1},        // Width of stroke of node
     "HEIGHT": {"id": "height", "value": 50},                  // Height of node
     "WIDTH": {"id": "width", "value": 50},                    // Width of node
@@ -46,12 +50,15 @@ export const NODE_KEYS = {
 // Keys, not supported by the library, that can be used in the JSON representation of edges
 // Some things can also be done with css, that is why there are two hashmaps
 const EDGE_KEYS_WITH_CSS_PROPERTY = {
+    "ANIMATION": {"id": GLOBAL_DEFAULT_KEY_VALUES.ANIMATION.id, "cssProperty": "animation"},
     "EDGE_COLOR": {"id": GLOBAL_DEFAULT_KEY_VALUES.EDGE_COLOR.id, "cssProperty": "stroke"},
     "EDGE_THICKNESS": {"id": GLOBAL_DEFAULT_KEY_VALUES.EDGE_THICKNESS.id, "cssProperty": "strokeWidth"},
     "STROKE_DASHARRAY": {"id": GLOBAL_DEFAULT_KEY_VALUES.STROKE_DASHARRAY.id, "cssProperty": "strokeDasharray"}
 };
 
 const EDGE_KEYS_NO_CSS_PROPERTY = {
+    "ANIMATED": GLOBAL_DEFAULT_KEY_VALUES.ANIMATED.id,
+    "TYPE": GLOBAL_DEFAULT_KEY_VALUES.TYPE.id,
     "MARKER_END":  GLOBAL_DEFAULT_KEY_VALUES.MARKER_END.id,
     "MARKER_START":  GLOBAL_DEFAULT_KEY_VALUES.MARKER_START.id
 }
@@ -169,8 +176,11 @@ export function parseEdges(globalDefaults, edges, nodes) {
             let value = EDGE_KEYS_NO_CSS_PROPERTY[key];
 
             if (!edge.hasOwnProperty(value)) {
-                // Deep copy, because e.g. markerStart does not have to be the same everywhere
-                edge[value] = {...globalDefaults[value]}; // TODO werkt enkel omdat alles in die hashmap toch sws een object is
+                if (typeof globalDefaults[value] === 'object') {
+                    edge[value] = {...globalDefaults[value]};  // Deep copy, because e.g. markerStart does not have to be the same everywhere
+                } else {
+                    edge[value] = globalDefaults[value];
+                }
             }
 
         }

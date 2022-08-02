@@ -1,16 +1,15 @@
 # Flow Visualization
 
-This is an application to generate flow graphs from [JSON](www.json.org) or [YAML](https://yaml.org/).
+This is an application to generate flow graphs from [JSON](https://www.json.org/) or [YAML](https://yaml.org/).
 <br>
-
 
 - [Flow Visualization](#flow-visualization)
     - [How to run](#how-to-run)
     - [Documentation](#documentation)
         - [Global defaults](#global-defaults)
-            - [Settings which apply to the entire graph:](#settings-which-apply-to-the-entire-graph)
-            - [Settings which apply to the nodes:](#settings-which-apply-to-the-nodes)
-            - [Settings which apply to the edges:](#settings-which-apply-to-the-edges)
+            - [Settings which apply to the entire graph](#settings-which-apply-to-the-entire-graph)
+            - [Settings which apply to the nodes](#settings-which-apply-to-the-nodes)
+            - [Settings which apply to the edges](#settings-which-apply-to-the-edges)
         - [Nodes](#nodes)
             - [Node positioning](#node-positioning)
             - [Predefined images](#predefined-images)
@@ -18,7 +17,6 @@ This is an application to generate flow graphs from [JSON](www.json.org) or [YAM
         - [Edges](#edges)
             - [Animations](#animations)
 - [License](#license)
-
 
 ## How to run
 
@@ -37,7 +35,8 @@ written in [camelCase](https://en.wikipedia.org/wiki/Camel_case).
 ### Global defaults
 
 Global defaults are useful when a lot of nodes and/or edges have the same properties and you don't want to repeat
-yourself everytime. These global default values are used as fallbacks if certain properties are not specified within the
+yourself every time. These global default values are used as fallbacks if certain properties are not specified within
+the
 nodes or edges.
 
 #### Settings which apply to the entire graph
@@ -61,17 +60,21 @@ nodes or edges.
 
 #### Settings which apply to the edges
 
-|        Key        |                                                                                                                             Possible Values                                                                                                                              |            Default             | Explanation                                                                                                                                                                                                                                                                                                                                             |  
-|:-----------------:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:------------------------------:|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|    `edgeColor`    |                                                       Any [CSS color](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/color_keywords) is valid, e.g. `steelblue`, `#FFD700`, `rgb(65, 105, 225)` ...                                                        |            `black`             | The color of the edges between the nodes.                                                                                                                                                                                                                                                                                                               |
-|  `edgeThickness`  |                                                                                                                                Any number                                                                                                                                |             `1.2`              | The thickness of the edges between the nodes.                                                                                                                                                                                                                                                                                                           |
-| `strokeDasharray` |                                                         e.g. `3`, `5 3 1 3` ...<br/>see [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray#example) for more information                                                         |              `0`               | The pattern of dashes of the edges.                                                                                                                                                                                                                                                                                                                     |
-|    `markerEnd`    | <code>{type: arrow&#124;arrowclosed, orient: &#60;orient value>, color: &#60;any CSS color>}</code><br/>For `orient`,                                                  see [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/orient#usage_notes) |              `{}`              | The arrowhead at the end of the edges. Notice that there are two options for `type`. `arrow` is a shallow arrow and `arrowclosed` will by filled. If you do not specify `color`, the color of the edge will also be the color of the arrow.                                                                                                             |
-|   `makerStart`    |                         <code>{type: arrow&#124;arrowclosed, orient: &#60;orient value>, color: &#60;any CSS color>}</code><br/>For `orient`, see [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/orient#usage_notes)                          | `{orient: auto-start-reverse}` | The arrowhead at the beginning of the edges. Everytime you use `markerStart`, you should actually reverse the arrow if you want the arrow to point to the outside. If you do not specify an `orient`, this is done for you. If you want to point `markerStart` to the inside, you can still do that by giving `orient` the value `auto`.                |
+|        Key        |                                                                                                     Possible Values                                                                                                     |            Default             | Explanation                                                                                                                                                                                                                                                                                                                             |  
+|:-----------------:|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:------------------------------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|    `animated`     |                                                                                                    `true` or `false`                                                                                                    |            `false`             | Set a default animation for the edge. See also [Animations](#animations).                                                                                                                                                                                                                                                               |
+|    `animation`    |                                                             See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/animation) about animation                                                              ||
+|    `edgeColor`    |                               Any [CSS color](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/color_keywords) is valid, e.g. `steelblue`, `#FFD700`, `rgb(65, 105, 225)` ...                               |            `black`             | The color of the edges between the nodes.                                                                                                                                                                                                                                                                                               |
+|  `edgeThickness`  |                                                                                                       Any number                                                                                                        |             `1.2`              | The thickness of the edges between the nodes.                                                                                                                                                                                                                                                                                           |
+| `strokeDasharray` |                                e.g. `3`, `5 3 1 3` ...<br/>see [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray#example) for more information                                 |              `0`               | The pattern of dashes of the edges.                                                                                                                                                                                                                                                                                                     |
+|    `markerEnd`    | <code>{type: arrow&#124;arrowclosed, orient: &#60;orient value>, color: &#60;any CSS color>}</code><br/>For `orient`, see [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/orient#usage_notes) |              `{}`              | The arrowhead at the end of the edges. Notice that there are two options for `type`. `arrow` is a shallow arrow and `arrowclosed` will be filled. If you do not specify `color`, the color of the edge will also be the color of the arrow.                                                                                             |
+|   `makerStart`    | <code>{type: arrow&#124;arrowclosed, orient: &#60;orient value>, color: &#60;any CSS color>}</code><br/>For `orient`, see [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/orient#usage_notes) | `{orient: auto-start-reverse}` | The arrowhead at the beginning of the edges. Everytime you use `markerStart`, you should actually reverse the arrow if you want the arrow to point to the outside. If you do not specify `orient`, this is done for you. If you want to point `markerStart` to the inside, you can still do that by giving `orient` the value `auto`.   |
+|      `type`       |                                                     `default` (= [Bézier curve](https://en.wikipedia.org/wiki/B%C3%A9zier_curve)), `step`, `smoothstep`,`straight`                                                      |           `default`            | Set how the edge should look like (straight line, curve ...).                                                                                                                                                                                                                                                                           |
 
 ### Nodes
 
-`fill`, `fontsize`, `shape`, `stroke`, `strokeWidth`, `height` and `width` are explained in the
+`fill`, `fontsize`, `shape`, `stroke`, `strokeWidth`, `height` and `width` are also usable on individual nodes. They are
+explained in the
 section [Global defaults](#global-defaults).
 
 |     Key      |            Possible Values             |                                                                                               Default                                                                                               | Explanation                                                                                                                                                                                                                            |  
@@ -86,8 +89,6 @@ section [Global defaults](#global-defaults).
 | `parentNode` |          The ID of the parent          |                                                                                             `undefined`                                                                                             | The parent of other nodes. If you want to add a node inside another node, you have to set `parentNode` in the child as the ID of the parent.                                                                                           |
 |   `zIndex`   |               Any number               |                                                                                                 `0`                                                                                                 | Controls the stacking order of the nodes. For more information, go to the [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/z-index).                                                                                    | 
 
-
-
 #### Node positioning
 
 [As seen before](#nodes), you can set the positions of all nodes individually with the `position` key. But it is not
@@ -96,9 +97,9 @@ very efficient to set all nodes manually. There are three mechanisms to make the
 - Use the `vgroup` attribute
     - See example 5 for a clear example. With `vgroup`, you can group nodes and automatically align them vertically. It
       is recommended to set the `position` of one node. All the other nodes are being placed below that node. Notice
-      that the nodes is a list of JSON objects. The first node which position does not equal `{x: 0, y:0}` is used as a
+      that the nodes is a list of JSON objects. The first node whose position does not equal `{x: 0, y:0}` is used as a
       reference. All the `x` values are the value of the `x` of the reference node. The `y` values are adapted so that
-      all nodes of the `vgroup` are being placed vertically. So if there are two or more nodes with a location not equal
+      all nodes of the `vgroup` are placed vertically. So if there are two or more nodes with a location not equal
       to `{x: 0, y:0}`, only the location of the first node of the array is kept. All the other locations are being
       overridden.
 - Use the `hgroup` attribute
@@ -122,7 +123,7 @@ welcome.
 When using this application, you'll notice there are buttons to load examples. These buttons load in the
 files [exampleData1.js](/src/data/exampleData1.js), [exampleData2.js](/src/data/exampleData2.js) ... So if you want to
 add
-an example, just create another file. In this file you should have a JSON object for the global defaults, an array of
+an example, just create another file. In this file, you should have a JSON object for the global defaults, an array of
 nodes
 and an array of edges. If your file is ready, import the JSON object and the arrays
 in [EditorArea.js](/src/custom/editors/EditorArea.js) and add your imports to the array `examples`. A button to load in
@@ -130,11 +131,14 @@ your example will automatically be generated.
 
 ### Edges
 
-`edgeColor`, `edgeThickness`, `strokeDasharray`, `markerStart` and `markerEnd` are explained in the
+`animated`, `animation`, `edgeColor`, `edgeThickness`, `strokeDasharray`, `markerStart`, `markerEnd` ant `type` are also
+usable on individual edges. They are explained in the
 section [Global defaults](#global-defaults).
 
-Note that you can also set `edgeColor`, `edgeThickness` and `strokeDasharray` as CSS properties in `style`. If that
-happens, `stroke`, `strokeWidth` or `strokeDasharray` in `style` are of course not overwritten by possible values in
+Note that you can also set `animation`, `edgeColor`, `edgeThickness` and `strokeDasharray` as CSS properties in `style`.
+If that
+happens, `animation`, `stroke`, `strokeWidth` or `strokeDasharray` in `style` are of course not overwritten by possible
+values in
 global defaults.
 
 |      Key       |                                        Possible Values                                         |                                               Default                                               | Explanation                                                                                                                                            |  
@@ -145,8 +149,6 @@ global defaults.
 |    `label`     |                                           Any string                                           |                                             `undefined`                                             | Add a label to the edge.                                                                                                                               |
 | `sourceHandle` |                  `left-source`, `right-source`, `top-source`, `bottom-source`                  | This depends on the `orientation` of the node and the positions of the nodes connected by the edge. | Set where the edge should attach to the source node.                                                                                                   |
 | `targetHandle` |                  `left-target`, `right-target`, `top-target`, `bottom-target`                  | This depends on the `orientation` of the node and the positions of the nodes connected by the edge. | Set where the edge should attach to the target node.                                                                                                   |
-|     `type`     | `default` (= [Bézier curve](wikipedia.org/wiki/Bézier_curve)), `step`, `smoothstep`,`straight` |                                              `default`                                              | Set how the edge should look like (straight line, curve ...).                                                                                          |
-|   `animated`   |                                       `true` or `false`                                        |                                               `false`                                               | Set a default animation for the edge. See also [Animations](#animations).                                                                              |
 
 #### Animations
 
@@ -154,7 +156,8 @@ There is a key `animated`, which you can set to `true`. But if you want custom a
 the `animation` property. An example of the standard `animated` key can be found in example 3. Custom animations can be
 found in example 7. For more information about the `animation` property, please check out
 the [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/animation). If you use `animated` with
-no `strokeDasharray`, `strokeDasharray` is set to a value of `5`.
+no `strokeDasharray`, `strokeDasharray` is set to a value of `5`. If you use a custom `animation`, the `animated` key
+has no effect anymore.
 
 # License
 
