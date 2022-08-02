@@ -95,7 +95,7 @@ section [Global defaults](#global-defaults).
 very efficient to set all nodes manually. There are three mechanisms to make the user's life easier:
 
 - Use the `vgroup` attribute
-    - See example 5 for a clear example. With `vgroup`, you can group nodes and automatically align them vertically. It
+    - See example 4 for a clear example. With `vgroup`, you can group nodes and automatically align them vertically. It
       is recommended to set the `position` of one node. All the other nodes are being placed below that node. Notice
       that the nodes is a list of JSON objects. The first node whose position does not equal `{x: 0, y:0}` is used as a
       reference. All the `x` values are the value of the `x` of the reference node. The `y` values are adapted so that
@@ -153,8 +153,8 @@ global defaults.
 #### Animations
 
 There is a key `animated`, which you can set to `true`. But if you want custom animations, you should use
-the `animation` property. An example of the standard `animated` key can be found in example 3. Custom animations can be
-found in example 7. For more information about the `animation` property, please check out
+the `animation` property. An example of the standard `animated` key can be found in example 2. Custom animations can be
+found in example 6. For more information about the `animation` property, please check out
 the [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/animation). If you use `animated` with
 no `strokeDasharray`, `strokeDasharray` is set to a value of `5`. If you use a custom `animation`, the `animated` key
 has no effect anymore.

@@ -14,7 +14,6 @@ export const nodesJSON = [
     {id: "LD3", label: '#LD', shape: "cylinder"},
     {id: "LD4", label: '#LD', shape: "cylinder"},
     {id: "LD5", label: '#LD', shape: "cylinder"},
-
     {shape: "comunica"}
 ];
 

@@ -1,121 +1,84 @@
-import {MarkerType} from "react-flow-renderer";
-
-
 export const globalDefaultsJSON = {
-    //fontsize: 12,
-   // width: 50,
-    height: 50,
-    //edgeThickness: 1,
-    fill: "white",
-    stroke: "black",
-    strokeWidth: 1,
-    orientation: "vertical"
+    height: 80,
+    width: 90,
+    fontsize: 10,
+    strokeWidth: 0.7,
+    markerEnd: {type: "arrowclosed"},
+    type: "straight"
 };
 
 export const nodesJSON = [
     {
-        shape:"comunica",
-        position: { x: 20, y: 90 },
-    },
-    {
-        // PARENTNODE
-        id: 'solid',
-       // type:"custom",
-        title: 'Solid Pod',
+        // PARENTNODE 1
+        title: 'Client 1',
         shape:"rectangle",
-        strokeWidth: 5,
-        stroke:"#8370fb",
-        fill:"#12121212",
-        width:300,
-        height: 100,
-        position: { x: 0, y: 200 },
-       // style: { backgroundColor: 'rgba(255, 0, 0, 0.2)', width: 300, height: 300 },
+        stroke:"royalblue",
+        strokeWidth:3,
+        width:455,
+        height: 190,
+        position: { x: -5, y: 0 },
     },
     {
-      //  id: "solidLogo",
-      //  type: "custom",
-        image: "solid",
-        stroke: "#fff",
-        position: {x:-50, y:225}
+        // PARENTNODE 1
+        title: 'Client 2',
+        shape:"rectangle",
+        stroke:"royalblue",
+        strokeWidth:3,
+        width:455,
+        height: 190,
+        position: { x: -5, y: 200 },
     },
     {
-        id: 'RDF-1',
-         label: 'RDF',
-        //type: "custom",
-       hgroup: "hgroup1",
-         position: { x: 20, y: 25 },
-        parentNode: 'solid',
-        //extent: 'parent',
+        // PARENTNODE 1
+        title: 'Client 3',
+        shape:"rectangle",
+        stroke:"royalblue",
+        strokeWidth:3,
+        width:455,
+        height: 190,
+        position: { x: -5, y: 400 },
     },
-    {
-        id: 'RDF-2',
-         label: 'RDF',
-       // type: "custom",
-       hgroup: "hgroup1",
-        // position: { x: 80, y: 25 },
-        parentNode: 'solid',
-        //extent: 'parent',
-    },
-    {
-        id: 'RDF-3',
-        label: 'RDF',
-        //type: "custom",
-        hgroup: "hgroup1",
-        //position: { x: 145, y: 25 },
-        parentNode: 'solid',
-        //extent: 'parent',
-    },
+    {id: "hd-1", parentNode: "Client 1", shape: "cylinder", "label": "Heterogeneous\ndata sources", position: {x:0, y:10}},
+    { id: "rml-rules-1", parentNode: "Client 1", shape: "hexagon", label: "RML mapping\nrules", position: {x: 0, y:100}},
+    {id: "rml-1", parentNode: "Client 1", shape: "rectangle", height: 60, "label": "RML mapper", position:{x: 120, y:60}},
+    {id: "rdf-1", parentNode: "Client 1", shape: "cylinder", label: "RDF data", position: {x:240, y: 50}},
+    {id: "sparql-1", parentNode: "Client 1", shape: "rectangle", height: 60, label: "SPARQL\nEndpoint", position: {x:360, y: 60}},
 
-    {
-        id: 'RDF-4',
-        label: 'RDF',
-      //  type: "custom",
-        position: { x: 230, y: 25 },
-        parentNode: 'solid',
-       // extent: 'parent',
-    },
-    {
-        stroke: "#fff",
-        image: "rmlio",
-        position: {x: 95, y: 350}
-    },
-    {
-        id:"flickr",
-       // type:"custom",
-        stroke: "#fff",
-        image: "https://cdn.worldvectorlogo.com/logos/flickr-1.svg",
-        position: {x: 20, y: 450}
-    },
-    {
-        id:"imgur",
-       // type:"custom",
-        stroke: "#fff",
-        image:"https://cdn.worldvectorlogo.com/logos/imgur-logo.svg",
-        position: {x: 95, y: 450}
-    },
-    {
-        id:"google",
-       // type:"custom",
-        stroke: "#fff",
-        image: "https://cdn.cdnlogo.com/logos/g/82/google-g-2015.svg",
-        position: {x: 170, y: 450}
-    }
+    {id: "hd-2", parentNode: "Client 2", shape: "cylinder", "label": "Heterogeneous\ndata sources", position: {x:0, y:10}},
+    { id: "rml-rules-2", parentNode: "Client 2", shape: "hexagon", label: "RML mapping\nrules", position: {x: 0, y:100}},
+    {id: "rml-2", parentNode: "Client 2", shape: "rectangle", height: 60, "label": "RML mapper", position:{x: 120, y:60}},
+    {id: "rdf-2", parentNode: "Client 2", shape: "cylinder", label: "RDF data", position: {x:240, y: 50}},
+    {id: "sparql-2", parentNode: "Client 2", shape: "rectangle", height: 60, label: "SPARQL\nEndpoint", position: {x:360, y: 60}},
 
+    {id: "hd-3", parentNode: "Client 3", shape: "cylinder", "label": "Heterogeneous\ndata sources", position: {x:0, y:10}},
+    { id: "rml-rules-3", parentNode: "Client 3", shape: "hexagon", label: "RML mapping\nrules", position: {x: 0, y:100}},
+    {id: "rml-3", parentNode: "Client 3", shape: "rectangle", height: 60, "label": "RML mapper", position:{x: 120, y:60}},
+    {id: "rdf-3", parentNode: "Client 3", shape: "cylinder", label: "RDF data", position: {x:240, y: 50}},
+    {id: "sparql-3", parentNode: "Client 3", shape: "rectangle", height: 60, label: "SPARQL\nEndpoint", position: {x:360, y: 60}},
+
+    {id: "sparql", shape: "rectangle", height: 60, label: "SPARQL\nqueries to\nComunica", position: {x: 550, y: 260}}
 ];
 
+//TODO: zIndex als het in een parent zit moet automatisch aangepast worden
 export const edgesJSON = [
-    { source: 'comunica', target: 'RDF-1', animated: true, type: "straight", zIndex:1 },
-    { source: 'comunica', target: 'RDF-2', animated:true, type: "straight", zIndex:1 },
-    { source: 'comunica', target: 'RDF-3', animated:true, type: "straight", zIndex:1 },
-    { source: 'comunica', target: 'RDF-4', animated:true, type: "step", sourceHandle:"right-source", markerEnd: {type: "arrowclosed"}, zIndex:1 },
+    { source: 'hd-1', target: 'rml-1' , zIndex:1 },
+    { source: 'rml-rules-1', target: 'rml-1', zIndex:1},
+    { source: 'rml-1', target: 'rdf-1', zIndex:1 },
+    { source: 'rdf-1', target: 'sparql-1', zIndex:1 },
 
-    { source: 'RDF-1', target: 'rmlio', animated: true, type: "straight", zIndex:1 },
-    { source: 'RDF-2', target: 'rmlio', animated:true, type: "straight", zIndex:1 },
-    { source: 'RDF-3', target: 'rmlio', animated:true, type: "straight", zIndex:1 },
+    { source: 'hd-2', target: 'rml-2', zIndex:1 },
+    { source: 'rml-rules-2', target: 'rml-2', zIndex:1 },
+    { source: 'rml-2', target: 'rdf-2', zIndex:1},
+    { source: 'rdf-2', target: 'sparql-2', zIndex:1 },
 
-    { source: 'flickr', target: 'rmlio', animated: false, type: "straight", style:{strokeDasharray: "5 3",  /*strokeWidth: 20*//*, stroke: "red"*/}/*, edgeColor:"green"*/ },
-    { source: 'imgur', target: 'rmlio', animated:false, type: "straight", style:{strokeDasharray: "5 3" }},
-    { source: 'google', target: 'rmlio', animated:false, type: "straight", style:{strokeDasharray: "5 3" }},
+    { source: 'hd-3', target: 'rml-3', zIndex:1 },
+    { source: 'rml-rules-3', target: 'rml-3', zIndex:1 },
+    { source: 'rml-3', target: 'rdf-3', zIndex:1 },
+    { source: 'rdf-3', target: 'sparql-3', zIndex:1 },
+
+    {source: "sparql-1", target: "sparql", type: 'default', style: {animation: "dashdraw .2s linear infinite", "strokeDasharray": "4 4"}},
+    {source: "sparql-2",  target: "sparql", type: 'default', style: {animation: "dashdraw .3s linear infinite", "strokeDasharray": "6 6"}},
+    {source: "sparql-3",  target: "sparql", type: 'default', style: {animation: "dashdraw 1s linear infinite", "strokeDasharray": "9 3 1 3"}},
 
 
 ];

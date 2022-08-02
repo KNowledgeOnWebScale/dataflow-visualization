@@ -1,31 +1,31 @@
-import {MarkerType} from "react-flow-renderer";
 
 export const globalDefaultsJSON = {
-    fontsize:10,
-    edgeThickness: 0.7,
-    strokeDasharray: "5 3 1 3"
+    stroke: "darkgray",
+    fill: "lightyellow",
+    fontsize: 10,
+    strokeWidth: 0.2,
+    animated: true,
+    markerEnd: {type: "arrowclosed"},
 };
 
 export const nodesJSON = [
-    {vgroup: "vgroup1", label: 'csv', shape: "cylinder", position: { y: -85 },},
-    {vgroup: "vgroup1", label: 'JSON', shape: "cylinder", /*position: { x: 0, y: 70 },*/ },
-    {vgroup: "vgroup1", label: 'XML', shape: "cylinder" /*, position: { x: 0, y: 140 },*/},
-    {vgroup: "vgroup1", label: 'MySQL', shape: "cylinder"/*, position: { x: 0, y: 210 },*/},
-    {vgroup: "vgroup1", label: 'API', shape: "circle"/*, position: { x: 0, y: 280 },*/},
+    {vgroup: "vgroup1", label: 'CSV', shape: "cylinder", position: { y: -85 },},
+    {vgroup: "vgroup1", label: 'JSON', shape: "cylinder"},
+    {vgroup: "vgroup1", label: 'XML', shape: "cylinder" },
+    {vgroup: "vgroup1", label: 'MySQL', shape: "cylinder"},
+    {vgroup: "vgroup1", label: 'API', shape: "circle"},
 
-    { id: 'RML', vgroup: "vgroup3",/*, type:"custom",*/ label: 'RML\nMapper', shape:"8-star", width: 70, height: 70 , position: { x: 300, y: 55 } },
-    { /*id: 'RDF', type:"custom",*/ label: 'RDF', shape: "cylinder", position: { x: 400, y: 65 } },
-    {hgroup: "hgroup1", id: 'SPARQL-END',label: 'SPARQL\nEndpoint', shape: "square" , position: { x: 450, y: 65 } },
+    { id: 'RML', type:"custom", label: 'RML\nStreamer', shape:"8-star", width: "70", height: "70" , position: { x: 200, y: 55 } },
+    { label: 'RDF', shape: "cylinder" , position: { x: 400, y: 65 } },
+    {id: 'SPARQL-END', type: "custom", label: 'SPARQL\nEndpoint', shape: "square" , position: { x: 450, y: 65 } },
 
-    {vgroup: "vgroup3", image: "rmlio", stroke:"white" /*TODO: die stroke autom fixen*/  /*, position:{x:310, y: 200}*/},
+    {id: "rmlio", type:"custom", label: "rml.io", shape:"note", position:{x:210, y: 200}},
 
-    {hgroup: "hgroup1", vgroup: "vgroup2", shape: "comunica" /*, position: { x: 600, y: 65 },*/},
-    {id: "SPARQL", vgroup: "vgroup2", label: "SPARQL", shape: "note"/*, position: {x: 600, y: 200}*/},
+    { shape: "comunica" , position: { x: 600, y: 65 },},
+    {label: "SPARQL", shape: "note", position: {x: 600, y: 200}},
 
-
-    {id: "note1", label:"The RML Mapper\npulls data from the\nheterogeneous data\nsources", width: 110, height: 110, shape: "note", position: {x: 100, y: -100} },
-    {id: "note2", label:"The RML Mapper\npushes an RDF graph", width: 110, height: 110, shape: "note", position: {x: 330, y: -60} },
-    {id: "note3", label:"Comunica queries the\nSPARQL endpoint:\nSPARQL query\ngoes in,\nresults come out", width: 110, height: 110, shape: "note", position: {x: 500, y: -60} }
+    {id: "note1", type: "custom", label:"The RML Streamer\nstreaminly converts\nthe data from the\nheterogeneous sources", width: 110, height: 110, shape: "note", position: {x: 100, y: -100} },
+    {id: "note3", type: "custom", label:"Comunica queries the\nSPARQL endpoint:\nSPARQL query\ngoes in,\nresults come out", width: 110, height: 110, shape: "note", position: {x: 500, y: -60} }
 
 
 
@@ -34,82 +34,46 @@ export const nodesJSON = [
 
 export const edgesJSON = [
     {
-        id: 'csv to rml',
-        source: 'csv',
-        target: 'RML',
-        className: 'normal-edge',
-        markerEnd: {
-            type: MarkerType.ArrowClosed,
-        },
+        source: 'CSV',
+        target: 'RDF',
+        style: {strokeDasharray: "5 2 2 2"},
     },
     {
-        id: 'JSON to rml',
         source: 'JSON',
-        target: 'RML',
-        className: 'normal-edge',
-        markerEnd: {
-            type: MarkerType.ArrowClosed,
-        },
+        target: 'RDF',
+        style: {strokeDasharray: "5 2 2 2"},
     },
     {
-        id: 'XML to rml',
         source: 'XML',
-        target: 'RML',
-        className: 'normal-edge',
-        markerEnd: {
-            type: MarkerType.ArrowClosed,
-        },
+        target: 'RDF',
+        style: {strokeDasharray: "5 2 2 2"},
     },
     {
-        id: 'MySQL to rml',
         source: 'MySQL',
-        target: 'RML',
-        className: 'normal-edge',
-        markerEnd: {
-            type: MarkerType.ArrowClosed,
-        },
+        target: 'RDF',
+        style: {strokeDasharray: "5 2 2 2"},
     },
     {
-        id: 'API to rml',
         source: 'API',
-        target: 'RML',
-        className: 'normal-edge',
-        markerEnd: {
-            type: MarkerType.ArrowClosed,
-        },
+        target: 'RDF',
+        style: {strokeDasharray: "5 2 2 2"},
     },
     {
-        id: "RML to RDF",
-        source: "RML",
-        target: "RDF",
-        type: "straight",
-        markerEnd: {
-            type: MarkerType.ArrowClosed
-        }
-    },
-    {
-        id: "RML to rmlio",
         source: "RML",
         target: "rmlio",
         type: "straight",
         sourceHandle: "bottom-source",
         targetHandle: "top-target",
-        style: {strokeDasharray: 3}
+        style: {strokeDasharray: 3},
+        markerEnd: {},
+        animated: false
     },
     {
-        id: "SPARQL-END to comunica",
         source: "SPARQL-END",
         target: "comunica",
         type: "straight",
-       // sourceHandle: "right-source",
-       // targetHandle: "left-target",
-        markerEnd: {
-            type: MarkerType.ArrowClosed
-        },
-        markerStart: {
-            type: MarkerType.ArrowClosed,
-            orient: "auto-start-reverse"
-        }
+        markerStart: {type: "arrowclosed"},
+        animated: false
     },
     {
         id: "Comunica to SPARQL",
@@ -118,7 +82,9 @@ export const edgesJSON = [
         type: "straight",
         sourceHandle: "bottom-source",
         targetHandle: "top-target",
-        style: {strokeDasharray: 3}
+        style: {strokeDasharray: 3},
+        markerEnd: {},
+        animated: false
     }
 
 ];
