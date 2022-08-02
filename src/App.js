@@ -33,7 +33,11 @@ const EdgesFlow = () => {
 
     return (
         <>
-
+            <div style={{float: "right", marginRight: "5px"}}>
+                <a href={"https://github.com/TiboStr/dataflow-visualization#readme"} target="_blank" rel="noreferrer">
+                    Read the docs
+                </a>
+            </div>
             <EditorArea setNodes={setNodes} setEdges={setEdges}/>
 
 
