@@ -4,9 +4,11 @@ import dagre from 'dagre';
 // These keys are not standard supported by the library, that's why they are in a dict
 // The values of this dict should be used in the JSON representation
 const GLOBAL_DEFAULT_KEY_VALUES = {
-    "AUTO_LAYOUT": {"id": "autoLayout", "value": false},
-    "EDGE_COLOR": {"id": "edgeColor", "value": "black"},      // color of edge
-    "EDGE_THICKNESS": {"id": "edgeThickness", "value": 1.2},  // Thickness of edge (= connections between nodes)
+    "EDGE_COLOR": {"id": "edgeColor", "value": "black"},        // color of edge
+    "EDGE_THICKNESS": {"id": "edgeThickness", "value": 1.2},    // Thickness of edge
+    "MARKER_END": {"id": "markerEnd", "value": {}},             // Marker at end of the edge
+    "MARKER_START": {"id": "markerStart", "value": {}},         // Marker at beginning of the edge
+
     "FILL": {"id": "fill", "value": "white"},                 // Color of node
     "FONTSIZE": {"id": "fontsize", "value": 12},              // Fontsize of text in nodes TODO: fontsize op edges???
     "SHAPE": {"id": "shape", "value": "square"},              // Shape of node
@@ -15,10 +17,11 @@ const GLOBAL_DEFAULT_KEY_VALUES = {
     "STROKE_WIDTH": {"id": "strokeWidth", "value": 1},        // Width of stroke of node
     "HEIGHT": {"id": "height", "value": 50},                  // Height of node
     "WIDTH": {"id": "width", "value": 50},                    // Width of node
+
+    "AUTO_LAYOUT": {"id": "autoLayout", "value": false},
     "ORIENTATION": {"id": "orientation", "value": "horizontal"}, // Orientation of flow
 
-    "MARKER_END": {"id": "markerEnd", "value": {}},             // Marker at end of the edge
-    "MARKER_START": {"id": "markerStart", "value": {}}          // Marker at beginning of the edge
+
 };
 
 // Keys, not supported by the library, that can be used in the JSON representation of nodes
@@ -184,6 +187,12 @@ export function parseEdges(globalDefaults, edges, nodes) {
         }
         if (!edge[EDGE_KEYS_NO_CSS_PROPERTY.MARKER_START].hasOwnProperty("color")) {
             edge[EDGE_KEYS_NO_CSS_PROPERTY.MARKER_START]["color"] = edge["style"]["stroke"];
+        }
+
+        // the key animated is something that is supported by the library, but it is overwritten by the standard value of strokeDasharray
+        // If the user sets animated to true, but sets no strokDasharray, the edge should still be animated
+        if (edge.hasOwnProperty("animated") && edge["animated"] === true && edge["style"]["strokeDasharray"] === GLOBAL_DEFAULT_KEY_VALUES.STROKE_DASHARRAY.value) {
+            edge["style"]["strokeDasharray"] = "5";
         }
 
 

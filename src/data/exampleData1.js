@@ -3,6 +3,7 @@ export const globalDefaultsJSON = {
     autoLayout: true,
     orientation: "vertical",
     fill: "royalblue",
+    edgeColor: "darkgray",
     markerEnd: {type: "arrowclosed"},
     markerStart: {type: "arrowclosed"}
 };
@@ -19,9 +20,9 @@ export const nodesJSON = [
 
 
 export const edgesJSON = [
-    {source: "comunica", target:"LD1"},
-    {source: "comunica", target:"LD2" },
-    {source: "comunica", target:"LD3"},
-    {source: "comunica", target:"LD4"},
-    {source: "comunica", target:"LD5"},
+    {source: "comunica", target:"LD1", label: "LD1"},
+    {source: "comunica", target:"LD2", label:"LD2" },
+    {source: "comunica", target:"LD3", label: "LD3"},
+    {source: "comunica", target:"LD4", label: "LD4"},
+    {source: "comunica", target:"LD5", label: "LD5"},
 ];

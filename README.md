@@ -11,10 +11,10 @@ and open http://localhost:3000/.
 
 If you [run the application](#how-to-run), you'll see that there are three editors. One to
 set [global defaults](#global-defaults), one to describe the [nodes](#nodes) and one for the [connections](#edges)
-between these nodes (edges).    
+between these nodes (edges).
 
-
-Note when reading this documentation: this is a [React](https://reactjs.org/) application, so all ID's/properties are written in [camelCase](https://en.wikipedia.org/wiki/Camel_case).
+Note when reading this documentation: this is a [React](https://reactjs.org/) application, so all ID's/properties are
+written in [camelCase](https://en.wikipedia.org/wiki/Camel_case).
 
 ### Global defaults
 
@@ -104,9 +104,22 @@ Note that you can also set `edgeColor`, `edgeThickness` and `strokeDasharray` as
 happens, `stroke`, `strokeWidth` or `strokeDasharray` in `style` are of course not overwritten by possible values in
 global defaults.
 
+|      Key       |                       Possible Values                        |                                               Default                                               | Explanation                                                                                                                                            |  
+|:--------------:|:------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------|
+|    `source`    |                    ID of the source node                     |                                             `undefined`                                             | Set the node from which the edge starts. This key is mandatory.                                                                                        |
+|    `target`    |                    ID of the target node                     |                                             `undefined`                                             | Set the node where the edge arrives. This key is mandatory.                                                                                            |
+|    `zIndex`    |                          Any number                          |                                                  0                                                  | Controls the layer order. If an edge crosses a node and you want the edge to be displayed on top of the edge, you can set `zIndex` to for example `1`. |
+|    `label`     |                          Any string                          |                                             `undefined`                                             | Add a label to the edge.                                                                                                                               |
+| `sourceHandle` | `left-source`, `right-source`, `top-source`, `bottom-source` | This depends on the `orientation` of the node and the positions of the nodes connected by the edge. | Set where the edge should attach to the source node.                                                                                                   |
+| `targetHandle` | `left-target`, `right-target`, `top-target`, `bottom-target` | This depends on the `orientation` of the node and the positions of the nodes connected by the edge. | Set where the edge should attach to the target node.                                                                                                   |
+|     `type`     | `default` (= Bézier curve), `step`, `smoothstep`,`straight`  |                                              `default`                                              | Set how the edge should look like (straight line, curve ...).                                                                                          |
+|   `animated`   |                      `true` or `false`                       |                                               `false`                                               | Set a default animation for the edge. See also [Animations](#animations).                                                                              |
+
 #### Animations
+
 There is a key `animated`, which you can set to `true`. But if you want custom animations, you should use
 the `animation` property. An example of the standard `animated` key can be found in example 3. Custom animations can be
 found in example 7. For more information about the `animation` property, please check out
-the [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/animation).
+the [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/animation). If you use `animated` with
+no `strokeDasharray`, `strokeDasharray` is set to a value of `5`.
 
