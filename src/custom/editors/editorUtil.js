@@ -166,24 +166,26 @@ export function parseEdges(globalDefaults, edges, nodes) {
             let value = EDGE_KEYS_NO_CSS_PROPERTY[key];
 
             if (!edge.hasOwnProperty(value)) {
-                edge[value] = globalDefaults[value];
+                // Deep copy, because e.g. markerStart does not have to be the same everywhere
+                edge[value] = {...globalDefaults[value]}; // TODO werkt enkel omdat alles in die hashmap toch sws een object is
             }
 
         }
 
         // markerStart will not be oriented correctly
-        if (!edge[EDGE_KEYS_NO_CSS_PROPERTY.MARKER_START.hasOwnProperty("orient")]) {
+        if (!edge[EDGE_KEYS_NO_CSS_PROPERTY.MARKER_START].hasOwnProperty("orient")) {
             edge[EDGE_KEYS_NO_CSS_PROPERTY.MARKER_START]["orient"] = "auto-start-reverse";
         }
 
 
-        // If edge has markerEnd and/or markerStart with no color set, color that too
-        if (edge.hasOwnProperty("markerEnd") && !edge["markerEnd"].hasOwnProperty("color")) {
-            edge["markerEnd"]["color"] = edge["style"]["stroke"];
+        // If edge has markerEnd and/or markerStart with no color set, set the color to the color of the edge
+        if (!edge[EDGE_KEYS_NO_CSS_PROPERTY.MARKER_END].hasOwnProperty("color")) {
+            edge[EDGE_KEYS_NO_CSS_PROPERTY.MARKER_END]["color"] = edge["style"]["stroke"];
         }
-        if (edge.hasOwnProperty("markerStart") && !edge["markerStart"].hasOwnProperty("color")) {
-            edge["markerStart"]["color"] = edge["style"]["stroke"];
+        if (!edge[EDGE_KEYS_NO_CSS_PROPERTY.MARKER_START].hasOwnProperty("color")) {
+            edge[EDGE_KEYS_NO_CSS_PROPERTY.MARKER_START]["color"] = edge["style"]["stroke"];
         }
+
 
         fix_sourceHandle_targetHandle(globalDefaults, edge, nodes);
 
