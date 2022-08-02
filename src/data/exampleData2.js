@@ -2,7 +2,8 @@ import {MarkerType} from "react-flow-renderer";
 
 export const globalDefaultsJSON = {
     fontsize:10,
-    edgeThickness: 0.5
+    edgeThickness: 0.7,
+    strokeDasharray: "5 3 1 3"
 };
 
 export const nodesJSON = [

@@ -11,10 +11,14 @@ const GLOBAL_DEFAULT_KEY_VALUES = {
     "FONTSIZE": {"id": "fontsize", "value": 12},              // Fontsize of text in nodes TODO: fontsize op edges???
     "SHAPE": {"id": "shape", "value": "square"},              // Shape of node
     "STROKE": {"id": "stroke", "value": "black"},             // Color of stroke of node
+    "STROKE_DASHARRAY": { "id": "strokeDasharray", "value": 0 },  // The stroke dasharray of the edges
     "STROKE_WIDTH": {"id": "strokeWidth", "value": 1},        // Width of stroke of node
     "HEIGHT": {"id": "height", "value": 50},                  // Height of node
     "WIDTH": {"id": "width", "value": 50},                    // Width of node
-    "ORIENTATION": {"id": "orientation", "value": "horizontal"} // Orientation of flow
+    "ORIENTATION": {"id": "orientation", "value": "horizontal"}, // Orientation of flow
+
+    "MARKER_END": {"id": "markerEnd", "value": {}},             // Marker at end of the edge
+    "MARKER_START": {"id": "markerStart", "value": {}}          // Marker at beginning of the edge
 };
 
 // Keys, not supported by the library, that can be used in the JSON representation of nodes
@@ -37,10 +41,17 @@ export const NODE_KEYS = {
 };
 
 // Keys, not supported by the library, that can be used in the JSON representation of edges
-const EDGE_KEYS = {
+// Some things can also be done with css, that is why there are two hashmaps
+const EDGE_KEYS_WITH_CSS_PROPERTY = {
     "EDGE_COLOR": {"id": GLOBAL_DEFAULT_KEY_VALUES.EDGE_COLOR.id, "cssProperty": "stroke"},
-    "EDGE_THICKNESS": {"id": GLOBAL_DEFAULT_KEY_VALUES.EDGE_THICKNESS.id, "cssProperty": "strokeWidth"}
+    "EDGE_THICKNESS": {"id": GLOBAL_DEFAULT_KEY_VALUES.EDGE_THICKNESS.id, "cssProperty": "strokeWidth"},
+    "STROKE_DASHARRAY": {"id": GLOBAL_DEFAULT_KEY_VALUES.STROKE_DASHARRAY.id, "cssProperty": "strokeDasharray"}
 };
+
+const EDGE_KEYS_NO_CSS_PROPERTY = {
+    "MARKER_END":  GLOBAL_DEFAULT_KEY_VALUES.MARKER_END.id,
+    "MARKER_START":  GLOBAL_DEFAULT_KEY_VALUES.MARKER_START.id
+}
 
 
 export function parseGlobalDefaults(globalDefaults) {
@@ -141,8 +152,8 @@ export function parseEdges(globalDefaults, edges, nodes) {
             edge["style"] = {};
         }
 
-        for (let key in EDGE_KEYS) {
-            let value = EDGE_KEYS[key];
+        for (let key in EDGE_KEYS_WITH_CSS_PROPERTY) {
+            let value = EDGE_KEYS_WITH_CSS_PROPERTY[key];
 
             // Reason for if statement:
             //  you can also set edgeColor via css with stroke, let's not overwrite that when that happens
@@ -150,6 +161,21 @@ export function parseEdges(globalDefaults, edges, nodes) {
                 edge["style"][value.cssProperty] = edge[value.id] || globalDefaults[value.id];
             }
         }
+
+        for (let key in EDGE_KEYS_NO_CSS_PROPERTY) {
+            let value = EDGE_KEYS_NO_CSS_PROPERTY[key];
+
+            if (!edge.hasOwnProperty(value)) {
+                edge[value] = globalDefaults[value];
+            }
+
+        }
+
+        // markerStart will not be oriented correctly
+        if (!edge[EDGE_KEYS_NO_CSS_PROPERTY.MARKER_START.hasOwnProperty("orient")]) {
+            edge[EDGE_KEYS_NO_CSS_PROPERTY.MARKER_START]["orient"] = "auto-start-reverse";
+        }
+
 
         // If edge has markerEnd and/or markerStart with no color set, color that too
         if (edge.hasOwnProperty("markerEnd") && !edge["markerEnd"].hasOwnProperty("color")) {

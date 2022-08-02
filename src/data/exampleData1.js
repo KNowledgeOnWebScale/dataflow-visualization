@@ -1,9 +1,10 @@
-import {MarkerType} from "react-flow-renderer";
 
 export const globalDefaultsJSON = {
     autoLayout: true,
     orientation: "vertical",
-    fill: "royalblue"
+    fill: "royalblue",
+    markerEnd: {type: "arrowclosed"},
+    markerStart: {type: "arrowclosed"}
 };
 
 export const nodesJSON = [
@@ -18,9 +19,9 @@ export const nodesJSON = [
 
 
 export const edgesJSON = [
-    {source: "comunica", target:"LD1", markerEnd: {type: "arrowclosed"}},
-    {source: "comunica", target:"LD2" , markerEnd: {type: "arrowclosed"}},
-    {source: "comunica", target:"LD3", markerEnd: {type: "arrowclosed"}},
-    {source: "comunica", target:"LD4", markerEnd: {type: "arrowclosed"}},
-    {source: "comunica", target:"LD5", markerEnd: {type: "arrowclosed"}},
+    {source: "comunica", target:"LD1"},
+    {source: "comunica", target:"LD2" },
+    {source: "comunica", target:"LD3"},
+    {source: "comunica", target:"LD4"},
+    {source: "comunica", target:"LD5"},
 ];
