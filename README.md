@@ -1,6 +1,24 @@
 # Flow Visualization
 
 This is an application to generate flow graphs from [JSON](www.json.org) or [YAML](https://yaml.org/).
+<br>
+
+
+- [Flow Visualization](#flow-visualization)
+    - [How to run](#how-to-run)
+    - [Documentation](#documentation)
+        - [Global defaults](#global-defaults)
+            - [Settings which apply to the entire graph:](#settings-which-apply-to-the-entire-graph)
+            - [Settings which apply to the nodes:](#settings-which-apply-to-the-nodes)
+            - [Settings which apply to the edges:](#settings-which-apply-to-the-edges)
+        - [Nodes](#nodes)
+            - [Node positioning](#node-positioning)
+            - [Predefined images](#predefined-images)
+            - [Add examples](#add-examples)
+        - [Edges](#edges)
+            - [Animations](#animations)
+- [License](#license)
+
 
 ## How to run
 
@@ -22,14 +40,14 @@ Global defaults are useful when a lot of nodes and/or edges have the same proper
 yourself everytime. These global default values are used as fallbacks if certain properties are not specified within the
 nodes or edges.
 
-#### Settings which apply to the entire graph:
+#### Settings which apply to the entire graph
 
 |      Key      |     Possible Values      |   Default    | Explanation                                                                                                                                                                                                                              |
 |:-------------:|:------------------------:|:------------:|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `autoLayout`  |    `true` or `false`     |   `false`    | If set to `true`, [dagre](https://github.com/dagrejs/dagre) is used to automatically determine to positions of the nodes. Individually set positions will be overwritten see [Node positioning](#node-positioning) for more information. |
 | `orientation` | `horizontal`, `vertical` | `horizontal` | The orientation of the graph. If you want to work from top to bottom or from bottom to top, set `orientation` to `vertical`.                                                                                                             |
 
-#### Settings which apply to the nodes:
+#### Settings which apply to the nodes
 
 |      Key      |                                                                   Possible Values                                                                    |   Default    | Explanation                                                                               |
 |:-------------:|:----------------------------------------------------------------------------------------------------------------------------------------------------:|:------------:|:------------------------------------------------------------------------------------------|
@@ -41,13 +59,13 @@ nodes or edges.
 |   `height`    |                                                                      Any number                                                                      |     `50`     | The height of the nodes.                                                                  |
 |    `width`    |                                                                      Any number                                                                      |     `50`     | The width of the nodes. It is recommended to use the same value for `width` and `height`. |
 
-#### Settings which apply to the edges:
+#### Settings which apply to the edges
 
 |        Key        |                                                                                                                             Possible Values                                                                                                                              |            Default             | Explanation                                                                                                                                                                                                                                                                                                                                             |  
 |:-----------------:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:------------------------------:|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |    `edgeColor`    |                                                       Any [CSS color](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/color_keywords) is valid, e.g. `steelblue`, `#FFD700`, `rgb(65, 105, 225)` ...                                                        |            `black`             | The color of the edges between the nodes.                                                                                                                                                                                                                                                                                                               |
 |  `edgeThickness`  |                                                                                                                                Any number                                                                                                                                |             `1.2`              | The thickness of the edges between the nodes.                                                                                                                                                                                                                                                                                                           |
-| `strokeDasharray` |                                                         e.g. `3`, `5 3 1 3` ...<br/>see [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray#example) for moreinformation                                                          |              `0`               | The pattern of dashes of the edges.                                                                                                                                                                                                                                                                                                                     |
+| `strokeDasharray` |                                                         e.g. `3`, `5 3 1 3` ...<br/>see [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray#example) for more information                                                         |              `0`               | The pattern of dashes of the edges.                                                                                                                                                                                                                                                                                                                     |
 |    `markerEnd`    | <code>{type: arrow&#124;arrowclosed, orient: &#60;orient value>, color: &#60;any CSS color>}</code><br/>For `orient`,                                                  see [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/orient#usage_notes) |              `{}`              | The arrowhead at the end of the edges. Notice that there are two options for `type`. `arrow` is a shallow arrow and `arrowclosed` will by filled. If you do not specify `color`, the color of the edge will also be the color of the arrow.                                                                                                             |
 |   `makerStart`    |                         <code>{type: arrow&#124;arrowclosed, orient: &#60;orient value>, color: &#60;any CSS color>}</code><br/>For `orient`, see [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/orient#usage_notes)                          | `{orient: auto-start-reverse}` | The arrowhead at the beginning of the edges. Everytime you use `markerStart`, you should actually reverse the arrow if you want the arrow to point to the outside. If you do not specify an `orient`, this is done for you. If you want to point `markerStart` to the inside, you can still do that by giving `orient` the value `auto`.                |
 
