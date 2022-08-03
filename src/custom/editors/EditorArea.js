@@ -51,7 +51,7 @@ const EditorArea = ({setNodes, setEdges}) => {
     const [language, setLanguage] = useState("json");
 
     const [errorMessageTitle, setErrorMessageTitle] = useState("");
-    const [errorMessage, setErrorMessage] = useState("");
+    const [errorMessages, setErrorMessages] = useState([]);
 
 
 
@@ -63,7 +63,7 @@ const EditorArea = ({setNodes, setEdges}) => {
 
     function handleErrorPopUpClose() {
         setErrorMessageTitle("")
-        setErrorMessage("")
+        setErrorMessages([])
     }
 
     function json2yaml(jsonData) {
@@ -149,14 +149,14 @@ const EditorArea = ({setNodes, setEdges}) => {
 
 
         function setError(e) {
-            setErrorMessage(e);
-            console.log(e)
-            console.log(`Error message: ${errorMessage}`)
+            setErrorMessages(e);
+            //console.log(e)
+            //console.log(`Error message: ${errorMessage}`)
         }
 
         setErrorMessageTitle("Error while validating global defaults");
         validateJSON(parsedGd, globalDefaultSchema, setError);  // Use JSON schema validator
-        if (errorMessage) return;
+        if (errorMessages) return;
 
 
 
@@ -178,103 +178,99 @@ const EditorArea = ({setNodes, setEdges}) => {
     }
 
 
-    return (
-        <>
+    return <>
 
-            <Modal show={errorMessageTitle.length > 0 && errorMessage.length > 0} onHide={handleErrorPopUpClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>{errorMessageTitle}</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    {errorMessage}
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="danger" onClick={() => handleErrorPopUpClose()}>
-                        OK
-                    </Button>
-                </Modal.Footer>
-            </Modal>
+        <Modal show={errorMessageTitle.length > 0 && errorMessages.length > 0} onHide={handleErrorPopUpClose}>
+            <Modal.Header closeButton>
+                <Modal.Title>{errorMessageTitle}</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                {errorMessages.map(e => <p>{e}</p>)}
+            </Modal.Body>
+            <Modal.Footer>
+                <Button variant="danger" onClick={() => handleErrorPopUpClose()}>
+                    OK
+                </Button>
+            </Modal.Footer>
+        </Modal>
 
-            <div className="d-flex">
-                {
-                    examples.map((_, i) => (
-                            <Button className="primary" onClick={e => loadExample(e, i + 1)} key={i}>example {i + 1}</Button>
-                        )
-                    )
-                }
+        <div className="d-flex">
+            {
+                examples.map((_, i) => <Button className="primary" onClick={e => loadExample(e, i + 1)} key={i}>example {i + 1}</Button>
+                )
+            }
+        </div>
+
+        <Dropdown onSelect={changeLanguage}>
+            <Dropdown.Toggle variant="warning" id="dropdown-basic">
+                Language: {language.toUpperCase()}
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
+                <Dropdown.Item eventKey="json" active>JSON</Dropdown.Item>
+                <Dropdown.Item eventKey="yaml">YAML</Dropdown.Item>
+            </Dropdown.Menu>
+        </Dropdown>
+
+
+        <div className="edit-area">
+            <div className="code-editor resizable" style={{height: "200px"}}>
+                <h5>Global defaults editor</h5>
+                <Editor
+                    language={language}
+                    value={globalDefaults}
+                    onChange={content => setGlobalDefaults(content)}
+                    theme="vs-dark"
+                    style={{
+                        width: "100%",
+                        //height: "100%",
+                        // minHeight: "250px",
+                        //margin: "auto"
+                    }}
+                />
             </div>
 
-            <Dropdown onSelect={changeLanguage}>
-                <Dropdown.Toggle variant="warning" id="dropdown-basic">
-                    Language: {language.toUpperCase()}
-                </Dropdown.Toggle>
-                <Dropdown.Menu>
-                    <Dropdown.Item eventKey="json" active>JSON</Dropdown.Item>
-                    <Dropdown.Item eventKey="yaml">YAML</Dropdown.Item>
-                </Dropdown.Menu>
-            </Dropdown>
+            <div className="d-flex resizable code-editor"
+                 style={{height: "350px"}}/*style={{width: "97%", margin: "auto"}}*/>
 
-
-            <div className="edit-area">
-                <div className="code-editor resizable" style={{height: "200px"}}>
-                    <h5>Global defaults editor</h5>
+                <div className="node-edge-editor">
+                    <h5>Node editor</h5>
                     <Editor
                         language={language}
-                        value={globalDefaults}
-                        onChange={content => setGlobalDefaults(content)}
+                        value={nodesData}
+                        onChange={content => setNodesData(content)}
                         theme="vs-dark"
                         style={{
                             width: "100%",
-                            //height: "100%",
-                            // minHeight: "250px",
+                            // height: "100%",
+                            //minHeight: "250px",
                             //margin: "auto"
                         }}
                     />
                 </div>
 
-                <div className="d-flex resizable code-editor"
-                     style={{height: "350px"}}/*style={{width: "97%", margin: "auto"}}*/>
-
-                    <div className="node-edge-editor">
-                        <h5>Node editor</h5>
-                        <Editor
-                            language={language}
-                            value={nodesData}
-                            onChange={content => setNodesData(content)}
-                            theme="vs-dark"
-                            style={{
-                                width: "100%",
-                                // height: "100%",
-                                //minHeight: "250px",
-                                //margin: "auto"
-                            }}
-                        />
-                    </div>
-
-                    <div className="node-edge-editor">
-                        <h5>Edge editor</h5>
-                        <Editor
-                            language={language}
-                            value={edgesData}
-                            onChange={content => setEdgesData(content)}
-                            theme="vs-dark"
-                            style={{
-                                width: "100%",
-                                //height: "100%",
-                                //minHeight: "250px",
-                                //margin: "auto"
-                            }}
-                        />
+                <div className="node-edge-editor">
+                    <h5>Edge editor</h5>
+                    <Editor
+                        language={language}
+                        value={edgesData}
+                        onChange={content => setEdgesData(content)}
+                        theme="vs-dark"
+                        style={{
+                            width: "100%",
+                            //height: "100%",
+                            //minHeight: "250px",
+                            //margin: "auto"
+                        }}
+                    />
 
 
-                    </div>
                 </div>
-
-                <Button variant="primary" onClick={e => handleConvert(e)}>Convert</Button>
-
             </div>
-        </>
-    )
+
+            <Button variant="primary" onClick={e => handleConvert(e)}>Convert</Button>
+
+        </div>
+    </>
 
 }
 

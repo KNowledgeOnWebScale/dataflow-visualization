@@ -4,26 +4,31 @@
 import {fixNodeGroups} from "./editorUtilPositioning";
 
 export const GLOBAL_DEFAULT_KEY_VALUES = {
-    "ANIMATED": {"id": "animated", "value": false},              // Standard animation supported by React Flow
-    "ANIMATION": {"id": "animation", "value": undefined},          // Custom animation
-    "TYPE": {"id": "type", "value": "default"},                 // Type of edge (default, step, smoothstep, straight)
-    "EDGE_COLOR": {"id": "edgeColor", "value": "black"},        // Color of edge
-    "EDGE_THICKNESS": {"id": "edgeThickness", "value": 1.2},    // Thickness of edge
-    "MARKER_END": {"id": "markerEnd", "value": {}},             // Marker at end of the edge
-    "MARKER_START": {"id": "markerStart", "value": {}},         // Marker at beginning of the edge
-    "STROKE_DASHARRAY": {"id": "strokeDasharray", "value": 0},  // The stroke dasharray of the edges
+    "ANIMATED": {id: "animated", value: false, type: "boolean"},              // Standard animation supported by React Flow
+    "ANIMATION": {id: "animation", "value": undefined, type: "string"},          // Custom animation
+    "TYPE": {id: "type", value: "default", type: "string", pattern: "^(default)$|^(step)$|^(smoothstep)$|^(straight)$"},                 // Type of edge (default, step, smoothstep, straight)
+    "EDGE_COLOR": {id: "edgeColor", value: "black", type: "string"},        // Color of edge
+    "EDGE_THICKNESS": {id: "edgeThickness", value: 1.2, type: "number"},    // Thickness of edge
+    "MARKER_END": {id: "markerEnd", value: {}, type: "object"},             // Marker at end of the edge
+    "MARKER_START": {id: "markerStart", value: {}, type: "object"}, //TODO  hoe object fixen?       // Marker at beginning of the edge
+    "STROKE_DASHARRAY": {id: "strokeDasharray", value: 0, type: ["number", "string"]},  // The stroke dasharray of the edges
 
 
-    "FILL": {"id": "fill", "value": "white"},                 // Color of node
-    "FONTSIZE": {"id": "fontsize", "value": 12},              // Fontsize of text in nodes TODO: fontsize op edges???
-    "SHAPE": {"id": "shape", "value": "square"},              // Shape of node
-    "STROKE": {"id": "stroke", "value": "black"},             // Color of stroke of node
-    "STROKE_WIDTH": {"id": "strokeWidth", "value": 1},        // Width of stroke of node
-    "HEIGHT": {"id": "height", "value": 50},                  // Height of node
-    "WIDTH": {"id": "width", "value": 50},                    // Width of node
+    "FILL": {id: "fill", value: "white", type: "string"},                 // Color of node
+    "FONTSIZE": {id: "fontsize", value: 12, type: "number"},              // Fontsize of text in nodes TODO: fontsize op edges???
+    "SHAPE": {
+        id: "shape",
+        value: "square",
+        type: "string",
+        pattern: "^(8-star)$|^(big-star)$|^(circle)$|^(cylinder)$|^(diamond)$|^(hexagon)$|^(note)$|^(rectangle)$|^(square)$|^(star)$|^(triangle)$|^(comunica)$|^(rmlio)$|^(solid)$"
+    },              // Shape of node
+    "STROKE": {id: "stroke", value: "black", type: "string"},             // Color of stroke of node
+    "STROKE_WIDTH": {id: "strokeWidth", value: 1, type: "number"},        // Width of stroke of node
+    "HEIGHT": {id: "height", value: 50, type: "number"},                  // Height of node
+    "WIDTH": {id: "width", value: 50},                    // Width of node
 
-    "AUTO_LAYOUT": {"id": "autoLayout", "value": false},
-    "ORIENTATION": {"id": "orientation", "value": "horizontal"}, // Orientation of flow
+    "AUTO_LAYOUT": {id: "autoLayout", value: false, type: "boolean"},
+    "ORIENTATION": {id: "orientation", value: "horizontal", type: "string", pattern: "^(vertical)|(horizontal)$"}, // Orientation of flow
 
 
 };
