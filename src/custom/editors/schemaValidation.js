@@ -1,6 +1,11 @@
 import Ajv from "ajv";
 //import {} from "ajv-errors";
-import {GLOBAL_DEFAULT_KEY_VALUES, NODE_KEYS} from "./editorUtil";
+import {
+    EDGE_KEYS_NO_CSS_PROPERTY,
+    EDGE_KEYS_WITH_CSS_PROPERTY,
+    GLOBAL_DEFAULT_KEY_VALUES,
+    NODE_KEYS
+} from "./editorUtil";
 
 const ajv = new Ajv({allErrors: true});
 require("ajv-errors")(ajv);
@@ -62,20 +67,12 @@ function createClearErrorMessage(id, type, pattern) {
 // Custom error messages -->  https://github.com/ajv-validator/ajv-errors
 
 
-// TODO: this is very very VERY bad code
-//  FIX IT
-
-
 export const globalDefaultSchema = {
     type: "object",
-    //errorMessage: "Global settings are expected to be initialized in an object",
     properties: {},
     errorMessage: {
-        properties: {
-            // "orientation": "orientation error"
-        },
+        properties: {},
         type: "Global settings are expected to be initialized in an object"
-
     }
 }
 
@@ -101,6 +98,7 @@ export const edgeSchema = {
     items:
         {
             type: "object",
+            required: [],
             properties: {},
             errorMessage: {
                 type: "Each edge should be an object",
@@ -136,6 +134,7 @@ function initGlobalDefaultsSchema() {
 
     }
 
+    //TODO: moet beter
     globalDefaultSchema.properties[GLOBAL_DEFAULT_KEY_VALUES.MARKER_START.id] = arrowSchema;
     globalDefaultSchema.properties[GLOBAL_DEFAULT_KEY_VALUES.MARKER_END.id] = arrowSchema;
 }
@@ -168,7 +167,34 @@ function initNodesSchema() {
 }
 
 function initEdgesSchema() {
+    for (let value of [...Object.values(EDGE_KEYS_NO_CSS_PROPERTY), ...Object.values(EDGE_KEYS_WITH_CSS_PROPERTY)]) {
 
+        if (value.required) {
+            edgeSchema.items.required.push(value.id);
+        }
+
+
+        if (value.type === "object") {
+            continue;
+        }
+
+        edgeSchema.items.properties[value.id] = {
+            type: value.type,
+            pattern: value.pattern,
+            // In global defaults, the errorMessages are not put inside properties
+            // But here it must be inside properties in order to work
+            errorMessage: {
+                type: createClearErrorMessage(value.id, value.type, value.pattern)
+            }
+        }
+
+        // TODO
+        //  BUG: can't control error message for an invalid pattern for edges with a pattern
+        //  In global defaults, that was fixed by not putting errorMessage inside properties, but for some reason that doesn't seem to work here
+        // edgeSchema.items.errorMessage[value.id] = createClearErrorMessage(value.id, value.type, value.pattern);
+        // edgeSchema.errorMessage[value.id] = createClearErrorMessage(value.id, value.type, value.pattern);
+    }
+    nodeSchema.items.properties[NODE_KEYS.POSITION.id] = positionSchema;
 }
 
 

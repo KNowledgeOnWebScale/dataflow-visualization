@@ -180,9 +180,9 @@ const EditorArea = ({setNodes, setEdges}) => {
         //  bv als naar een id verwezen wordt, bestaat die ID wel
 
 
-        let defaults = parseGlobalDefaults(JSON.parse(gd));
-        let nodes = parseNodes(defaults, JSON.parse(nd));
-        let edges = parseEdges(defaults, JSON.parse(ed), nodes);
+        let defaults = parseGlobalDefaults(parsedGd);
+        let nodes = parseNodes(defaults, parsedNd);
+        let edges = parseEdges(defaults, parsedEd, nodes);
 
 
         const dagreGraph = new dagre.graphlib.Graph();

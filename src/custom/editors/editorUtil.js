@@ -16,6 +16,8 @@ export const GLOBAL_DEFAULT_KEY_VALUES = {
 
     "FILL": {id: "fill", value: "white", type: "string"},                 // Color of node
     "FONTSIZE": {id: "fontsize", value: 12, type: "number"},              // Fontsize of text in nodes TODO: fontsize op edges???
+
+    //TODO in readme uitleggen dat je ook het pattern moet aanpassen
     "SHAPE": {
         id: "shape",
         value: "square",
@@ -39,6 +41,8 @@ export const NODE_KEYS = {
     POSITION: {id: "position", type: "object"},
     Z_INDEX: {id: "zIndex", type: "number"},
 
+    // TODO: eignl ook regex (comunica, solid, rmlio),
+    //  mss een aparte map maken voor images en dan de content van die dir opvragen om niet meer namen te moeten hardcoden
     IMAGE: {id: "image", type: "string"},
     LABEL: {id: "label", type: "string"},
     TITLE: {id: "title", type: "string"},
@@ -49,9 +53,16 @@ export const NODE_KEYS = {
 
     "FILL": {"id": GLOBAL_DEFAULT_KEY_VALUES.FILL.id, "type": GLOBAL_DEFAULT_KEY_VALUES.FILL.type},
     "FONTSIZE": {"id": GLOBAL_DEFAULT_KEY_VALUES.FONTSIZE.id, "type": GLOBAL_DEFAULT_KEY_VALUES.FONTSIZE.type},
-    "SHAPE": {"id": GLOBAL_DEFAULT_KEY_VALUES.SHAPE.id,  "type": GLOBAL_DEFAULT_KEY_VALUES.SHAPE.type, "pattern": GLOBAL_DEFAULT_KEY_VALUES.SHAPE.pattern},
+    "SHAPE": {
+        "id": GLOBAL_DEFAULT_KEY_VALUES.SHAPE.id,
+        "type": GLOBAL_DEFAULT_KEY_VALUES.SHAPE.type,
+        "pattern": GLOBAL_DEFAULT_KEY_VALUES.SHAPE.pattern
+    },
     "STROKE": {"id": GLOBAL_DEFAULT_KEY_VALUES.STROKE.id, "type": GLOBAL_DEFAULT_KEY_VALUES.STROKE.type},
-    "STROKE_WIDTH": {"id": GLOBAL_DEFAULT_KEY_VALUES.STROKE_WIDTH.id, "type": GLOBAL_DEFAULT_KEY_VALUES.STROKE_WIDTH.type},
+    "STROKE_WIDTH": {
+        "id": GLOBAL_DEFAULT_KEY_VALUES.STROKE_WIDTH.id,
+        "type": GLOBAL_DEFAULT_KEY_VALUES.STROKE_WIDTH.type
+    },
     "HEIGHT": {"id": GLOBAL_DEFAULT_KEY_VALUES.HEIGHT.id, "type": GLOBAL_DEFAULT_KEY_VALUES.HEIGHT.type},
     "WIDTH": {"id": GLOBAL_DEFAULT_KEY_VALUES.WIDTH.id, "type": GLOBAL_DEFAULT_KEY_VALUES.WIDTH.type},
 };
@@ -59,17 +70,65 @@ export const NODE_KEYS = {
 // Keys, not supported by the library, that can be used in the JSON representation of edges
 // Some things can also be done with css, that is why there are two hashmaps
 export const EDGE_KEYS_WITH_CSS_PROPERTY = {
-    "ANIMATION": {"id": GLOBAL_DEFAULT_KEY_VALUES.ANIMATION.id, "cssProperty": "animation"},
-    "EDGE_COLOR": {"id": GLOBAL_DEFAULT_KEY_VALUES.EDGE_COLOR.id, "cssProperty": "stroke"},
-    "EDGE_THICKNESS": {"id": GLOBAL_DEFAULT_KEY_VALUES.EDGE_THICKNESS.id, "cssProperty": "strokeWidth"},
-    "STROKE_DASHARRAY": {"id": GLOBAL_DEFAULT_KEY_VALUES.STROKE_DASHARRAY.id, "cssProperty": "strokeDasharray"}
+    "ANIMATION": {
+        "id": GLOBAL_DEFAULT_KEY_VALUES.ANIMATION.id,
+        "type": GLOBAL_DEFAULT_KEY_VALUES.ANIMATION.type,
+        "cssProperty": "animation"
+    },
+    "EDGE_COLOR": {
+        "id": GLOBAL_DEFAULT_KEY_VALUES.EDGE_COLOR.id,
+        "type": GLOBAL_DEFAULT_KEY_VALUES.EDGE_COLOR.type,
+        "cssProperty": "stroke"
+    },
+    "EDGE_THICKNESS": {
+        "id": GLOBAL_DEFAULT_KEY_VALUES.EDGE_THICKNESS.id,
+        "type": GLOBAL_DEFAULT_KEY_VALUES.EDGE_THICKNESS.type,
+        "cssProperty": "strokeWidth"
+    },
+    "STROKE_DASHARRAY": {
+        "id": GLOBAL_DEFAULT_KEY_VALUES.STROKE_DASHARRAY.id,
+        "type": GLOBAL_DEFAULT_KEY_VALUES.STROKE_DASHARRAY.type,
+        "cssProperty": "strokeDasharray"
+    }
 };
 
 export const EDGE_KEYS_NO_CSS_PROPERTY = {
-    "ANIMATED": GLOBAL_DEFAULT_KEY_VALUES.ANIMATED.id,
-    "TYPE": GLOBAL_DEFAULT_KEY_VALUES.TYPE.id,
-    "MARKER_END": GLOBAL_DEFAULT_KEY_VALUES.MARKER_END.id,
-    "MARKER_START": GLOBAL_DEFAULT_KEY_VALUES.MARKER_START.id
+    "SOURCE": {id: "source", type: "string", required: true},
+    "TARGET": {id: "target", type: "string", required: true},
+    "Z_INDEX": {id: "zIndex", type: "number"},
+    "LABEL": {id: "label", type: "string"},
+    "SOURCE_HANDLE": {
+        id: "sourceHandle",
+        type: "string",
+        pattern: "^(left-source)$|^(right-source)$|^(top-source)$|^(bottom-source)$",
+    },
+    "TARGET_HANDLE": {
+        id: "targetHandle",
+        type: "string",
+        pattern: "^(left-target)$|^(right-target)$|^(top-target)$|^(bottom-target)$",
+    },
+
+    "ANIMATED": {
+        "id": GLOBAL_DEFAULT_KEY_VALUES.ANIMATED.id,
+        "type": GLOBAL_DEFAULT_KEY_VALUES.ANIMATED.TYPE,
+        "canBeGlobal": true
+    },
+    "TYPE": {
+        "id": GLOBAL_DEFAULT_KEY_VALUES.TYPE.id,
+        "type": GLOBAL_DEFAULT_KEY_VALUES.TYPE.type,
+        "pattern": GLOBAL_DEFAULT_KEY_VALUES.TYPE.pattern,
+        "canBeGlobal": true
+    },
+    "MARKER_END": {
+        "id": GLOBAL_DEFAULT_KEY_VALUES.MARKER_END.id,
+        "type": GLOBAL_DEFAULT_KEY_VALUES.MARKER_END.type,
+        "canBeGlobal": true
+    },
+    "MARKER_START": {
+        "id": GLOBAL_DEFAULT_KEY_VALUES.MARKER_START.id,
+        "type": GLOBAL_DEFAULT_KEY_VALUES.MARKER_START.type,
+        "canBeGlobal": true
+    }
 }
 
 
@@ -188,7 +247,11 @@ export function parseEdges(globalDefaults, edges, nodes) {
         }
 
         for (let key in EDGE_KEYS_NO_CSS_PROPERTY) {
-            let value = EDGE_KEYS_NO_CSS_PROPERTY[key];
+            if (!EDGE_KEYS_NO_CSS_PROPERTY[key]["canBeGlobal"]) {
+                continue;
+            }
+
+            let value = EDGE_KEYS_NO_CSS_PROPERTY[key]["id"];
 
             if (!edge.hasOwnProperty(value)) {
                 if (typeof globalDefaults[value] === 'object') {
@@ -201,16 +264,16 @@ export function parseEdges(globalDefaults, edges, nodes) {
         }
 
         // markerStart will not be oriented correctly
-        if (!edge[EDGE_KEYS_NO_CSS_PROPERTY.MARKER_START].hasOwnProperty("orient")) {
-            edge[EDGE_KEYS_NO_CSS_PROPERTY.MARKER_START]["orient"] = "auto-start-reverse";
+        if (!edge[EDGE_KEYS_NO_CSS_PROPERTY.MARKER_START.id].hasOwnProperty("orient")) {
+            edge[EDGE_KEYS_NO_CSS_PROPERTY.MARKER_START.id]["orient"] = "auto-start-reverse";
         }
 
         // If edge has markerEnd and/or markerStart with no color set, set the color to the color of the edge
-        if (!edge[EDGE_KEYS_NO_CSS_PROPERTY.MARKER_END].hasOwnProperty("color")) {
-            edge[EDGE_KEYS_NO_CSS_PROPERTY.MARKER_END]["color"] = edge["style"]["stroke"];
+        if (!edge[EDGE_KEYS_NO_CSS_PROPERTY.MARKER_END.id].hasOwnProperty("color")) {
+            edge[EDGE_KEYS_NO_CSS_PROPERTY.MARKER_END.id]["color"] = edge["style"]["stroke"];
         }
-        if (!edge[EDGE_KEYS_NO_CSS_PROPERTY.MARKER_START].hasOwnProperty("color")) {
-            edge[EDGE_KEYS_NO_CSS_PROPERTY.MARKER_START]["color"] = edge["style"]["stroke"];
+        if (!edge[EDGE_KEYS_NO_CSS_PROPERTY.MARKER_START.id].hasOwnProperty("color")) {
+            edge[EDGE_KEYS_NO_CSS_PROPERTY.MARKER_START.id]["color"] = edge["style"]["stroke"];
         }
 
         // the key animated is something that is supported by the library, but it is overwritten by the standard value of strokeDasharray
