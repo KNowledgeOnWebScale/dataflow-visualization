@@ -8,12 +8,12 @@ import {getShape} from "./nodeUtil";
 
 export default memo(({data, isConnectable}) => {
 
-    let width = data[NODE_KEYS.WIDTH];
-    let height = data[NODE_KEYS.HEIGHT];
+    let width = data[NODE_KEYS.WIDTH.id];
+    let height = data[NODE_KEYS.HEIGHT.id];
 
-    let fontsize = data[NODE_KEYS.FONTSIZE];
+    let fontsize = data[NODE_KEYS.FONTSIZE.id];
 
-    let element = getShape(data[NODE_KEYS.SHAPE], data[NODE_KEYS.FILL], data[NODE_KEYS.STROKE], data[NODE_KEYS.STROKE_WIDTH]);
+    let element = getShape(data[NODE_KEYS.SHAPE.id], data[NODE_KEYS.FILL.id], data[NODE_KEYS.STROKE.id], data[NODE_KEYS.STROKE_WIDTH.id]);
 
     return (
         <>
@@ -27,27 +27,27 @@ export default memo(({data, isConnectable}) => {
                 </svg>
 
                 <svg style={{width: width, height: height}}>
-                    {data[NODE_KEYS.IMAGE] &&
-                        (getShape(data[NODE_KEYS.IMAGE]) ||
-                            <image key={Math.random()} href={data[NODE_KEYS.IMAGE]} width="100%" height="100%"
+                    {data[NODE_KEYS.IMAGE.id] &&
+                        (getShape(data[NODE_KEYS.IMAGE.id]) ||
+                            <image key={Math.random()} href={data[NODE_KEYS.IMAGE.id]} width="100%" height="100%"
                                    preserveAspectRatio="xMinYMin slice"/>)
                     }
                 </svg>
 
 
                 <text fontSize={fontsize}  /*x="50%" y="50%"*/ /*dominantBaseline="middle" textAnchor="middle"*/>
-                    {data[NODE_KEYS.TITLE] &&
-                        <tspan key={Math.random()} x="50%" y={(data[NODE_KEYS.STROKE_WIDTH] || 1) + fontsize}
+                    {data[NODE_KEYS.TITLE.id] &&
+                        <tspan key={Math.random()} x="50%" y={(data[NODE_KEYS.STROKE_WIDTH.id] || 1) + fontsize}
                                dominantBaseline="middle" textAnchor="middle">{data.title}</tspan>
                     }
-                    {data[NODE_KEYS.LABEL] &&
+                    {data[NODE_KEYS.LABEL.id] &&
                         data.label.split("\n").map((e, i) => {
                             if (i !== 0) {
                                 return <tspan key={i} x="50%" dy={fontsize} dominantBaseline="middle"
                                               textAnchor="middle">{e}</tspan>
                             } else {
                                 return <tspan key={i} x="50%"
-                                              y={50 - ((data[NODE_KEYS.LABEL].split("\n").length - 1) * height / fontsize / 2) + "%"}
+                                              y={50 - ((data[NODE_KEYS.LABEL.id].split("\n").length - 1) * height / fontsize / 2) + "%"}
                                               dominantBaseline="middle" textAnchor="middle">{e}</tspan>
                             }
                         })}

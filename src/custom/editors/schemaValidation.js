@@ -1,6 +1,6 @@
 import Ajv from "ajv";
 //import {} from "ajv-errors";
-import {GLOBAL_DEFAULT_KEY_VALUES} from "./editorUtil";
+import {GLOBAL_DEFAULT_KEY_VALUES, NODE_KEYS} from "./editorUtil";
 
 const ajv = new Ajv({allErrors: true});
 require("ajv-errors")(ajv);
@@ -23,6 +23,20 @@ const arrowSchema = {
     }
 }
 
+const positionSchema = {
+    type: "object",
+    properties: {
+        "x": {
+            type: "number",
+            errorMessage: createClearErrorMessage("object.x", "number")
+        },
+        "y": {
+            type: ["number"],
+            errorMessage: createClearErrorMessage("object.y", "number")
+        }
+    }
+}
+
 function createClearErrorMessage(id, type, pattern) {
     let out = [id, "must be"];
 
@@ -39,7 +53,7 @@ function createClearErrorMessage(id, type, pattern) {
     }
 
     if (pattern) {
-        out.push(`. With pattern: ${pattern}`);
+        out.push(`with pattern: ${pattern}`);
     }
 
     return out.join(" ");
@@ -54,21 +68,56 @@ function createClearErrorMessage(id, type, pattern) {
 
 export const globalDefaultSchema = {
     type: "object",
-    properties: {}
+    //errorMessage: "Global settings are expected to be initialized in an object",
+    properties: {},
+    errorMessage: {
+        properties: {
+            // "orientation": "orientation error"
+        },
+        type: "Global settings are expected to be initialized in an object"
+
+    }
 }
 
-export const nodeSchema = {
 
+export const nodeSchema = {
+    type: "array",
+    items:
+        {
+            type: "object",
+            properties: {},
+            errorMessage: {
+                type: "Each node should be an object",
+            }
+        },
+    errorMessage: {
+        type: "Nodes are expected to be objects in an array"
+    },
 }
 
 
 export const edgeSchema = {
-
+    type: "array",
+    items:
+        {
+            type: "object",
+            properties: {},
+            errorMessage: {
+                type: "Each edge should be an object",
+            }
+        },
+    errorMessage: {
+        type: "Edges are expected to be objects in an array"
+    },
 }
 
-initGlobalDefaultSchema();
 
-function initGlobalDefaultSchema() {
+initGlobalDefaultsSchema();
+initNodesSchema();
+initEdgesSchema();
+
+
+function initGlobalDefaultsSchema() {
     for (let value of Object.values(GLOBAL_DEFAULT_KEY_VALUES)) {
 
         if (value.type === "object") {
@@ -78,10 +127,12 @@ function initGlobalDefaultSchema() {
         globalDefaultSchema.properties[value.id] = {
             type: value.type,
             pattern: value.pattern,
-            errorMessage: {
-                type: createClearErrorMessage(value.id, value.type, value.pattern)
-            }
+            //errorMessage: {
+            //   type: createClearErrorMessage(value.id, value.type, value.pattern)
+            //}
         }
+
+        globalDefaultSchema.errorMessage.properties[value.id] = createClearErrorMessage(value.id, value.type, value.pattern);
 
     }
 
@@ -89,23 +140,47 @@ function initGlobalDefaultSchema() {
     globalDefaultSchema.properties[GLOBAL_DEFAULT_KEY_VALUES.MARKER_END.id] = arrowSchema;
 }
 
+function initNodesSchema() {
+    for (let value of Object.values(NODE_KEYS)) {
 
-function stripQuotationMarks(string) {
-    return string.replace(/^"+|"+$/)
+        if (value.type === "object") {
+            continue;
+        }
+
+        nodeSchema.items.properties[value.id] = {
+            type: value.type,
+            pattern: value.pattern,
+            // In global defaults, the errorMessages are not put inside properties
+            // But here it must be inside properties in order to work
+            errorMessage: {
+                type: createClearErrorMessage(value.id, value.type, value.pattern)
+            }
+        }
+
+        // TODO
+        //  BUG: can't control error message for an invalid pattern for shape
+        //  In global defaults, that was fixed by not putting errorMessage inside properties, but for some reason that doesn't seem to work here
+        // nodeSchema.items.errorMessage[value.id] = createClearErrorMessage(value.id, value.type, value.pattern);
+        // nodeSchema.errorMessage[value.id] = createClearErrorMessage(value.id, value.type, value.pattern);
+    }
+    nodeSchema.items.properties[NODE_KEYS.POSITION.id] = positionSchema;
+
 }
+
+function initEdgesSchema() {
+
+}
+
 
 export function validateJSON(data, schema, setError) {
 
     const validate = ajv.compile(schema);  // TODO: niet heel de tijd opnieuw doen, buiten deze functie zetten
     const valid = validate(data);
     if (!valid) {
-        console.log(validate.errors)
-
         let errMsg = validate.errors.map(e => e["message"] || JSON.stringify(e, null, 2))
-
-        //let errMessage =validate.errors[0]["message"] || JSON.stringify(validate.errors, null, 2);
-        //setError(errMsg.join("\n   ; {\n} <br>  \n"));  // somehow, newline does not work
-        setError(errMsg)
+        if (errMsg) {
+            setError(errMsg);
+        }
     }
 }
 

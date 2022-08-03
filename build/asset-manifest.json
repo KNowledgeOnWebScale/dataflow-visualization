@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/dataflow-visualization/static/css/main.98435179.css",
-    "main.js": "/dataflow-visualization/static/js/main.73834915.js",
+    "main.js": "/dataflow-visualization/static/js/main.15a4ab63.js",
     "static/media/rmlio.png": "/dataflow-visualization/static/media/rmlio.859bf1ae940ec1adc300.png",
     "static/media/comunica.svg": "/dataflow-visualization/static/media/comunica.273048f85711071b81289050f3fe05b5.svg",
     "static/media/solid.svg": "/dataflow-visualization/static/media/solid.a1e6ec7c34310abf76c8239e197d822e.svg",
     "index.html": "/dataflow-visualization/index.html",
     "main.98435179.css.map": "/dataflow-visualization/static/css/main.98435179.css.map",
-    "main.73834915.js.map": "/dataflow-visualization/static/js/main.73834915.js.map"
+    "main.15a4ab63.js.map": "/dataflow-visualization/static/js/main.15a4ab63.js.map"
   },
   "entrypoints": [
     "static/css/main.98435179.css",
-    "static/js/main.73834915.js"
+    "static/js/main.15a4ab63.js"
   ]
 }

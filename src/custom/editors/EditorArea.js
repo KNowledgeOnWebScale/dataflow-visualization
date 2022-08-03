@@ -39,7 +39,7 @@ import {
 
 import {parseEdges, parseGlobalDefaults, parseNodes} from "./editorUtil";
 import {getLayoutedElementsDagre} from "./editorUtilPositioning";
-import {globalDefaultSchema, validateJSON} from "./schemaValidation";
+import {edgeSchema, globalDefaultSchema, nodeSchema, validateJSON} from "./schemaValidation";
 
 
 const EditorArea = ({setNodes, setEdges}) => {
@@ -50,9 +50,9 @@ const EditorArea = ({setNodes, setEdges}) => {
 
     const [language, setLanguage] = useState("json");
 
+    const [errorModalVisible, setErrorModalVisible] = useState(false);
     const [errorMessageTitle, setErrorMessageTitle] = useState("");
     const [errorMessages, setErrorMessages] = useState([]);
-
 
 
     const examples = [
@@ -64,6 +64,7 @@ const EditorArea = ({setNodes, setEdges}) => {
     function handleErrorPopUpClose() {
         setErrorMessageTitle("")
         setErrorMessages([])
+        setErrorModalVisible(false)
     }
 
     function json2yaml(jsonData) {
@@ -146,18 +147,37 @@ const EditorArea = ({setNodes, setEdges}) => {
         const parsedNd = JSON.parse(nd);
         const parsedEd = JSON.parse(ed);
 
-
+        let error = false;
 
         function setError(e) {
             setErrorMessages(e);
-            //console.log(e)
-            //console.log(`Error message: ${errorMessage}`)
+            error = true;
+            setErrorModalVisible(true);
         }
 
-        setErrorMessageTitle("Error while validating global defaults");
-        validateJSON(parsedGd, globalDefaultSchema, setError);  // Use JSON schema validator
-        if (errorMessages) return;
 
+        setErrorMessageTitle("Error while validating global defaults");
+        validateJSON(parsedGd, globalDefaultSchema, setError /*setError*/);
+        if (error) {
+            return;
+        }
+
+        setErrorMessageTitle("Error while validating nodes");
+        validateJSON(parsedNd, nodeSchema, setError)
+        if (error) {
+            setErrorModalVisible(true);
+            return;
+        }
+
+        setErrorMessageTitle("Error while validating edges");
+        validateJSON(parsedEd, edgeSchema, setError);
+        if (error) {
+            setErrorModalVisible(true);
+            return;
+        }
+
+        // TODO: ookal is syntaxis alles juist, ook nog eens checken op de semantische correctheid
+        //  bv als naar een id verwezen wordt, bestaat die ID wel
 
 
         let defaults = parseGlobalDefaults(JSON.parse(gd));
@@ -180,7 +200,8 @@ const EditorArea = ({setNodes, setEdges}) => {
 
     return <>
 
-        <Modal show={errorMessageTitle.length > 0 && errorMessages.length > 0} onHide={handleErrorPopUpClose}>
+        <Modal show={errorModalVisible} onHide={handleErrorPopUpClose}
+               scrollable={true}>
             <Modal.Header closeButton>
                 <Modal.Title>{errorMessageTitle}</Modal.Title>
             </Modal.Header>
@@ -196,7 +217,8 @@ const EditorArea = ({setNodes, setEdges}) => {
 
         <div className="d-flex">
             {
-                examples.map((_, i) => <Button className="primary" onClick={e => loadExample(e, i + 1)} key={i}>example {i + 1}</Button>
+                examples.map((_, i) => <Button className="primary" onClick={e => loadExample(e, i + 1)}
+                                               key={i}>example {i + 1}</Button>
                 )
             }
         </div>

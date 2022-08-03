@@ -28,28 +28,32 @@ export const GLOBAL_DEFAULT_KEY_VALUES = {
     "WIDTH": {id: "width", value: 50},                    // Width of node
 
     "AUTO_LAYOUT": {id: "autoLayout", value: false, type: "boolean"},
-    "ORIENTATION": {id: "orientation", value: "horizontal", type: "string", pattern: "^(vertical)|(horizontal)$"}, // Orientation of flow
+    "ORIENTATION": {id: "orientation", value: "horizontal", type: "string", pattern: "^(vertical)$|^(horizontal)$"}, // Orientation of flow
 
 
 };
 
 // Keys, not supported by the library, that can be used in the JSON representation of nodes
 export const NODE_KEYS = {
-    "IMAGE": "image",
-    "LABEL": "label",
-    "TITLE": "title",
+    ID: {id: "id", type: "string"},
+    POSITION: {id: "position", type: "object"},
+    Z_INDEX: {id: "zIndex", type: "number"},
 
-    "PARENT": "parentNode",
+    IMAGE: {id: "image", type: "string"},
+    LABEL: {id: "label", type: "string"},
+    TITLE: {id: "title", type: "string"},
+
+    PARENT: {id: "parentNode", type: "string"},  // TODO nog fixen of dat dit wel een bestaande id is
 
     //TODO: vgroup, hgroup
 
-    "FILL": GLOBAL_DEFAULT_KEY_VALUES.FILL.id,
-    "FONTSIZE": GLOBAL_DEFAULT_KEY_VALUES.FONTSIZE.id,
-    "SHAPE": GLOBAL_DEFAULT_KEY_VALUES.SHAPE.id,
-    "STROKE": GLOBAL_DEFAULT_KEY_VALUES.STROKE.id,
-    "STROKE_WIDTH": GLOBAL_DEFAULT_KEY_VALUES.STROKE_WIDTH.id,
-    "HEIGHT": GLOBAL_DEFAULT_KEY_VALUES.HEIGHT.id,
-    "WIDTH": GLOBAL_DEFAULT_KEY_VALUES.WIDTH.id,
+    "FILL": {"id": GLOBAL_DEFAULT_KEY_VALUES.FILL.id, "type": GLOBAL_DEFAULT_KEY_VALUES.FILL.type},
+    "FONTSIZE": {"id": GLOBAL_DEFAULT_KEY_VALUES.FONTSIZE.id, "type": GLOBAL_DEFAULT_KEY_VALUES.FONTSIZE.type},
+    "SHAPE": {"id": GLOBAL_DEFAULT_KEY_VALUES.SHAPE.id,  "type": GLOBAL_DEFAULT_KEY_VALUES.SHAPE.type, "pattern": GLOBAL_DEFAULT_KEY_VALUES.SHAPE.pattern},
+    "STROKE": {"id": GLOBAL_DEFAULT_KEY_VALUES.STROKE.id, "type": GLOBAL_DEFAULT_KEY_VALUES.STROKE.type},
+    "STROKE_WIDTH": {"id": GLOBAL_DEFAULT_KEY_VALUES.STROKE_WIDTH.id, "type": GLOBAL_DEFAULT_KEY_VALUES.STROKE_WIDTH.type},
+    "HEIGHT": {"id": GLOBAL_DEFAULT_KEY_VALUES.HEIGHT.id, "type": GLOBAL_DEFAULT_KEY_VALUES.HEIGHT.type},
+    "WIDTH": {"id": GLOBAL_DEFAULT_KEY_VALUES.WIDTH.id, "type": GLOBAL_DEFAULT_KEY_VALUES.WIDTH.type},
 };
 
 // Keys, not supported by the library, that can be used in the JSON representation of edges
@@ -94,10 +98,10 @@ export function parseNodes(globalDefaults, nodes) {
             // If the node does not have a label and the shape is unique among the nodes with no id's, the shape becomes the id
             // If the node does not have an id, label or shape, we look if the image is unique
 
-            const titleId = NODE_KEYS.TITLE;
-            const labelId = NODE_KEYS.LABEL;
-            const shapeId = GLOBAL_DEFAULT_KEY_VALUES.SHAPE.id;
-            const imageId = NODE_KEYS.IMAGE;
+            const titleId = NODE_KEYS.TITLE.id;
+            const labelId = NODE_KEYS.LABEL.id;
+            const shapeId = NODE_KEYS.SHAPE.id;
+            const imageId = NODE_KEYS.IMAGE.id;
 
             function checkForPossibleId(key) {
                 if (node.hasOwnProperty(key)) {
@@ -131,14 +135,14 @@ export function parseNodes(globalDefaults, nodes) {
         // The values of NODE_KEYS should come in a data object, which will be passed to SvgNode
         let data = {};
 
-        if (node.hasOwnProperty(NODE_KEYS.IMAGE) && !node.hasOwnProperty(GLOBAL_DEFAULT_KEY_VALUES.STROKE.id)) {
+        if (node.hasOwnProperty(NODE_KEYS.IMAGE.id) && !node.hasOwnProperty(GLOBAL_DEFAULT_KEY_VALUES.STROKE.id)) {
             // Standard behaviour is no border around image
             node[GLOBAL_DEFAULT_KEY_VALUES.STROKE.id] = "none";
         }
 
 
         for (let key in NODE_KEYS) {
-            let value = NODE_KEYS[key]
+            let value = NODE_KEYS[key]["id"]
             data[value] = node[value];
             if (!node.hasOwnProperty(value) && globalDefaults.hasOwnProperty(value)) {
                 data[value] = globalDefaults[value];
@@ -220,8 +224,8 @@ export function parseEdges(globalDefaults, edges, nodes) {
         if (!edge.hasOwnProperty("zIndex")) {
             const [srcNode, targetNode] = getSourceNode_targetNode_fromId(edge, nodes);
             if (
-                srcNode.hasOwnProperty(NODE_KEYS.PARENT) && targetNode.hasOwnProperty(NODE_KEYS.PARENT)
-                && srcNode[NODE_KEYS.PARENT] === targetNode[NODE_KEYS.PARENT]
+                srcNode.hasOwnProperty(NODE_KEYS.PARENT.id) && targetNode.hasOwnProperty(NODE_KEYS.PARENT.id)
+                && srcNode[NODE_KEYS.PARENT.id] === targetNode[NODE_KEYS.PARENT.id]
             ) {
                 edge["zIndex"] = 1;
 

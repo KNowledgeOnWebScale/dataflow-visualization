@@ -15,7 +15,7 @@ export const nodesJSON = [
     {vgroup: "vgroup1", label: 'MySQL', shape: "cylinder"},
     {vgroup: "vgroup1", label: 'API', shape: "circle"},
 
-    { id: 'RML', type:"custom", label: 'RML\nStreamer', shape:"8-star", width: "70", height: "70" , position: { x: 200, y: 55 } },
+    { id: 'RML', type:"custom", label: 'RML\nStreamer', shape:"8-star", width: 70, height: 70 , position: { x: 200, y: 55 } },
     { label: 'RDF', shape: "cylinder" , position: { x: 400, y: 65 } },
     {id: 'SPARQL-END', type: "custom", label: 'SPARQL\nEndpoint', shape: "square" , position: { x: 450, y: 65 } },
 
