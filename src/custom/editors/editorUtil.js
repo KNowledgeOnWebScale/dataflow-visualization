@@ -3,7 +3,7 @@
 // The values of this dict should be used in the JSON representation
 import {fixNodeGroups} from "./editorUtilPositioning";
 
-const GLOBAL_DEFAULT_KEY_VALUES = {
+export const GLOBAL_DEFAULT_KEY_VALUES = {
     "ANIMATED": {"id": "animated", "value": false},              // Standard animation supported by React Flow
     "ANIMATION": {"id": "animation", "value": undefined},          // Custom animation
     "TYPE": {"id": "type", "value": "default"},                 // Type of edge (default, step, smoothstep, straight)
@@ -49,14 +49,14 @@ export const NODE_KEYS = {
 
 // Keys, not supported by the library, that can be used in the JSON representation of edges
 // Some things can also be done with css, that is why there are two hashmaps
-const EDGE_KEYS_WITH_CSS_PROPERTY = {
+export const EDGE_KEYS_WITH_CSS_PROPERTY = {
     "ANIMATION": {"id": GLOBAL_DEFAULT_KEY_VALUES.ANIMATION.id, "cssProperty": "animation"},
     "EDGE_COLOR": {"id": GLOBAL_DEFAULT_KEY_VALUES.EDGE_COLOR.id, "cssProperty": "stroke"},
     "EDGE_THICKNESS": {"id": GLOBAL_DEFAULT_KEY_VALUES.EDGE_THICKNESS.id, "cssProperty": "strokeWidth"},
     "STROKE_DASHARRAY": {"id": GLOBAL_DEFAULT_KEY_VALUES.STROKE_DASHARRAY.id, "cssProperty": "strokeDasharray"}
 };
 
-const EDGE_KEYS_NO_CSS_PROPERTY = {
+export const EDGE_KEYS_NO_CSS_PROPERTY = {
     "ANIMATED": GLOBAL_DEFAULT_KEY_VALUES.ANIMATED.id,
     "TYPE": GLOBAL_DEFAULT_KEY_VALUES.TYPE.id,
     "MARKER_END": GLOBAL_DEFAULT_KEY_VALUES.MARKER_END.id,

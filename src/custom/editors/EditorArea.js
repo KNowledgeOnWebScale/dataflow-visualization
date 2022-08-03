@@ -1,5 +1,5 @@
 import Editor from "@monaco-editor/react";
-import {Button} from "react-bootstrap";
+import {Button, Modal} from "react-bootstrap";
 import Dropdown from "react-bootstrap/Dropdown";
 import dagre from "dagre";
 import YAML from "js-yaml";
@@ -39,6 +39,7 @@ import {
 
 import {parseEdges, parseGlobalDefaults, parseNodes} from "./editorUtil";
 import {getLayoutedElementsDagre} from "./editorUtilPositioning";
+import {globalDefaultSchema, validateJSON} from "./schemaValidation";
 
 
 const EditorArea = ({setNodes, setEdges}) => {
@@ -49,6 +50,10 @@ const EditorArea = ({setNodes, setEdges}) => {
 
     const [language, setLanguage] = useState("json");
 
+    const [errorMessageTitle, setErrorMessageTitle] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
+
+
 
     const examples = [
         [globalDefaultsJSON1, nodesJSON1, edgesJSON1], [globalDefaultsJSON2, nodesJSON2, edgesJSON2],
@@ -56,6 +61,10 @@ const EditorArea = ({setNodes, setEdges}) => {
         [globalDefaultsJSON5, nodesJSON5, edgesJSON5], [globalDefaultsJSON6, nodesJSON6, edgesJSON6],
     ];
 
+    function handleErrorPopUpClose() {
+        setErrorMessageTitle("")
+        setErrorMessage("")
+    }
 
     function json2yaml(jsonData) {
         let yamlValue;
@@ -133,6 +142,24 @@ const EditorArea = ({setNodes, setEdges}) => {
         }
 
 
+        const parsedGd = JSON.parse(gd);
+        const parsedNd = JSON.parse(nd);
+        const parsedEd = JSON.parse(ed);
+
+
+
+        function setError(e) {
+            setErrorMessage(e);
+            console.log(e)
+            console.log(`Error message: ${errorMessage}`)
+        }
+
+        setErrorMessageTitle("Error while validating global defaults");
+        validateJSON(parsedGd, globalDefaultSchema, setError);  // Use JSON schema validator
+        if (errorMessage) return;
+
+
+
         let defaults = parseGlobalDefaults(JSON.parse(gd));
         let nodes = parseNodes(defaults, JSON.parse(nd));
         let edges = parseEdges(defaults, JSON.parse(ed), nodes);
@@ -153,6 +180,20 @@ const EditorArea = ({setNodes, setEdges}) => {
 
     return (
         <>
+
+            <Modal show={errorMessageTitle.length > 0 && errorMessage.length > 0} onHide={handleErrorPopUpClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>{errorMessageTitle}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    {errorMessage}
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="danger" onClick={() => handleErrorPopUpClose()}>
+                        OK
+                    </Button>
+                </Modal.Footer>
+            </Modal>
 
             <div className="d-flex">
                 {
