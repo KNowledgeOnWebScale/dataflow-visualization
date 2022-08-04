@@ -124,7 +124,7 @@ export function initSchemas() {
 }
 
 
-export function getMonacoSchemas(models, uris) {
+/*export function getMonacoSchemas(models, uris) {
     if ("GLOBAL_DEFAULT" in models && "GLOBAL_DEFAULT" in uris && "NODES" in models && "NODES" in uris && "EDGES" in models && "EDGES" in uris) {
         console.warn("Necessary are not present!!!")
     }
@@ -147,7 +147,7 @@ export function getMonacoSchemas(models, uris) {
         }
     ]
 
-}
+}*/
 
 
 function initGlobalDefaultsSchema() {
@@ -236,7 +236,9 @@ function initEdgesSchema() {
         // edgeSchema.items.errorMessage.properties[value.id] = createClearErrorMessage(value.id, value.type, value.pattern);
         // edgeSchema.errorMessage.properties[value.id] = createClearErrorMessage(value.id, value.type, value.pattern);
     }
-    nodeSchema.items.properties[NODE_KEYS.POSITION.id] = positionSchema;
+    edgeSchema.items.properties[GLOBAL_DEFAULT_KEY_VALUES.MARKER_START.id] = arrowSchema;
+    edgeSchema.items.properties[GLOBAL_DEFAULT_KEY_VALUES.MARKER_END.id] = arrowSchema;
+
 }
 
 

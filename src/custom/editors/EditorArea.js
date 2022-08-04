@@ -2,7 +2,7 @@ import {Button, Modal} from "react-bootstrap";
 import Dropdown from "react-bootstrap/Dropdown";
 import dagre from "dagre";
 import YAML from "js-yaml";
-import {useRef, useState} from "react";
+import {useState} from "react";
 
 import {
     edgesJSON as edgesJSON1,
@@ -38,10 +38,8 @@ import {
 
 import {parseEdges, parseGlobalDefaults, parseNodes} from "./editorUtil";
 import {getLayoutedElementsDagre} from "./editorUtilPositioning";
-import {edgeSchema, getMonacoSchemas, globalDefaultSchema, nodeSchema, validateJSON} from "./schemaValidation";
-import GlobalDefaultsEditor from "./GlobalDefaultsEditor";
-import NodeEditor from "./NodeEditor";
-import EdgeEditor from "./EdgeEditor";
+import {edgeSchema, globalDefaultSchema, nodeSchema, validateJSON} from "./schemaValidation";
+import MyEditor from "./MyEditor";
 
 
 const EditorArea = ({setNodes, setEdges}) => {
@@ -187,10 +185,9 @@ const EditorArea = ({setNodes, setEdges}) => {
         let edges = parseEdges(defaults, parsedEd, nodes);
 
 
-        const dagreGraph = new dagre.graphlib.Graph();
-        dagreGraph.setDefaultEdgeLabel(() => ({}));
-
         if (defaults["autoLayout"]) {
+            const dagreGraph = new dagre.graphlib.Graph();
+            dagreGraph.setDefaultEdgeLabel(() => ({}));
             [nodes, edges] = getLayoutedElementsDagre(dagreGraph, nodes, edges, defaults);
         }
 
@@ -240,18 +237,9 @@ const EditorArea = ({setNodes, setEdges}) => {
             <div className="code-editor resizable" style={{height: "200px"}}>
                 <h5>Global defaults editor</h5>
 
-                <GlobalDefaultsEditor language={language} globalDefaults={globalDefaults}
-                                      setGlobalDefaults={setGlobalDefaults}/>
-                {/*<Editor
-                    onMount={handleEditorDidMountGlobalDefault}
-                    language={language}
-                    value={globalDefaults}
-                    onChange={content => setGlobalDefaults(content)}
-                    theme="vs-dark"
-                    style={{
-                        width: "100%",
-                    }}
-                />*/}
+                <MyEditor language={language} data={globalDefaults} setData={setGlobalDefaults}
+                          modelName={"global-defaults-model"} schema={globalDefaultSchema}/>
+
             </div>
 
             <div className="d-flex resizable code-editor"
@@ -259,12 +247,14 @@ const EditorArea = ({setNodes, setEdges}) => {
 
                 <div className="node-edge-editor">
                     <h5>Node editor</h5>
-                    <NodeEditor language={language} nodesData={nodesData} setNodesData={setNodesData}/>
+                    <MyEditor language={language} data={nodesData} setData={setNodesData} modelName={"nodes-model"}
+                              schema={nodeSchema}/>
                 </div>
 
                 <div className="node-edge-editor">
                     <h5>Edge editor</h5>
-                    <EdgeEditor language={language} edgesData={edgesData} setEdgesData={setEdgesData}/>
+                    <MyEditor language={language} data={edgesData} setData={setEdgesData} modelName={"edges-model"}
+                              schema={edgeSchema}/>
                 </div>
             </div>
 
