@@ -110,7 +110,6 @@ const EditorArea = ({setNodes, setEdges}) => {
     }
 
     function changeLanguage(e) {
-
         let newLang = e;
 
         if (newLang === "yaml" && language === "json") {
@@ -193,7 +192,6 @@ const EditorArea = ({setNodes, setEdges}) => {
 
         setNodes(nodes);
         setEdges(edges);
-
     }
 
 
@@ -208,7 +206,7 @@ const EditorArea = ({setNodes, setEdges}) => {
                 {errorMessages.map(e => <p>{e}</p>)}
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="danger" onClick={() => handleErrorPopUpClose()}>
+                <Button variant="danger" onClick={handleErrorPopUpClose}>
                     OK
                 </Button>
             </Modal.Footer>
@@ -216,8 +214,11 @@ const EditorArea = ({setNodes, setEdges}) => {
 
         <div className="d-flex">
             {
-                examples.map((_, i) => <Button className="primary" onClick={e => loadExample(e, i + 1)}
-                                               key={i}>example {i + 1}</Button>
+                examples.map((_, i) => (
+                        <Button className="primary" onClick={e => loadExample(e, i + 1)}
+                                key={i}>example {i + 1}
+                        </Button>
+                    )
                 )
             }
         </div>
@@ -236,15 +237,11 @@ const EditorArea = ({setNodes, setEdges}) => {
         <div className="edit-area" id="global-default-editor">
             <div className="code-editor resizable" style={{height: "200px"}}>
                 <h5>Global defaults editor</h5>
-
                 <MyEditor language={language} data={globalDefaults} setData={setGlobalDefaults}
                           modelName={"global-defaults-model"} schema={globalDefaultSchema}/>
-
             </div>
 
-            <div className="d-flex resizable code-editor"
-                 style={{height: "350px"}}>
-
+            <div className="d-flex resizable code-editor" style={{height: "350px"}}>
                 <div className="node-edge-editor">
                     <h5>Node editor</h5>
                     <MyEditor language={language} data={nodesData} setData={setNodesData} modelName={"nodes-model"}

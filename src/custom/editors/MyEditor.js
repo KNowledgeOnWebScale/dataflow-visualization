@@ -3,7 +3,6 @@ import {useState} from "react";
 
 const MyEditor = ({language, data, setData, modelName, schema}) => {
 
-
     const [myEditor, setMyEditor] = useState(null);
     const [myMonaco, setMyMonaco] = useState(null);
     const [myModel, setMyModel] = useState(null)
@@ -63,7 +62,7 @@ const MyEditor = ({language, data, setData, modelName, schema}) => {
                 onChange={content => setData(content)}
                 theme="vs-dark"
                 style={{
-                    width: "100%",
+                    width: "100%"
                 }}
             />
         </div>

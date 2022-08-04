@@ -4,18 +4,21 @@
 import {fixNodeGroups} from "./editorUtilPositioning";
 
 export const GLOBAL_DEFAULT_KEY_VALUES = {
-    "ANIMATED": {id: "animated", value: false, type: "boolean"},              // Standard animation supported by React Flow
-    "ANIMATION": {id: "animation", type: "string"},          // Custom animation
-    "TYPE": {id: "type", value: "default", type: "string", enum: ["default", "step", "smoothstep", "straight"]},                 // Type of edge (default, step, smoothstep, straight)
+    "ANIMATED": {id: "animated", value: false, type: "boolean"},            // Standard animation supported by React Flow
+    "ANIMATION": {id: "animation", type: "string"},                         // Custom animation
+    "TYPE": {                                                               // Type of edge (default, step, smoothstep, straight)
+        id: "type", value: "default", type: "string",
+        enum: ["default", "step", "smoothstep", "straight"]
+    },
     "EDGE_COLOR": {id: "edgeColor", value: "black", type: "string"},        // Color of edge
     "EDGE_THICKNESS": {id: "edgeThickness", value: 1.2, type: "number"},    // Thickness of edge
     "MARKER_END": {id: "markerEnd", value: {}, type: "object"},             // Marker at end of the edge
-    "MARKER_START": {id: "markerStart", value: {}, type: "object"}, //TODO  hoe object fixen?       // Marker at beginning of the edge
+    "MARKER_START": {id: "markerStart", value: {}, type: "object"}, //TODO  hoe object fixen ivm intellisense (nu hardcoded in schemaValidation.js)?       // Marker at beginning of the edge
     "STROKE_DASHARRAY": {id: "strokeDasharray", value: 0, type: ["number", "string"]},  // The stroke dasharray of the edges
 
 
     "FILL": {id: "fill", value: "white", type: "string"},                 // Color of node
-    "FONTSIZE": {id: "fontsize", value: 12, type: "number"},              // Fontsize of text in nodes TODO: fontsize op edges???
+    "FONTSIZE": {id: "fontsize", value: 12, type: "number"},              // Fontsize of text in nodes
 
     //TODO in readme uitleggen dat je ook het pattern moet aanpassen
     "SHAPE": {
@@ -29,14 +32,16 @@ export const GLOBAL_DEFAULT_KEY_VALUES = {
     "HEIGHT": {id: "height", value: 50, type: "number"},                  // Height of node
     "WIDTH": {id: "width", value: 50, type: "number"},                    // Width of node
 
-    "AUTO_LAYOUT": {id: "autoLayout", value: false, type: "boolean"},
-    "ORIENTATION": {id: "orientation", value: "horizontal", type: "string",
-        enum: ["vertical", "horizontal"]}
+    "AUTO_LAYOUT": {id: "autoLayout", value: false, type: "boolean"},     // If true, use library 'dagrejs' to determine positioning of nodes
+    "ORIENTATION": {
+        id: "orientation", value: "horizontal", type: "string",
+        enum: ["vertical", "horizontal"]
+    }
 
 
 };
 
-// Keys, not supported by the library, that can be used in the JSON representation of nodes
+// Keys that can be used in the JSON representation of nodes
 export const NODE_KEYS = {
     ID: {id: "id", type: "string"},
     POSITION: {id: "position", type: "object"},
@@ -57,7 +62,7 @@ export const NODE_KEYS = {
     "SHAPE": {
         "id": GLOBAL_DEFAULT_KEY_VALUES.SHAPE.id,
         "type": GLOBAL_DEFAULT_KEY_VALUES.SHAPE.type,
-        "enum":  GLOBAL_DEFAULT_KEY_VALUES.SHAPE.enum
+        "enum": GLOBAL_DEFAULT_KEY_VALUES.SHAPE.enum
     },
     "STROKE": {"id": GLOBAL_DEFAULT_KEY_VALUES.STROKE.id, "type": GLOBAL_DEFAULT_KEY_VALUES.STROKE.type},
     "STROKE_WIDTH": {
@@ -68,9 +73,9 @@ export const NODE_KEYS = {
     "WIDTH": {"id": GLOBAL_DEFAULT_KEY_VALUES.WIDTH.id, "type": GLOBAL_DEFAULT_KEY_VALUES.WIDTH.type},
 };
 
-// Keys, not supported by the library, that can be used in the JSON representation of edges
+// Keys that can be used in the JSON representation of edges
 // Some things can also be done with css, that is why there are two hashmaps
-export const EDGE_KEYS_WITH_CSS_PROPERTY = {
+export const EDGE_KEYS = {
     "ANIMATION": {
         "id": GLOBAL_DEFAULT_KEY_VALUES.ANIMATION.id,
         "type": GLOBAL_DEFAULT_KEY_VALUES.ANIMATION.type,
@@ -90,10 +95,8 @@ export const EDGE_KEYS_WITH_CSS_PROPERTY = {
         "id": GLOBAL_DEFAULT_KEY_VALUES.STROKE_DASHARRAY.id,
         "type": GLOBAL_DEFAULT_KEY_VALUES.STROKE_DASHARRAY.type,
         "cssProperty": "strokeDasharray"
-    }
-};
+    },
 
-export const EDGE_KEYS_NO_CSS_PROPERTY = {
     "SOURCE": {id: "source", type: "string", required: true},
     "TARGET": {id: "target", type: "string", required: true},
     "Z_INDEX": {id: "zIndex", type: "number"},
@@ -237,8 +240,15 @@ export function parseEdges(globalDefaults, edges, nodes) {
             edge["style"] = {};
         }
 
-        for (let key in EDGE_KEYS_WITH_CSS_PROPERTY) {
-            let value = EDGE_KEYS_WITH_CSS_PROPERTY[key];
+        // TODO loop over values en niet over keys
+        for (let key in EDGE_KEYS) {
+            // TODO: mss beter way dan die if
+            //  mss later mogelijk om verschillende loops om te zetten naar 1 loop
+            if (!EDGE_KEYS[key].hasOwnProperty("cssProperty")) {
+                continue
+            }
+
+            let value = EDGE_KEYS[key];
 
             // Reason for if statement:
             //  you can also set edgeColor via css with stroke, let's not overwrite that when that happens
@@ -247,12 +257,13 @@ export function parseEdges(globalDefaults, edges, nodes) {
             }
         }
 
-        for (let key in EDGE_KEYS_NO_CSS_PROPERTY) {
-            if (!EDGE_KEYS_NO_CSS_PROPERTY[key]["canBeGlobal"]) {
+        // TODO: gwn 1 loop samen met de vorige
+        for (let key in EDGE_KEYS) {
+            if (!EDGE_KEYS[key]["canBeGlobal"]) {
                 continue;
             }
 
-            let value = EDGE_KEYS_NO_CSS_PROPERTY[key]["id"];
+            let value = EDGE_KEYS[key]["id"];
 
             if (!edge.hasOwnProperty(value)) {
                 if (typeof globalDefaults[value] === 'object') {
@@ -264,17 +275,18 @@ export function parseEdges(globalDefaults, edges, nodes) {
 
         }
 
+        // TODO: die dingen zijn nu ook keys
         // markerStart will not be oriented correctly
-        if (!edge[EDGE_KEYS_NO_CSS_PROPERTY.MARKER_START.id].hasOwnProperty("orient")) {
-            edge[EDGE_KEYS_NO_CSS_PROPERTY.MARKER_START.id]["orient"] = "auto-start-reverse";
+        if (!edge[EDGE_KEYS.MARKER_START.id].hasOwnProperty("orient")) {
+            edge[EDGE_KEYS.MARKER_START.id]["orient"] = "auto-start-reverse";
         }
 
         // If edge has markerEnd and/or markerStart with no color set, set the color to the color of the edge
-        if (!edge[EDGE_KEYS_NO_CSS_PROPERTY.MARKER_END.id].hasOwnProperty("color")) {
-            edge[EDGE_KEYS_NO_CSS_PROPERTY.MARKER_END.id]["color"] = edge["style"]["stroke"];
+        if (!edge[EDGE_KEYS.MARKER_END.id].hasOwnProperty("color")) {
+            edge[EDGE_KEYS.MARKER_END.id]["color"] = edge["style"]["stroke"];
         }
-        if (!edge[EDGE_KEYS_NO_CSS_PROPERTY.MARKER_START.id].hasOwnProperty("color")) {
-            edge[EDGE_KEYS_NO_CSS_PROPERTY.MARKER_START.id]["color"] = edge["style"]["stroke"];
+        if (!edge[EDGE_KEYS.MARKER_START.id].hasOwnProperty("color")) {
+            edge[EDGE_KEYS.MARKER_START.id]["color"] = edge["style"]["stroke"];
         }
 
         // the key animated is something that is supported by the library, but it is overwritten by the standard value of strokeDasharray

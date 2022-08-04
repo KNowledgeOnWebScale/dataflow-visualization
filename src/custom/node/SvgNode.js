@@ -35,7 +35,7 @@ export default memo(({data, isConnectable}) => {
                 </svg>
 
 
-                <text fontSize={fontsize}  /*x="50%" y="50%"*/ /*dominantBaseline="middle" textAnchor="middle"*/>
+                <text fontSize={fontsize}>
                     {data[NODE_KEYS.TITLE.id] &&
                         <tspan key={Math.random()} x="50%" y={(data[NODE_KEYS.STROKE_WIDTH.id] || 1) + fontsize}
                                dominantBaseline="middle" textAnchor="middle">{data.title}</tspan>
@@ -57,6 +57,9 @@ export default memo(({data, isConnectable}) => {
             </svg>
 
             {
+                // TODO: niet hardcoded, deze waarden zijn al eens gedefinieerd in een hashmap
+                //  dus hergebruiken!!!
+
                 // type, position, id
                 [["source", "right", "right-source"], ["source", "bottom", "bottom-source"],
                     ["target", "left", "left-target"], ["target", "top", "top-target"],

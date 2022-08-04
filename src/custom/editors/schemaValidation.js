@@ -1,8 +1,7 @@
 import Ajv from "ajv";
 //import {} from "ajv-errors";
 import {
-    EDGE_KEYS_NO_CSS_PROPERTY,
-    EDGE_KEYS_WITH_CSS_PROPERTY,
+    EDGE_KEYS,
     GLOBAL_DEFAULT_KEY_VALUES,
     NODE_KEYS
 } from "./editorUtil";
@@ -207,7 +206,7 @@ function initNodesSchema() {
 }
 
 function initEdgesSchema() {
-    for (let value of [...Object.values(EDGE_KEYS_NO_CSS_PROPERTY), ...Object.values(EDGE_KEYS_WITH_CSS_PROPERTY)]) {
+    for (let value of [Object.values(EDGE_KEYS)]) {
 
         if (value.required) {
             edgeSchema.items.required.push(value.id);
