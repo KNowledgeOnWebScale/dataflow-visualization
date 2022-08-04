@@ -5,7 +5,7 @@ import {fixNodeGroups} from "./editorUtilPositioning";
 
 export const GLOBAL_DEFAULT_KEY_VALUES = {
     "ANIMATED": {id: "animated", value: false, type: "boolean"},              // Standard animation supported by React Flow
-    "ANIMATION": {id: "animation", "value": undefined, type: "string"},          // Custom animation
+    "ANIMATION": {id: "animation", type: "string"},          // Custom animation
     "TYPE": {id: "type", value: "default", type: "string", enum: ["default", "step", "smoothstep", "straight"]},                 // Type of edge (default, step, smoothstep, straight)
     "EDGE_COLOR": {id: "edgeColor", value: "black", type: "string"},        // Color of edge
     "EDGE_THICKNESS": {id: "edgeThickness", value: 1.2, type: "number"},    // Thickness of edge
@@ -27,7 +27,7 @@ export const GLOBAL_DEFAULT_KEY_VALUES = {
     "STROKE": {id: "stroke", value: "black", type: "string"},             // Color of stroke of node
     "STROKE_WIDTH": {id: "strokeWidth", value: 1, type: "number"},        // Width of stroke of node
     "HEIGHT": {id: "height", value: 50, type: "number"},                  // Height of node
-    "WIDTH": {id: "width", value: 50},                    // Width of node
+    "WIDTH": {id: "width", value: 50, type: "number"},                    // Width of node
 
     "AUTO_LAYOUT": {id: "autoLayout", value: false, type: "boolean"},
     "ORIENTATION": {id: "orientation", value: "horizontal", type: "string",

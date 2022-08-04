@@ -1,4 +1,3 @@
-import Editor from "@monaco-editor/react";
 import {Button, Modal} from "react-bootstrap";
 import Dropdown from "react-bootstrap/Dropdown";
 import dagre from "dagre";
@@ -40,6 +39,7 @@ import {
 import {parseEdges, parseGlobalDefaults, parseNodes} from "./editorUtil";
 import {getLayoutedElementsDagre} from "./editorUtilPositioning";
 import {edgeSchema, globalDefaultSchema, nodeSchema, validateJSON} from "./schemaValidation";
+import MyEditor from "./MyEditor";
 
 
 const EditorArea = ({setNodes, setEdges}) => {
@@ -185,10 +185,9 @@ const EditorArea = ({setNodes, setEdges}) => {
         let edges = parseEdges(defaults, parsedEd, nodes);
 
 
-        const dagreGraph = new dagre.graphlib.Graph();
-        dagreGraph.setDefaultEdgeLabel(() => ({}));
-
         if (defaults["autoLayout"]) {
+            const dagreGraph = new dagre.graphlib.Graph();
+            dagreGraph.setDefaultEdgeLabel(() => ({}));
             [nodes, edges] = getLayoutedElementsDagre(dagreGraph, nodes, edges, defaults);
         }
 
@@ -234,58 +233,28 @@ const EditorArea = ({setNodes, setEdges}) => {
         </Dropdown>
 
 
-        <div className="edit-area">
+        <div className="edit-area" id="global-default-editor">
             <div className="code-editor resizable" style={{height: "200px"}}>
                 <h5>Global defaults editor</h5>
-                <Editor
-                    language={language}
-                    value={globalDefaults}
-                    onChange={content => setGlobalDefaults(content)}
-                    theme="vs-dark"
-                    style={{
-                        width: "100%",
-                        //height: "100%",
-                        // minHeight: "250px",
-                        //margin: "auto"
-                    }}
-                />
+
+                <MyEditor language={language} data={globalDefaults} setData={setGlobalDefaults}
+                          modelName={"global-defaults-model"} schema={globalDefaultSchema}/>
+
             </div>
 
             <div className="d-flex resizable code-editor"
-                 style={{height: "350px"}}/*style={{width: "97%", margin: "auto"}}*/>
+                 style={{height: "350px"}}>
 
                 <div className="node-edge-editor">
                     <h5>Node editor</h5>
-                    <Editor
-                        language={language}
-                        value={nodesData}
-                        onChange={content => setNodesData(content)}
-                        theme="vs-dark"
-                        style={{
-                            width: "100%",
-                            // height: "100%",
-                            //minHeight: "250px",
-                            //margin: "auto"
-                        }}
-                    />
+                    <MyEditor language={language} data={nodesData} setData={setNodesData} modelName={"nodes-model"}
+                              schema={nodeSchema}/>
                 </div>
 
                 <div className="node-edge-editor">
                     <h5>Edge editor</h5>
-                    <Editor
-                        language={language}
-                        value={edgesData}
-                        onChange={content => setEdgesData(content)}
-                        theme="vs-dark"
-                        style={{
-                            width: "100%",
-                            //height: "100%",
-                            //minHeight: "250px",
-                            //margin: "auto"
-                        }}
-                    />
-
-
+                    <MyEditor language={language} data={edgesData} setData={setEdgesData} modelName={"edges-model"}
+                              schema={edgeSchema}/>
                 </div>
             </div>
 

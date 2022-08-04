@@ -57,7 +57,7 @@ function createClearErrorMessage(id, type, patternEnum) {
     if (patternEnum) {
         out.push(`with possible values: ${patternEnum[0]}`);
 
-        for (let i = 1; i < patternEnum.length-1; i+=1) {
+        for (let i = 1; i < patternEnum.length - 1; i += 1) {
             out.push(`, ${patternEnum[i]}`)
         }
 
@@ -107,7 +107,7 @@ export const edgeSchema = {
             required: [],
             properties: {},
             errorMessage: {
-                type: "Each edge should be an object",properties: {}
+                type: "Each edge should be an object", properties: {}
             }
         },
     errorMessage: {
@@ -116,13 +116,38 @@ export const edgeSchema = {
 }
 
 
-initGlobalDefaultsSchema();
-initNodesSchema();
-initEdgesSchema();
+// This function is called once, in index.js
+export function initSchemas() {
+    initGlobalDefaultsSchema();
+    initNodesSchema();
+    initEdgesSchema();
+}
 
-//console.log(nodeSchema)
 
+/*export function getMonacoSchemas(models, uris) {
+    if ("GLOBAL_DEFAULT" in models && "GLOBAL_DEFAULT" in uris && "NODES" in models && "NODES" in uris && "EDGES" in models && "EDGES" in uris) {
+        console.warn("Necessary are not present!!!")
+    }
 
+    return [
+        {
+            uri: uris["GLOBAL_DEFAULT"],
+            fileMatch: [models["GLOBAL_DEFAULT"].toString()],
+            schema: globalDefaultSchema
+        },
+        {
+            uri: uris["NODES"],
+            fileMatch: [models["NODES"].toString()],
+            schema: globalDefaultSchema
+        },
+        {
+            uri: uris["EDGES"],
+            fileMatch: [models["EDGES"].toString()],
+            schema: globalDefaultSchema
+        }
+    ]
+
+}*/
 
 
 function initGlobalDefaultsSchema() {
@@ -137,7 +162,7 @@ function initGlobalDefaultsSchema() {
             enum: value.enum,
 
             //errorMessage: {
-              // type: createClearErrorMessage(value.id, value.type, value.pattern)
+            // type: createClearErrorMessage(value.id, value.type, value.pattern)
             //}
         }
 
@@ -174,8 +199,8 @@ function initNodesSchema() {
         //  BUG: can't control error message for an invalid pattern for shape
         //  In global defaults, that was fixed by not putting errorMessage inside properties, but for some reason that doesn't seem to work here
 
-         //nodeSchema.items.errorMessage.properties[value.id] = createClearErrorMessage(value.id, value.type, value.pattern);
-         //nodeSchema.errorMessage.properties[value.id] = createClearErrorMessage(value.id, value.type, value.pattern);
+        //nodeSchema.items.errorMessage.properties[value.id] = createClearErrorMessage(value.id, value.type, value.pattern);
+        //nodeSchema.errorMessage.properties[value.id] = createClearErrorMessage(value.id, value.type, value.pattern);
     }
     nodeSchema.items.properties[NODE_KEYS.POSITION.id] = positionSchema;
 
@@ -211,7 +236,9 @@ function initEdgesSchema() {
         // edgeSchema.items.errorMessage.properties[value.id] = createClearErrorMessage(value.id, value.type, value.pattern);
         // edgeSchema.errorMessage.properties[value.id] = createClearErrorMessage(value.id, value.type, value.pattern);
     }
-    nodeSchema.items.properties[NODE_KEYS.POSITION.id] = positionSchema;
+    edgeSchema.items.properties[GLOBAL_DEFAULT_KEY_VALUES.MARKER_START.id] = arrowSchema;
+    edgeSchema.items.properties[GLOBAL_DEFAULT_KEY_VALUES.MARKER_END.id] = arrowSchema;
+
 }
 
 
