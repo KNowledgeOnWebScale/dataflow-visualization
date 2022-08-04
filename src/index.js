@@ -1,5 +1,5 @@
-import React, { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
+import React, {StrictMode} from "react";
+import {createRoot} from "react-dom/client";
 import "./styles.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -13,6 +13,6 @@ initSchemas();   // Initialize JSON validation schemas once
 const root = createRoot(document.getElementById("root"));
 root.render(
     <StrictMode>
-        <App />
+        <App/>
     </StrictMode>
 );

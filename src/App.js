@@ -18,11 +18,7 @@ const nodeTypes = {
 
 
 //TODO: before parsing, check if all necessary keys are present, if not, do user friendly error handling
-// TODO:  mss ook een regex test doen op de values (bv height moet een nummer zijn [0-9]+, orientation is "vertical|horizontal" ...
 
-//let defaults = parseGlobalDefaults(globalDefaults);
-//let parsedNodes = parseNodes(defaults, nodesData);
-//let parsedEdges = parseEdges(defaults, edgesData, nodesData);
 
 const EdgesFlow = () => {
 
