@@ -209,6 +209,8 @@ const EditorArea = ({setNodes, setEdges}) => {
    }
 
     function handleEditorDidMountGlobalDefault(editor, monaco) {
+        // https://microsoft.github.io/monaco-editor/playground.html#extending-language-services-configure-json-defaults
+
         monacoRefGlobalDefault.current = editor;
 
         const modelUri = monaco.Uri.parse('a://b/foo.json'); // a made up unique URI for our model
@@ -411,6 +413,152 @@ const EditorArea = ({setNodes, setEdges}) => {
 
     }
 
+    function editorDidMountNodes(editor, monaco) {
+        monacoRefNodes.current = editor;
+
+        const modelUri = monaco.Uri.parse('a://b/nodes.json'); // a made up unique URI for our model
+        const model = monaco.editor.createModel("{   }", 'json', modelUri);
+
+
+        monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
+            validate: true,
+            schemas: [
+                {
+                    uri: 'http://myserver/foo-schema.json', // id of the first schema
+                    fileMatch: [modelUri.toString()], // associate with our model
+                    schema: {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "string",
+                                    "errorMessage": {
+                                        "type": "id must be string"
+                                    }
+                                },
+                                "zIndex": {
+                                    "type": "number",
+                                    "errorMessage": {
+                                        "type": "zIndex must be number"
+                                    }
+                                },
+                                "image": {
+                                    "type": "string",
+                                    "errorMessage": {
+                                        "type": "image must be string"
+                                    }
+                                },
+                                "label": {
+                                    "type": "string",
+                                    "errorMessage": {
+                                        "type": "label must be string"
+                                    }
+                                },
+                                "title": {
+                                    "type": "string",
+                                    "errorMessage": {
+                                        "type": "title must be string"
+                                    }
+                                },
+                                "parentNode": {
+                                    "type": "string",
+                                    "errorMessage": {
+                                        "type": "parentNode must be string"
+                                    }
+                                },
+                                "fill": {
+                                    "type": "string",
+                                    "errorMessage": {
+                                        "type": "fill must be string"
+                                    }
+                                },
+                                "fontsize": {
+                                    "type": "number",
+                                    "errorMessage": {
+                                        "type": "fontsize must be number"
+                                    }
+                                },
+                                "shape": {
+                                    "type": "string",
+                                    "enum": [
+                                        "8-star",
+                                        "big-star",
+                                        "circle",
+                                        "cylinder",
+                                        "diamond",
+                                        "hexagon",
+                                        "note",
+                                        "rectangle",
+                                        "square",
+                                        "star",
+                                        "triangle",
+                                        "comunica",
+                                        "rmlio",
+                                        "solid"
+                                    ],
+                                    "errorMessage": {
+                                        "type": "shape must be string with possible values: 8-star , big-star , circle , cylinder , diamond , hexagon , note , rectangle , square , star , triangle , comunica , rmlio  or solid"
+                                    }
+                                },
+                                "stroke": {
+                                    "type": "string",
+                                    "errorMessage": {
+                                        "type": "stroke must be string"
+                                    }
+                                },
+                                "strokeWidth": {
+                                    "type": "number",
+                                    "errorMessage": {
+                                        "type": "strokeWidth must be number"
+                                    }
+                                },
+                                "height": {
+                                    "type": "number",
+                                    "errorMessage": {
+                                        "type": "height must be number"
+                                    }
+                                },
+                                "width": {
+                                    "type": "number",
+                                    "errorMessage": {
+                                        "type": "width must be number"
+                                    }
+                                },
+                                "position": {
+                                    "type": "object",
+                                    "properties": {
+                                        "x": {
+                                            "type": "number",
+                                            "errorMessage": "object.x must be number"
+                                        },
+                                        "y": {
+                                            "type": [
+                                                "number"
+                                            ],
+                                            "errorMessage": "object.y must be number"
+                                        }
+                                    }
+                                }
+                            },
+                            "errorMessage": {
+                                "type": "Each node should be an object",
+                                "properties": {}
+                            }
+                        },
+                        "errorMessage": {
+                            "type": "Nodes are expected to be objects in an array"
+                        }
+                    }
+                }
+            ]
+        });
+
+
+
+        editor.setModel(model)
+    }
+
 
     return <>
 
@@ -473,6 +621,7 @@ const EditorArea = ({setNodes, setEdges}) => {
                 <div className="node-edge-editor">
                     <h5>Node editor</h5>
                     <Editor
+                        onMount={editorDidMountNodes}
                         language={language}
                         value={nodesData}
                         onChange={content => setNodesData(content)}
