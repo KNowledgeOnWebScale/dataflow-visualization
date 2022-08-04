@@ -8,22 +8,22 @@ import {
 } from "./editorUtil";
 
 const ajv = new Ajv({allErrors: true});
-require("ajv-errors")(ajv);
+require("ajv-errors")(ajv, /*{keepErrors: false}*/);
 
 const arrowSchema = {
     type: "object",
     properties: {
         "type": {
-            type: "string", pattern: "^(arrow)$|^(arrowclosed)$",
-            errorMessage: createClearErrorMessage("object.type", "string", "^(arrow)$|^(arrowclosed)$")
+            type: "string", enum: ["arrow", "arrowclosed"],
+            errorMessage: createClearErrorMessage("Type of arrow", "string", ["arrow", "arrowclosed"])
         },
         "orient": {
             type: ["string", "number"],
-            errorMessage: createClearErrorMessage("object.orient", ["number", "string"])
+            errorMessage: createClearErrorMessage("Orient of arrow", ["number", "string"])
         },
         "color": {
             type: "string",
-            errorMessage: createClearErrorMessage("object.color", "string")
+            errorMessage: createClearErrorMessage("Color of arrow", "string")
         }
     }
 }
@@ -42,11 +42,8 @@ const positionSchema = {
     }
 }
 
-function createClearErrorMessage(id, type, pattern) {
+function createClearErrorMessage(id, type, patternEnum) {
     let out = [id, "must be"];
-
-    //  let type = globalDefaultSchema.properties.id.type;  //
-    //  let pattern = globalDefaultSchema.properties.id.pattern;
 
     if (Array.isArray(type) && type.length > 0) {
         out.push(type[0]);
@@ -57,8 +54,16 @@ function createClearErrorMessage(id, type, pattern) {
         out.push(type);
     }
 
-    if (pattern) {
-        out.push(`with pattern: ${pattern}`);
+    if (patternEnum) {
+        out.push(`with possible values: ${patternEnum[0]}`);
+
+        for (let i = 1; i < patternEnum.length-1; i+=1) {
+            out.push(`, ${patternEnum[i]}`)
+        }
+
+        if (patternEnum.length > 1) {
+            out.push(` or ${patternEnum.slice(-1)}`);
+        }
     }
 
     return out.join(" ");
@@ -85,6 +90,7 @@ export const nodeSchema = {
             properties: {},
             errorMessage: {
                 type: "Each node should be an object",
+                properties: {}
             }
         },
     errorMessage: {
@@ -101,11 +107,11 @@ export const edgeSchema = {
             required: [],
             properties: {},
             errorMessage: {
-                type: "Each edge should be an object",
+                type: "Each edge should be an object",properties: {}
             }
         },
     errorMessage: {
-        type: "Edges are expected to be objects in an array"
+        type: "Edges are expected to be objects in an array"//, properties:{}
     },
 }
 
@@ -113,6 +119,10 @@ export const edgeSchema = {
 initGlobalDefaultsSchema();
 initNodesSchema();
 initEdgesSchema();
+
+//console.log(nodeSchema)
+
+
 
 
 function initGlobalDefaultsSchema() {
@@ -124,13 +134,14 @@ function initGlobalDefaultsSchema() {
 
         globalDefaultSchema.properties[value.id] = {
             type: value.type,
-            pattern: value.pattern,
+            enum: value.enum,
+
             //errorMessage: {
-            //   type: createClearErrorMessage(value.id, value.type, value.pattern)
+              // type: createClearErrorMessage(value.id, value.type, value.pattern)
             //}
         }
 
-        globalDefaultSchema.errorMessage.properties[value.id] = createClearErrorMessage(value.id, value.type, value.pattern);
+        globalDefaultSchema.errorMessage.properties[value.id] = createClearErrorMessage(value.id, value.type, value.enum);
 
     }
 
@@ -148,19 +159,23 @@ function initNodesSchema() {
 
         nodeSchema.items.properties[value.id] = {
             type: value.type,
-            pattern: value.pattern,
+
+            enum: value.enum,
+
             // In global defaults, the errorMessages are not put inside properties
             // But here it must be inside properties in order to work
+
             errorMessage: {
-                type: createClearErrorMessage(value.id, value.type, value.pattern)
+                type: createClearErrorMessage(value.id, value.type, value.enum)
             }
         }
 
         // TODO
         //  BUG: can't control error message for an invalid pattern for shape
         //  In global defaults, that was fixed by not putting errorMessage inside properties, but for some reason that doesn't seem to work here
-        // nodeSchema.items.errorMessage[value.id] = createClearErrorMessage(value.id, value.type, value.pattern);
-        // nodeSchema.errorMessage[value.id] = createClearErrorMessage(value.id, value.type, value.pattern);
+
+         //nodeSchema.items.errorMessage.properties[value.id] = createClearErrorMessage(value.id, value.type, value.pattern);
+         //nodeSchema.errorMessage.properties[value.id] = createClearErrorMessage(value.id, value.type, value.pattern);
     }
     nodeSchema.items.properties[NODE_KEYS.POSITION.id] = positionSchema;
 
@@ -180,19 +195,21 @@ function initEdgesSchema() {
 
         edgeSchema.items.properties[value.id] = {
             type: value.type,
-            pattern: value.pattern,
+
+            enum: value.enum,
+
             // In global defaults, the errorMessages are not put inside properties
             // But here it must be inside properties in order to work
             errorMessage: {
-                type: createClearErrorMessage(value.id, value.type, value.pattern)
+                type: createClearErrorMessage(value.id, value.type, value.enum)
             }
         }
 
         // TODO
         //  BUG: can't control error message for an invalid pattern for edges with a pattern
         //  In global defaults, that was fixed by not putting errorMessage inside properties, but for some reason that doesn't seem to work here
-        // edgeSchema.items.errorMessage[value.id] = createClearErrorMessage(value.id, value.type, value.pattern);
-        // edgeSchema.errorMessage[value.id] = createClearErrorMessage(value.id, value.type, value.pattern);
+        // edgeSchema.items.errorMessage.properties[value.id] = createClearErrorMessage(value.id, value.type, value.pattern);
+        // edgeSchema.errorMessage.properties[value.id] = createClearErrorMessage(value.id, value.type, value.pattern);
     }
     nodeSchema.items.properties[NODE_KEYS.POSITION.id] = positionSchema;
 }
@@ -200,9 +217,10 @@ function initEdgesSchema() {
 
 export function validateJSON(data, schema, setError) {
 
-    const validate = ajv.compile(schema);  // TODO: niet heel de tijd opnieuw doen, buiten deze functie zetten
+    const validate = ajv.compile(schema);  // TODO: niet heel de tijd opnieuw doen, buiten deze functie zetten, mss in hashmap
     const valid = validate(data);
     if (!valid) {
+        console.log(validate.errors)
         let errMsg = validate.errors.map(e => e["message"] || JSON.stringify(e, null, 2))
         if (errMsg) {
             setError(errMsg);

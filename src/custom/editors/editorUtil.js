@@ -6,7 +6,7 @@ import {fixNodeGroups} from "./editorUtilPositioning";
 export const GLOBAL_DEFAULT_KEY_VALUES = {
     "ANIMATED": {id: "animated", value: false, type: "boolean"},              // Standard animation supported by React Flow
     "ANIMATION": {id: "animation", "value": undefined, type: "string"},          // Custom animation
-    "TYPE": {id: "type", value: "default", type: "string", pattern: "^(default)$|^(step)$|^(smoothstep)$|^(straight)$"},                 // Type of edge (default, step, smoothstep, straight)
+    "TYPE": {id: "type", value: "default", type: "string", enum: ["default", "step", "smoothstep", "straight"]},                 // Type of edge (default, step, smoothstep, straight)
     "EDGE_COLOR": {id: "edgeColor", value: "black", type: "string"},        // Color of edge
     "EDGE_THICKNESS": {id: "edgeThickness", value: 1.2, type: "number"},    // Thickness of edge
     "MARKER_END": {id: "markerEnd", value: {}, type: "object"},             // Marker at end of the edge
@@ -22,7 +22,7 @@ export const GLOBAL_DEFAULT_KEY_VALUES = {
         id: "shape",
         value: "square",
         type: "string",
-        pattern: "^(8-star)$|^(big-star)$|^(circle)$|^(cylinder)$|^(diamond)$|^(hexagon)$|^(note)$|^(rectangle)$|^(square)$|^(star)$|^(triangle)$|^(comunica)$|^(rmlio)$|^(solid)$"
+        enum: ["8-star", "big-star", "circle", "cylinder", "diamond", "hexagon", "note", "rectangle", "square", "star", "triangle", "comunica", "rmlio", "solid"],
     },              // Shape of node
     "STROKE": {id: "stroke", value: "black", type: "string"},             // Color of stroke of node
     "STROKE_WIDTH": {id: "strokeWidth", value: 1, type: "number"},        // Width of stroke of node
@@ -30,7 +30,8 @@ export const GLOBAL_DEFAULT_KEY_VALUES = {
     "WIDTH": {id: "width", value: 50},                    // Width of node
 
     "AUTO_LAYOUT": {id: "autoLayout", value: false, type: "boolean"},
-    "ORIENTATION": {id: "orientation", value: "horizontal", type: "string", pattern: "^(vertical)$|^(horizontal)$"}, // Orientation of flow
+    "ORIENTATION": {id: "orientation", value: "horizontal", type: "string",
+        enum: ["vertical", "horizontal"]}
 
 
 };
@@ -56,7 +57,7 @@ export const NODE_KEYS = {
     "SHAPE": {
         "id": GLOBAL_DEFAULT_KEY_VALUES.SHAPE.id,
         "type": GLOBAL_DEFAULT_KEY_VALUES.SHAPE.type,
-        "pattern": GLOBAL_DEFAULT_KEY_VALUES.SHAPE.pattern
+        "enum":  GLOBAL_DEFAULT_KEY_VALUES.SHAPE.enum
     },
     "STROKE": {"id": GLOBAL_DEFAULT_KEY_VALUES.STROKE.id, "type": GLOBAL_DEFAULT_KEY_VALUES.STROKE.type},
     "STROKE_WIDTH": {
@@ -100,12 +101,12 @@ export const EDGE_KEYS_NO_CSS_PROPERTY = {
     "SOURCE_HANDLE": {
         id: "sourceHandle",
         type: "string",
-        pattern: "^(left-source)$|^(right-source)$|^(top-source)$|^(bottom-source)$",
+        enum: ["left-source", "right-source", "top-source", "bottom-source"]
     },
     "TARGET_HANDLE": {
         id: "targetHandle",
         type: "string",
-        pattern: "^(left-target)$|^(right-target)$|^(top-target)$|^(bottom-target)$",
+        enum: ["left-target", "right-target", "top-target", "bottom-target"]
     },
 
     "ANIMATED": {
@@ -116,7 +117,7 @@ export const EDGE_KEYS_NO_CSS_PROPERTY = {
     "TYPE": {
         "id": GLOBAL_DEFAULT_KEY_VALUES.TYPE.id,
         "type": GLOBAL_DEFAULT_KEY_VALUES.TYPE.type,
-        "pattern": GLOBAL_DEFAULT_KEY_VALUES.TYPE.pattern,
+        "enum": GLOBAL_DEFAULT_KEY_VALUES.TYPE.enum,
         "canBeGlobal": true
     },
     "MARKER_END": {
