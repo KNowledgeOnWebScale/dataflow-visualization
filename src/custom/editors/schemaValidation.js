@@ -116,11 +116,14 @@ export const edgeSchema = {
 }
 
 
-initGlobalDefaultsSchema();
-initNodesSchema();
-initEdgesSchema();
+// This function is called once, in index.js
+export function initSchemas() {
+    initGlobalDefaultsSchema();
+    initNodesSchema();
+    initEdgesSchema();
+}
 
-//console.log(nodeSchema)
+console.log(nodeSchema)
 
 
 

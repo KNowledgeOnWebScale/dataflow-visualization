@@ -27,7 +27,7 @@ export const GLOBAL_DEFAULT_KEY_VALUES = {
     "STROKE": {id: "stroke", value: "black", type: "string"},             // Color of stroke of node
     "STROKE_WIDTH": {id: "strokeWidth", value: 1, type: "number"},        // Width of stroke of node
     "HEIGHT": {id: "height", value: 50, type: "number"},                  // Height of node
-    "WIDTH": {id: "width", value: 50},                    // Width of node
+    "WIDTH": {id: "width", value: 50, type: "number"},                    // Width of node
 
     "AUTO_LAYOUT": {id: "autoLayout", value: false, type: "boolean"},
     "ORIENTATION": {id: "orientation", value: "horizontal", type: "string",
