@@ -1,4 +1,3 @@
-import Editor from "@monaco-editor/react";
 import {Button, Modal} from "react-bootstrap";
 import Dropdown from "react-bootstrap/Dropdown";
 import dagre from "dagre";
@@ -39,15 +38,13 @@ import {
 
 import {parseEdges, parseGlobalDefaults, parseNodes} from "./editorUtil";
 import {getLayoutedElementsDagre} from "./editorUtilPositioning";
-import {edgeSchema, globalDefaultSchema, nodeSchema, validateJSON} from "./schemaValidation";
+import {edgeSchema, getMonacoSchemas, globalDefaultSchema, nodeSchema, validateJSON} from "./schemaValidation";
+import GlobalDefaultsEditor from "./GlobalDefaultsEditor";
+import NodeEditor from "./NodeEditor";
+import EdgeEditor from "./EdgeEditor";
 
 
 const EditorArea = ({setNodes, setEdges}) => {
-
-    const monacoRefGlobalDefault = useRef(null);
-    const monacoRefNodes = useRef(null);
-    const monacoRefEdges = useRef(null);
-
 
     const [globalDefaults, setGlobalDefaults] = useState(JSON.stringify({}));
     const [nodesData, setNodesData] = useState(JSON.stringify([]));
@@ -203,363 +200,6 @@ const EditorArea = ({setNodes, setEdges}) => {
     }
 
 
-   function handleEditorWillMountGlobalDefault(monaco) {
-
-
-   }
-
-    function handleEditorDidMountGlobalDefault(editor, monaco) {
-        // https://microsoft.github.io/monaco-editor/playground.html#extending-language-services-configure-json-defaults
-
-        monacoRefGlobalDefault.current = editor;
-
-        const modelUri = monaco.Uri.parse('a://b/foo.json'); // a made up unique URI for our model
-        const model = monaco.editor.createModel("{   }", 'json', modelUri);
-
-
-        monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
-            validate: true,
-            schemas: [
-                {
-
-                    fileMatch: [modelUri.toString()],
-                    schema: {
-
-                        "type": "object",
-                        "properties": {
-                            "animated": {
-                                "type": "boolean"
-                            },
-                            "animation": {
-                                "type": "string"
-                            },
-                            "type": {
-                                "type": "string",
-                                "enum": [
-                                    "default",
-                                    "step",
-                                    "smoothstep",
-                                    "straight"
-                                ]
-                            },
-                            "edgeColor": {
-                                "type": "string"
-                            },
-                            "edgeThickness": {
-                                "type": "number"
-                            },
-                            "strokeDasharray": {
-                                "type": [
-                                    "number",
-                                    "string"
-                                ]
-                            },
-                            "fill": {
-                                "type": "string"
-                            },
-                            "fontsize": {
-                                "type": "number"
-                            },
-                            "shape": {
-                                "type": "string",
-                                "enum": [
-                                    "8-star",
-                                    "big-star",
-                                    "circle",
-                                    "cylinder",
-                                    "diamond",
-                                    "hexagon",
-                                    "note",
-                                    "rectangle",
-                                    "square",
-                                    "star",
-                                    "triangle",
-                                    "comunica",
-                                    "rmlio",
-                                    "solid"
-                                ]
-                            },
-                            "stroke": {
-                                "type": "string"
-                            },
-                            "strokeWidth": {
-                                "type": "number"
-                            },
-                            "height": {
-                                "type": "number"
-                            },
-                            "width": {},
-                            "autoLayout": {
-                                "type": "boolean"
-                            },
-                            "orientation": {
-                                "type": "string",
-                                "enum": [
-                                    "vertical",
-                                    "horizontal"
-                                ]
-                            },
-                            "markerStart": {
-                                "type": "object",
-                                "properties": {
-                                    "type": {
-                                        "type": "string",
-                                        "enum": [
-                                            "arrow",
-                                            "arrowclosed"
-                                        ],
-                                        "errorMessage": "Type of arrow must be string with possible values: arrow  or arrowclosed"
-                                    },
-                                    "orient": {
-                                        "type": [
-                                            "string",
-                                            "number"
-                                        ],
-                                        "errorMessage": "Orient of arrow must be number or string"
-                                    },
-                                    "color": {
-                                        "type": "string",
-                                        "errorMessage": "Color of arrow must be string"
-                                    }
-                                }
-                            },
-                            "markerEnd": {
-                                "type": "object",
-                                "properties": {
-                                    "type": {
-                                        "type": "string",
-                                        "enum": [
-                                            "arrow",
-                                            "arrowclosed"
-                                        ],
-                                        "errorMessage": "Type of arrow must be string with possible values: arrow  or arrowclosed"
-                                    },
-                                    "orient": {
-                                        "type": [
-                                            "string",
-                                            "number"
-                                        ],
-                                        "errorMessage": "Orient of arrow must be number or string"
-                                    },
-                                    "color": {
-                                        "type": "string",
-                                        "errorMessage": "Color of arrow must be string"
-                                    }
-                                }
-                            }
-                        },
-                        "errorMessage": {
-                            "properties": {
-                                "animated": "animated must be boolean",
-                                "animation": "animation must be string",
-                                "type": "type must be string with possible values: default , step , smoothstep  or straight",
-                                "edgeColor": "edgeColor must be string",
-                                "edgeThickness": "edgeThickness must be number",
-                                "strokeDasharray": "strokeDasharray must be number or string",
-                                "fill": "fill must be string",
-                                "fontsize": "fontsize must be number",
-                                "shape": "shape must be string with possible values: 8-star , big-star , circle , cylinder , diamond , hexagon , note , rectangle , square , star , triangle , comunica , rmlio  or solid",
-                                "stroke": "stroke must be string",
-                                "strokeWidth": "strokeWidth must be number",
-                                "height": "height must be number",
-                                "width": "width must be ",
-                                "autoLayout": "autoLayout must be boolean",
-                                "orientation": "orientation must be string with possible values: vertical  or horizontal"
-                            },
-                            "type": "Global settings are expected to be initialized in an object"
-                        }
-                    }
-                }
-            ]
-        })
-
-
-       /* monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
-            validate: true,
-            schemas: [
-                {
-                    uri: 'http://myserver/foo-schema.json', // id of the first schema
-                    fileMatch: [modelUri.toString()], // associate with our model
-                    schema: {
-                        type: 'object',
-                        properties: {
-                            p1: {
-                                enum: ['v1', 'v2']
-                            },
-                            p2: {
-                                $ref: 'http://myserver/bar-schema.json' // reference the second schema
-                            }
-                        }
-                    }
-                },
-                {
-                    uri: 'http://myserver/bar-schema.json', // id of the second schema
-                    schema: {
-                        type: 'object',
-                        properties: {
-                            q1: {
-                                enum: ['x1', 'x2']
-                            }
-                        }
-                    }
-                }
-            ]
-        });*/
-
-
-        editor.setModel(model)
-
-
-
-    }
-
-    function editorDidMountNodes(editor, monaco) {
-        monacoRefNodes.current = editor;
-
-        const modelUri = monaco.Uri.parse('a://b/nodes.json'); // a made up unique URI for our model
-        const model = monaco.editor.createModel("{   }", 'json', modelUri);
-
-
-        monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
-            validate: true,
-            schemas: [
-                {
-                    uri: 'http://myserver/foo-schema.json', // id of the first schema
-                    fileMatch: [modelUri.toString()], // associate with our model
-                    schema: {
-                        "type": "array",
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "id": {
-                                    "type": "string",
-                                    "errorMessage": {
-                                        "type": "id must be string"
-                                    }
-                                },
-                                "zIndex": {
-                                    "type": "number",
-                                    "errorMessage": {
-                                        "type": "zIndex must be number"
-                                    }
-                                },
-                                "image": {
-                                    "type": "string",
-                                    "errorMessage": {
-                                        "type": "image must be string"
-                                    }
-                                },
-                                "label": {
-                                    "type": "string",
-                                    "errorMessage": {
-                                        "type": "label must be string"
-                                    }
-                                },
-                                "title": {
-                                    "type": "string",
-                                    "errorMessage": {
-                                        "type": "title must be string"
-                                    }
-                                },
-                                "parentNode": {
-                                    "type": "string",
-                                    "errorMessage": {
-                                        "type": "parentNode must be string"
-                                    }
-                                },
-                                "fill": {
-                                    "type": "string",
-                                    "errorMessage": {
-                                        "type": "fill must be string"
-                                    }
-                                },
-                                "fontsize": {
-                                    "type": "number",
-                                    "errorMessage": {
-                                        "type": "fontsize must be number"
-                                    }
-                                },
-                                "shape": {
-                                    "type": "string",
-                                    "enum": [
-                                        "8-star",
-                                        "big-star",
-                                        "circle",
-                                        "cylinder",
-                                        "diamond",
-                                        "hexagon",
-                                        "note",
-                                        "rectangle",
-                                        "square",
-                                        "star",
-                                        "triangle",
-                                        "comunica",
-                                        "rmlio",
-                                        "solid"
-                                    ],
-                                    "errorMessage": {
-                                        "type": "shape must be string with possible values: 8-star , big-star , circle , cylinder , diamond , hexagon , note , rectangle , square , star , triangle , comunica , rmlio  or solid"
-                                    }
-                                },
-                                "stroke": {
-                                    "type": "string",
-                                    "errorMessage": {
-                                        "type": "stroke must be string"
-                                    }
-                                },
-                                "strokeWidth": {
-                                    "type": "number",
-                                    "errorMessage": {
-                                        "type": "strokeWidth must be number"
-                                    }
-                                },
-                                "height": {
-                                    "type": "number",
-                                    "errorMessage": {
-                                        "type": "height must be number"
-                                    }
-                                },
-                                "width": {
-                                    "type": "number",
-                                    "errorMessage": {
-                                        "type": "width must be number"
-                                    }
-                                },
-                                "position": {
-                                    "type": "object",
-                                    "properties": {
-                                        "x": {
-                                            "type": "number",
-                                            "errorMessage": "object.x must be number"
-                                        },
-                                        "y": {
-                                            "type": [
-                                                "number"
-                                            ],
-                                            "errorMessage": "object.y must be number"
-                                        }
-                                    }
-                                }
-                            },
-                            "errorMessage": {
-                                "type": "Each node should be an object",
-                                "properties": {}
-                            }
-                        },
-                        "errorMessage": {
-                            "type": "Nodes are expected to be objects in an array"
-                        }
-                    }
-                }
-            ]
-        });
-
-
-
-        editor.setModel(model)
-    }
-
-
     return <>
 
         <Modal show={errorModalVisible} onHide={handleErrorPopUpClose}
@@ -599,8 +239,10 @@ const EditorArea = ({setNodes, setEdges}) => {
         <div className="edit-area" id="global-default-editor">
             <div className="code-editor resizable" style={{height: "200px"}}>
                 <h5>Global defaults editor</h5>
-                <Editor
-                    beforeMount={handleEditorWillMountGlobalDefault}
+
+                <GlobalDefaultsEditor language={language} globalDefaults={globalDefaults}
+                                      setGlobalDefaults={setGlobalDefaults}/>
+                {/*<Editor
                     onMount={handleEditorDidMountGlobalDefault}
                     language={language}
                     value={globalDefaults}
@@ -608,49 +250,21 @@ const EditorArea = ({setNodes, setEdges}) => {
                     theme="vs-dark"
                     style={{
                         width: "100%",
-                        //height: "100%",
-                        // minHeight: "250px",
-                        //margin: "auto"
                     }}
-                />
+                />*/}
             </div>
 
             <div className="d-flex resizable code-editor"
-                 style={{height: "350px"}}/*style={{width: "97%", margin: "auto"}}*/>
+                 style={{height: "350px"}}>
 
                 <div className="node-edge-editor">
                     <h5>Node editor</h5>
-                    <Editor
-                        onMount={editorDidMountNodes}
-                        language={language}
-                        value={nodesData}
-                        onChange={content => setNodesData(content)}
-                        theme="vs-dark"
-                        style={{
-                            width: "100%",
-                            // height: "100%",
-                            //minHeight: "250px",
-                            //margin: "auto"
-                        }}
-                    />
+                    <NodeEditor language={language} nodesData={nodesData} setNodesData={setNodesData}/>
                 </div>
 
                 <div className="node-edge-editor">
                     <h5>Edge editor</h5>
-                    <Editor
-                        language={language}
-                        value={edgesData}
-                        onChange={content => setEdgesData(content)}
-                        theme="vs-dark"
-                        style={{
-                            width: "100%",
-                            //height: "100%",
-                            //minHeight: "250px",
-                            //margin: "auto"
-                        }}
-                    />
-
-
+                    <EdgeEditor language={language} edgesData={edgesData} setEdgesData={setEdgesData}/>
                 </div>
             </div>
 
