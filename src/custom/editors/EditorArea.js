@@ -36,7 +36,7 @@ import {
 } from "../../data/exampleData6";
 
 
-import {parseEdges, parseGlobalDefaults, parseNodes} from "./editorUtil";
+import {GRAPH, parseEdges, parseGlobalDefaults, parseNodes} from "./editorUtil";
 import {getLayoutedElementsDagre} from "./editorUtilPositioning";
 import {edgeSchema, globalDefaultSchema, nodeSchema, validateJSON} from "./schemaValidation";
 import MyEditor from "./MyEditor";
@@ -44,7 +44,7 @@ import MyEditor from "./MyEditor";
 
 const EditorArea = ({setNodes, setEdges}) => {
 
-    const [globalDefaults, setGlobalDefaults] = useState(JSON.stringify({}));
+    const [globalDefaults, setGlobalDefaults] = useState(JSON.stringify({"graph": {}, "node": {}, "edge": {}}));
     const [nodesData, setNodesData] = useState(JSON.stringify([]));
     const [edgesData, setEdgesData] = useState(JSON.stringify([]));
 
@@ -183,8 +183,10 @@ const EditorArea = ({setNodes, setEdges}) => {
         let nodes = parseNodes(defaults, parsedNd);
         let edges = parseEdges(defaults, parsedEd, nodes);
 
+        console.log(edges)
 
-        if (defaults["autoLayout"]) {
+        //TODO met keys uit hashmap werken
+        if (defaults[GRAPH]["autoLayout"]) {
             const dagreGraph = new dagre.graphlib.Graph();
             dagreGraph.setDefaultEdgeLabel(() => ({}));
             [nodes, edges] = getLayoutedElementsDagre(dagreGraph, nodes, edges, defaults);

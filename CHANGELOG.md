@@ -1,10 +1,10 @@
 # Changelog
 
-Dates are YYYY-MM-DD
+Dates are DD-MM-YYYY
 
 
 
-## [0.1.0] - 2022-08-04
+## [0.1.0] - 04-08-2022
 First ever release. You can make flows from JSON or YAML.
 
 
@@ -14,5 +14,6 @@ First ever release. You can make flows from JSON or YAML.
 ### Added
 
 ### Changed
+- Issue #4: Global settings have nested objects 'graph', 'node' and 'edge'. 
 
 ### Removed

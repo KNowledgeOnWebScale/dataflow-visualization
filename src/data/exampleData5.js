@@ -1,9 +1,17 @@
 
 export const globalDefaultsJSON = {
-    orientation: "vertical",
-    strokeDasharray: "6 5",
-    animated: true,
-    type: "straight"
+    graph: {
+        orientation: "vertical",
+    },
+    node: {
+
+    },
+    edge: {
+        strokeDasharray: "6 5",
+        animated: true,
+        type: "straight"
+    }
+
 };
 
 export const nodesJSON = [

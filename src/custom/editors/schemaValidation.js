@@ -1,9 +1,8 @@
 import Ajv from "ajv";
 //import {} from "ajv-errors";
 import {
-    EDGE_KEYS,
-    GLOBAL_DEFAULT_KEY_VALUES,
-    NODE_KEYS
+    EDGE,
+    KEY_VALUES, NODE
 } from "./editorUtil";
 
 const ajv = new Ajv({allErrors: true});
@@ -117,6 +116,7 @@ export const edgeSchema = {
 
 // This function is called once, in index.js
 export function initSchemas() {
+
     initGlobalDefaultsSchema();
     initNodesSchema();
     initEdgesSchema();
@@ -148,33 +148,47 @@ export function initSchemas() {
 
 }*/
 
+function globalDefaultNestedKey(key) {
+    const nestedObj = {
+        type: "object",
+        properties: {}
+    }
 
-function initGlobalDefaultsSchema() {
-    for (let value of Object.values(GLOBAL_DEFAULT_KEY_VALUES)) {
+    for (let value of Object.values(KEY_VALUES[key])) {
 
         if (value.type === "object") {
             continue;
         }
 
-        globalDefaultSchema.properties[value.id] = {
+        nestedObj["properties"][value.id] = {
             type: value.type,
             enum: value.enum,
-
-            //errorMessage: {
-            // type: createClearErrorMessage(value.id, value.type, value.pattern)
-            //}
+            errorMessage: {
+                type: createClearErrorMessage(value.id, value.type, value.enum)
+            }
         }
+    }
 
-        globalDefaultSchema.errorMessage.properties[value.id] = createClearErrorMessage(value.id, value.type, value.enum);
+    globalDefaultSchema.properties[key] = nestedObj;
+}
 
+
+function initGlobalDefaultsSchema() {
+
+    for (let key in KEY_VALUES) {
+        globalDefaultNestedKey(key)
     }
 
     //TODO: moet beter
-    globalDefaultSchema.properties[GLOBAL_DEFAULT_KEY_VALUES.MARKER_START.id] = arrowSchema;
-    globalDefaultSchema.properties[GLOBAL_DEFAULT_KEY_VALUES.MARKER_END.id] = arrowSchema;
+    // Fix diegenen met type object ook op automatische manier
+    globalDefaultSchema.properties[EDGE]["properties"][KEY_VALUES[EDGE].MARKER_START.id] = arrowSchema
+    globalDefaultSchema.properties[EDGE]["properties"][KEY_VALUES[EDGE].MARKER_END.id] = arrowSchema
 }
 
+
 function initNodesSchema() {
+    const NODE_KEYS = KEY_VALUES[NODE];
+
     for (let value of Object.values(NODE_KEYS)) {
 
         if (value.type === "object") {
@@ -183,7 +197,6 @@ function initNodesSchema() {
 
         nodeSchema.items.properties[value.id] = {
             type: value.type,
-
             enum: value.enum,
 
             // In global defaults, the errorMessages are not put inside properties
@@ -205,8 +218,12 @@ function initNodesSchema() {
 
 }
 
+
+
 function initEdgesSchema() {
-    for (let value of [Object.values(EDGE_KEYS)]) {
+    const EDGE_KEYS = KEY_VALUES[EDGE];
+
+    for (let value of Object.values(EDGE_KEYS)) {
 
         if (value.required) {
             edgeSchema.items.required.push(value.id);
@@ -219,7 +236,6 @@ function initEdgesSchema() {
 
         edgeSchema.items.properties[value.id] = {
             type: value.type,
-
             enum: value.enum,
 
             // In global defaults, the errorMessages are not put inside properties
@@ -235,8 +251,8 @@ function initEdgesSchema() {
         // edgeSchema.items.errorMessage.properties[value.id] = createClearErrorMessage(value.id, value.type, value.pattern);
         // edgeSchema.errorMessage.properties[value.id] = createClearErrorMessage(value.id, value.type, value.pattern);
     }
-    edgeSchema.items.properties[GLOBAL_DEFAULT_KEY_VALUES.MARKER_START.id] = arrowSchema;
-    edgeSchema.items.properties[GLOBAL_DEFAULT_KEY_VALUES.MARKER_END.id] = arrowSchema;
+    edgeSchema.items.properties[KEY_VALUES[EDGE].MARKER_START.id] = arrowSchema;
+    edgeSchema.items.properties[KEY_VALUES[EDGE].MARKER_END.id] = arrowSchema;
 
 }
 

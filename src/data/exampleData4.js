@@ -1,10 +1,18 @@
-import {MarkerType} from "react-flow-renderer";
 
 export const globalDefaultsJSON = {
-    type: "straight",
-    markerEnd: {
-        type: "arrowclosed"
+    graph: {
+
+    },
+    node: {
+
+    },
+    edge: {
+        type: "straight",
+        markerEnd: {
+            type: "arrowclosed"
+        }
     }
+
 };
 
 export const nodesJSON = [
