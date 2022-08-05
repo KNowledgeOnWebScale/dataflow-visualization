@@ -5,7 +5,7 @@ import {Handle} from 'react-flow-renderer';
 import {NODE_KEYS} from "../editors/editorUtil";
 import {getShape} from "./nodeUtil";
 
-
+// TODO rename this file to better cover its contents
 export default memo(({data, isConnectable}) => {
 
     let width = data[NODE_KEYS.WIDTH.id];

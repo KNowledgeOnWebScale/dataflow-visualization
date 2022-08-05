@@ -2,7 +2,8 @@ import comunica from "../../assets/comunica.svg";
 import rmlio from "../../assets/rmlio.png";
 import solid from "../../assets/solid.svg";
 
-
+// TODO rename this file to better cover its contents
+// TODO why not put these svgs as actual files and import them? Makes this code a lot cleaner + you can edit the svgs in dedicated programs more easily
 export function getShape(shapeId, fill, stroke, strokeWidth) {
     const SHAPES = {
         "8-star":

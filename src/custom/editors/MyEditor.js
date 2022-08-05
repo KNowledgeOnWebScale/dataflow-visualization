@@ -3,7 +3,8 @@ import {useState} from "react";
 
 const MyEditor = ({language, data, setData, modelName, schema}) => {
 
-
+    // TODO I get the heebie jeebies of variables starting with `my`, can you come up with more descriptive names?
+    // TODO same remark for this entire component :) Suggestion: CodeEditor
     const [myEditor, setMyEditor] = useState(null);
     const [myMonaco, setMyMonaco] = useState(null);
     const [myModel, setMyModel] = useState(null)

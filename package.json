@@ -10,12 +10,12 @@
     "ajv": "^8.11.0",
     "ajv-errors": "^3.0.0",
     "bootstrap": "^5.2.0",
-    "dagre": "latest",
+    "dagre": "^0.8.5",
     "js-yaml": "^4.1.0",
     "react": "^18.2.0",
-    "react-bootstrap": "^2.4.0",
+    "react-bootstrap": "^2.5.0",
     "react-dom": "^18.2.0",
-    "react-flow-renderer": "^10.3.11",
+    "react-flow-renderer": "^10.3.12",
     "react-scripts": "5.0.1"
   },
   "scripts": {

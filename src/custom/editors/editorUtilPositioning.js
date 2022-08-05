@@ -30,6 +30,7 @@ export function getLayoutedElementsDagre(dagreGraph, nodes, edges, globalDefault
 
 }
 
+// TODO this function is only used for `editorUtil`: why not move it there so you can keep it private?
 export function fixNodeGroups(nodes) {
     // loop over nodes and store all groups
     // let groups = {"vgroups": new Set(), "hgroups": new Set()}

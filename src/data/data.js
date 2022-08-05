@@ -1,5 +1,6 @@
 import {MarkerType} from "react-flow-renderer";
 
+// TODO I don't think this file is still being used
 export const nodesData = [
     {
         id: 'edges-1',

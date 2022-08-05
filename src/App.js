@@ -42,10 +42,11 @@ const EdgesFlow = () => {
 
 
             <div style={{
-                width: window.innerWidth * 0.96,
+                width: window.innerWidth * 0.48,
                 height: window.innerHeight * 0.96,
                 border: "solid 1px black",
-                margin: "10px auto 10px auto"
+                margin: "10px auto 10px auto",
+                display: "inline-block"
             }}>
                 <ReactFlow
                     nodes={nodes}

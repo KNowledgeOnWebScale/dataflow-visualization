@@ -1,6 +1,7 @@
 import React from 'react';
 import { getBezierPath, getMarkerEnd } from 'react-flow-renderer';
 
+// TODO I don't think this file is being used? It's in the wrong location in any case
 export default function CustomEdge({
                                        id,
                                        sourceX,

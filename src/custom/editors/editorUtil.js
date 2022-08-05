@@ -3,6 +3,7 @@
 // The values of this dict should be used in the JSON representation
 import {fixNodeGroups} from "./editorUtilPositioning";
 
+// TODO I have the feeling you should either have a 'constants.js' file, or rename this 'editorUtil.js' to 'configParsing.js' or smth
 export const GLOBAL_DEFAULT_KEY_VALUES = {
     "ANIMATED": {id: "animated", value: false, type: "boolean"},              // Standard animation supported by React Flow
     "ANIMATION": {id: "animation", type: "string"},          // Custom animation
