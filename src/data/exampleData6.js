@@ -1,10 +1,17 @@
 export const globalDefaultsJSON = {
-    height: 80,
-    width: 90,
-    fontsize: 10,
-    strokeWidth: 0.7,
-    markerEnd: {type: "arrowclosed"},
-    type: "straight"
+    graph: {
+
+    },
+    node: {
+        height: 80,
+        width: 90,
+        fontsize: 10,
+    },
+    edge: {
+        strokeWidth: 0.7,
+        markerEnd: {type: "arrowclosed"},
+        type: "straight"
+    }
 };
 
 export const nodesJSON = [

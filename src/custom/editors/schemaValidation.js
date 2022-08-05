@@ -1,9 +1,7 @@
 import Ajv from "ajv";
 //import {} from "ajv-errors";
 import {
-    EDGE_KEYS,
-    GLOBAL_DEFAULT_KEY_VALUES,
-    NODE_KEYS
+    KEY_VALUES
 } from "./editorUtil";
 
 const ajv = new Ajv({allErrors: true});
@@ -117,9 +115,11 @@ export const edgeSchema = {
 
 // This function is called once, in index.js
 export function initSchemas() {
-    initGlobalDefaultsSchema();
-    initNodesSchema();
-    initEdgesSchema();
+    // TODO: deze functies herstellen
+
+    //initGlobalDefaultsSchema();
+    //initNodesSchema();
+    //initEdgesSchema();
 }
 
 
@@ -149,6 +149,7 @@ export function initSchemas() {
 }*/
 
 
+/* TODO: FIXEN!!!
 function initGlobalDefaultsSchema() {
     for (let value of Object.values(GLOBAL_DEFAULT_KEY_VALUES)) {
 
@@ -173,7 +174,12 @@ function initGlobalDefaultsSchema() {
     globalDefaultSchema.properties[GLOBAL_DEFAULT_KEY_VALUES.MARKER_START.id] = arrowSchema;
     globalDefaultSchema.properties[GLOBAL_DEFAULT_KEY_VALUES.MARKER_END.id] = arrowSchema;
 }
+*/
 
+
+
+
+/* TODO: herstellen!!!
 function initNodesSchema() {
     for (let value of Object.values(NODE_KEYS)) {
 
@@ -204,7 +210,11 @@ function initNodesSchema() {
     nodeSchema.items.properties[NODE_KEYS.POSITION.id] = positionSchema;
 
 }
+*/
 
+
+
+/* TODO: HERSTELLEN!!!
 function initEdgesSchema() {
     for (let value of [Object.values(EDGE_KEYS)]) {
 
@@ -239,7 +249,7 @@ function initEdgesSchema() {
     edgeSchema.items.properties[GLOBAL_DEFAULT_KEY_VALUES.MARKER_END.id] = arrowSchema;
 
 }
-
+*/
 
 export function validateJSON(data, schema, setError) {
 

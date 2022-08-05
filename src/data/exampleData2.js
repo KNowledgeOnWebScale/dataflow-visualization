@@ -1,11 +1,19 @@
 
 export const globalDefaultsJSON = {
-    stroke: "darkgray",
-    fill: "lightyellow",
-    fontsize: 10,
-    strokeWidth: 0.2,
-    animated: true,
-    markerEnd: {type: "arrowclosed"},
+    graph: {
+
+    },
+    node: {
+        stroke: "darkgray",
+        fill: "lightyellow",
+        fontsize: 10,
+        strokeWidth: 0.2,
+    },
+    edge: {
+        animated: true,
+        markerEnd: {type: "arrowclosed"},
+    }
+
 };
 
 export const nodesJSON = [
