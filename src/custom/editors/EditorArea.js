@@ -40,10 +40,11 @@ import {
 } from "../../data/exampleData6";
 
 
-import {GRAPH, parseEdges, parseGlobalDefaults, parseNodes} from "./editorUtil";
+import {GRAPH, parseEdges, parseGlobalDefaults, parseNodes} from "./configParsing";
 import {getLayoutedElementsDagre} from "./editorUtilPositioning";
 import {edgeSchema, globalDefaultSchema, nodeSchema, validateJSON} from "./schemaValidation";
-import MyEditor from "./MyEditor";
+import MyEditor from "./CodeEditor";
+import ErrorModal from "./ErrorModal";
 
 
 const EditorArea = ({setNodes, setEdges}) => {
@@ -66,11 +67,6 @@ const EditorArea = ({setNodes, setEdges}) => {
         [globalDefaultsJSON5, nodesJSON5, edgesJSON5], [globalDefaultsJSON6, nodesJSON6, edgesJSON6],
     ];
 
-    function handleErrorPopUpClose() {
-        setErrorMessageTitle("")
-        setErrorMessages([])
-        setErrorModalVisible(false)
-    }
 
     // TODO this is generic code
     function json2yaml(jsonData) {
@@ -115,7 +111,6 @@ const EditorArea = ({setNodes, setEdges}) => {
         setEdgesData(edges);
     }
 
-    // TODO note how I changed the very vague `e` to a more descriptive variable name
     function changeLanguage(eventKey) {
         let newLang = eventKey;
 
@@ -204,22 +199,19 @@ const EditorArea = ({setNodes, setEdges}) => {
     }
 
 
+    function handleErrorPopUpClose() {
+        setErrorMessageTitle("")
+        setErrorMessages([])
+        setErrorModalVisible(false)
+    }
+
     return <>
-        {/* TODO Feels like this modal could be a separate component */}
-        <Modal show={errorModalVisible} onHide={handleErrorPopUpClose}
-            scrollable={true}>
-            <Modal.Header closeButton>
-                <Modal.Title>{errorMessageTitle}</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                {errorMessages.map(e => <p>{e}</p>)}
-            </Modal.Body>
-            <Modal.Footer>
-                <Button variant="danger" onClick={handleErrorPopUpClose}>
-                    OK
-                </Button>
-            </Modal.Footer>
-        </Modal>
+        <ErrorModal errorModalVisible={errorModalVisible}
+                    errorMessageTitle={errorMessageTitle}
+                    errorMessages={errorMessages}
+                    handleErrorPopUpClose={handleErrorPopUpClose}
+        />
+
 
         <div className="d-flex">
             {
@@ -243,7 +235,7 @@ const EditorArea = ({setNodes, setEdges}) => {
         </Dropdown>
 
 
-        <div className="edit-area" id="global-default-editor" style={{width:"49%", display: "inline-block"}}>
+        <div className="edit-area" id="global-default-editor" style={{width: "49%", display: "inline-block"}}>
             <div className="code-editor resizable" style={{height: "200px"}}>
                 <h5>Global defaults editor</h5>
                 <MyEditor language={language} data={globalDefaults} setData={setGlobalDefaults}

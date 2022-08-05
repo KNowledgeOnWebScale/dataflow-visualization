@@ -2,7 +2,7 @@ import React, {useCallback} from 'react';
 
 import ReactFlow, {addEdge, Controls, useEdgesState, useNodesState,} from 'react-flow-renderer';
 
-import SvgNode from "./custom/node/SvgNode";
+import SvgNode from "./custom/node/Node";
 
 import EditorArea from "./custom/editors/EditorArea";
 

@@ -3,7 +3,7 @@ import Ajv from "ajv";
 import {
     EDGE,
     KEY_VALUES, NODE
-} from "./editorUtil";
+} from "./configParsing";
 
 const ajv = new Ajv({allErrors: true});
 require("ajv-errors")(ajv, /*{keepErrors: false}*/);
