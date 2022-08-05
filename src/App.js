@@ -2,7 +2,7 @@ import React, {useCallback} from 'react';
 
 import ReactFlow, {addEdge, Controls, useEdgesState, useNodesState,} from 'react-flow-renderer';
 
-import SvgNode from "./custom/node/SvgNode";
+import SvgNode from "./custom/node/Node";
 
 import EditorArea from "./custom/editors/EditorArea";
 
@@ -38,10 +38,11 @@ const EdgesFlow = () => {
 
 
             <div style={{
-                width: window.innerWidth * 0.96,
+                width: window.innerWidth * 0.48,
                 height: window.innerHeight * 0.96,
                 border: "solid 1px black",
-                margin: "10px auto 10px auto"
+                margin: "10px auto 10px auto",
+                display: "inline-block"
             }}>
                 <ReactFlow
                     nodes={nodes}

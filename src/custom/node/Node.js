@@ -2,9 +2,11 @@ import React, {memo} from 'react';
 
 import {Handle} from 'react-flow-renderer';
 
-import {KEY_VALUES, NODE} from "../editors/editorUtil";
+import {KEY_VALUES, NODE} from "../editors/configParsing";
 import {getShape} from "./nodeUtil";
 
+
+import cylinder from "../../assets/cylinder.svg"
 
 export default memo(({data, isConnectable}) => {
 
@@ -17,13 +19,29 @@ export default memo(({data, isConnectable}) => {
 
     return (
         <>
-            <svg style={{width: width, height: height}}>
-                <svg style={{width: width}} key={Math.random()}>
 
+
+            {/*
+
+            https://www.geeksforgeeks.org/how-to-import-a-svg-file-in-javascript/
+
+            <object type="image/svg+xml" data={cylinder} className="logo" style={{width: width, height: height, fill: "green", stroke: "blue", strokeWidth: 2}}>
+                Logo
+            </object>
+            */}
+
+            {/*
+                 <img src={cylinder} alt="some file"  height='50'
+                    width='50' style={{width: width, height: height, fill: "green", stroke: "blue", strokeWidth: 2}}
+                   />
+                 */}
+
+             <svg style={{width: width, height: height}}>
+
+                 <svg style={{width: width}} key={Math.random()}>
                     {
                         element
                     }
-
                 </svg>
 
                 <svg style={{width: width, height: height}}>

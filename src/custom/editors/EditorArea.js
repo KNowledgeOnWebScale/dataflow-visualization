@@ -4,6 +4,10 @@ import dagre from "dagre";
 import YAML from "js-yaml";
 import {useState} from "react";
 
+// TODO make this cleaner, something like below, which abstracts away all the example handling you're now doing in a UI component
+/*
+import examples from "../../data/examples"
+*/
 import {
     edgesJSON as edgesJSON1,
     globalDefaultsJSON as globalDefaultsJSON1,
@@ -36,10 +40,11 @@ import {
 } from "../../data/exampleData6";
 
 
-import {GRAPH, parseEdges, parseGlobalDefaults, parseNodes} from "./editorUtil";
+import {GRAPH, parseEdges, parseGlobalDefaults, parseNodes} from "./configParsing";
 import {getLayoutedElementsDagre} from "./editorUtilPositioning";
 import {edgeSchema, globalDefaultSchema, nodeSchema, validateJSON} from "./schemaValidation";
-import MyEditor from "./MyEditor";
+import MyEditor from "./CodeEditor";
+import ErrorModal from "./ErrorModal";
 
 
 const EditorArea = ({setNodes, setEdges}) => {
@@ -55,18 +60,15 @@ const EditorArea = ({setNodes, setEdges}) => {
     const [errorMessages, setErrorMessages] = useState([]);
 
 
+    // TODO see previous todo: this should not be here anymore
     const examples = [
         [globalDefaultsJSON1, nodesJSON1, edgesJSON1], [globalDefaultsJSON2, nodesJSON2, edgesJSON2],
         [globalDefaultsJSON3, nodesJSON3, edgesJSON3], [globalDefaultsJSON4, nodesJSON4, edgesJSON4],
         [globalDefaultsJSON5, nodesJSON5, edgesJSON5], [globalDefaultsJSON6, nodesJSON6, edgesJSON6],
     ];
 
-    function handleErrorPopUpClose() {
-        setErrorMessageTitle("")
-        setErrorMessages([])
-        setErrorModalVisible(false)
-    }
 
+    // TODO this is generic code
     function json2yaml(jsonData) {
         let yamlValue;
         try {
@@ -88,7 +90,7 @@ const EditorArea = ({setNodes, setEdges}) => {
         }
     }
 
-
+    // TODO this is a mix of non-UI code, and creates a dependency on 'examples', I'd split in 2 functions
     function loadExample(e, number) {
         e.preventDefault();
 
@@ -109,19 +111,19 @@ const EditorArea = ({setNodes, setEdges}) => {
         setEdgesData(edges);
     }
 
-    function changeLanguage(e) {
-        let newLang = e;
+    function changeLanguage(eventKey) {
+        let newLang = eventKey;
 
         if (newLang === "yaml" && language === "json") {
             setGlobalDefaults(json2yaml(globalDefaults));
             setNodesData(json2yaml(nodesData));
             setEdgesData(json2yaml(edgesData));
-            setLanguage(e);
+            setLanguage(eventKey);
         } else if (newLang === "json" && language === "yaml") {
             setGlobalDefaults(yaml2json(globalDefaults));
             setNodesData(yaml2json(nodesData));
             setEdgesData(yaml2json(edgesData));
-            setLanguage(e);
+            setLanguage(eventKey);
         }
 
     }
@@ -197,22 +199,19 @@ const EditorArea = ({setNodes, setEdges}) => {
     }
 
 
-    return <>
+    function handleErrorPopUpClose() {
+        setErrorMessageTitle("")
+        setErrorMessages([])
+        setErrorModalVisible(false)
+    }
 
-        <Modal show={errorModalVisible} onHide={handleErrorPopUpClose}
-               scrollable={true}>
-            <Modal.Header closeButton>
-                <Modal.Title>{errorMessageTitle}</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                {errorMessages.map(e => <p>{e}</p>)}
-            </Modal.Body>
-            <Modal.Footer>
-                <Button variant="danger" onClick={handleErrorPopUpClose}>
-                    OK
-                </Button>
-            </Modal.Footer>
-        </Modal>
+    return <>
+        <ErrorModal errorModalVisible={errorModalVisible}
+                    errorMessageTitle={errorMessageTitle}
+                    errorMessages={errorMessages}
+                    handleErrorPopUpClose={handleErrorPopUpClose}
+        />
+
 
         <div className="d-flex">
             {
@@ -236,7 +235,7 @@ const EditorArea = ({setNodes, setEdges}) => {
         </Dropdown>
 
 
-        <div className="edit-area" id="global-default-editor">
+        <div className="edit-area" id="global-default-editor" style={{width: "49%", display: "inline-block"}}>
             <div className="code-editor resizable" style={{height: "200px"}}>
                 <h5>Global defaults editor</h5>
                 <MyEditor language={language} data={globalDefaults} setData={setGlobalDefaults}
@@ -249,7 +248,9 @@ const EditorArea = ({setNodes, setEdges}) => {
                     <MyEditor language={language} data={nodesData} setData={setNodesData} modelName={"nodes-model"}
                               schema={nodeSchema}/>
                 </div>
-
+            </div>
+            <div className="d-flex resizable code-editor"
+                 style={{height: "350px"}}>
                 <div className="node-edge-editor">
                     <h5>Edge editor</h5>
                     <MyEditor language={language} data={edgesData} setData={setEdgesData} modelName={"edges-model"}
