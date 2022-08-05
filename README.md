@@ -2,7 +2,7 @@
 # Flow Visualization
 
 This is a [React] application to generate flow graphs from [JSON](https://www.json.org/) or [YAML](https://yaml.org/).
-It is built on top of [ReactFlow].
+It is built on top of [ReactFlowComponent].
 
 - [How to run](#how-to-run)
 - [Documentation](#documentation)
@@ -114,7 +114,7 @@ welcome.
 #### Add examples
 
 When using this application, you'll notice there are buttons to load examples. These buttons load in the
-files [exampleData1.js](/src/data/exampleData1.js), [exampleData2.js](/src/data/exampleData2.js) ... So if you want to
+files [exampleData1.js](/src/data/examples/exampleData1.js), [exampleData2.js](/src/data/examples/exampleData2.js) ... So if you want to
 add
 an example, just create another file. In this file, you should have a JSON object for the global defaults, an array of
 nodes
@@ -157,4 +157,4 @@ has no effect anymore.
 This project is licensed under the terms of the MIT License. See [LICENSE.md](/LICENSE.md) for details.
 
 [React]: https://reactjs.org/
-[ReactFlow]: https://reactflow.dev/
+[ReactFlowComponent]: https://reactflow.dev/

@@ -1,4 +1,4 @@
-.code-editor {
+/*.code-editor {
     width: 97%;
     margin: auto;
     height: 100%;
@@ -15,4 +15,42 @@
     resize: vertical;
     overflow-y: hidden;
     *border: 1px solid black;
+}*/
+
+table td, table td * {
+    vertical-align: top;
+}
+
+.edit-area {
+    width: 100%;
+}
+
+.small-editor-div {
+    height: 100px;
+}
+
+.small-editor-div {
+    width: 100%;
+    height: 200px;
+
+    min-height: 100px;
+    position: relative;
+    resize: vertical;
+    overflow-y: hidden;
+}
+.editor-div {
+    width: 100%;
+    height: 350px;
+
+    min-height: 100px;
+    position: relative;
+    resize: vertical;
+    overflow-y: hidden;
+}
+
+.editor {
+    *border: 1px solid red;
+    height: 100%;
+    width: 100%;
+    position: relative;
 }

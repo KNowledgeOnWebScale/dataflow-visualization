@@ -54,7 +54,7 @@ const CodeEditor = ({language, data, setData, modelName, schema}) => {
 
 
     return <>
-        <div onClick={initAgain} style={{height: "100%"}}>
+        <div className="editor" onClick={initAgain}>
             <Editor
                 onMount={editorDidMountNodes}
                 language={language}
@@ -62,7 +62,8 @@ const CodeEditor = ({language, data, setData, modelName, schema}) => {
                 onChange={content => setData(content)}
                 theme="vs-dark"
                 style={{
-                    width: "100%"
+                    width: "100%",
+                    height: "100%"
                 }}
             />
         </div>

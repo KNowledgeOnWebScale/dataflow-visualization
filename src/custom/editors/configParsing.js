@@ -63,7 +63,7 @@ export const KEY_VALUES = {
             enum: ["default", "step", "smoothstep", "straight"]
         },
 
-        "Z_INDEX": {id: "zIndex", "canBeGlobal": true, value: 0, type: "number"},  // Leave value zIndex 0 (e.g. example 2)
+        "Z_INDEX": {id: "zIndex", "canBeGlobal": true, type: "number"},  // Leave value zIndex 0 (e.g. example 2)
         "LABEL": {id: "label", "canBeGlobal": true, type: "string"},
         "SOURCE": {id: "source", "canBeGlobal": false, type: "string", required: true},  //TODO: mss wel true
         "TARGET": {id: "target", "canBeGlobal": false, type: "string", required: true},
@@ -351,7 +351,7 @@ export function parseEdges(globalDefaults, edges, nodes) {
 
             let value = EDGE_KEYS[key]["id"];
 
-            if (!edge.hasOwnProperty(value)) {
+            if (!edge.hasOwnProperty(value) && globalDefaults[EDGE].hasOwnProperty(value)) {
                 if (typeof globalDefaults[value] === 'object') {
                     edge[value] = {...globalDefaults[EDGE][value]};  // Deep copy, because e.g. markerStart does not have to be the same everywhere
                 } else {

@@ -1,132 +1,34 @@
-import {Button, Modal} from "react-bootstrap";
-import Dropdown from "react-bootstrap/Dropdown";
+import {Button} from "react-bootstrap";
 import dagre from "dagre";
-import YAML from "js-yaml";
 import {useState} from "react";
-
-// TODO make this cleaner, something like below, which abstracts away all the example handling you're now doing in a UI component
-/*
-import examples from "../../data/examples"
-*/
-import {
-    edgesJSON as edgesJSON1,
-    globalDefaultsJSON as globalDefaultsJSON1,
-    nodesJSON as nodesJSON1
-} from "../../data/exampleData1";
-import {
-    edgesJSON as edgesJSON2,
-    globalDefaultsJSON as globalDefaultsJSON2,
-    nodesJSON as nodesJSON2
-} from "../../data/exampleData2";
-import {
-    edgesJSON as edgesJSON3,
-    globalDefaultsJSON as globalDefaultsJSON3,
-    nodesJSON as nodesJSON3
-} from "../../data/exampleData3";
-import {
-    edgesJSON as edgesJSON4,
-    globalDefaultsJSON as globalDefaultsJSON4,
-    nodesJSON as nodesJSON4
-} from "../../data/exampleData4";
-import {
-    edgesJSON as edgesJSON5,
-    globalDefaultsJSON as globalDefaultsJSON5,
-    nodesJSON as nodesJSON5
-} from "../../data/exampleData5";
-import {
-    edgesJSON as edgesJSON6,
-    globalDefaultsJSON as globalDefaultsJSON6,
-    nodesJSON as nodesJSON6
-} from "../../data/exampleData6";
-
 
 import {GRAPH, parseEdges, parseGlobalDefaults, parseNodes} from "./configParsing";
 import {getLayoutedElementsDagre} from "./editorUtilPositioning";
 import {edgeSchema, globalDefaultSchema, nodeSchema, validateJSON} from "./schemaValidation";
-import MyEditor from "./CodeEditor";
+import CodeEditor from "./CodeEditor";
 import ErrorModal from "./ErrorModal";
+import LanguageSwitcher from "../LanguageSwitcher";
+import {yaml2json} from "../jsonYamlUtil";
 
 
-const EditorArea = ({setNodes, setEdges}) => {
+const EditorArea = ({
+                        setNodes,
+                        setEdges,
+                        language,
+                        setLanguage,
+                        setData,
+                        globalDefaults,
+                        setGlobalDefaults,
+                        nodesData,
+                        setNodesData,
+                        edgesData,
+                        setEdgesData
+                    }) => {
 
-    const [globalDefaults, setGlobalDefaults] = useState(JSON.stringify({"graph": {}, "node": {}, "edge": {}}));
-    const [nodesData, setNodesData] = useState(JSON.stringify([]));
-    const [edgesData, setEdgesData] = useState(JSON.stringify([]));
-
-    const [language, setLanguage] = useState("json");
 
     const [errorModalVisible, setErrorModalVisible] = useState(false);
     const [errorMessageTitle, setErrorMessageTitle] = useState("");
     const [errorMessages, setErrorMessages] = useState([]);
-
-
-    // TODO see previous todo: this should not be here anymore
-    const examples = [
-        [globalDefaultsJSON1, nodesJSON1, edgesJSON1], [globalDefaultsJSON2, nodesJSON2, edgesJSON2],
-        [globalDefaultsJSON3, nodesJSON3, edgesJSON3], [globalDefaultsJSON4, nodesJSON4, edgesJSON4],
-        [globalDefaultsJSON5, nodesJSON5, edgesJSON5], [globalDefaultsJSON6, nodesJSON6, edgesJSON6],
-    ];
-
-
-    // TODO this is generic code
-    function json2yaml(jsonData) {
-        let yamlValue;
-        try {
-            yamlValue = YAML.dump(JSON.parse(jsonData));
-            return yamlValue;
-        } catch (e) {
-            return e;
-        }
-    }
-
-    function yaml2json(yamlData) {
-
-        let jsonValue;
-        try {
-            jsonValue = JSON.stringify(YAML.load(yamlData.toString()), null, "\t");
-            return jsonValue;
-        } catch (e) {
-            return e;
-        }
-    }
-
-    // TODO this is a mix of non-UI code, and creates a dependency on 'examples', I'd split in 2 functions
-    function loadExample(e, number) {
-        e.preventDefault();
-
-        let example = examples[number - 1];
-
-        let defaults = JSON.stringify(example[0], null, "\t");
-        let nodes = JSON.stringify(example[1], null, "\t");
-        let edges = JSON.stringify(example[2], null, "\t");
-
-        if (language === "yaml") {
-            defaults = json2yaml(defaults);
-            nodes = json2yaml(nodes);
-            edges = json2yaml(edges);
-        }
-
-        setGlobalDefaults(defaults);
-        setNodesData(nodes);
-        setEdgesData(edges);
-    }
-
-    function changeLanguage(eventKey) {
-        let newLang = eventKey;
-
-        if (newLang === "yaml" && language === "json") {
-            setGlobalDefaults(json2yaml(globalDefaults));
-            setNodesData(json2yaml(nodesData));
-            setEdgesData(json2yaml(edgesData));
-            setLanguage(eventKey);
-        } else if (newLang === "json" && language === "yaml") {
-            setGlobalDefaults(yaml2json(globalDefaults));
-            setNodesData(yaml2json(nodesData));
-            setEdgesData(yaml2json(edgesData));
-            setLanguage(eventKey);
-        }
-
-    }
 
 
 // Convert what's inside the editors to a graph
@@ -135,12 +37,12 @@ const EditorArea = ({setNodes, setEdges}) => {
 
         let gd = globalDefaults;
         let nd = nodesData;
-        let ed = edgesData;
+        let ed = edgesData
 
         if (language === "yaml") {
-            gd = yaml2json(globalDefaults);
-            nd = yaml2json(nodesData);
-            ed = yaml2json(edgesData);
+            gd = yaml2json(gd);
+            nd = yaml2json(nd);
+            ed = yaml2json(ed);
         }
 
 
@@ -185,8 +87,6 @@ const EditorArea = ({setNodes, setEdges}) => {
         let nodes = parseNodes(defaults, parsedNd);
         let edges = parseEdges(defaults, parsedEd, nodes);
 
-        console.log(edges)
-
         //TODO met keys uit hashmap werken
         if (defaults[GRAPH]["autoLayout"]) {
             const dagreGraph = new dagre.graphlib.Graph();
@@ -212,51 +112,27 @@ const EditorArea = ({setNodes, setEdges}) => {
                     handleErrorPopUpClose={handleErrorPopUpClose}
         />
 
+        <LanguageSwitcher language={language} setLanguage={setLanguage} setData={setData}
+                          globalDefaults={globalDefaults} nodesData={nodesData} edgesData={edgesData}/>
 
-        <div className="d-flex">
-            {
-                examples.map((_, i) => (
-                        <Button className="primary" onClick={e => loadExample(e, i + 1)}
-                                key={i}>example {i + 1}
-                        </Button>
-                    )
-                )
-            }
-        </div>
+        <div className="edit-area" /*style={{width: "49%", display: "inline-block"}}*/>
 
-        <Dropdown onSelect={changeLanguage}>
-            <Dropdown.Toggle variant="warning" id="dropdown-basic">
-                Language: {language.toUpperCase()}
-            </Dropdown.Toggle>
-            <Dropdown.Menu>
-                <Dropdown.Item eventKey="json" active>JSON</Dropdown.Item>
-                <Dropdown.Item eventKey="yaml">YAML</Dropdown.Item>
-            </Dropdown.Menu>
-        </Dropdown>
+                <div className="small-editor-div"/*className="node-edge-editor"*/>
+                    <h5>Global defaults editor</h5>
+                    <CodeEditor language={language} data={globalDefaults} setData={setGlobalDefaults} modelName={"global-defaults-model"}
+                                schema={globalDefaultSchema}/>
+                </div>
 
-
-        <div className="edit-area" id="global-default-editor" style={{width: "49%", display: "inline-block"}}>
-            <div className="code-editor resizable" style={{height: "200px"}}>
-                <h5>Global defaults editor</h5>
-                <MyEditor language={language} data={globalDefaults} setData={setGlobalDefaults}
-                          modelName={"global-defaults-model"} schema={globalDefaultSchema}/>
-            </div>
-
-            <div className="d-flex resizable code-editor" style={{height: "350px"}}>
-                <div className="node-edge-editor">
+                <div className="editor-div"/*className="node-edge-editor"*/>
                     <h5>Node editor</h5>
-                    <MyEditor language={language} data={nodesData} setData={setNodesData} modelName={"nodes-model"}
-                              schema={nodeSchema}/>
+                    <CodeEditor language={language} data={nodesData} setData={setNodesData} modelName={"nodes-model"}
+                                schema={nodeSchema}/>
                 </div>
-            </div>
-            <div className="d-flex resizable code-editor"
-                 style={{height: "350px"}}>
-                <div className="node-edge-editor">
+                <div className="editor-div" /*className="node-edge-editor"*/>
                     <h5>Edge editor</h5>
-                    <MyEditor language={language} data={edgesData} setData={setEdgesData} modelName={"edges-model"}
-                              schema={edgeSchema}/>
+                    <CodeEditor language={language} data={edgesData} setData={setEdgesData} modelName={"edges-model"}
+                                schema={edgeSchema}/>
                 </div>
-            </div>
 
             <Button variant="primary" onClick={e => handleConvert(e)}>Convert</Button>
 
