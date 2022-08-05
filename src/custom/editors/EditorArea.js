@@ -44,7 +44,7 @@ import MyEditor from "./MyEditor";
 
 const EditorArea = ({setNodes, setEdges}) => {
 
-    const [globalDefaults, setGlobalDefaults] = useState(JSON.stringify({}));
+    const [globalDefaults, setGlobalDefaults] = useState(JSON.stringify({"graph": {}, "node": {}, "edge": {}}));
     const [nodesData, setNodesData] = useState(JSON.stringify([]));
     const [edgesData, setEdgesData] = useState(JSON.stringify([]));
 
