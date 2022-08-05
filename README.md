@@ -2,7 +2,7 @@
 # Flow Visualization
 
 This is a [React] application to generate flow graphs from [JSON](https://www.json.org/) or [YAML](https://yaml.org/).
-It is built on top of [ReactFlowComponent].
+It is built on top of [ReactFlow].
 
 - [How to run](#how-to-run)
 - [Documentation](#documentation)
@@ -157,4 +157,4 @@ has no effect anymore.
 This project is licensed under the terms of the MIT License. See [LICENSE.md](/LICENSE.md) for details.
 
 [React]: https://reactjs.org/
-[ReactFlowComponent]: https://reactflow.dev/
+[ReactFlow]: https://reactflow.dev/
