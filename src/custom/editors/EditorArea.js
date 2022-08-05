@@ -40,7 +40,7 @@ import {
 } from "../../data/exampleData6";
 
 
-import {parseEdges, parseGlobalDefaults, parseNodes} from "./editorUtil";
+import {GRAPH, parseEdges, parseGlobalDefaults, parseNodes} from "./editorUtil";
 import {getLayoutedElementsDagre} from "./editorUtilPositioning";
 import {edgeSchema, globalDefaultSchema, nodeSchema, validateJSON} from "./schemaValidation";
 import MyEditor from "./MyEditor";
@@ -48,7 +48,7 @@ import MyEditor from "./MyEditor";
 
 const EditorArea = ({setNodes, setEdges}) => {
 
-    const [globalDefaults, setGlobalDefaults] = useState(JSON.stringify({}));
+    const [globalDefaults, setGlobalDefaults] = useState(JSON.stringify({"graph": {}, "node": {}, "edge": {}}));
     const [nodesData, setNodesData] = useState(JSON.stringify([]));
     const [edgesData, setEdgesData] = useState(JSON.stringify([]));
 
@@ -117,7 +117,6 @@ const EditorArea = ({setNodes, setEdges}) => {
 
     // TODO note how I changed the very vague `e` to a more descriptive variable name
     function changeLanguage(eventKey) {
-
         let newLang = eventKey;
 
         if (newLang === "yaml" && language === "json") {
@@ -191,8 +190,10 @@ const EditorArea = ({setNodes, setEdges}) => {
         let nodes = parseNodes(defaults, parsedNd);
         let edges = parseEdges(defaults, parsedEd, nodes);
 
+        console.log(edges)
 
-        if (defaults["autoLayout"]) {
+        //TODO met keys uit hashmap werken
+        if (defaults[GRAPH]["autoLayout"]) {
             const dagreGraph = new dagre.graphlib.Graph();
             dagreGraph.setDefaultEdgeLabel(() => ({}));
             [nodes, edges] = getLayoutedElementsDagre(dagreGraph, nodes, edges, defaults);
@@ -200,7 +201,6 @@ const EditorArea = ({setNodes, setEdges}) => {
 
         setNodes(nodes);
         setEdges(edges);
-
     }
 
 
@@ -215,7 +215,7 @@ const EditorArea = ({setNodes, setEdges}) => {
                 {errorMessages.map(e => <p>{e}</p>)}
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="danger" onClick={() => handleErrorPopUpClose()}>
+                <Button variant="danger" onClick={handleErrorPopUpClose}>
                     OK
                 </Button>
             </Modal.Footer>
@@ -223,8 +223,11 @@ const EditorArea = ({setNodes, setEdges}) => {
 
         <div className="d-flex">
             {
-                examples.map((_, i) => <Button className="primary" onClick={e => loadExample(e, i + 1)}
-                                               key={i}>example {i + 1}</Button>
+                examples.map((_, i) => (
+                        <Button className="primary" onClick={e => loadExample(e, i + 1)}
+                                key={i}>example {i + 1}
+                        </Button>
+                    )
                 )
             }
         </div>
@@ -243,15 +246,11 @@ const EditorArea = ({setNodes, setEdges}) => {
         <div className="edit-area" id="global-default-editor" style={{width:"49%", display: "inline-block"}}>
             <div className="code-editor resizable" style={{height: "200px"}}>
                 <h5>Global defaults editor</h5>
-
                 <MyEditor language={language} data={globalDefaults} setData={setGlobalDefaults}
                           modelName={"global-defaults-model"} schema={globalDefaultSchema}/>
-
             </div>
 
-            <div className="d-flex resizable code-editor"
-                 style={{height: "350px"}}>
-
+            <div className="d-flex resizable code-editor" style={{height: "350px"}}>
                 <div className="node-edge-editor">
                     <h5>Node editor</h5>
                     <MyEditor language={language} data={nodesData} setData={setNodesData} modelName={"nodes-model"}

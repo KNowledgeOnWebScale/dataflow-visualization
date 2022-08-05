@@ -1,11 +1,19 @@
 import dagre from "dagre";
+import {GRAPH, KEY_VALUES, NODE} from "./editorUtil";
+
+// TODO: overal met keys werken uit de hashmap
 
 export function getLayoutedElementsDagre(dagreGraph, nodes, edges, globalDefaults) {
 
-    dagreGraph.setGraph({ rankdir: globalDefaults.orientation === "horizontal" ? "LR" : "TB" });
+    dagreGraph.setGraph({rankdir: globalDefaults[GRAPH][KEY_VALUES[GRAPH].ORIENTATION.id] === "horizontal" ? "LR" : "TB"});
+
+    //console.log(globalDefaults[GRAPH][KEY_VALUES[GRAPH].ORIENTATION.id])
 
     nodes.forEach((node) => {
-        dagreGraph.setNode(node.id, { width: node.width || globalDefaults.width, height: node.height || globalDefaults.height });
+        dagreGraph.setNode(node.id, {
+            width: node.width || globalDefaults[NODE].width,
+            height: node.height || globalDefaults[NODE].height
+        });
     });
 
     edges.forEach((edge) => {
@@ -18,8 +26,8 @@ export function getLayoutedElementsDagre(dagreGraph, nodes, edges, globalDefault
         const nodeWithPosition = dagreGraph.node(node.id);
 
         node.position = {
-            x: nodeWithPosition.x - (node.width || globalDefaults.width) / 2,
-            y: nodeWithPosition.y - (node.height || globalDefaults.height) / 2,
+            x: nodeWithPosition.x - (node.width || globalDefaults[NODE].width) / 2,
+            y: nodeWithPosition.y - (node.height || globalDefaults[NODE].height) / 2,
         };
 
         return node;
@@ -96,13 +104,16 @@ function fixVgroups(allNodes, vgroupId) {
 
     let referenceNode = nodes.slice(i, 1)[0];
 
-    let deltaY = maxHeight / 2;  //TODO mss als de orientatie horizontaal is, beetje dichter en als de orientatie verticaal is, wat verder
+    // TODO mss als de orientatie horizontaal is, beetje dichter en als de orientatie verticaal is, wat verder
+    //  mss gwn algemeen een manier vinden om de spacing te definiëren
+
+    let deltaY = maxHeight / 2;
     let previousY = pos.y;
     let previousHeight = referenceNode.data.height;
     let previousWidth = referenceNode.data.width;
 
     for (let n of nodes.filter((_, index) => index !== i)) {
-        n.position.x = pos.x + (previousWidth-n.data.width)/2;
+        n.position.x = pos.x + (previousWidth - n.data.width) / 2;
         n.position.y = previousY + previousHeight + deltaY;
         previousY = n.position.y
         previousWidth = n.data.width;
@@ -146,8 +157,8 @@ function fixHgroups(allNodes, hgroupId) {
     let previousWidth = referenceNode.data.width;
 
     for (let n of nodes.filter((_, index) => index !== i)) {
-        n.position.y = pos.y + (previousHeight-n.data.height)/2;
-        n.position.x = previousX + previousWidth + deltaX ;
+        n.position.y = pos.y + (previousHeight - n.data.height) / 2;
+        n.position.x = previousX + previousWidth + deltaX;
         previousX = n.position.x
         previousWidth = n.data.width;
         previousHeight = n.data.height;

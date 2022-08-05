@@ -64,7 +64,7 @@ const MyEditor = ({language, data, setData, modelName, schema}) => {
                 onChange={content => setData(content)}
                 theme="vs-dark"
                 style={{
-                    width: "100%",
+                    width: "100%"
                 }}
             />
         </div>
