@@ -1,10 +1,15 @@
 import {Button} from "react-bootstrap";
 import {yaml2json} from "./jsonYamlUtil";
-import {useRef} from "react";
+import {useRef, useState} from "react";
+import ErrorModal from "./editors/ErrorModal";
 
 const ControlsComponent = ({language, setLanguage, globalDefaults, nodesData, edgesData, setData}) => {
 
     const inputFile = useRef(null)
+
+    const [errorTitle, setErrorTitle] = useState("");
+    const [errorMessages, setErrorMessages] = useState([]);  // TODO: mss fixen dat dit ook een string kan zijn
+    const [errorModalVisible, setErrorModalVisible] = useState(false);
 
     const globalDefaultsID = "globalDefaults";
     const nodesId = "nodes";
@@ -14,7 +19,8 @@ const ControlsComponent = ({language, setLanguage, globalDefaults, nodesData, ed
         e.preventDefault();
 
         //TODO: check syntax first
-
+        // If invalid, pop up the errorModal
+        // Do this when issue 30 is implemented
 
         let globalDefaultsConfig = JSON.parse(language === "json" ? globalDefaults : yaml2json(globalDefaults));
         let nodesConfig = JSON.parse(language === "json" ? nodesData : yaml2json(nodesData));
@@ -52,9 +58,18 @@ const ControlsComponent = ({language, setLanguage, globalDefaults, nodesData, ed
         reader.readAsText(fileObject);
 
         reader.onload = () => {
-            const fileAsJson = JSON.parse(reader.result);
+            let fileAsJson;
+            try {
+                fileAsJson = JSON.parse(reader.result);
+            } catch (e) {
+                setErrorTitle("Error while parsing content of file as JSON.");
+                setErrorMessages([`Make sure the file is valid JSON, with keys '${globalDefaultsID}', '${nodesId}' and '${edgesId}'.`])
+                setErrorModalVisible(true);
+                console.warn(e);
+                return;
+            }
+            console.log(fileAsJson);
 
-            console.log(fileAsJson)
             setData(
                 JSON.stringify(fileAsJson[globalDefaultsID], null, 4),
                 JSON.stringify(fileAsJson[nodesId], null, 4),
@@ -65,17 +80,22 @@ const ControlsComponent = ({language, setLanguage, globalDefaults, nodesData, ed
 
 
         reader.onerror = () => {
-            // TODO: mss werken met errorModal
-            // OOk checken of het wel correct kan geparsed worden als json, indien niet correcte error message tonen
+
+            setErrorTitle("Could not open file.");
+            setErrorModalVisible(true);
 
             console.warn("Error while reading the imported file.");
         }
+
         // Reset file input
         e.target.value = null;
 
     }
 
     return <>
+        <ErrorModal errorModalVisible={errorModalVisible} errorMessageTitle={errorTitle} errorMessages={errorMessages}
+                    handleErrorPopUpClose={() => setErrorModalVisible(false)}/>
+
         <Button variant={"success"} onClick={handleExport}>Export config</Button>
         <Button variant={"success"} onClick={handleImport}>Import config</Button>
         <input type='file' id='file' ref={inputFile} onChange={handleFileChange} style={{display: 'none'}}/>
