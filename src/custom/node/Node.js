@@ -6,7 +6,7 @@ import {KEY_VALUES, NODE} from "../editors/configParsing";
 import {getShape} from "./nodeUtil";
 
 
-import cylinder from "../../assets/cylinder.svg"
+//import cylinder from "../../assets/cylinder.svg"
 
 export default memo(({data, isConnectable}) => {
 
