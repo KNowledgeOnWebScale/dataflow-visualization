@@ -2,13 +2,13 @@ import {Button} from "react-bootstrap";
 import dagre from "dagre";
 import {useState} from "react";
 
-import {GRAPH, parseEdges, parseGlobalDefaults, parseNodes} from "./configParsing";
-import {getLayoutedElementsDagre} from "./editorUtilPositioning";
-import {edgeSchema, globalDefaultSchema, nodeSchema, validateJSON} from "./schemaValidation";
+import {GRAPH, parseEdges, parseGlobalDefaults, parseNodes} from "../../lib/configParsing";
+import {getLayoutedElementsDagre} from "../../lib/nodeAutoPositioning";
+import {edgeSchema, globalDefaultSchema, nodeSchema, validateJSON} from "../../lib/schemaValidation";
 import CodeEditor from "./CodeEditor";
-import ErrorModal from "./ErrorModal";
+import ErrorModal from "../ErrorModal";
 import LanguageSwitcher from "../LanguageSwitcher";
-import {yaml2json} from "../jsonYamlUtil";
+import {yaml2json} from "../../lib/jsonYamlConversionUtil";
 
 
 const EditorArea = ({
@@ -30,6 +30,7 @@ const EditorArea = ({
     const [errorMessageTitle, setErrorMessageTitle] = useState("");
     const [errorMessages, setErrorMessages] = useState([]);
 
+//TODO: before parsing, check if all necessary keys are present, if not, do user friendly error handling
 
 // Convert what's inside the editors to a graph
     function handleConvert(e) {
@@ -117,22 +118,23 @@ const EditorArea = ({
 
         <div className="edit-area" /*style={{width: "49%", display: "inline-block"}}*/>
 
-                <div className="small-editor-div"/*className="node-edge-editor"*/>
-                    <h5>Global defaults editor</h5>
-                    <CodeEditor language={language} data={globalDefaults} setData={setGlobalDefaults} modelName={"global-defaults-model"}
-                                schema={globalDefaultSchema}/>
-                </div>
+            <div className="small-editor-div"/*className="node-edge-editor"*/>
+                <h5>Global defaults editor</h5>
+                <CodeEditor language={language} data={globalDefaults} setData={setGlobalDefaults}
+                            modelName={"global-defaults-model"}
+                            schema={globalDefaultSchema}/>
+            </div>
 
-                <div className="editor-div"/*className="node-edge-editor"*/>
-                    <h5>Node editor</h5>
-                    <CodeEditor language={language} data={nodesData} setData={setNodesData} modelName={"nodes-model"}
-                                schema={nodeSchema}/>
-                </div>
-                <div className="editor-div" /*className="node-edge-editor"*/>
-                    <h5>Edge editor</h5>
-                    <CodeEditor language={language} data={edgesData} setData={setEdgesData} modelName={"edges-model"}
-                                schema={edgeSchema}/>
-                </div>
+            <div className="editor-div"/*className="node-edge-editor"*/>
+                <h5>Node editor</h5>
+                <CodeEditor language={language} data={nodesData} setData={setNodesData} modelName={"nodes-model"}
+                            schema={nodeSchema}/>
+            </div>
+            <div className="editor-div" /*className="node-edge-editor"*/>
+                <h5>Edge editor</h5>
+                <CodeEditor language={language} data={edgesData} setData={setEdgesData} modelName={"edges-model"}
+                            schema={edgeSchema}/>
+            </div>
 
             <Button variant="primary" onClick={e => handleConvert(e)}>Convert</Button>
 

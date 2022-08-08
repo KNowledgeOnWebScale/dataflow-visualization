@@ -1,7 +1,7 @@
 import {addEdge, useEdgesState, useNodesState} from "react-flow-renderer";
 import EditorArea from "./editors/EditorArea";
 import {useCallback, useState} from "react";
-import ExampleComponent from "./ExampleComponent";
+import ExampleComponent from "./ExamplesComponent";
 import ControlsComponent from "./ControlsComponent";
 import ReactFlowComponent from "./ReactFlowComponent";
 
@@ -31,7 +31,7 @@ const Visualizer = () => {
 
         <ExampleComponent language={language} setData={setData}/>
         <ControlsComponent language={language} setLanguage={setLanguage} globalDefaults={globalDefaults}
-                                   nodesData={nodesData} edgesData={edgesData} setData={setData}/>
+                           nodesData={nodesData} edgesData={edgesData} setData={setData}/>
 
         <table style={{width: "100%", marginLeft: "5px", marginRight: "5px"}}>
             <tr>

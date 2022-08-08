@@ -1,5 +1,5 @@
 import Dropdown from "react-bootstrap/Dropdown";
-import {json2yaml, yaml2json} from "./jsonYamlUtil";
+import {json2yaml, yaml2json} from "../lib/jsonYamlConversionUtil";
 
 const LanguageSwitcher = ({language, setLanguage, setData, globalDefaults, nodesData, edgesData}) => {
 

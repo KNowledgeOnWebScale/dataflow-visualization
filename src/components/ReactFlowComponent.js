@@ -9,9 +9,10 @@ const ReactFlowComponent = ({nodes, edges, onNodesChange, onEdgesChange, onConne
 
     return <>
 
-        <div style={{height: window.innerHeight * 0.95,
-                    border: "solid 1px black", width: "97%"
-            }}
+        <div style={{
+            height: window.innerHeight * 0.95,
+            border: "solid 1px black", width: "97%"
+        }}
 
             /*style={{
             width: window.innerWidth * 0.48,
