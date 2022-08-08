@@ -1,4 +1,3 @@
-
 export const GRAPH = "graph";
 export const NODE = "node";
 export const EDGE = "edge";
@@ -55,7 +54,13 @@ export const KEY_VALUES = {
         "THICKNESS": {id: "thickness", "canBeGlobal": true, value: 1.2, type: "number", "cssProperty": "strokeWidth"},    // Thickness of edge
         "MARKER_END": {id: "markerEnd", "canBeGlobal": true, value: {}, type: "object"},             // Marker at end of the edge
         "MARKER_START": {id: "markerStart", "canBeGlobal": true, value: {}, type: "object"}, //TODO  hoe object fixen ivm intellisense (nu hardcoded in schemaValidation.js)?       // Marker at beginning of the edge
-        "STROKE_DASHARRAY": {id: "strokeDasharray", "canBeGlobal": true, value: 0, type: ["number", "string"], "cssProperty": "strokeDasharray"},  // The stroke dasharray of the edges
+        "STROKE_DASHARRAY": {
+            id: "strokeDasharray",
+            "canBeGlobal": true,
+            value: 0,
+            type: ["number", "string"],
+            "cssProperty": "strokeDasharray"
+        },  // The stroke dasharray of the edges
         "ANIMATED": {id: "animated", "canBeGlobal": true, value: false, type: "boolean"},            // Standard animation supported by React Flow
         "ANIMATION": {id: "animation", "canBeGlobal": true, type: "string", "cssProperty": "animation"},                         // Custom animation
         "TYPE": {                                                               // Type of edge (default, step, smoothstep, straight)
@@ -83,104 +88,6 @@ export const KEY_VALUES = {
 
 };
 
-/*
-// Keys that can be used in the JSON representation of nodes
-export const NODE_KEYS = {
-    ID: {id: "id", type: "string"},
-    POSITION: {id: "position", type: "object"},
-    Z_INDEX: {id: "zIndex", type: "number"},
-
-    // TODO: eignl ook regex (comunica, solid, rmlio),
-    //  mss een aparte map maken voor images en dan de content van die dir opvragen om niet meer namen te moeten hardcoden
-    IMAGE: {id: "image", type: "string"},
-    LABEL: {id: "label", type: "string"},
-    TITLE: {id: "title", type: "string"},
-
-    PARENT: {id: "parentNode", type: "string"},  // TODO nog fixen of dat dit wel een bestaande id is
-
-    //TODO: vgroup, hgroup
-
-    "FILL": {"id": GLOBAL_DEFAULT_KEY_VALUES.FILL.id, "type": GLOBAL_DEFAULT_KEY_VALUES.FILL.type},
-    "FONTSIZE": {"id": GLOBAL_DEFAULT_KEY_VALUES.FONTSIZE.id, "type": GLOBAL_DEFAULT_KEY_VALUES.FONTSIZE.type},
-    "SHAPE": {
-        "id": GLOBAL_DEFAULT_KEY_VALUES.SHAPE.id,
-        "type": GLOBAL_DEFAULT_KEY_VALUES.SHAPE.type,
-        "enum": GLOBAL_DEFAULT_KEY_VALUES.SHAPE.enum
-    },
-    "STROKE": {"id": GLOBAL_DEFAULT_KEY_VALUES.STROKE.id, "type": GLOBAL_DEFAULT_KEY_VALUES.STROKE.type},
-    "STROKE_WIDTH": {
-        "id": GLOBAL_DEFAULT_KEY_VALUES.STROKE_WIDTH.id,
-        "type": GLOBAL_DEFAULT_KEY_VALUES.STROKE_WIDTH.type
-    },
-    "HEIGHT": {"id": GLOBAL_DEFAULT_KEY_VALUES.HEIGHT.id, "type": GLOBAL_DEFAULT_KEY_VALUES.HEIGHT.type},
-    "WIDTH": {"id": GLOBAL_DEFAULT_KEY_VALUES.WIDTH.id, "type": GLOBAL_DEFAULT_KEY_VALUES.WIDTH.type},
-};
-
- */
-
-/*
-// Keys that can be used in the JSON representation of edges
-// Some things can also be done with css, that is why there are two hashmaps
-export const EDGE_KEYS = {
-    "ANIMATION": {
-        "id": GLOBAL_DEFAULT_KEY_VALUES.ANIMATION.id,
-        "type": GLOBAL_DEFAULT_KEY_VALUES.ANIMATION.type,
-        "cssProperty": "animation"
-    },
-    "EDGE_COLOR": {
-        "id": GLOBAL_DEFAULT_KEY_VALUES.EDGE_COLOR.id,
-        "type": GLOBAL_DEFAULT_KEY_VALUES.EDGE_COLOR.type,
-        "cssProperty": "stroke"
-    },
-    "EDGE_THICKNESS": {
-        "id": GLOBAL_DEFAULT_KEY_VALUES.EDGE_THICKNESS.id,
-        "type": GLOBAL_DEFAULT_KEY_VALUES.EDGE_THICKNESS.type,
-        "cssProperty": "strokeWidth"
-    },
-    "STROKE_DASHARRAY": {
-        "id": GLOBAL_DEFAULT_KEY_VALUES.STROKE_DASHARRAY.id,
-        "type": GLOBAL_DEFAULT_KEY_VALUES.STROKE_DASHARRAY.type,
-        "cssProperty": "strokeDasharray"
-    },
-
-    "SOURCE": {id: "source", type: "string", required: true},
-    "TARGET": {id: "target", type: "string", required: true},
-    "Z_INDEX": {id: GLOBAL_DEFAULT_KEY_VALUES.Z_INDEX.id, type: "number"},
-    "LABEL": {id: "label", type: "string"},
-    "SOURCE_HANDLE": {
-        id: "sourceHandle",
-        type: "string",
-        enum: ["left-source", "right-source", "top-source", "bottom-source"]
-    },
-    "TARGET_HANDLE": {
-        id: "targetHandle",
-        type: "string",
-        enum: ["left-target", "right-target", "top-target", "bottom-target"]
-    },
-
-    "ANIMATED": {
-        "id": GLOBAL_DEFAULT_KEY_VALUES.ANIMATED.id,
-        "type": GLOBAL_DEFAULT_KEY_VALUES.ANIMATED.TYPE,
-        "canBeGlobal": true
-    },
-    "TYPE": {
-        "id": GLOBAL_DEFAULT_KEY_VALUES.TYPE.id,
-        "type": GLOBAL_DEFAULT_KEY_VALUES.TYPE.type,
-        "enum": GLOBAL_DEFAULT_KEY_VALUES.TYPE.enum,
-        "canBeGlobal": true
-    },
-    "MARKER_END": {
-        "id": GLOBAL_DEFAULT_KEY_VALUES.MARKER_END.id,
-        "type": GLOBAL_DEFAULT_KEY_VALUES.MARKER_END.type,
-        "canBeGlobal": true
-    },
-    "MARKER_START": {
-        "id": GLOBAL_DEFAULT_KEY_VALUES.MARKER_START.id,
-        "type": GLOBAL_DEFAULT_KEY_VALUES.MARKER_START.type,
-        "canBeGlobal": true
-    }
-}
-*/
 
 export function parseGlobalDefaults(globalDefaults) {
 
@@ -352,7 +259,7 @@ export function parseEdges(globalDefaults, edges, nodes) {
             let value = EDGE_KEYS[key]["id"];
 
             if (!edge.hasOwnProperty(value) && globalDefaults[EDGE].hasOwnProperty(value)) {
-                if (typeof globalDefaults[value] === 'object') {
+                if (typeof globalDefaults[EDGE][value] === 'object') {
                     edge[value] = {...globalDefaults[EDGE][value]};  // Deep copy, because e.g. markerStart does not have to be the same everywhere
                 } else {
                     edge[value] = globalDefaults[EDGE][value];
@@ -361,7 +268,6 @@ export function parseEdges(globalDefaults, edges, nodes) {
 
         }
 
-        // TODO: die dingen zijn nu ook keys
         // markerStart will not be oriented correctly
         if (!edge[EDGE_KEYS.MARKER_START.id].hasOwnProperty("orient")) {
             edge[EDGE_KEYS.MARKER_START.id]["orient"] = "auto-start-reverse";
@@ -467,8 +373,6 @@ function getSourceNode_targetNode_fromId(edge, nodes) {
     const targetNode = nodes.find(n => n.id === edge["target"]);
     return [sourceNode, targetNode];
 }
-
-
 
 
 function fixNodeGroups(nodes) {
