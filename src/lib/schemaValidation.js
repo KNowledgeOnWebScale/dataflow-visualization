@@ -10,6 +10,7 @@ require("ajv-errors")(ajv, /*{keepErrors: false}*/);
 
 const arrowSchema = {
     type: "object",
+    title: "Arrowhead schema",
     properties: {
         "type": {
             type: "string", enum: ["arrow", "arrowclosed"],
@@ -28,6 +29,7 @@ const arrowSchema = {
 
 const positionSchema = {
     type: "object",
+    title: "Position schema",
     properties: {
         "x": {
             type: "number",
@@ -72,6 +74,8 @@ function createClearErrorMessage(id, type, patternEnum) {
 
 export const globalDefaultSchema = {
     type: "object",
+    title: "Global defaults",
+    description: "This schema is to define the properties inside the global defaults config.",
     properties: {},
     errorMessage: {
         properties: {},
@@ -82,9 +86,11 @@ export const globalDefaultSchema = {
 
 export const nodeSchema = {
     type: "array",
+    title: "Array of nodes",
     items:
         {
             type: "object",
+            title: "Node",
             properties: {},
             errorMessage: {
                 type: "Each node should be an object",
@@ -99,9 +105,11 @@ export const nodeSchema = {
 
 export const edgeSchema = {
     type: "array",
+    title: "Array of edges",
     items:
         {
             type: "object",
+            title: "Edge",
             required: [],
             properties: {},
             errorMessage: {
@@ -148,9 +156,17 @@ export function initSchemas() {
 
 }*/
 
+
+
+
+// TODO: Hier klopt iets niet
+// Ik bouw eigenlijk het schema van nodes en edges 2 keer op
+// TODO: hergebruiken!!!
+
 function globalDefaultNestedKey(key) {
     const nestedObj = {
         type: "object",
+        title: key,
         properties: {}
     }
 
@@ -163,6 +179,7 @@ function globalDefaultNestedKey(key) {
         nestedObj["properties"][value.id] = {
             type: value.type,
             enum: value.enum,
+            description: value.description,
             errorMessage: {
                 type: createClearErrorMessage(value.id, value.type, value.enum)
             }
@@ -198,6 +215,7 @@ function initNodesSchema() {
         nodeSchema.items.properties[value.id] = {
             type: value.type,
             enum: value.enum,
+            description: value.description,
 
             // In global defaults, the errorMessages are not put inside properties
             // But here it must be inside properties in order to work
