@@ -6,8 +6,6 @@ import {KEY_VALUES, NODE} from "../../lib/configParsing";
 import {getShape} from "./nodeUtil";
 
 
-import cylinder from "../../assets/cylinder.svg"
-
 export default memo(({data, isConnectable}) => {
 
     let width = data[KEY_VALUES[NODE].WIDTH.id];
@@ -17,13 +15,21 @@ export default memo(({data, isConnectable}) => {
 
     let element = getShape(data[KEY_VALUES[NODE].SHAPE.id], data[KEY_VALUES[NODE].FILL.id], data[KEY_VALUES[NODE].STROKE.id], data[KEY_VALUES[NODE].STROKE_WIDTH.id]);
 
+
     return (
         <>
+
+
+            {/*
+
+            Maybe this is a solution:  https://codepen.io/alvarotrigo/pen/popwJKy
 
             {
                 ["cylinder"].map(e => {
 
-                    (document.getElementById("cylinder").style.fill = "yellow")
+                    if (document.getElementById("cylinder")) {
+                        (document.getElementById("cylinder").style.fill = "yellow")
+                    }
                     console.log(document.getElementById("cylinder"))
                     return (
                         <svg style={{width: 50, height: 50}}>
@@ -34,7 +40,7 @@ export default memo(({data, isConnectable}) => {
                 })
 
             }
-
+/*}
             {/*
 
             https://www.geeksforgeeks.org/how-to-import-a-svg-file-in-javascript/
