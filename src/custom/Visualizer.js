@@ -30,14 +30,16 @@ const Visualizer = () => {
     return <>
 
         <ExampleComponent language={language} setData={setData}/>
-        <ControlsComponent/> {/* TODO: bv exporting enz*/}
+        <ControlsComponent language={language} setLanguage={setLanguage} globalDefaults={globalDefaults}
+                                   nodesData={nodesData} edgesData={edgesData} setData={setData}/>
 
         <table style={{width: "100%", marginLeft: "5px", marginRight: "5px"}}>
             <tr>
                 <td style={{width: "30%"/*border: "5px solid green"*/}}>
                     <EditorArea setNodes={setNodes} setEdges={setEdges} language={language} setLanguage={setLanguage}
                                 setData={setData} globalDefaults={globalDefaults} setGlobalDefaults={setGlobalDefaults}
-                                edgesData={edgesData} setEdgesData={setEdgesData} nodesData={nodesData} setNodesData={setNodesData}/>
+                                edgesData={edgesData} setEdgesData={setEdgesData} nodesData={nodesData}
+                                setNodesData={setNodesData}/>
                 </td>
                 <td style={{width: "3%"}}></td>
                 <td>
