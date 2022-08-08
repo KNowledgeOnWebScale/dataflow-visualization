@@ -1,9 +1,18 @@
-import {Button, Form} from "react-bootstrap";
+import {Button} from "react-bootstrap";
 import {json2yaml, yaml2json} from "../lib/jsonYamlConversionUtil";
 import {useRef, useState} from "react";
 import ErrorModal from "./ErrorModal";
 
-const ControlsComponent = ({language, setLanguage, globalDefaults, nodesData, setNodesData, edgesData, setData, nodes}) => {
+const ControlsComponent = ({
+                               language,
+                               setLanguage,
+                               globalDefaults,
+                               nodesData,
+                               setNodesData,
+                               edgesData,
+                               setData,
+                               nodes
+                           }) => {
 
     const inputFile = useRef(null)
 
@@ -107,23 +116,31 @@ const ControlsComponent = ({language, setLanguage, globalDefaults, nodesData, se
         let newNodesData = JSON.parse(language === "yaml" ? yaml2json(nodesData) : nodesData);
 
 
-        if (nodes.length !== newNodesData.length) {
-            // TODO: Checking length is the only check so far (mss ook ID's checken)
-
+        function nodesReactFlowNotSameAsNodesEditor() {
             setErrorTitle("Error while updating config of nodes.");
-            setErrorMessages(["Make sure the flow visualization is the visualization of the configs."]);
+            setErrorMessages(["Make sure the flow visualization is the visualization of the configs.", "Make sure to click 'convert' first."]);
             setErrorModalVisible(true);
+        }
+
+        if (nodes.length !== newNodesData.length) {
+            nodesReactFlowNotSameAsNodesEditor();
             return;
         }
 
 
-
         for (let i = 0; i < newNodesData.length; i += 1) {
             newNodesData[i]["position"] = nodes[i]["position"];
+
+            if (newNodesData[i].shape !== nodes[i].data.shape) {
+                // console.warn(newNodesData[i].shape, nodes[i].data.shape)
+                nodesReactFlowNotSameAsNodesEditor();
+                return;
+            }
+
         }
 
-        const newNodesDataJSONstringify = JSON.stringify(newNodesData, null, 4)
-        setNodesData(language === "yaml" ? json2yaml(newNodesDataJSONstringify) : newNodesDataJSONstringify);
+        const newNodesDataJSONStringify = JSON.stringify(newNodesData, null, 4);
+        setNodesData(language === "yaml" ? json2yaml(newNodesDataJSONStringify) : newNodesDataJSONStringify);
 
     }
 
