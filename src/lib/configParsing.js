@@ -30,6 +30,12 @@ export const KEY_VALUES = {
             enum: ["8-star", "big-star", "circle", "cylinder", "diamond", "hexagon", "note", "rectangle", "square", "star", "triangle", "comunica", "rmlio", "solid"],
         },              // Shape of node
         "STROKE": {id: "stroke", "canBeGlobal": true, value: "black", type: "string"},             // Color of stroke of node
+        "STROKE_DASHARRAY": {
+            id: "strokeDasharray",
+            "canBeGlobal": true,
+            value: 0,
+            type: ["number", "string"]
+        },
         "STROKE_WIDTH": {id: "strokeWidth", "canBeGlobal": true, value: 1, type: "number"},        // Width of stroke of node
         "HEIGHT": {id: "height", "canBeGlobal": true, value: 50, type: "number"},                  // Height of node
         "WIDTH": {id: "width", "canBeGlobal": true, value: 50, type: "number"},                    // Width of node
