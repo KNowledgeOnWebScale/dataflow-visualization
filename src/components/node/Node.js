@@ -6,7 +6,7 @@ import {KEY_VALUES, NODE} from "../../lib/configParsing";
 import {getShape} from "./nodeUtil";
 
 
-//import cylinder from "../../assets/cylinder.svg"
+import cylinder from "../../assets/cylinder.svg"
 
 export default memo(({data, isConnectable}) => {
 
@@ -20,6 +20,20 @@ export default memo(({data, isConnectable}) => {
     return (
         <>
 
+            {
+                ["cylinder"].map(e => {
+
+                    (document.getElementById("cylinder").style.fill = "yellow")
+                    console.log(document.getElementById("cylinder"))
+                    return (
+                        <svg style={{width: 50, height: 50}}>
+                            <image href={cylinder} id="cylinder"/>
+                        </svg>
+                    )
+
+                })
+
+            }
 
             {/*
 
@@ -38,11 +52,13 @@ export default memo(({data, isConnectable}) => {
 
             <svg style={{width: width, height: height}}>
 
+
                 <svg style={{width: width}} key={Math.random()}>
                     {
                         element
                     }
                 </svg>
+
 
                 <svg style={{width: width, height: height}}>
                     {data[KEY_VALUES[NODE].IMAGE.id] &&
