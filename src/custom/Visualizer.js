@@ -10,7 +10,7 @@ const Visualizer = () => {
     const [nodes, setNodes, onNodesChange] = useNodesState([]);
     const [edges, setEdges, onEdgesChange] = useEdgesState([]);
 
-    const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), []);
+    const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
 
     const [language, setLanguage] = useState("json");
 
