@@ -20,7 +20,7 @@ This is an application to generate flow graphs from [JSON](https://www.json.org/
 
 ## How to run
 
-Visit https://tibostr.github.io/dataflow-visualization/. If you want to run this application locally, run `npm start`
+Visit [https://knowledgeonwebscale.github.io/dataflow-visualization/](https://knowledgeonwebscale.github.io/dataflow-visualization/). If you want to run this application locally, run `npm start`
 and open http://localhost:3000/.
 
 ## Documentation
