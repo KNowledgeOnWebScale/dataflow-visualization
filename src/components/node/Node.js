@@ -15,7 +15,9 @@ export default memo(({data, isConnectable}) => {
 
     let fontsize = data[KEY_VALUES[NODE].FONTSIZE.id];
 
-    let element = getShape(data[KEY_VALUES[NODE].SHAPE.id], data[KEY_VALUES[NODE].FILL.id], data[KEY_VALUES[NODE].STROKE.id], data[KEY_VALUES[NODE].STROKE_WIDTH.id]);
+    let element = getShape(
+        data[KEY_VALUES[NODE].SHAPE.id], data[KEY_VALUES[NODE].FILL.id], data[KEY_VALUES[NODE].STROKE.id], data[KEY_VALUES[NODE].STROKE_WIDTH.id], data[KEY_VALUES[NODE].STROKE_DASHARRAY.id]
+    );
 
     return (
         <>
