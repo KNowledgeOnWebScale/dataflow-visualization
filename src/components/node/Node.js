@@ -2,7 +2,7 @@ import React, {memo} from 'react';
 
 import {Handle} from 'react-flow-renderer';
 
-import {KEY_VALUES, NODE} from "../editors/configParsing";
+import {KEY_VALUES, NODE} from "../../lib/configParsing";
 import {getShape} from "./nodeUtil";
 
 
@@ -36,9 +36,9 @@ export default memo(({data, isConnectable}) => {
                    />
                  */}
 
-             <svg style={{width: width, height: height}}>
+            <svg style={{width: width, height: height}}>
 
-                 <svg style={{width: width}} key={Math.random()}>
+                <svg style={{width: width}} key={Math.random()}>
                     {
                         element
                     }

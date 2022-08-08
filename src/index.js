@@ -4,7 +4,7 @@ import "./styles.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
-import {initSchemas} from "./custom/editors/schemaValidation";
+import {initSchemas} from "./lib/schemaValidation";
 
 import App from "./App";
 

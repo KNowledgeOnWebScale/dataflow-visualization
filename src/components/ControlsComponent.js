@@ -1,7 +1,7 @@
 import {Button} from "react-bootstrap";
-import {yaml2json} from "./jsonYamlUtil";
+import {yaml2json} from "../lib/jsonYamlConversionUtil";
 import {useRef, useState} from "react";
-import ErrorModal from "./editors/ErrorModal";
+import ErrorModal from "./ErrorModal";
 
 const ControlsComponent = ({language, setLanguage, globalDefaults, nodesData, edgesData, setData}) => {
 

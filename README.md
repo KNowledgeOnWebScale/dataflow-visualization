@@ -108,7 +108,7 @@ very efficient to set all nodes manually. There are three mechanisms to make the
 #### Predefined images
 
 As mentioned before, the value of `image` can be a predefined value or a URL. If you want to add your own predefined
-image, edit the hashmap `SHAPES` in the file [nodeUtil.js](/src/custom/node/nodeUtil.js). Pull requests are always
+image, edit the hashmap `SHAPES` in the file [nodeUtil.js](/src/components/node/nodeUtil.js). Pull requests are always
 welcome.
 
 #### Add examples
@@ -119,7 +119,7 @@ add
 an example, just create another file. In this file, you should have a JSON object for the global defaults, an array of
 nodes
 and an array of edges. If your file is ready, import the JSON object and the arrays
-in [EditorArea.js](/src/custom/editors/EditorArea.js) and add your imports to the array `examples`. A button to load in
+in [EditorArea.js](/src/components/editors/EditorArea.js) and add your imports to the array `examples`. A button to load in
 your example will automatically be generated.
 
 ### Edges

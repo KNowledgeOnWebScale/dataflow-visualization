@@ -1,9 +1,9 @@
 import {examples} from "../data/examples"
 import {Button} from "react-bootstrap";
-import {json2yaml} from "./jsonYamlUtil";
+import {json2yaml} from "../lib/jsonYamlConversionUtil";
 
 
-const ExampleComponent = ({language, setData}) => {
+const ExamplesComponent = ({language, setData}) => {
 
     function loadExample(e, number) {
         e.preventDefault();
@@ -38,4 +38,4 @@ const ExampleComponent = ({language, setData}) => {
 
 }
 
-export default ExampleComponent;
+export default ExamplesComponent;
