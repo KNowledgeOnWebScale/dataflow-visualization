@@ -46,11 +46,12 @@ export default memo(({data, isConnectable}) => {
                     }
                 </svg>
 
-                <svg style={{width: width, height: height}}>
+                <svg viewBox={`0 0 ${width} ${height}`} width={width} height={height}>
                     {data[KEY_VALUES[NODE].IMAGE.id] &&
                         (getShape(data[KEY_VALUES[NODE].IMAGE.id]) ||
-                            <image key={Math.random()} href={data[KEY_VALUES[NODE].IMAGE.id]} width="100%" height="100%"
-                                   preserveAspectRatio="xMinYMin slice"/>)
+                            <image key={Math.random()} href={data[KEY_VALUES[NODE].IMAGE.id]}
+                                   width={width} height={height}/>
+                        )
                     }
                 </svg>
 
