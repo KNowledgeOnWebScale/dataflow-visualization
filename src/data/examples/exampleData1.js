@@ -8,7 +8,7 @@ export const globalDefaultsJSON = {
         fill: "royalblue",
     },
     edge: {
-        edgeColor: "darkgray",
+        color: "darkgray",
         markerEnd: {type: "arrowclosed"},
         markerStart: {type: "arrowclosed"}
     }

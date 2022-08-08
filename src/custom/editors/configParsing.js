@@ -51,8 +51,8 @@ export const KEY_VALUES = {
 
     // Keys that can be used in the JSON/YAML representation of edges
     [EDGE]: {
-        "EDGE_COLOR": {id: "edgeColor", "canBeGlobal": true, value: "black", type: "string", "cssProperty": "stroke"},        // Color of edge
-        "EDGE_THICKNESS": {id: "edgeThickness", "canBeGlobal": true, value: 1.2, type: "number", "cssProperty": "strokeWidth"},    // Thickness of edge
+        "COLOR": {id: "color", "canBeGlobal": true, value: "black", type: "string", "cssProperty": "stroke"},        // Color of edge
+        "THICKNESS": {id: "thickness", "canBeGlobal": true, value: 1.2, type: "number", "cssProperty": "strokeWidth"},    // Thickness of edge
         "MARKER_END": {id: "markerEnd", "canBeGlobal": true, value: {}, type: "object"},             // Marker at end of the edge
         "MARKER_START": {id: "markerStart", "canBeGlobal": true, value: {}, type: "object"}, //TODO  hoe object fixen ivm intellisense (nu hardcoded in schemaValidation.js)?       // Marker at beginning of the edge
         "STROKE_DASHARRAY": {id: "strokeDasharray", "canBeGlobal": true, value: 0, type: ["number", "string"], "cssProperty": "strokeDasharray"},  // The stroke dasharray of the edges
