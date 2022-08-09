@@ -210,14 +210,14 @@ export const KEY_VALUES = {
             id: "sourceHandle",
             "canBeGlobal": true,
             type: "string",
-            enum: ["left-source", "right-source", "top-source", "bottom-source"],
+            enum: ["left", "right", "top", "bottom"],
             description: "Set where the edge should attach to the source node."
         },
         "TARGET_HANDLE": {
             id: "targetHandle",
             "canBeGlobal": true,
             type: "string",
-            enum: ["left-target", "right-target", "top-target", "bottom-target"],
+            enum: ["left", "right", "top", "bottom"],
             description: "Set where the edge should attach to the target node."
         },
         "TYPE": {                                                               // Type of edge (default, step, smoothstep, straight)
@@ -484,13 +484,13 @@ function fix_sourceHandle_targetHandle(globalDefaults, edge, nodes) {
     }
 
     const verticalCheck = [
-        [sourceNodePos.y <= targetNodePos.y, "bottom-source", "top-target"],
-        [sourceNodePos.y >= targetNodePos.y, "top-source", "bottom-target"]
+        [sourceNodePos.y <= targetNodePos.y, "bottom", "top"],
+        [sourceNodePos.y >= targetNodePos.y, "top", "bottom"]
     ];
 
     const horizontalCheck = [
-        [sourceNodePos.x <= targetNodePos.x, "right-source", "left-target"],
-        [sourceNodePos.x >= targetNodePos.x, "left-source", "right-target"]
+        [sourceNodePos.x <= targetNodePos.x, "right", "left"],
+        [sourceNodePos.x >= targetNodePos.x, "left", "right"]
     ];
 
     const check = {

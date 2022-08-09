@@ -57,8 +57,8 @@ export const edgesJSON = [
     {
         source: "comunica",
         target: "SPARQL",
-        sourceHandle: "bottom-source",
-        targetHandle: "top-target",
+        sourceHandle: "bottom",
+        targetHandle: "top",
         markerEnd: {},
         strokeDasharray: 3,
         animation: "none"

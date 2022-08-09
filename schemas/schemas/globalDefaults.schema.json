@@ -218,27 +218,27 @@
         "sourceHandle": {
           "type": "string",
           "enum": [
-            "left-source",
-            "right-source",
-            "top-source",
-            "bottom-source"
+            "left",
+            "right",
+            "top",
+            "bottom"
           ],
           "description": "Set where the edge should attach to the source node.",
           "errorMessage": {
-            "type": "sourceHandle must be string with possible values: left-source , right-source , top-source  or bottom-source"
+            "type": "sourceHandle must be string with possible values: left , right , top  or bottom"
           }
         },
         "targetHandle": {
           "type": "string",
           "enum": [
-            "left-target",
-            "right-target",
-            "top-target",
-            "bottom-target"
+            "left",
+            "right",
+            "top",
+            "bottom"
           ],
           "description": "Set where the edge should attach to the target node.",
           "errorMessage": {
-            "type": "targetHandle must be string with possible values: left-target , right-target , top-target  or bottom-target"
+            "type": "targetHandle must be string with possible values: left , right , top  or bottom"
           }
         },
         "type": {

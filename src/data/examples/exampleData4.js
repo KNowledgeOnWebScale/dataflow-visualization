@@ -189,8 +189,8 @@ export const edgesJSON = [
     {
         source: "RML-CSV",
         target: "rmlio",
-        sourceHandle: "bottom-source",
-        targetHandle: "top-target",
+        sourceHandle: "bottom",
+        targetHandle: "top",
         strokeDasharray: "6 3",
         markerEnd: {}
     },
@@ -198,8 +198,8 @@ export const edgesJSON = [
     {
         source: "comunica",
         target: "SPARQL",
-        sourceHandle: "bottom-source",
-        targetHandle: "top-target",
+        sourceHandle: "bottom",
+        targetHandle: "top",
         strokeDasharray: "6 3",
         markerEnd: {}
     }
