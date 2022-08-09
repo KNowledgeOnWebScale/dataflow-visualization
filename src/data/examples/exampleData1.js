@@ -1,3 +1,4 @@
+export const title = "autoLayout example"
 
 export const globalDefaultsJSON = {
     graph: {

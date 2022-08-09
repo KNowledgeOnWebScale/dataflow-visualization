@@ -7,7 +7,8 @@ This document is aimed at developers.
 In [index.js](src/index.js) set the variable `download` to `true`. Rerun the application and set the variable to `false`
 again. You will notice there were three JSON files downloaded. Paste the contents of these files in the accompanying
 files in the directory [schemas/schemas](schemas/schemas). Open your terminal, `cd` to `/schemas` and
-run `node JSONSchemaMarkdown.js`. The new markdowns will be generated. [README.md](README.md) already links to these files.
+run `node JSONSchemaMarkdown.js`. The new markdowns will be generated. [README.md](README.md) already links to these
+files.
 
 ### How to add shapes/images
 
@@ -24,8 +25,9 @@ So if you want to
 add
 an example, just create another file. In this file, you should have a JSON object for the global defaults, an array of
 nodes
-and an array of edges. If your file is ready, import the JSON object and the arrays
+and an array of edges. Optionally, you can set a title as well. This will be the text inside the button (so the contents
+of the buttons don't have to be `example x`). If your file is ready, import everything
 in [examples.js](./src/data/examples.js) and add your imports to the array `examples`. A button to load in
-your example will automatically show up if you restart this application.
+your example will automatically show up if you restart the application.
 
 
