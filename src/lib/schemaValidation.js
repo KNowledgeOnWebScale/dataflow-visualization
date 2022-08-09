@@ -11,6 +11,7 @@ require("ajv-errors")(ajv, /*{keepErrors: false}*/);
 const arrowSchema = {
     type: "object",
     title: "Arrowhead schema",
+    /*$id: "arrowSchema",*/
     properties: {
         "type": {
             type: "string", enum: ["arrow", "arrowclosed"],
@@ -30,6 +31,7 @@ const arrowSchema = {
 const positionSchema = {
     type: "object",
     title: "Position schema",
+    $id: "positionSchema",
     properties: {
         "x": {
             type: "number",
@@ -76,6 +78,7 @@ export const globalDefaultSchema = {
     type: "object",
     title: "Global defaults",
     description: "This schema is to define the properties inside the global defaults config.",
+    $id: "globalDefaultSchema",
     properties: {},
     errorMessage: {
         properties: {},
@@ -87,10 +90,12 @@ export const globalDefaultSchema = {
 export const nodeSchema = {
     type: "array",
     title: "Array of nodes",
+    $id: "nodeSchema",
     items:
         {
             type: "object",
             title: "Node",
+            required: [],
             properties: {},
             errorMessage: {
                 type: "Each node should be an object",
@@ -106,6 +111,7 @@ export const nodeSchema = {
 export const edgeSchema = {
     type: "array",
     title: "Array of edges",
+    $id: "edgeSchema",
     items:
         {
             type: "object",
@@ -157,22 +163,18 @@ export function initSchemas() {
 }*/
 
 
-
-
-// TODO: Hier klopt iets niet
-// Ik bouw eigenlijk het schema van nodes en edges 2 keer op
-// TODO: hergebruiken!!!
-
 function globalDefaultNestedKey(key) {
     const nestedObj = {
         type: "object",
         title: key,
+        description: key + " in global defaults",
+        $id: "globalDefaults" +  key.charAt(0).toUpperCase() + key.toLowerCase().slice(1),
         properties: {}
     }
 
     for (let value of Object.values(KEY_VALUES[key])) {
 
-        if (value.type === "object") {
+        if (value.type === "object" || !value.canBeGlobal) {
             continue;
         }
 
@@ -210,6 +212,10 @@ function initNodesSchema() {
 
         if (value.type === "object") {
             continue;
+        }
+
+        if (value.required) {
+            nodeSchema.items.required.push(value.id);
         }
 
         nodeSchema.items.properties[value.id] = {

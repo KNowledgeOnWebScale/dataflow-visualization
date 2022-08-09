@@ -1,0 +1,3 @@
+## animated Type
+
+`boolean`

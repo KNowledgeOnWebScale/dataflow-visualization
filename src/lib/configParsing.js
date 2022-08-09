@@ -5,15 +5,18 @@ export const EDGE = "edge";
 // These are the keys that can be used in globalDefaults
 // These keys are not standard supported by the library, that's why they are in a dict
 // The values of this dict should be used in the JSON representation
+
+//TODO: canBeGlobal doet niets voor jsonSchema
 export const KEY_VALUES = {
 
     [GRAPH]: {
         "AUTO_LAYOUT": {id: "autoLayout", "canBeGlobal": true, value: false, type: "boolean", description: "If set to true, an algorithm is used to automaticaly determine the positions of the nodes."},     // If true, use library 'dagrejs' to determine positioning of nodes
         "ORIENTATION": {
             id: "orientation", "canBeGlobal": true, value: "horizontal", type: "string",
-            enum: ["vertical", "horizontal"]
-        },
-        description: "The orientation of the graph. Set to `vertical` if you want to work from top to bottom or bottom to top."
+            enum: ["vertical", "horizontal"],
+            description: "The orientation of the graph. Set to `vertical` if you want to work from top to bottom or bottom to top."
+        }
+
     },
 
 
@@ -43,7 +46,7 @@ export const KEY_VALUES = {
         "HEIGHT": {id: "height", "canBeGlobal": true, value: 50, type: "number", description: "The height of the node."},                  // Height of node
         "WIDTH": {id: "width", "canBeGlobal": true, value: 50, type: "number", description: "The width of the node."},                    // Width of node
 
-        ID: {id: "id", "canBeGlobal": false, type: "string", description: "Used to refer to the node."},
+        ID: {id: "id", "canBeGlobal": false, type: "string", required: false, description: "Used to refer to the node."},
         POSITION: {id: "position", "canBeGlobal": false, type: "object", description: "The position of the node."},
         Z_INDEX: {id: "zIndex", "canBeGlobal": true, value: 0, type: "number", description: "Controls the stacking order of the nodes."},
         IMAGE: {id: "image", "canBeGlobal": true, type: "string", description: "The image inside a node. This image takes up the entire width and height of the node."},
@@ -79,17 +82,17 @@ export const KEY_VALUES = {
 
         "Z_INDEX": {id: "zIndex", "canBeGlobal": true, type: "number"},  // Leave value zIndex 0 (e.g. example 2)
         "LABEL": {id: "label", "canBeGlobal": true, type: "string"},
-        "SOURCE": {id: "source", "canBeGlobal": false, type: "string", required: true},  //TODO: mss wel true
-        "TARGET": {id: "target", "canBeGlobal": false, type: "string", required: true},
+        "SOURCE": {id: "source", "canBeGlobal": true, type: "string", required: true},
+        "TARGET": {id: "target", "canBeGlobal": true, type: "string", required: true},
         "SOURCE_HANDLE": {
             id: "sourceHandle",
-            "canBeGlobal": false,
+            "canBeGlobal": true,
             type: "string",
             enum: ["left-source", "right-source", "top-source", "bottom-source"]
         },
         "TARGET_HANDLE": {
             id: "targetHandle",
-            "canBeGlobal": false,
+            "canBeGlobal": true,
             type: "string",
             enum: ["left-target", "right-target", "top-target", "bottom-target"]
         },

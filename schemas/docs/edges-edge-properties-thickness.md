@@ -1,0 +1,3 @@
+## thickness Type
+
+`number`

@@ -1,0 +1,3 @@
+## zIndex Type
+
+`number`

@@ -1,0 +1,153 @@
+{
+  "type": "array",
+  "title": "Array of nodes",
+  "$id": "nodeSchema",
+  "items": {
+    "type": "object",
+    "title": "Node",
+    "required": [],
+    "properties": {
+      "fill": {
+        "type": "string",
+        "description": "Color of the node.",
+        "errorMessage": {
+          "type": "fill must be string"
+        }
+      },
+      "fontsize": {
+        "type": "number",
+        "description": "Size of the text inside the nodes.",
+        "errorMessage": {
+          "type": "fontsize must be number"
+        }
+      },
+      "shape": {
+        "type": "string",
+        "enum": [
+          "8-star",
+          "big-star",
+          "circle",
+          "cylinder",
+          "diamond",
+          "hexagon",
+          "note",
+          "rectangle",
+          "square",
+          "star",
+          "triangle",
+          "comunica",
+          "rmlio",
+          "solid"
+        ],
+        "description": "The shape of the node.",
+        "errorMessage": {
+          "type": "shape must be string with possible values: 8-star , big-star , circle , cylinder , diamond , hexagon , note , rectangle , square , star , triangle , comunica , rmlio  or solid"
+        }
+      },
+      "stroke": {
+        "type": "string",
+        "description": "The color of the stroke of the node.",
+        "errorMessage": {
+          "type": "stroke must be string"
+        }
+      },
+      "strokeDasharray": {
+        "type": [
+          "number",
+          "string"
+        ],
+        "description": "The dash pattern of the node.",
+        "errorMessage": {
+          "type": "strokeDasharray must be number or string"
+        }
+      },
+      "strokeWidth": {
+        "type": "number",
+        "description": "The thickness of the stroke of the nodes.",
+        "errorMessage": {
+          "type": "strokeWidth must be number"
+        }
+      },
+      "height": {
+        "type": "number",
+        "description": "The height of the node.",
+        "errorMessage": {
+          "type": "height must be number"
+        }
+      },
+      "width": {
+        "type": "number",
+        "description": "The width of the node.",
+        "errorMessage": {
+          "type": "width must be number"
+        }
+      },
+      "id": {
+        "type": "string",
+        "description": "Used to refer to the node.",
+        "errorMessage": {
+          "type": "id must be string"
+        }
+      },
+      "zIndex": {
+        "type": "number",
+        "description": "Controls the stacking order of the nodes.",
+        "errorMessage": {
+          "type": "zIndex must be number"
+        }
+      },
+      "image": {
+        "type": "string",
+        "description": "The image inside a node. This image takes up the entire width and height of the node.",
+        "errorMessage": {
+          "type": "image must be string"
+        }
+      },
+      "label": {
+        "type": "string",
+        "description": "The text inside a node.",
+        "errorMessage": {
+          "type": "label must be string"
+        }
+      },
+      "title": {
+        "type": "string",
+        "description": "The title of a node. E.g. useful to name a parentNode.",
+        "errorMessage": {
+          "type": "title must be string"
+        }
+      },
+      "parentNode": {
+        "type": "string",
+        "description": "The parent of other nodes. If you want to add a node inside another node, you have to set `parentNode` in the child as the ID of the parent.",
+        "errorMessage": {
+          "type": "parentNode must be string"
+        }
+      },
+      "position": {
+        "type": "object",
+        "title": "Position schema",
+        "$id": "positionSchema",
+        "properties": {
+          "x": {
+            "type": "number",
+            "errorMessage": "object.x must be number"
+          },
+          "y": {
+            "type": [
+              "number"
+            ],
+            "errorMessage": "object.y must be number"
+          }
+        }
+      }
+    },
+    "errorMessage": {
+      "type": "Each node should be an object",
+      "properties": {}
+    }
+  },
+  "errorMessage": {
+    "type": "Nodes are expected to be objects in an array"
+  }
+}

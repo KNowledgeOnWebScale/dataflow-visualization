@@ -1,0 +1,3 @@
+## parentNode Type
+
+`string`

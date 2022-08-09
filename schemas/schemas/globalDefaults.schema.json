@@ -1,0 +1,293 @@
+{
+  "type": "object",
+  "title": "Global defaults",
+  "description": "This schema is to define the properties inside the global defaults config.",
+  "$id": "globalDefaultSchema",
+  "properties": {
+    "graph": {
+      "type": "object",
+      "title": "graph",
+      "description": "graph in global defaults",
+      "$id": "globalDefaultsGraph",
+      "properties": {
+        "autoLayout": {
+          "type": "boolean",
+          "description": "If set to true, an algorithm is used to automaticaly determine the positions of the nodes.",
+          "errorMessage": {
+            "type": "autoLayout must be boolean"
+          }
+        },
+        "orientation": {
+          "type": "string",
+          "enum": [
+            "vertical",
+            "horizontal"
+          ],
+          "description": "The orientation of the graph. Set to `vertical` if you want to work from top to bottom or bottom to top.",
+          "errorMessage": {
+            "type": "orientation must be string with possible values: vertical  or horizontal"
+          }
+        }
+      }
+    },
+    "node": {
+      "type": "object",
+      "title": "node",
+      "description": "node in global defaults",
+      "$id": "globalDefaultsNode",
+      "properties": {
+        "fill": {
+          "type": "string",
+          "description": "Color of the node.",
+          "errorMessage": {
+            "type": "fill must be string"
+          }
+        },
+        "fontsize": {
+          "type": "number",
+          "description": "Size of the text inside the nodes.",
+          "errorMessage": {
+            "type": "fontsize must be number"
+          }
+        },
+        "shape": {
+          "type": "string",
+          "enum": [
+            "8-star",
+            "big-star",
+            "circle",
+            "cylinder",
+            "diamond",
+            "hexagon",
+            "note",
+            "rectangle",
+            "square",
+            "star",
+            "triangle",
+            "comunica",
+            "rmlio",
+            "solid"
+          ],
+          "description": "The shape of the node.",
+          "errorMessage": {
+            "type": "shape must be string with possible values: 8-star , big-star , circle , cylinder , diamond , hexagon , note , rectangle , square , star , triangle , comunica , rmlio  or solid"
+          }
+        },
+        "stroke": {
+          "type": "string",
+          "description": "The color of the stroke of the node.",
+          "errorMessage": {
+            "type": "stroke must be string"
+          }
+        },
+        "strokeDasharray": {
+          "type": [
+            "number",
+            "string"
+          ],
+          "description": "The dash pattern of the node.",
+          "errorMessage": {
+            "type": "strokeDasharray must be number or string"
+          }
+        },
+        "strokeWidth": {
+          "type": "number",
+          "description": "The thickness of the stroke of the nodes.",
+          "errorMessage": {
+            "type": "strokeWidth must be number"
+          }
+        },
+        "height": {
+          "type": "number",
+          "description": "The height of the node.",
+          "errorMessage": {
+            "type": "height must be number"
+          }
+        },
+        "width": {
+          "type": "number",
+          "description": "The width of the node.",
+          "errorMessage": {
+            "type": "width must be number"
+          }
+        },
+        "zIndex": {
+          "type": "number",
+          "description": "Controls the stacking order of the nodes.",
+          "errorMessage": {
+            "type": "zIndex must be number"
+          }
+        },
+        "image": {
+          "type": "string",
+          "description": "The image inside a node. This image takes up the entire width and height of the node.",
+          "errorMessage": {
+            "type": "image must be string"
+          }
+        },
+        "label": {
+          "type": "string",
+          "description": "The text inside a node.",
+          "errorMessage": {
+            "type": "label must be string"
+          }
+        }
+      }
+    },
+    "edge": {
+      "type": "object",
+      "title": "edge",
+      "description": "edge in global defaults",
+      "$id": "globalDefaultsEdge",
+      "properties": {
+        "color": {
+          "type": "string",
+          "errorMessage": {
+            "type": "color must be string"
+          }
+        },
+        "thickness": {
+          "type": "number",
+          "errorMessage": {
+            "type": "thickness must be number"
+          }
+        },
+        "strokeDasharray": {
+          "type": [
+            "number",
+            "string"
+          ],
+          "errorMessage": {
+            "type": "strokeDasharray must be number or string"
+          }
+        },
+        "animated": {
+          "type": "boolean",
+          "errorMessage": {
+            "type": "animated must be boolean"
+          }
+        },
+        "animation": {
+          "type": "string",
+          "errorMessage": {
+            "type": "animation must be string"
+          }
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "default",
+            "step",
+            "smoothstep",
+            "straight"
+          ],
+          "errorMessage": {
+            "type": "type must be string with possible values: default , step , smoothstep  or straight"
+          }
+        },
+        "zIndex": {
+          "type": "number",
+          "errorMessage": {
+            "type": "zIndex must be number"
+          }
+        },
+        "label": {
+          "type": "string",
+          "errorMessage": {
+            "type": "label must be string"
+          }
+        },
+        "source": {
+          "type": "string",
+          "errorMessage": {
+            "type": "source must be string"
+          }
+        },
+        "target": {
+          "type": "string",
+          "errorMessage": {
+            "type": "target must be string"
+          }
+        },
+        "sourceHandle": {
+          "type": "string",
+          "enum": [
+            "left-source",
+            "right-source",
+            "top-source",
+            "bottom-source"
+          ],
+          "errorMessage": {
+            "type": "sourceHandle must be string with possible values: left-source , right-source , top-source  or bottom-source"
+          }
+        },
+        "targetHandle": {
+          "type": "string",
+          "enum": [
+            "left-target",
+            "right-target",
+            "top-target",
+            "bottom-target"
+          ],
+          "errorMessage": {
+            "type": "targetHandle must be string with possible values: left-target , right-target , top-target  or bottom-target"
+          }
+        },
+        "markerStart": {
+          "type": "object",
+          "title": "Arrowhead schema",
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": [
+                "arrow",
+                "arrowclosed"
+              ],
+              "errorMessage": "Type of arrow must be string with possible values: arrow  or arrowclosed"
+            },
+            "orient": {
+              "type": [
+                "string",
+                "number"
+              ],
+              "errorMessage": "Orient of arrow must be number or string"
+            },
+            "color": {
+              "type": "string",
+              "errorMessage": "Color of arrow must be string"
+            }
+          }
+        },
+        "markerEnd": {
+          "type": "object",
+          "title": "Arrowhead schema",
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": [
+                "arrow",
+                "arrowclosed"
+              ],
+              "errorMessage": "Type of arrow must be string with possible values: arrow  or arrowclosed"
+            },
+            "orient": {
+              "type": [
+                "string",
+                "number"
+              ],
+              "errorMessage": "Orient of arrow must be number or string"
+            },
+            "color": {
+              "type": "string",
+              "errorMessage": "Color of arrow must be string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "errorMessage": {
+    "properties": {},
+    "type": "Global settings are expected to be initialized in an object"
+  }
+}

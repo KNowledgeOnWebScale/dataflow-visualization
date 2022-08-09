@@ -11,14 +11,16 @@ import App from "./App";
 initSchemas();   // Initialize JSON validation schemas once
 
 
-const download = true;
+const download = false;
 
 if (download) {
     function write(title, data) {
 
         // https://github.com/adobe/jsonschema2md
 
-        //jsonschema2md - d schemas/schemas - o schemas/docs
+        // run:
+        //     jsonschema2md -d schemas/schemas -o schemas/docs -h false
+        // To auto generate the docs
 
 
         const jsonString = `data:text/json;charset=utf-8,${encodeURIComponent(

@@ -1,0 +1,3 @@
+## height Type
+
+`number`
