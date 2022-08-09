@@ -2,9 +2,12 @@
 
 This document is aimed at developers.
 
-### How to autogenerate documentation
+### How to autogenerate the documentation
 
-TODO
+In [index.js](src/index.js) set the variable `download` to `true`. Rerun the application and set the variable to `false`
+again. You will notice there were three JSON files downloaded. Paste the contents of these files in the accompanying
+files in the directory [schemas/schemas](schemas/schemas). Open your terminal, `cd` to `/schemas` and
+run `node JSONSchemaMarkdown.js`. The new markdowns will be generated. [README.md](README.md) already links to these files.
 
 ### How to add shapes/images
 

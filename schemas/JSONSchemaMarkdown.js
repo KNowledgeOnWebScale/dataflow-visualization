@@ -3,6 +3,7 @@ const globalDefaultsJSON = require("./schemas/globalDefaults.schema.json");
 const nodesJSON = require("./schemas/nodes.schema.json");
 const edgesJSON = require("./schemas/edges.schema.json");
 
+
 /**
  * @author Brian Wendt <brianwendt@users.noreply.github.com>
  * @link https://github.com/BrianWendt/json-schema-md-doc
@@ -783,7 +784,7 @@ class JSONSchemaMarkdown {
         return value.replace('$', '\\$'); //$ in [] breaks markdown
     }
 }
-;
+
 
 /**
  * Export JSONSchemaMarkdown as a module for Node
@@ -820,8 +821,3 @@ try {
     console.log("Error:")
     console.log(e)
 }
-
-
-
-
-
