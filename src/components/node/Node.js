@@ -82,10 +82,14 @@ export default memo(({data, isConnectable}) => {
                 //  dus hergebruiken!!!
 
                 // type, position, id
-                [["source", "right", "right-source"], ["source", "bottom", "bottom-source"],
+               /* [["source", "right", "right-source"], ["source", "bottom", "bottom-source"],
                     ["target", "left", "left-target"], ["target", "top", "top-target"],
                     ["source", "top", "top-source"], ["source", "left", "left-source"],
-                    ["target", "bottom", "bottom-target"], ["target", "right", "right-target"]
+                    ["target", "bottom", "bottom-target"], ["target", "right", "right-target"]*/
+                [["source", "right", "right"], ["source", "bottom", "bottom"],
+                    ["target", "left", "left"], ["target", "top", "top"],
+                    ["source", "top", "top"], ["source", "left", "left"],
+                    ["target", "bottom", "bottom"], ["target", "right", "right"]
                 ].map((e, i) => {
                     return (
                         <Handle

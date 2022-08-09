@@ -164,21 +164,21 @@ export const edgesJSON = [
         target: "sparql",
         type: 'default',
         animation: "dashdraw .2s linear infinite",
-        "strokeDasharray": "4 4"
+        strokeDasharray: "4 4"
     },
     {
         source: "sparql-2",
         target: "sparql",
         type: 'default',
         animation: "dashdraw .3s linear infinite",
-        "strokeDasharray": "6 6"
+        strokeDasharray: "6 6"
     },
     {
         source: "sparql-3",
         target: "sparql",
         type: 'default',
         animation: "dashdraw 1s linear infinite",
-        "strokeDasharray": "9 3 1 3"
+        strokeDasharray: "9 3 1 3"
     },
 
 

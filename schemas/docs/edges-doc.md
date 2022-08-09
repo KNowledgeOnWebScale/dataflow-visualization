@@ -52,19 +52,19 @@ Type: `array`
 		 - Type: `string`
 		 - <i id="edgeSchema/items/properties/sourceHandle">path: #edgeSchema/items/properties/sourceHandle</i>
 		 - The value is restricted to the following: 
-			 1. _"left-source"_
-			 2. _"right-source"_
-			 3. _"top-source"_
-			 4. _"bottom-source"_
+			 1. _"left"_
+			 2. _"right"_
+			 3. _"top"_
+			 4. _"bottom"_
 	 - <b id="#edgeSchema/items/properties/targetHandle">targetHandle</b>
 		 - _Set where the edge should attach to the target node._
 		 - Type: `string`
 		 - <i id="edgeSchema/items/properties/targetHandle">path: #edgeSchema/items/properties/targetHandle</i>
 		 - The value is restricted to the following: 
-			 1. _"left-target"_
-			 2. _"right-target"_
-			 3. _"top-target"_
-			 4. _"bottom-target"_
+			 1. _"left"_
+			 2. _"right"_
+			 3. _"top"_
+			 4. _"bottom"_
 	 - <b id="#edgeSchema/items/properties/type">type</b>
 		 - _Set how the edge should look like (straight line, curve ...). `default` = [Bézier curve](https://en.wikipedia.org/wiki/B%C3%A9zier_curve)._
 		 - Type: `string`

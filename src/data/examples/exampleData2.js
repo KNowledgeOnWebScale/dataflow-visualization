@@ -70,8 +70,8 @@ export const edgesJSON = [
         source: "RML",
         target: "rmlio",
         type: "straight",
-        sourceHandle: "bottom-source",
-        targetHandle: "top-target",
+        sourceHandle: "bottom",
+        targetHandle: "top",
         strokeDasharray: 3,
         markerEnd: {},
         animated: false
@@ -88,8 +88,8 @@ export const edgesJSON = [
         source: "comunica",
         target: "SPARQL",
         type: "straight",
-        sourceHandle: "bottom-source",
-        targetHandle: "top-target",
+        sourceHandle: "bottom",
+        targetHandle: "top",
         strokeDasharray: 3,
         markerEnd: {},
         animated: false
