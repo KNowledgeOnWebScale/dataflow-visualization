@@ -10,7 +10,7 @@ First ever release. You can make flows from JSON or YAML.
 
 ### Added
 
-- Issue #11: Created a file [`DEVELOPMENT.md`](DEVELOPMENT.md) to keep [`README.md`](README.md) end-user-friendly.
+- Issue #11: Created a file [DEVELOPMENT.md] to keep [README.md] end-user-friendly.
 - Issue #12: You can set the contents of the example buttons via the configs.
 - Issue #19: You can import and export figure configurations.
 - Issue #22: There is a button to import the sizes of all nodes of the flow.
@@ -38,5 +38,16 @@ First ever release. You can make flows from JSON or YAML.
 ### Fixes
 
 - Issue 40: If you changed the color of an edge, all the markers with no color specified, changed to that color.
-- 
+-
 
+Kept [README] up to date with all the new changes and additions.
+
+
+
+[DEVELOPMENT.md]: DEVELOPMENT.md
+
+[DEVELOPMENT]: DEVELOPMENT.md
+
+[README.md]: README.md
+
+[README]: README.md

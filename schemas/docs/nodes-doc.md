@@ -32,7 +32,7 @@ Type: `array`
 		 - <i id="nodeSchema/items/properties/fontsize">path: #nodeSchema/items/properties/fontsize</i>
 		 - Default: `12`
 	 - <b id="#nodeSchema/items/properties/id">id</b>
-		 - _Used to refer to the node._
+		 - _Used to refer to the node. Used by e.g. an edge to connect two nodes or used by children to specify its parent node._
 		 - Type: `string`
 		 - <i id="nodeSchema/items/properties/id">path: #nodeSchema/items/properties/id</i>
 	 - <b id="#nodeSchema/items/properties/image">image</b>
@@ -83,7 +83,7 @@ Type: `array`
 		 - <i id="nodeSchema/items/properties/strokeWidth">path: #nodeSchema/items/properties/strokeWidth</i>
 		 - Default: `1`
 	 - <b id="#nodeSchema/items/properties/title">title</b>
-		 - _The title of a node. E.g. useful to name a parentNode._
+		 - _The title of a node. E.g. useful to name a parentNode. Notice that this is not the same as an ID. If you give a node a title, that title will show up not in the middle of the node, but at the top._
 		 - Type: `string`
 		 - <i id="nodeSchema/items/properties/title">path: #nodeSchema/items/properties/title</i>
 	 - <b id="#nodeSchema/items/properties/zIndex">zIndex</b>
