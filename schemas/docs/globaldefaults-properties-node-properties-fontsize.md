@@ -1,3 +1,0 @@
-## fontsize Type
-
-`number`

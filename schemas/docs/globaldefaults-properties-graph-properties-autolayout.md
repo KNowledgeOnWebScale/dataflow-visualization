@@ -1,3 +1,0 @@
-## autoLayout Type
-
-`boolean`

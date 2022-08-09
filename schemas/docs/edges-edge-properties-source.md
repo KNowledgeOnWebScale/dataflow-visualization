@@ -1,3 +1,0 @@
-## source Type
-
-`string`

@@ -1,3 +1,0 @@
-## fill Type
-
-`string`

@@ -779,7 +779,7 @@ class JSONSchemaMarkdown {
      * Escape string for MD link
      * @param {String} value
      */
-    escapeLink(value){
+    escapeLink(value) {
         return value.replace('$', '\\$'); //$ in [] breaks markdown
     }
 }
@@ -793,34 +793,30 @@ if (typeof module !== "undefined") {
 }
 
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-
-
-
-
-
-const docsGLobalDefaults = JSONSchemaMarkdown.doc(globalDefaultsJSON);
+const docsGlobalDefaults = JSONSchemaMarkdown.doc(globalDefaultsJSON);
 const docsNodes = JSONSchemaMarkdown.doc(nodesJSON);
 const docsEdges = JSONSchemaMarkdown.doc(edgesJSON);
 
 try {
-    fs.writeFileSync('./globaldefaults-doc.md', docsGLobalDefaults );
-} catch(e) {
+    fs.writeFileSync('./globaldefaults-doc.md', docsGlobalDefaults);
+} catch (e) {
     console.log("Error:")
     console.log(e)
 }
 
 try {
-    fs.writeFileSync('./nodes-doc.md', docsNodes );
-} catch(e) {
+    fs.writeFileSync('./nodes-doc.md', docsNodes);
+} catch (e) {
     console.log("Error:")
     console.log(e)
 }
 
 try {
-    fs.writeFileSync('./edges-doc.md', docsEdges );
-} catch(e) {
+    fs.writeFileSync('./edges-doc.md', docsEdges);
+} catch (e) {
     console.log("Error:")
     console.log(e)
 }

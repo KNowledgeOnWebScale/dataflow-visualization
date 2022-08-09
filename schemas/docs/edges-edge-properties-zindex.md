@@ -1,3 +1,0 @@
-## zIndex Type
-
-`number`

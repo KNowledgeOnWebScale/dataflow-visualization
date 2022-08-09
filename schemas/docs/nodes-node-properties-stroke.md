@@ -1,3 +1,0 @@
-## stroke Type
-
-`string`

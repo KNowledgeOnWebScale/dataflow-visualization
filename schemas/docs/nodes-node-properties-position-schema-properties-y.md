@@ -1,3 +1,0 @@
-## y Type
-
-`number`

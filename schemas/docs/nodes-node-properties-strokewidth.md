@@ -1,3 +1,0 @@
-## strokeWidth Type
-
-`number`

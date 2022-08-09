@@ -1,3 +1,0 @@
-## width Type
-
-`number`

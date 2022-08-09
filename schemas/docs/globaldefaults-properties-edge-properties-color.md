@@ -1,3 +1,0 @@
-## color Type
-
-`string`
