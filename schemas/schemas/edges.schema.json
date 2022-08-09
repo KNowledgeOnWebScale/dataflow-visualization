@@ -13,6 +13,14 @@
       "color": {
         "type": "string",
         "description": "The color of the edge.",
+        "default": {
+          "id": "color",
+          "canBeGlobal": true,
+          "value": "black",
+          "type": "string",
+          "cssProperty": "stroke",
+          "description": "The color of the edge."
+        },
         "errorMessage": {
           "type": "color must be string"
         }
@@ -20,6 +28,14 @@
       "thickness": {
         "type": "number",
         "description": "The thickness of the edge.",
+        "default": {
+          "id": "thickness",
+          "canBeGlobal": true,
+          "value": 1.2,
+          "type": "number",
+          "cssProperty": "strokeWidth",
+          "description": "The thickness of the edge."
+        },
         "errorMessage": {
           "type": "thickness must be number"
         }
@@ -30,6 +46,17 @@
           "string"
         ],
         "description": "The pattern of dashes of the edges. See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray#example) for more information.",
+        "default": {
+          "id": "strokeDasharray",
+          "canBeGlobal": true,
+          "value": 0,
+          "type": [
+            "number",
+            "string"
+          ],
+          "cssProperty": "strokeDasharray",
+          "description": "The pattern of dashes of the edges. See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray#example) for more information."
+        },
         "errorMessage": {
           "type": "strokeDasharray must be number or string"
         }
@@ -37,6 +64,13 @@
       "animated": {
         "type": "boolean",
         "description": "Set a default animation for the edge. See also [Animations](https://github.com/KNowledgeOnWebScale/dataflow-visualization/tree/main#animations).",
+        "default": {
+          "id": "animated",
+          "canBeGlobal": true,
+          "value": false,
+          "type": "boolean",
+          "description": "Set a default animation for the edge. See also [Animations](https://github.com/KNowledgeOnWebScale/dataflow-visualization/tree/main#animations)."
+        },
         "errorMessage": {
           "type": "animated must be boolean"
         }
@@ -44,6 +78,13 @@
       "animation": {
         "type": "string",
         "description": "See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/animation) for more information about animation.",
+        "default": {
+          "id": "animation",
+          "canBeGlobal": true,
+          "type": "string",
+          "cssProperty": "animation",
+          "description": "See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/animation) for more information about animation."
+        },
         "errorMessage": {
           "type": "animation must be string"
         }
@@ -57,6 +98,19 @@
           "straight"
         ],
         "description": "Set how the edge should look like (straight line, curve ...). `default` = [Bézier curve](https://en.wikipedia.org/wiki/B%C3%A9zier_curve).",
+        "default": {
+          "id": "type",
+          "canBeGlobal": true,
+          "value": "default",
+          "type": "string",
+          "enum": [
+            "default",
+            "step",
+            "smoothstep",
+            "straight"
+          ],
+          "description": "Set how the edge should look like (straight line, curve ...). `default` = [Bézier curve](https://en.wikipedia.org/wiki/B%C3%A9zier_curve)."
+        },
         "errorMessage": {
           "type": "type must be string with possible values: default , step , smoothstep  or straight"
         }
@@ -64,6 +118,12 @@
       "zIndex": {
         "type": "number",
         "description": "Controls the stacking order of the edge. For more information, go to the [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/z-index).",
+        "default": {
+          "id": "zIndex",
+          "canBeGlobal": true,
+          "type": "number",
+          "description": "Controls the stacking order of the edge. For more information, go to the [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/z-index)."
+        },
         "errorMessage": {
           "type": "zIndex must be number"
         }
@@ -71,6 +131,12 @@
       "label": {
         "type": "string",
         "description": "Set the label of the edge.",
+        "default": {
+          "id": "label",
+          "canBeGlobal": true,
+          "type": "string",
+          "description": "Set the label of the edge."
+        },
         "errorMessage": {
           "type": "label must be string"
         }
@@ -78,6 +144,13 @@
       "source": {
         "type": "string",
         "description": "ID of the source node.",
+        "default": {
+          "id": "source",
+          "canBeGlobal": true,
+          "type": "string",
+          "required": true,
+          "description": "ID of the source node."
+        },
         "errorMessage": {
           "type": "source must be string"
         }
@@ -85,6 +158,13 @@
       "target": {
         "type": "string",
         "description": "ID of the target node.",
+        "default": {
+          "id": "target",
+          "canBeGlobal": true,
+          "type": "string",
+          "required": true,
+          "description": "ID of the target node."
+        },
         "errorMessage": {
           "type": "target must be string"
         }
@@ -98,6 +178,18 @@
           "bottom-source"
         ],
         "description": "Set where the edge should attach to the source node.",
+        "default": {
+          "id": "sourceHandle",
+          "canBeGlobal": true,
+          "type": "string",
+          "enum": [
+            "left-source",
+            "right-source",
+            "top-source",
+            "bottom-source"
+          ],
+          "description": "Set where the edge should attach to the source node."
+        },
         "errorMessage": {
           "type": "sourceHandle must be string with possible values: left-source , right-source , top-source  or bottom-source"
         }
@@ -111,6 +203,18 @@
           "bottom-target"
         ],
         "description": "Set where the edge should attach to the target node.",
+        "default": {
+          "id": "targetHandle",
+          "canBeGlobal": true,
+          "type": "string",
+          "enum": [
+            "left-target",
+            "right-target",
+            "top-target",
+            "bottom-target"
+          ],
+          "description": "Set where the edge should attach to the target node."
+        },
         "errorMessage": {
           "type": "targetHandle must be string with possible values: left-target , right-target , top-target  or bottom-target"
         }

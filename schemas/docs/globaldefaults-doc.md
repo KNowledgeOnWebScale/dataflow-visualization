@@ -21,6 +21,7 @@ Type: `object`
 			 - _If set to `true`, [dagre](https://github.com/dagrejs/dagre) is used to automatically determine to positions of the nodes. Individually set positions will be overwritten see [Node positioning](https://github.com/KNowledgeOnWebScale/dataflow-visualization/tree/main#node-positioning) for more information._
 			 - Type: `boolean`
 			 - <i id="globalDefaultsGraph/properties/autoLayout">path: #globalDefaultsGraph/properties/autoLayout</i>
+			 - Default: _false_
 		 - <b id="#globalDefaultsGraph/properties/orientation">orientation</b>
 			 - _The orientation of the graph. If you want to work from top to bottom or from bottom to top, set `orientation` to `vertical`_
 			 - Type: `string`
@@ -28,6 +29,7 @@ Type: `object`
 			 - The value is restricted to the following: 
 				 1. _"vertical"_
 				 2. _"horizontal"_
+			 - Default: _"horizontal"_
  - <b id="#globalDefaultSchema/properties/node">node</b>
 	 - ### node
 	 - _node in global defaults_
@@ -39,10 +41,12 @@ Type: `object`
 			 - _Color of the node._
 			 - Type: `string`
 			 - <i id="globalDefaultsNode/properties/fill">path: #globalDefaultsNode/properties/fill</i>
+			 - Default: _"white"_
 		 - <b id="#globalDefaultsNode/properties/fontsize">fontsize</b>
 			 - _Size of the text inside the nodes._
 			 - Type: `number`
 			 - <i id="globalDefaultsNode/properties/fontsize">path: #globalDefaultsNode/properties/fontsize</i>
+			 - Default: `12`
 		 - <b id="#globalDefaultsNode/properties/shape">shape</b>
 			 - _The shape of the node._
 			 - Type: `string`
@@ -62,30 +66,37 @@ Type: `object`
 				 12. _"comunica"_
 				 13. _"rmlio"_
 				 14. _"solid"_
+			 - Default: _"square"_
 		 - <b id="#globalDefaultsNode/properties/stroke">stroke</b>
 			 - _The color of the stroke of the node._
 			 - Type: `string`
 			 - <i id="globalDefaultsNode/properties/stroke">path: #globalDefaultsNode/properties/stroke</i>
+			 - Default: _"black"_
 		 - <b id="#globalDefaultsNode/properties/strokeDasharray">strokeDasharray</b>
 			 - _The dash pattern of the node._
 			 - Types: `number`, `string`
 			 - <i id="globalDefaultsNode/properties/strokeDasharray">path: #globalDefaultsNode/properties/strokeDasharray</i>
+			 - Default: `0`
 		 - <b id="#globalDefaultsNode/properties/strokeWidth">strokeWidth</b>
 			 - _The thickness of the stroke of the nodes._
 			 - Type: `number`
 			 - <i id="globalDefaultsNode/properties/strokeWidth">path: #globalDefaultsNode/properties/strokeWidth</i>
+			 - Default: `1`
 		 - <b id="#globalDefaultsNode/properties/height">height</b>
 			 - _The height of the node._
 			 - Type: `number`
 			 - <i id="globalDefaultsNode/properties/height">path: #globalDefaultsNode/properties/height</i>
+			 - Default: `50`
 		 - <b id="#globalDefaultsNode/properties/width">width</b>
 			 - _The width of the node._
 			 - Type: `number`
 			 - <i id="globalDefaultsNode/properties/width">path: #globalDefaultsNode/properties/width</i>
+			 - Default: `50`
 		 - <b id="#globalDefaultsNode/properties/zIndex">zIndex</b>
 			 - _Controls the stacking order of the nodes._
 			 - Type: `number`
 			 - <i id="globalDefaultsNode/properties/zIndex">path: #globalDefaultsNode/properties/zIndex</i>
+			 - Default: `0`
 		 - <b id="#globalDefaultsNode/properties/image">image</b>
 			 - _The image inside a node. This image takes up the entire width and height of the node._
 			 - Type: `string`
@@ -105,18 +116,22 @@ Type: `object`
 			 - _The color of the edge._
 			 - Type: `string`
 			 - <i id="globalDefaultsEdge/properties/color">path: #globalDefaultsEdge/properties/color</i>
+			 - Default: _"black"_
 		 - <b id="#globalDefaultsEdge/properties/thickness">thickness</b>
 			 - _The thickness of the edge._
 			 - Type: `number`
 			 - <i id="globalDefaultsEdge/properties/thickness">path: #globalDefaultsEdge/properties/thickness</i>
+			 - Default: `1.2`
 		 - <b id="#globalDefaultsEdge/properties/strokeDasharray">strokeDasharray</b>
 			 - _The pattern of dashes of the edges. See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray#example) for more information._
 			 - Types: `number`, `string`
 			 - <i id="globalDefaultsEdge/properties/strokeDasharray">path: #globalDefaultsEdge/properties/strokeDasharray</i>
+			 - Default: `0`
 		 - <b id="#globalDefaultsEdge/properties/animated">animated</b>
 			 - _Set a default animation for the edge. See also [Animations](https://github.com/KNowledgeOnWebScale/dataflow-visualization/tree/main#animations)._
 			 - Type: `boolean`
 			 - <i id="globalDefaultsEdge/properties/animated">path: #globalDefaultsEdge/properties/animated</i>
+			 - Default: _false_
 		 - <b id="#globalDefaultsEdge/properties/animation">animation</b>
 			 - _See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/animation) for more information about animation._
 			 - Type: `string`
@@ -130,6 +145,7 @@ Type: `object`
 				 2. _"step"_
 				 3. _"smoothstep"_
 				 4. _"straight"_
+			 - Default: _"default"_
 		 - <b id="#globalDefaultsEdge/properties/zIndex">zIndex</b>
 			 - _Controls the stacking order of the edge. For more information, go to the [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/z-index)._
 			 - Type: `number`

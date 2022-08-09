@@ -182,6 +182,7 @@ function globalDefaultNestedKey(key) {
             type: value.type,
             enum: value.enum,
             description: value.description,
+            default: value.value,
             errorMessage: {
                 type: createClearErrorMessage(value.id, value.type, value.enum)
             }
@@ -222,6 +223,7 @@ function initNodesSchema() {
             type: value.type,
             enum: value.enum,
             description: value.description,
+            default: value.value,
 
             // In global defaults, the errorMessages are not put inside properties
             // But here it must be inside properties in order to work
@@ -262,6 +264,7 @@ function initEdgesSchema() {
             type: value.type,
             enum: value.enum,
             description: value.description,
+            default: value,
 
             // In global defaults, the errorMessages are not put inside properties
             // But here it must be inside properties in order to work
