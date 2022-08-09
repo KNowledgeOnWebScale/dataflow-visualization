@@ -32,12 +32,12 @@ yourself every time. These global default values are used as fallbacks if certai
 the
 nodes or edges.
 
-* [Global defaults](./schemas/globaldefaults-doc.md)
+* [Global defaults](schemas/docs/globaldefaults-doc.md)
 
 
 ### Nodes
 
-*   [Array of nodes](./schemas/nodes-doc.md) 
+*   [Array of nodes](schemas/docs/nodes-doc.md) 
 
 #### Node positioning
 
@@ -65,7 +65,7 @@ very efficient to set all nodes manually. There are three mechanisms to make the
 
 ### Edges
 
-*   [Edges](./schemas/edges-doc.md)
+*   [Edges](schemas/docs/edges-doc.md)
 
 
 Note that you can also set `animation`, `edgeColor`, `edgeThickness` and `strokeDasharray` as CSS properties in `style`.

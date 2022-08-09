@@ -801,23 +801,19 @@ const docsGlobalDefaults = JSONSchemaMarkdown.doc(globalDefaultsJSON);
 const docsNodes = JSONSchemaMarkdown.doc(nodesJSON);
 const docsEdges = JSONSchemaMarkdown.doc(edgesJSON);
 
-try {
-    fs.writeFileSync('./globaldefaults-doc.md', docsGlobalDefaults);
-} catch (e) {
-    console.log("Error:")
-    console.log(e)
+
+function write(data, path) {
+    try {
+        fs.writeFileSync(path, data);
+    } catch (e) {
+        console.log("Error:")
+        console.log(e)
+    }
 }
 
-try {
-    fs.writeFileSync('./nodes-doc.md', docsNodes);
-} catch (e) {
-    console.log("Error:")
-    console.log(e)
-}
+[
+    [docsGlobalDefaults, "./docs/globaldefaults-doc.md"],
+    [docsNodes, "./docs/nodes-doc.md"],
+    [docsEdges, "./docs/edges-doc.md"]
+].forEach(e => write(e[0], e[1]))
 
-try {
-    fs.writeFileSync('./edges-doc.md', docsEdges);
-} catch (e) {
-    console.log("Error:")
-    console.log(e)
-}
