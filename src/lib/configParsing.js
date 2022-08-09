@@ -5,12 +5,16 @@ export const EDGE = "edge";
 // These are the keys that can be used in globalDefaults
 // These keys are not standard supported by the library, that's why they are in a dict
 // The values of this dict should be used in the JSON representation
-
-//TODO: canBeGlobal doet niets voor jsonSchema
 export const KEY_VALUES = {
 
     [GRAPH]: {
-        "AUTO_LAYOUT": {id: "autoLayout", "canBeGlobal": true, value: false, type: "boolean", description: "If set to true, an algorithm is used to automaticaly determine the positions of the nodes."},     // If true, use library 'dagrejs' to determine positioning of nodes
+        "AUTO_LAYOUT": {
+            id: "autoLayout",
+            "canBeGlobal": true,
+            value: false,
+            type: "boolean",
+            description: "If set to true, an algorithm is used to automaticaly determine the positions of the nodes."
+        },     // If true, use library 'dagrejs' to determine positioning of nodes
         "ORIENTATION": {
             id: "orientation", "canBeGlobal": true, value: "horizontal", type: "string",
             enum: ["vertical", "horizontal"],
@@ -23,7 +27,13 @@ export const KEY_VALUES = {
     // Keys that can be used in the JSON/YAML representation of nodes
     [NODE]: {
         "FILL": {id: "fill", "canBeGlobal": true, value: "white", type: "string", description: "Color of the node."},                 // Color of node
-        "FONTSIZE": {id: "fontsize", "canBeGlobal": true, value: 12, type: "number", description: "Size of the text inside the nodes."},              // Fontsize of text in nodes
+        "FONTSIZE": {
+            id: "fontsize",
+            "canBeGlobal": true,
+            value: 12,
+            type: "number",
+            description: "Size of the text inside the nodes."
+        },              // Fontsize of text in nodes
 
         //TODO in DEVELOPMENT.md uitleggen dat je ook het pattern moet aanpassen
         "SHAPE": {
@@ -33,8 +43,14 @@ export const KEY_VALUES = {
             type: "string",
             enum: ["8-star", "big-star", "circle", "cylinder", "diamond", "hexagon", "note", "rectangle", "square", "star", "triangle", "comunica", "rmlio", "solid"],
             description: "The shape of the node."
-            },              // Shape of node
-        "STROKE": {id: "stroke", "canBeGlobal": true, value: "black", type: "string", description: "The color of the stroke of the node."},             // Color of stroke of node
+        },              // Shape of node
+        "STROKE": {
+            id: "stroke",
+            "canBeGlobal": true,
+            value: "black",
+            type: "string",
+            description: "The color of the stroke of the node."
+        },             // Color of stroke of node
         "STROKE_DASHARRAY": {
             id: "strokeDasharray",
             "canBeGlobal": true,
@@ -42,18 +58,57 @@ export const KEY_VALUES = {
             type: ["number", "string"],
             description: "The dash pattern of the node."
         },
-        "STROKE_WIDTH": {id: "strokeWidth", "canBeGlobal": true, value: 1, type: "number", description: "The thickness of the stroke of the nodes."},        // Width of stroke of node
-        "HEIGHT": {id: "height", "canBeGlobal": true, value: 50, type: "number", description: "The height of the node."},                  // Height of node
+        "STROKE_WIDTH": {
+            id: "strokeWidth",
+            "canBeGlobal": true,
+            value: 1,
+            type: "number",
+            description: "The thickness of the stroke of the nodes."
+        },        // Width of stroke of node
+        "HEIGHT": {
+            id: "height",
+            "canBeGlobal": true,
+            value: 50,
+            type: "number",
+            description: "The height of the node."
+        },                  // Height of node
         "WIDTH": {id: "width", "canBeGlobal": true, value: 50, type: "number", description: "The width of the node."},                    // Width of node
 
-        ID: {id: "id", "canBeGlobal": false, type: "string", required: false, description: "Used to refer to the node."},
+        ID: {
+            id: "id",
+            "canBeGlobal": false,
+            type: "string",
+            required: false,
+            description: "Used to refer to the node."
+        },
         POSITION: {id: "position", "canBeGlobal": false, type: "object", description: "The position of the node."},
-        Z_INDEX: {id: "zIndex", "canBeGlobal": true, value: 0, type: "number", description: "Controls the stacking order of the nodes."},
-        IMAGE: {id: "image", "canBeGlobal": true, type: "string", description: "The image inside a node. This image takes up the entire width and height of the node."},
+        Z_INDEX: {
+            id: "zIndex",
+            "canBeGlobal": true,
+            value: 0,
+            type: "number",
+            description: "Controls the stacking order of the nodes."
+        },
+        IMAGE: {
+            id: "image",
+            "canBeGlobal": true,
+            type: "string",
+            description: "The image inside a node. This image takes up the entire width and height of the node."
+        },
         LABEL: {id: "label", "canBeGlobal": true, value: "", type: "string", description: "The text inside a node."},
-        TITLE: {id: "title", "canBeGlobal": false, type: "string", description: "The title of a node. E.g. useful to name a parentNode."},
+        TITLE: {
+            id: "title",
+            "canBeGlobal": false,
+            type: "string",
+            description: "The title of a node. E.g. useful to name a parentNode."
+        },
 
-        PARENT: {id: "parentNode", "canBeGlobal": false, type: "string", description: "The parent of other nodes. If you want to add a node inside another node, you have to set `parentNode` in the child as the ID of the parent."}
+        PARENT: {
+            id: "parentNode",
+            "canBeGlobal": false,
+            type: "string",
+            description: "The parent of other nodes. If you want to add a node inside another node, you have to set `parentNode` in the child as the ID of the parent."
+        }
 
 
         //TODO; hgroup, vgroup

@@ -10,10 +10,10 @@ First ever release. You can make flows from JSON or YAML.
 
 ### Added
 
+- Issue #11: Created a file `DEVELOPMENT` to keep `README` for end-user-friendly. 
 - Issue #19: You can import and export figure configurations.
 - Issue #22: There is a button to import the sizes of all nodes of the flow.
 - Issue #35: Nodes can have a dashed stroke (just like edges already could).
--
 
 
 
