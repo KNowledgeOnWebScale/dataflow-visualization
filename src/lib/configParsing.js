@@ -59,7 +59,7 @@ export const KEY_VALUES = {
             "canBeGlobal": false,
             type: "string",
             required: false,
-            description: "Used to refer to the node."
+            description: "Used to refer to the node. Used by e.g. an edge to connect two nodes or used by children to specify its parent node."
         },
         IMAGE: {
             id: "image",
@@ -117,7 +117,8 @@ export const KEY_VALUES = {
             id: "title",
             "canBeGlobal": false,
             type: "string",
-            description: "The title of a node. E.g. useful to name a parentNode."
+            description: "The title of a node. E.g. useful to name a parentNode. " +
+                "Notice that this is not the same as an ID. If you give a node a title, that title will show up not in the middle of the node, but at the top."
         },
         Z_INDEX: {
             id: "zIndex",
