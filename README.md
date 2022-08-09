@@ -1,26 +1,30 @@
-<!-- omit in toc -->
 # Flow Visualization
 
-This is a [React] application to generate flow graphs from [JSON](https://www.json.org/) or [YAML](https://yaml.org/).
+This is a [React] application to generate flow graphs from [JSON] or [YAML].
 It is built on top of [ReactFlow].
 
 - [How to run](#how-to-run)
 - [Documentation](#documentation)
-  - [Global defaults](#global-defaults)
-  - [Nodes](#nodes)
-  - [Edges](#edges)
+    - [Global defaults](#global-defaults)
+    - [Nodes](#nodes)
+    - [Edges](#edges)
+    - [Buttons](#buttons)
 - [License](#license)
 
 ## How to run
 
-Visit https://knowledgeonwebscale.github.io/dataflow-visualization/. If you want to run this application locally, run `npm start`
+Visit https://knowledgeonwebscale.github.io/dataflow-visualization/. If you want to run this application locally,
+run `npm start`
 and open http://localhost:3000/.
 
 ## Documentation
 
 If you [run the application](#how-to-run), you'll see that there are three editors. One to
 set [global defaults](#global-defaults), one to describe the [nodes](#nodes) and one for the [connections](#edges)
-between these nodes (edges).
+between these nodes (edges). The editors you see are the same editors used
+by [Visual Studio Code](https://code.visualstudio.com/),
+this means that you can use shortcuts like `ctrl+shift+i` for indentation or `ctrl+z` to undo your last change. You can
+also open the command palette by hitting the `F1`-key.
 
 Note when reading this documentation: this is a [React] application, so all ID's/properties are
 written in [camelCase](https://en.wikipedia.org/wiki/Camel_case).
@@ -32,12 +36,11 @@ yourself every time. These global default values are used as fallbacks if certai
 the
 nodes or edges.
 
-* [Global defaults](schemas/docs/globaldefaults-doc.md)
-
+* More info: [global defaults](schemas/docs/globaldefaults-doc.md)
 
 ### Nodes
 
-*   [Array of nodes](schemas/docs/nodes-doc.md) 
+* More info: [nodes](schemas/docs/nodes-doc.md)
 
 #### Node positioning
 
@@ -62,30 +65,56 @@ very efficient to set all nodes manually. There are three mechanisms to make the
       to get a little more complex, this method is not recommended, because dagre does not always work very well in
       combination with this project.
 
-
 ### Edges
 
-*   [Edges](schemas/docs/edges-doc.md)
-
-
-Note that you can also set `animation`, `edgeColor`, `edgeThickness` and `strokeDasharray` as CSS properties in `style`.
-If that
-happens, `animation`, `stroke`, `strokeWidth` or `strokeDasharray` in `style` are of course not overwritten by possible
-values in
-global defaults.
+* More info: [edges](schemas/docs/edges-doc.md)
 
 #### Animations
 
 There is a key `animated`, which you can set to `true`. But if you want custom animations, you should use
-the `animation` property. An example of the standard `animated` key can be found in example 2. Custom animations can be
-found in example 6. For more information about the `animation` property, please check out
+the `animation` property. An example of the standard `animated` key can be found
+in [example 2](/src/data/examples/exampleData2.js). Custom animations can be
+found in [example 6](/src/data/examples/exampleData6.js). For more information about the `animation` property, please
+check out
 the [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/animation). If you use `animated` with
 no `strokeDasharray`, `strokeDasharray` is set to a value of `5`. If you use a custom `animation`, the `animated` key
 has no effect anymore.
 
+### Buttons
+
+When running this application, you'll see that there are a few buttons visible.
+
+#### Example buttons
+
+These buttons on are for loading in examples.
+
+#### Import/export buttons
+
+These buttons are to import and export entire configs (format is JSON). This feature is useful if you want to save
+configs for later.
+
+#### 'Fill in' button
+
+Manually typing positions for the nodes is not so easy. And sometimes mechanisms like `vgroup`, `hgroup` or `autoLayout`
+might give different results then expected.
+
+When a diagram is visible, you can drag the nodes around with your mouse. Once all nodes are in the correct place, click
+the button and the new positions will be filled in into the node config.
+
+#### Language switcher button
+
+There are two languages supported in which you can describe your flow: [JSON] and [YAML]. Use this dropdown button to
+pick the language of your preference.
+
 ## License
 
-This project is licensed under the terms of the MIT License. See [LICENSE.md](/LICENSE.md) for details.
+This project is licensed under the terms of the MIT License. See [LICENSE.md](LICENSE.md) for details.
+
+
+[JSON]: https://www.json.org/
+
+[YAML]: https://yaml.org/
 
 [React]: https://reactjs.org/
+
 [ReactFlow]: https://reactflow.dev/
