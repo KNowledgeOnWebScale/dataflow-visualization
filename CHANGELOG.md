@@ -10,12 +10,12 @@ First ever release. You can make flows from JSON or YAML.
 
 ### Added
 
-- Issue #11: Created a file `DEVELOPMENT` to keep `README` for end-user-friendly. 
+- Issue #11: Created a file [`DEVELOPMENT.md`](DEVELOPMENT.md) to keep [`README.md`](README.md) end-user-friendly.
+- Issue #12: You can set the contents of the example buttons via the configs.
 - Issue #19: You can import and export figure configurations.
 - Issue #22: There is a button to import the sizes of all nodes of the flow.
 - Issue #35: Nodes can have a dashed stroke (just like edges already could).
-
-
+-
 
 ### Changed
 
@@ -31,10 +31,7 @@ First ever release. You can make flows from JSON or YAML.
 - Issue #31: There is a GitHub action that deploys a new version of this project to GitHub Pages on every `git push`.
   The new link (after the transferation done in issue #25)
   is https://knowledgeonwebscale.github.io/dataflow-visualization/.
--  
-
-
-
+-
 
 ### Removed
 

@@ -26,9 +26,10 @@ const ExamplesComponent = ({language, setData}) => {
     return <>
         <div className="d-flex">
             {
-                examples.map((_, i) => (
+                examples.map((a, i) => (
                         <Button className="primary" onClick={e => loadExample(e, i + 1)}
-                                key={i}>example {i + 1}
+                                key={i}>
+                            {a[3] || "example " + (i + 1)}
                         </Button>
                     )
                 )
