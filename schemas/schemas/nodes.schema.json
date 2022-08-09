@@ -7,6 +7,22 @@
     "title": "Node",
     "required": [],
     "properties": {
+      "height": {
+        "type": "number",
+        "description": "The height of the node.",
+        "default": 50,
+        "errorMessage": {
+          "type": "height must be number"
+        }
+      },
+      "width": {
+        "type": "number",
+        "description": "The width of the node.",
+        "default": 50,
+        "errorMessage": {
+          "type": "width must be number"
+        }
+      },
       "fill": {
         "type": "string",
         "description": "Color of the node.",
@@ -21,6 +37,35 @@
         "default": 12,
         "errorMessage": {
           "type": "fontsize must be number"
+        }
+      },
+      "id": {
+        "type": "string",
+        "description": "Used to refer to the node.",
+        "errorMessage": {
+          "type": "id must be string"
+        }
+      },
+      "image": {
+        "type": "string",
+        "description": "The image inside a node. This image takes up the entire width and height of the node.",
+        "errorMessage": {
+          "type": "image must be string"
+        }
+      },
+      "label": {
+        "type": "string",
+        "description": "The text inside a node.",
+        "default": "",
+        "errorMessage": {
+          "type": "label must be string"
+        }
+      },
+      "parentNode": {
+        "type": "string",
+        "description": "The parent of other nodes. If you want to add a node inside another node, you have to set `parentNode` in the child as the ID of the parent.",
+        "errorMessage": {
+          "type": "parentNode must be string"
         }
       },
       "shape": {
@@ -74,27 +119,11 @@
           "type": "strokeWidth must be number"
         }
       },
-      "height": {
-        "type": "number",
-        "description": "The height of the node.",
-        "default": 50,
-        "errorMessage": {
-          "type": "height must be number"
-        }
-      },
-      "width": {
-        "type": "number",
-        "description": "The width of the node.",
-        "default": 50,
-        "errorMessage": {
-          "type": "width must be number"
-        }
-      },
-      "id": {
+      "title": {
         "type": "string",
-        "description": "Used to refer to the node.",
+        "description": "The title of a node. E.g. useful to name a parentNode.",
         "errorMessage": {
-          "type": "id must be string"
+          "type": "title must be string"
         }
       },
       "zIndex": {
@@ -103,35 +132,6 @@
         "default": 0,
         "errorMessage": {
           "type": "zIndex must be number"
-        }
-      },
-      "image": {
-        "type": "string",
-        "description": "The image inside a node. This image takes up the entire width and height of the node.",
-        "errorMessage": {
-          "type": "image must be string"
-        }
-      },
-      "label": {
-        "type": "string",
-        "description": "The text inside a node.",
-        "default": "",
-        "errorMessage": {
-          "type": "label must be string"
-        }
-      },
-      "title": {
-        "type": "string",
-        "description": "The title of a node. E.g. useful to name a parentNode.",
-        "errorMessage": {
-          "type": "title must be string"
-        }
-      },
-      "parentNode": {
-        "type": "string",
-        "description": "The parent of other nodes. If you want to add a node inside another node, you have to set `parentNode` in the child as the ID of the parent.",
-        "errorMessage": {
-          "type": "parentNode must be string"
         }
       },
       "position": {

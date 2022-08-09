@@ -11,7 +11,7 @@ import App from "./App";
 initSchemas();   // Initialize JSON validation schemas once
 
 
-const download = false;
+const download = true;
 
 if (download) {
     function write(title, data) {

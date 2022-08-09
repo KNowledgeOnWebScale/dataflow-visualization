@@ -264,7 +264,7 @@ function initEdgesSchema() {
             type: value.type,
             enum: value.enum,
             description: value.description,
-            default: value,
+            default: value.value,
 
             // In global defaults, the errorMessages are not put inside properties
             // But here it must be inside properties in order to work

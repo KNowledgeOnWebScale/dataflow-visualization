@@ -38,6 +38,22 @@
       "description": "node in global defaults",
       "$id": "globalDefaultsNode",
       "properties": {
+        "height": {
+          "type": "number",
+          "description": "The height of the node.",
+          "default": 50,
+          "errorMessage": {
+            "type": "height must be number"
+          }
+        },
+        "width": {
+          "type": "number",
+          "description": "The width of the node.",
+          "default": 50,
+          "errorMessage": {
+            "type": "width must be number"
+          }
+        },
         "fill": {
           "type": "string",
           "description": "Color of the node.",
@@ -52,6 +68,21 @@
           "default": 12,
           "errorMessage": {
             "type": "fontsize must be number"
+          }
+        },
+        "image": {
+          "type": "string",
+          "description": "The image inside a node. This image takes up the entire width and height of the node.",
+          "errorMessage": {
+            "type": "image must be string"
+          }
+        },
+        "label": {
+          "type": "string",
+          "description": "The text inside a node.",
+          "default": "",
+          "errorMessage": {
+            "type": "label must be string"
           }
         },
         "shape": {
@@ -105,43 +136,12 @@
             "type": "strokeWidth must be number"
           }
         },
-        "height": {
-          "type": "number",
-          "description": "The height of the node.",
-          "default": 50,
-          "errorMessage": {
-            "type": "height must be number"
-          }
-        },
-        "width": {
-          "type": "number",
-          "description": "The width of the node.",
-          "default": 50,
-          "errorMessage": {
-            "type": "width must be number"
-          }
-        },
         "zIndex": {
           "type": "number",
           "description": "Controls the stacking order of the nodes.",
           "default": 0,
           "errorMessage": {
             "type": "zIndex must be number"
-          }
-        },
-        "image": {
-          "type": "string",
-          "description": "The image inside a node. This image takes up the entire width and height of the node.",
-          "errorMessage": {
-            "type": "image must be string"
-          }
-        },
-        "label": {
-          "type": "string",
-          "description": "The text inside a node.",
-          "default": "",
-          "errorMessage": {
-            "type": "label must be string"
           }
         }
       }
@@ -152,12 +152,34 @@
       "description": "edge in global defaults",
       "$id": "globalDefaultsEdge",
       "properties": {
+        "animated": {
+          "type": "boolean",
+          "description": "Set a default animation for the edge. See also [Animations](https://github.com/KNowledgeOnWebScale/dataflow-visualization/tree/main#animations).",
+          "default": false,
+          "errorMessage": {
+            "type": "animated must be boolean"
+          }
+        },
+        "animation": {
+          "type": "string",
+          "description": "See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/animation) for more information about animation.",
+          "errorMessage": {
+            "type": "animation must be string"
+          }
+        },
         "color": {
           "type": "string",
           "description": "The color of the edge.",
           "default": "black",
           "errorMessage": {
             "type": "color must be string"
+          }
+        },
+        "label": {
+          "type": "string",
+          "description": "Set the label of the edge.",
+          "errorMessage": {
+            "type": "label must be string"
           }
         },
         "thickness": {
@@ -177,49 +199,6 @@
           "default": 0,
           "errorMessage": {
             "type": "strokeDasharray must be number or string"
-          }
-        },
-        "animated": {
-          "type": "boolean",
-          "description": "Set a default animation for the edge. See also [Animations](https://github.com/KNowledgeOnWebScale/dataflow-visualization/tree/main#animations).",
-          "default": false,
-          "errorMessage": {
-            "type": "animated must be boolean"
-          }
-        },
-        "animation": {
-          "type": "string",
-          "description": "See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/animation) for more information about animation.",
-          "errorMessage": {
-            "type": "animation must be string"
-          }
-        },
-        "type": {
-          "type": "string",
-          "enum": [
-            "default",
-            "step",
-            "smoothstep",
-            "straight"
-          ],
-          "description": "Set how the edge should look like (straight line, curve ...). `default` = [Bézier curve](https://en.wikipedia.org/wiki/B%C3%A9zier_curve).",
-          "default": "default",
-          "errorMessage": {
-            "type": "type must be string with possible values: default , step , smoothstep  or straight"
-          }
-        },
-        "zIndex": {
-          "type": "number",
-          "description": "Controls the stacking order of the edge. For more information, go to the [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/z-index).",
-          "errorMessage": {
-            "type": "zIndex must be number"
-          }
-        },
-        "label": {
-          "type": "string",
-          "description": "Set the label of the edge.",
-          "errorMessage": {
-            "type": "label must be string"
           }
         },
         "source": {
@@ -260,6 +239,27 @@
           "description": "Set where the edge should attach to the target node.",
           "errorMessage": {
             "type": "targetHandle must be string with possible values: left-target , right-target , top-target  or bottom-target"
+          }
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "default",
+            "step",
+            "smoothstep",
+            "straight"
+          ],
+          "description": "Set how the edge should look like (straight line, curve ...). `default` = [Bézier curve](https://en.wikipedia.org/wiki/B%C3%A9zier_curve).",
+          "default": "default",
+          "errorMessage": {
+            "type": "type must be string with possible values: default , step , smoothstep  or straight"
+          }
+        },
+        "zIndex": {
+          "type": "number",
+          "description": "Controls the stacking order of the edge. For more information, go to the [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/z-index).",
+          "errorMessage": {
+            "type": "zIndex must be number"
           }
         },
         "markerStart": {
