@@ -10,6 +10,8 @@ require("ajv-errors")(ajv, /*{keepErrors: false}*/);
 
 const arrowSchema = {
     type: "object",
+    title: "Arrowhead schema",
+    /*$id: "arrowSchema",*/
     properties: {
         "type": {
             type: "string", enum: ["arrow", "arrowclosed"],
@@ -28,6 +30,8 @@ const arrowSchema = {
 
 const positionSchema = {
     type: "object",
+    title: "Position schema",
+    $id: "positionSchema",
     properties: {
         "x": {
             type: "number",
@@ -72,6 +76,9 @@ function createClearErrorMessage(id, type, patternEnum) {
 
 export const globalDefaultSchema = {
     type: "object",
+    title: "Global defaults",
+    description: "This schema is to define the properties inside the global defaults config.",
+    $id: "globalDefaultSchema",
     properties: {},
     errorMessage: {
         properties: {},
@@ -82,9 +89,13 @@ export const globalDefaultSchema = {
 
 export const nodeSchema = {
     type: "array",
+    title: "Array of nodes",
+    $id: "nodeSchema",
     items:
         {
             type: "object",
+            title: "Node",
+            required: [],
             properties: {},
             errorMessage: {
                 type: "Each node should be an object",
@@ -99,9 +110,12 @@ export const nodeSchema = {
 
 export const edgeSchema = {
     type: "array",
+    title: "Array of edges",
+    $id: "edgeSchema",
     items:
         {
             type: "object",
+            title: "Edge",
             required: [],
             properties: {},
             errorMessage: {
@@ -148,21 +162,27 @@ export function initSchemas() {
 
 }*/
 
+
 function globalDefaultNestedKey(key) {
     const nestedObj = {
         type: "object",
+        title: key,
+        description: key + " in global defaults",
+        $id: "globalDefaults" +  key.charAt(0).toUpperCase() + key.toLowerCase().slice(1),
         properties: {}
     }
 
     for (let value of Object.values(KEY_VALUES[key])) {
 
-        if (value.type === "object") {
+        if (value.type === "object" || !value.canBeGlobal) {
             continue;
         }
 
         nestedObj["properties"][value.id] = {
             type: value.type,
             enum: value.enum,
+            description: value.description,
+            default: value.value,
             errorMessage: {
                 type: createClearErrorMessage(value.id, value.type, value.enum)
             }
@@ -195,9 +215,15 @@ function initNodesSchema() {
             continue;
         }
 
+        if (value.required) {
+            nodeSchema.items.required.push(value.id);
+        }
+
         nodeSchema.items.properties[value.id] = {
             type: value.type,
             enum: value.enum,
+            description: value.description,
+            default: value.value,
 
             // In global defaults, the errorMessages are not put inside properties
             // But here it must be inside properties in order to work
@@ -237,6 +263,8 @@ function initEdgesSchema() {
         edgeSchema.items.properties[value.id] = {
             type: value.type,
             enum: value.enum,
+            description: value.description,
+            default: value.value,
 
             // In global defaults, the errorMessages are not put inside properties
             // But here it must be inside properties in order to work

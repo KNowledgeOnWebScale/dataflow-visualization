@@ -10,16 +10,17 @@ First ever release. You can make flows from JSON or YAML.
 
 ### Added
 
+- Issue #11: Created a file `DEVELOPMENT` to keep `README` for end-user-friendly. 
 - Issue #19: You can import and export figure configurations.
 - Issue #22: There is a button to import the sizes of all nodes of the flow.
 - Issue #35: Nodes can have a dashed stroke (just like edges already could).
--
 
 
 
 ### Changed
 
 - Issue #4: Global settings have nested objects 'graph', 'node' and 'edge'.
+- Issue #5: You can generate documentation (see DEVELOPMENT.md for more info)
 - Issue #5: edgeColor -> color and edgeThickness -> thickness.
 - Issue #20: Changed layout of the editors. The editors are on the left, so you don't need to scroll in order to see the
   generated flow.
