@@ -13,7 +13,7 @@ It is built on top of [ReactFlow].
 
 ## How to run
 
-Visit https://tibostr.github.io/dataflow-visualization/. If you want to run this application locally, run `npm start`
+Visit https://knowledgeonwebscale.github.io/dataflow-visualization/. If you want to run this application locally, run `npm start`
 and open http://localhost:3000/.
 
 ## Documentation
