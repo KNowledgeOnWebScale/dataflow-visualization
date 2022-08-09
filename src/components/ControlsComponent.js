@@ -131,8 +131,7 @@ const ControlsComponent = ({
         for (let i = 0; i < newNodesData.length; i += 1) {
             newNodesData[i]["position"] = nodes[i]["position"];
 
-            if (newNodesData[i].shape !== nodes[i].data.shape) {
-                // console.warn(newNodesData[i].shape, nodes[i].data.shape)
+            if (newNodesData[i].shape !== nodes[i].data.shape && newNodesData[i].image !== nodes[i].data.image) {
                 nodesReactFlowNotSameAsNodesEditor();
                 return;
             }
