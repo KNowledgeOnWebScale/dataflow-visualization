@@ -44,27 +44,27 @@ export const edgesJSON = [
     {
         source: 'CSV',
         target: 'RDF',
-        style: {strokeDasharray: "5 2 2 2"},
+        strokeDasharray: "5 2 2 2"
     },
     {
         source: 'JSON',
         target: 'RDF',
-        style: {strokeDasharray: "5 2 2 2"},
+        strokeDasharray: "5 2 2 2",
     },
     {
         source: 'XML',
         target: 'RDF',
-        style: {strokeDasharray: "5 2 2 2"},
+        strokeDasharray: "5 2 2 2",
     },
     {
         source: 'MySQL',
         target: 'RDF',
-        style: {strokeDasharray: "5 2 2 2"},
+        strokeDasharray: "5 2 2 2",
     },
     {
         source: 'API',
         target: 'RDF',
-        style: {strokeDasharray: "5 2 2 2"},
+        strokeDasharray: "5 2 2 2",
     },
     {
         source: "RML",
@@ -72,7 +72,7 @@ export const edgesJSON = [
         type: "straight",
         sourceHandle: "bottom-source",
         targetHandle: "top-target",
-        style: {strokeDasharray: 3},
+        strokeDasharray: 3,
         markerEnd: {},
         animated: false
     },
@@ -90,7 +90,7 @@ export const edgesJSON = [
         type: "straight",
         sourceHandle: "bottom-source",
         targetHandle: "top-target",
-        style: {strokeDasharray: 3},
+        strokeDasharray: 3,
         markerEnd: {},
         animated: false
     }
