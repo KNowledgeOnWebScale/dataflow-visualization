@@ -12,12 +12,14 @@
     "properties": {
       "color": {
         "type": "string",
+        "description": "The color of the edge.",
         "errorMessage": {
           "type": "color must be string"
         }
       },
       "thickness": {
         "type": "number",
+        "description": "The thickness of the edge.",
         "errorMessage": {
           "type": "thickness must be number"
         }
@@ -27,18 +29,21 @@
           "number",
           "string"
         ],
+        "description": "The pattern of dashes of the edges. See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray#example) for more information.",
         "errorMessage": {
           "type": "strokeDasharray must be number or string"
         }
       },
       "animated": {
         "type": "boolean",
+        "description": "Set a default animation for the edge. See also [Animations](https://github.com/KNowledgeOnWebScale/dataflow-visualization/tree/main#animations).",
         "errorMessage": {
           "type": "animated must be boolean"
         }
       },
       "animation": {
         "type": "string",
+        "description": "See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/animation) for more information about animation.",
         "errorMessage": {
           "type": "animation must be string"
         }
@@ -51,30 +56,35 @@
           "smoothstep",
           "straight"
         ],
+        "description": "Set how the edge should look like (straight line, curve ...). `default` = [Bézier curve](https://en.wikipedia.org/wiki/B%C3%A9zier_curve).",
         "errorMessage": {
           "type": "type must be string with possible values: default , step , smoothstep  or straight"
         }
       },
       "zIndex": {
         "type": "number",
+        "description": "Controls the stacking order of the edge. For more information, go to the [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/z-index).",
         "errorMessage": {
           "type": "zIndex must be number"
         }
       },
       "label": {
         "type": "string",
+        "description": "Set the label of the edge.",
         "errorMessage": {
           "type": "label must be string"
         }
       },
       "source": {
         "type": "string",
+        "description": "ID of the source node.",
         "errorMessage": {
           "type": "source must be string"
         }
       },
       "target": {
         "type": "string",
+        "description": "ID of the target node.",
         "errorMessage": {
           "type": "target must be string"
         }
@@ -87,6 +97,7 @@
           "top-source",
           "bottom-source"
         ],
+        "description": "Set where the edge should attach to the source node.",
         "errorMessage": {
           "type": "sourceHandle must be string with possible values: left-source , right-source , top-source  or bottom-source"
         }
@@ -99,6 +110,7 @@
           "top-target",
           "bottom-target"
         ],
+        "description": "Set where the edge should attach to the target node.",
         "errorMessage": {
           "type": "targetHandle must be string with possible values: left-target , right-target , top-target  or bottom-target"
         }

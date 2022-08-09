@@ -13,12 +13,12 @@ export const KEY_VALUES = {
             "canBeGlobal": true,
             value: false,
             type: "boolean",
-            description: "If set to true, an algorithm is used to automaticaly determine the positions of the nodes."
+            description: "If set to `true`, [dagre](https://github.com/dagrejs/dagre) is used to automatically determine to positions of the nodes. Individually set positions will be overwritten see [Node positioning](https://github.com/KNowledgeOnWebScale/dataflow-visualization/tree/main#node-positioning) for more information."
         },     // If true, use library 'dagrejs' to determine positioning of nodes
         "ORIENTATION": {
             id: "orientation", "canBeGlobal": true, value: "horizontal", type: "string",
             enum: ["vertical", "horizontal"],
-            description: "The orientation of the graph. Set to `vertical` if you want to work from top to bottom or bottom to top."
+            description: "The orientation of the graph. If you want to work from top to bottom or from bottom to top, set `orientation` to `vertical`"
         }
 
     },
@@ -117,39 +117,86 @@ export const KEY_VALUES = {
 
     // Keys that can be used in the JSON/YAML representation of edges
     [EDGE]: {
-        "COLOR": {id: "color", "canBeGlobal": true, value: "black", type: "string", "cssProperty": "stroke"},        // Color of edge
-        "THICKNESS": {id: "thickness", "canBeGlobal": true, value: 1.2, type: "number", "cssProperty": "strokeWidth"},    // Thickness of edge
-        "MARKER_END": {id: "markerEnd", "canBeGlobal": true, value: {}, type: "object"},             // Marker at end of the edge
-        "MARKER_START": {id: "markerStart", "canBeGlobal": true, value: {}, type: "object"}, //TODO  hoe object fixen ivm intellisense (nu hardcoded in schemaValidation.js)?       // Marker at beginning of the edge
+        "COLOR": {
+            id: "color",
+            "canBeGlobal": true,
+            value: "black",
+            type: "string",
+            "cssProperty": "stroke",
+            description: "The color of the edge."
+        },
+        "THICKNESS": {
+            id: "thickness",
+            "canBeGlobal": true,
+            value: 1.2,
+            type: "number",
+            "cssProperty": "strokeWidth",
+            description: "The thickness of the edge."
+        },
+        "MARKER_END": {
+            id: "markerEnd",
+            "canBeGlobal": true,
+            value: {},
+            type: "object",
+            description: "The arrowhead at the end of the edge. Notice that there are two options for `type`. `arrow` is a shallow arrow and `arrowclosed` will be filled. If you do not specify `color`, the color of the edge will also be the color of the arrow."
+        },
+        "MARKER_START": {
+            id: "markerStart",
+            "canBeGlobal": true,
+            value: {},
+            type: "object",
+            description: "The arrowhead at the beginning of the edge. Notice that there are two options for `type`. `arrow` is a shallow arrow and `arrowclosed` will be filled. If you do not specify `color`, the color of the edge will also be the color of the arrow."
+        }, //TODO  hoe object fixen ivm intellisense (nu hardcoded in schemaValidation.js)?       // Marker at beginning of the edge
         "STROKE_DASHARRAY": {
             id: "strokeDasharray",
             "canBeGlobal": true,
             value: 0,
             type: ["number", "string"],
-            "cssProperty": "strokeDasharray"
-        },  // The stroke dasharray of the edges
-        "ANIMATED": {id: "animated", "canBeGlobal": true, value: false, type: "boolean"},            // Standard animation supported by React Flow
-        "ANIMATION": {id: "animation", "canBeGlobal": true, type: "string", "cssProperty": "animation"},                         // Custom animation
+            "cssProperty": "strokeDasharray",
+            description: "The pattern of dashes of the edges. See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray#example) for more information."
+        },
+        "ANIMATED": {
+            id: "animated",
+            "canBeGlobal": true,
+            value: false,
+            type: "boolean",
+            description: "Set a default animation for the edge. See also [Animations](https://github.com/KNowledgeOnWebScale/dataflow-visualization/tree/main#animations)."
+        },
+        "ANIMATION": {
+            id: "animation",
+            "canBeGlobal": true,
+            type: "string",
+            "cssProperty": "animation",
+            description: "See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/animation) for more information about animation."
+        },
         "TYPE": {                                                               // Type of edge (default, step, smoothstep, straight)
             id: "type", "canBeGlobal": true, value: "default", type: "string",
-            enum: ["default", "step", "smoothstep", "straight"]
+            enum: ["default", "step", "smoothstep", "straight"],
+            description: "Set how the edge should look like (straight line, curve ...). `default` = [Bézier curve](https://en.wikipedia.org/wiki/B%C3%A9zier_curve)."
         },
 
-        "Z_INDEX": {id: "zIndex", "canBeGlobal": true, type: "number"},  // Leave value zIndex 0 (e.g. example 2)
-        "LABEL": {id: "label", "canBeGlobal": true, type: "string"},
-        "SOURCE": {id: "source", "canBeGlobal": true, type: "string", required: true},
-        "TARGET": {id: "target", "canBeGlobal": true, type: "string", required: true},
+        "Z_INDEX": {
+            id: "zIndex",
+            "canBeGlobal": true,
+            type: "number",
+            description: "Controls the stacking order of the edge. For more information, go to the [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/z-index)."
+        },
+        "LABEL": {id: "label", "canBeGlobal": true, type: "string", description: "Set the label of the edge."},
+        "SOURCE": {id: "source", "canBeGlobal": true, type: "string", required: true, description: "ID of the source node."},
+        "TARGET": {id: "target", "canBeGlobal": true, type: "string", required: true, description: "ID of the target node."},
         "SOURCE_HANDLE": {
             id: "sourceHandle",
             "canBeGlobal": true,
             type: "string",
-            enum: ["left-source", "right-source", "top-source", "bottom-source"]
+            enum: ["left-source", "right-source", "top-source", "bottom-source"],
+            description: "Set where the edge should attach to the source node."
         },
         "TARGET_HANDLE": {
             id: "targetHandle",
             "canBeGlobal": true,
             type: "string",
-            enum: ["left-target", "right-target", "top-target", "bottom-target"]
+            enum: ["left-target", "right-target", "top-target", "bottom-target"],
+            description: "Set where the edge should attach to the target node."
         },
     },
 

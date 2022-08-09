@@ -18,11 +18,11 @@ Type: `object`
 	 - <b id="globaldefaultsgraph">&#36;id: globalDefaultsGraph</b>
 	 - **_Properties_**
 		 - <b id="#globalDefaultsGraph/properties/autoLayout">autoLayout</b>
-			 - _If set to true, an algorithm is used to automaticaly determine the positions of the nodes._
+			 - _If set to `true`, [dagre](https://github.com/dagrejs/dagre) is used to automatically determine to positions of the nodes. Individually set positions will be overwritten see [Node positioning](https://github.com/KNowledgeOnWebScale/dataflow-visualization/tree/main#node-positioning) for more information._
 			 - Type: `boolean`
 			 - <i id="globalDefaultsGraph/properties/autoLayout">path: #globalDefaultsGraph/properties/autoLayout</i>
 		 - <b id="#globalDefaultsGraph/properties/orientation">orientation</b>
-			 - _The orientation of the graph. Set to `vertical` if you want to work from top to bottom or bottom to top._
+			 - _The orientation of the graph. If you want to work from top to bottom or from bottom to top, set `orientation` to `vertical`_
 			 - Type: `string`
 			 - <i id="globalDefaultsGraph/properties/orientation">path: #globalDefaultsGraph/properties/orientation</i>
 			 - The value is restricted to the following: 
@@ -102,21 +102,27 @@ Type: `object`
 	 - <b id="globaldefaultsedge">&#36;id: globalDefaultsEdge</b>
 	 - **_Properties_**
 		 - <b id="#globalDefaultsEdge/properties/color">color</b>
+			 - _The color of the edge._
 			 - Type: `string`
 			 - <i id="globalDefaultsEdge/properties/color">path: #globalDefaultsEdge/properties/color</i>
 		 - <b id="#globalDefaultsEdge/properties/thickness">thickness</b>
+			 - _The thickness of the edge._
 			 - Type: `number`
 			 - <i id="globalDefaultsEdge/properties/thickness">path: #globalDefaultsEdge/properties/thickness</i>
 		 - <b id="#globalDefaultsEdge/properties/strokeDasharray">strokeDasharray</b>
+			 - _The pattern of dashes of the edges. See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray#example) for more information._
 			 - Types: `number`, `string`
 			 - <i id="globalDefaultsEdge/properties/strokeDasharray">path: #globalDefaultsEdge/properties/strokeDasharray</i>
 		 - <b id="#globalDefaultsEdge/properties/animated">animated</b>
+			 - _Set a default animation for the edge. See also [Animations](https://github.com/KNowledgeOnWebScale/dataflow-visualization/tree/main#animations)._
 			 - Type: `boolean`
 			 - <i id="globalDefaultsEdge/properties/animated">path: #globalDefaultsEdge/properties/animated</i>
 		 - <b id="#globalDefaultsEdge/properties/animation">animation</b>
+			 - _See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/animation) for more information about animation._
 			 - Type: `string`
 			 - <i id="globalDefaultsEdge/properties/animation">path: #globalDefaultsEdge/properties/animation</i>
 		 - <b id="#globalDefaultsEdge/properties/type">type</b>
+			 - _Set how the edge should look like (straight line, curve ...). `default` = [Bézier curve](https://en.wikipedia.org/wiki/B%C3%A9zier_curve)._
 			 - Type: `string`
 			 - <i id="globalDefaultsEdge/properties/type">path: #globalDefaultsEdge/properties/type</i>
 			 - The value is restricted to the following: 
@@ -125,18 +131,23 @@ Type: `object`
 				 3. _"smoothstep"_
 				 4. _"straight"_
 		 - <b id="#globalDefaultsEdge/properties/zIndex">zIndex</b>
+			 - _Controls the stacking order of the edge. For more information, go to the [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/z-index)._
 			 - Type: `number`
 			 - <i id="globalDefaultsEdge/properties/zIndex">path: #globalDefaultsEdge/properties/zIndex</i>
 		 - <b id="#globalDefaultsEdge/properties/label">label</b>
+			 - _Set the label of the edge._
 			 - Type: `string`
 			 - <i id="globalDefaultsEdge/properties/label">path: #globalDefaultsEdge/properties/label</i>
 		 - <b id="#globalDefaultsEdge/properties/source">source</b>
+			 - _ID of the source node._
 			 - Type: `string`
 			 - <i id="globalDefaultsEdge/properties/source">path: #globalDefaultsEdge/properties/source</i>
 		 - <b id="#globalDefaultsEdge/properties/target">target</b>
+			 - _ID of the target node._
 			 - Type: `string`
 			 - <i id="globalDefaultsEdge/properties/target">path: #globalDefaultsEdge/properties/target</i>
 		 - <b id="#globalDefaultsEdge/properties/sourceHandle">sourceHandle</b>
+			 - _Set where the edge should attach to the source node._
 			 - Type: `string`
 			 - <i id="globalDefaultsEdge/properties/sourceHandle">path: #globalDefaultsEdge/properties/sourceHandle</i>
 			 - The value is restricted to the following: 
@@ -145,6 +156,7 @@ Type: `object`
 				 3. _"top-source"_
 				 4. _"bottom-source"_
 		 - <b id="#globalDefaultsEdge/properties/targetHandle">targetHandle</b>
+			 - _Set where the edge should attach to the target node._
 			 - Type: `string`
 			 - <i id="globalDefaultsEdge/properties/targetHandle">path: #globalDefaultsEdge/properties/targetHandle</i>
 			 - The value is restricted to the following: 
