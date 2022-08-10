@@ -109,6 +109,14 @@ Type: `object`
 			 - Type: `number`
 			 - <i id="globalDefaultsNode/properties/zIndex">path: #globalDefaultsNode/properties/zIndex</i>
 			 - Default: `0`
+		 - <b id="#globalDefaultsNode/properties/hgroup">hgroup</b>
+			 - _Align a group of nodes vertically._
+			 - Type: `string`
+			 - <i id="globalDefaultsNode/properties/hgroup">path: #globalDefaultsNode/properties/hgroup</i>
+		 - <b id="#globalDefaultsNode/properties/vgroup">vgroup</b>
+			 - _Align a group of nodes horizontally._
+			 - Type: `string`
+			 - <i id="globalDefaultsNode/properties/vgroup">path: #globalDefaultsNode/properties/vgroup</i>
 		 - <b id="#globalDefaultsNode/properties/presets">presets</b>
 			 - _Create node presets._
 			 - Type: `object`

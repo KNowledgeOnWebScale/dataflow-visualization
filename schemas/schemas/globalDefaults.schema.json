@@ -151,6 +151,20 @@
             "type": "zIndex must be number"
           }
         },
+        "hgroup": {
+          "type": "string",
+          "description": "Align a group of nodes vertically.",
+          "errorMessage": {
+            "type": "hgroup must be string"
+          }
+        },
+        "vgroup": {
+          "type": "string",
+          "description": "Align a group of nodes horizontally.",
+          "errorMessage": {
+            "type": "vgroup must be string"
+          }
+        },
         "presets": {
           "type": "object",
           "description": "Create node presets.",
@@ -271,6 +285,20 @@
                 "default": 0,
                 "errorMessage": {
                   "type": "zIndex must be number"
+                }
+              },
+              "hgroup": {
+                "type": "string",
+                "description": "Align a group of nodes vertically.",
+                "errorMessage": {
+                  "type": "hgroup must be string"
+                }
+              },
+              "vgroup": {
+                "type": "string",
+                "description": "Align a group of nodes horizontally.",
+                "errorMessage": {
+                  "type": "vgroup must be string"
                 }
               }
             }
