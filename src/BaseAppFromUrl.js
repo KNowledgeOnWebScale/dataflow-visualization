@@ -20,6 +20,9 @@ const Base = () => {
 
     const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
 
+    console.log(searchParams.get("nodes"))
+
+
     useEffect(() => {
         let nodes2json;
         let edges2json;
