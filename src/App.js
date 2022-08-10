@@ -12,9 +12,9 @@ const EdgesFlow = () => {
 
             <BrowserRouter>
                 <Routes>
-                    <Route path="/dataflow-visualization" index element={<BaseApp/>}/>
-                    <Route path="/dataflow-visualization/data" element={<BaseFromUrl/>}/>
-                    <Route path="*" element={<NotFound/>}/>
+                    <Route path="/dataflow-visualization" exact element={<BaseApp/>}/>
+                    <Route path="/dataflow-visualization/data" exact element={<BaseFromUrl/>}/>
+                    {/*<Route path="*" element={<NotFound/>}/>*/}
                 </Routes>
             </BrowserRouter>
 
