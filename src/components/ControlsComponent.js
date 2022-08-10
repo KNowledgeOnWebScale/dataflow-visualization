@@ -2,6 +2,7 @@ import {Button} from "react-bootstrap";
 import {json2yaml, yaml2json} from "../lib/jsonYamlConversionUtil";
 import {useRef, useState} from "react";
 import ErrorModal from "./ErrorModal";
+import {downloadJSONFile} from "../lib/downloadFileUtil";
 
 const ControlsComponent = ({
                                language,
@@ -11,7 +12,8 @@ const ControlsComponent = ({
                                setNodesData,
                                edgesData,
                                setData,
-                               nodes
+                               nodes,
+                               edges
                            }) => {
 
     const inputFile = useRef(null)
@@ -24,6 +26,23 @@ const ControlsComponent = ({
     const nodesId = "nodes";
     const edgesId = "edges"
 
+
+    function handleRawExport(e) {
+        e.preventDefault();
+
+        console.log(nodes)
+
+
+        // let rawNodesConfig = JSON.parse(nodes);
+        //let rawEdgesConfig = JSON.parse(edges);
+
+
+        const out = {"rawNodesConfig": nodes, "rawEdgesConfig": edges};
+
+        downloadJSONFile("rawconfig.json", out);
+
+    }
+
     function handleExport(e) {
         e.preventDefault();
 
@@ -35,18 +54,10 @@ const ControlsComponent = ({
         let nodesConfig = JSON.parse(language === "json" ? nodesData : yaml2json(nodesData));
         let edgesConfig = JSON.parse(language === "json" ? edgesData : yaml2json(edgesData));
 
-
         const out = {[globalDefaultsID]: globalDefaultsConfig, [nodesId]: nodesConfig, [edgesId]: edgesConfig};
 
+        downloadJSONFile("config.json", out);
 
-        const jsonString = `data:text/json;charset=utf-8,${encodeURIComponent(
-            JSON.stringify(out)
-        )}`;
-        const link = document.createElement("a");
-        link.href = jsonString;
-        link.download = "config.json";
-
-        link.click();
     }
 
     function handleImport(e) {
@@ -147,6 +158,7 @@ const ControlsComponent = ({
         <ErrorModal errorModalVisible={errorModalVisible} errorMessageTitle={errorTitle} errorMessages={errorMessages}
                     handleErrorPopUpClose={() => setErrorModalVisible(false)}/>
 
+        <Button variant={"danger"} onClick={handleRawExport}>Export raw config</Button>
         <Button variant={"success"} onClick={handleExport}>Export config</Button>
         <Button variant={"success"} onClick={handleImport}>Import config</Button>
         <input type='file' id='file' ref={inputFile} onChange={handleFileChange} style={{display: 'none'}}/>

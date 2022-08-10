@@ -93,6 +93,8 @@ These buttons on are for loading in examples.
 These buttons are to import and export entire configs (format is JSON). This feature is useful if you want to save
 configs for later.
 
+There is also a button to export the raw data. This is the data needed for [ReactFlow] to draw up a flow.
+
 #### 'Fill in' button
 
 Manually typing positions for the nodes is not so easy. And sometimes mechanisms like `vgroup`, `hgroup` or `autoLayout`

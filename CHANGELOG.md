@@ -14,8 +14,9 @@ First ever release. You can make flows from JSON or YAML.
 - Issue #12: You can set the contents of the example buttons via the configs.
 - Issue #19: You can import and export figure configurations.
 - Issue #22: There is a button to import the sizes of all nodes of the flow.
+- Issue #34: You can use define for nodes and edges.
 - Issue #35: Nodes can have a dashed stroke (just like edges already could).
--
+- Issue #59: There is a button to export the raw ReactFlow config.
 
 ### Changed
 
