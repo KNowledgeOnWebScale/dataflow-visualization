@@ -146,9 +146,19 @@ export const KEY_VALUES = {
             description: "Controls the stacking order of the nodes."
         },
 
+        HGROUP: {
+            id: "hgroup",
+            canBeGlobal: true,
+            type: "string",
+            description: "Align a group of nodes vertically."
+        },
 
-        //TODO; hgroup, vgroup
-
+        VGROUP: {
+            id: "vgroup",
+            canBeGlobal: true,
+            type: "string",
+            description: "Align a group of nodes horizontally."
+        }
     },
 
     // Keys that can be used in the JSON/YAML representation of edges
@@ -561,36 +571,26 @@ function getSourceNode_targetNode_fromId(edge, nodes) {
 
 
 function fixNodeGroups(nodes) {
-    // loop over nodes and store all groups
-    // let groups = {"vgroups": new Set(), "hgroups": new Set()}
+
+    const vgroupID = KEY_VALUES[NODE].VGROUP.id;
+    const hgroupId = KEY_VALUES[NODE].HGROUP.id;
+
     let groupsHash = new Set();
     let groups = [];
-    /*for (let n of nodes) {
-        // TODO: met ID's werken voor vgroup en hgroup
-        if (n.hasOwnProperty("vgroup")) {
-            groups["vgroups"].add(n["vgroup"]);
-        }
-        if (n.hasOwnProperty("hgroup")) {
-            groups["hgroups"].add(n["hgroup"]);
-        }
-    }
-
-    groups["vgroups"].forEach(g => fixVgroups(nodes, g));
-    groups["hgroups"].forEach(g => fixHgroups(nodes, g));*/
 
     for (let n of nodes) {
-        if (n.hasOwnProperty("vgroup") && !groupsHash.has(n["vgroup"])) {
-            groups.push(["vgroup", n["vgroup"]]);
-            groupsHash.add(n["vgroup"])
+        if (n.hasOwnProperty(vgroupID) && !groupsHash.has(n[vgroupID])) {
+            groups.push([vgroupID, n[vgroupID]]);
+            groupsHash.add(n[vgroupID])
         }
-        if (n.hasOwnProperty("hgroup") && !groupsHash.has(n["hgroup"])) {
-            groups.push(["hgroup", n["hgroup"]]);
-            groupsHash.add(n["hgroup"]);
+        if (n.hasOwnProperty(hgroupId) && !groupsHash.has(n[hgroupId])) {
+            groups.push([hgroupId, n[hgroupId]]);
+            groupsHash.add(n[hgroupId]);
         }
     }
 
     for (let g of groups) {
-        if (g[0] === "vgroup") {
+        if (g[0] === vgroupID) {
             fixVgroups(nodes, g[1]);
         } else {
             fixHgroups(nodes, g[1])

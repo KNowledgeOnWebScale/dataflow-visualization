@@ -95,6 +95,14 @@ Type: `array`
 		 - Type: `number`
 		 - <i id="nodeSchema/items/properties/zIndex">path: #nodeSchema/items/properties/zIndex</i>
 		 - Default: `0`
+	 - <b id="#nodeSchema/items/properties/hgroup">hgroup</b>
+		 - _Align a group of nodes vertically._
+		 - Type: `string`
+		 - <i id="nodeSchema/items/properties/hgroup">path: #nodeSchema/items/properties/hgroup</i>
+	 - <b id="#nodeSchema/items/properties/vgroup">vgroup</b>
+		 - _Align a group of nodes horizontally._
+		 - Type: `string`
+		 - <i id="nodeSchema/items/properties/vgroup">path: #nodeSchema/items/properties/vgroup</i>
 	 - <b id="#nodeSchema/items/properties/position">position</b>
 		 - #### Position schema
 		 - Type: `object`
