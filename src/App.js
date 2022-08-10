@@ -1,23 +1,22 @@
 import React from 'react';
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {HashRouter, Route, Routes} from "react-router-dom";
 import BaseApp from "./BaseApp";
 import BaseFromUrl from "./BaseAppFromUrl";
-//import NotFound from "./components/NotFound";
+import NotFound from "./components/NotFound";
 
 
 const EdgesFlow = () => {
 
+    console.log(process.env.PUBLIC_URL)
     return (
         <>
-
-            <BrowserRouter>
+            <HashRouter /*basename={process.env.PUBLIC_URL + "/"}*/>
                 <Routes>
-                    <Route path="/dataflow-visualization" exact element={<BaseApp/>}/>
-                    <Route path="/dataflow-visualization/data" exact element={<BaseFromUrl/>}/>
-                    {/*<Route path="*" element={<NotFound/>}/>*/}
+                    <Route path="data" element={<BaseFromUrl/>}/>
+                    <Route exact path="/" element={<BaseApp/>}/>
+                    <Route path="*" element={<NotFound/>}/>
                 </Routes>
-            </BrowserRouter>
-
+            </HashRouter>
 
         </>
     );
