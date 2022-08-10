@@ -40,6 +40,13 @@
           "type": "label must be string"
         }
       },
+      "preset": {
+        "type": "string",
+        "description": "Refer to a preset defined in the config of the global defaults. If you use this, you will overwrite all that is defined in this edge with the values of the preset.",
+        "errorMessage": {
+          "type": "preset must be string"
+        }
+      },
       "thickness": {
         "type": "number",
         "description": "The thickness of the edge.",
