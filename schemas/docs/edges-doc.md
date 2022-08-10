@@ -29,6 +29,10 @@ Type: `array`
 		 - _Set the label of the edge._
 		 - Type: `string`
 		 - <i id="edgeSchema/items/properties/label">path: #edgeSchema/items/properties/label</i>
+	 - <b id="#edgeSchema/items/properties/preset">preset</b>
+		 - _Refer to a preset defined in the config of the global defaults. If you use this, you will overwrite all that is defined in this edge with the values of the preset._
+		 - Type: `string`
+		 - <i id="edgeSchema/items/properties/preset">path: #edgeSchema/items/properties/preset</i>
 	 - <b id="#edgeSchema/items/properties/thickness">thickness</b>
 		 - _The thickness of the edge._
 		 - Type: `number`

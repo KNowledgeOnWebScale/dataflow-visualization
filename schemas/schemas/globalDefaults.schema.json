@@ -143,6 +143,124 @@
           "errorMessage": {
             "type": "zIndex must be number"
           }
+        },
+        "presets": {
+          "type": "object",
+          "description": "Create node presets.",
+          "additionalProperties": {
+            "type": "object",
+            "title": "node",
+            "description": "node in global defaults",
+            "$id": "presetNestedNode",
+            "properties": {
+              "height": {
+                "type": "number",
+                "description": "The height of the node.",
+                "default": 50,
+                "errorMessage": {
+                  "type": "height must be number"
+                }
+              },
+              "width": {
+                "type": "number",
+                "description": "The width of the node.",
+                "default": 50,
+                "errorMessage": {
+                  "type": "width must be number"
+                }
+              },
+              "fill": {
+                "type": "string",
+                "description": "Color of the node.",
+                "default": "white",
+                "errorMessage": {
+                  "type": "fill must be string"
+                }
+              },
+              "fontsize": {
+                "type": "number",
+                "description": "Size of the text inside the nodes.",
+                "default": 12,
+                "errorMessage": {
+                  "type": "fontsize must be number"
+                }
+              },
+              "image": {
+                "type": "string",
+                "description": "The image inside a node. This image takes up the entire width and height of the node.",
+                "errorMessage": {
+                  "type": "image must be string"
+                }
+              },
+              "label": {
+                "type": "string",
+                "description": "The text inside a node.",
+                "default": "",
+                "errorMessage": {
+                  "type": "label must be string"
+                }
+              },
+              "shape": {
+                "type": "string",
+                "enum": [
+                  "8-star",
+                  "big-star",
+                  "circle",
+                  "cylinder",
+                  "diamond",
+                  "hexagon",
+                  "note",
+                  "rectangle",
+                  "square",
+                  "star",
+                  "triangle",
+                  "comunica",
+                  "rmlio",
+                  "solid"
+                ],
+                "description": "The shape of the node.",
+                "default": "square",
+                "errorMessage": {
+                  "type": "shape must be string with possible values: 8-star , big-star , circle , cylinder , diamond , hexagon , note , rectangle , square , star , triangle , comunica , rmlio  or solid"
+                }
+              },
+              "stroke": {
+                "type": "string",
+                "description": "The color of the stroke of the node.",
+                "default": "black",
+                "errorMessage": {
+                  "type": "stroke must be string"
+                }
+              },
+              "strokeDasharray": {
+                "type": [
+                  "number",
+                  "string"
+                ],
+                "description": "The dash pattern of the node.",
+                "default": 0,
+                "errorMessage": {
+                  "type": "strokeDasharray must be number or string"
+                }
+              },
+              "strokeWidth": {
+                "type": "number",
+                "description": "The thickness of the stroke of the nodes.",
+                "default": 1,
+                "errorMessage": {
+                  "type": "strokeWidth must be number"
+                }
+              },
+              "zIndex": {
+                "type": "number",
+                "description": "Controls the stacking order of the nodes.",
+                "default": 0,
+                "errorMessage": {
+                  "type": "zIndex must be number"
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -309,6 +427,178 @@
             "color": {
               "type": "string",
               "errorMessage": "Color of arrow must be string"
+            }
+          }
+        },
+        "presets": {
+          "type": "object",
+          "description": "Create edge presets.",
+          "additionalProperties": {
+            "type": "object",
+            "title": "edge",
+            "description": "edge in global defaults",
+            "$id": "presetNestedEdge",
+            "properties": {
+              "animated": {
+                "type": "boolean",
+                "description": "Set a default animation for the edge. See also [Animations](https://github.com/KNowledgeOnWebScale/dataflow-visualization/tree/main#animations).",
+                "default": false,
+                "errorMessage": {
+                  "type": "animated must be boolean"
+                }
+              },
+              "animation": {
+                "type": "string",
+                "description": "See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/animation) for more information about animation.",
+                "errorMessage": {
+                  "type": "animation must be string"
+                }
+              },
+              "color": {
+                "type": "string",
+                "description": "The color of the edge.",
+                "default": "black",
+                "errorMessage": {
+                  "type": "color must be string"
+                }
+              },
+              "label": {
+                "type": "string",
+                "description": "Set the label of the edge.",
+                "errorMessage": {
+                  "type": "label must be string"
+                }
+              },
+              "thickness": {
+                "type": "number",
+                "description": "The thickness of the edge.",
+                "default": 1.2,
+                "errorMessage": {
+                  "type": "thickness must be number"
+                }
+              },
+              "strokeDasharray": {
+                "type": [
+                  "number",
+                  "string"
+                ],
+                "description": "The pattern of dashes of the edges. See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray#example) for more information.",
+                "default": 0,
+                "errorMessage": {
+                  "type": "strokeDasharray must be number or string"
+                }
+              },
+              "source": {
+                "type": "string",
+                "description": "ID of the source node.",
+                "errorMessage": {
+                  "type": "source must be string"
+                }
+              },
+              "target": {
+                "type": "string",
+                "description": "ID of the target node.",
+                "errorMessage": {
+                  "type": "target must be string"
+                }
+              },
+              "sourceHandle": {
+                "type": "string",
+                "enum": [
+                  "left",
+                  "right",
+                  "top",
+                  "bottom"
+                ],
+                "description": "Set where the edge should attach to the source node.",
+                "errorMessage": {
+                  "type": "sourceHandle must be string with possible values: left , right , top  or bottom"
+                }
+              },
+              "targetHandle": {
+                "type": "string",
+                "enum": [
+                  "left",
+                  "right",
+                  "top",
+                  "bottom"
+                ],
+                "description": "Set where the edge should attach to the target node.",
+                "errorMessage": {
+                  "type": "targetHandle must be string with possible values: left , right , top  or bottom"
+                }
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "default",
+                  "step",
+                  "smoothstep",
+                  "straight"
+                ],
+                "description": "Set how the edge should look like (straight line, curve ...). `default` = [Bézier curve](https://en.wikipedia.org/wiki/B%C3%A9zier_curve).",
+                "default": "default",
+                "errorMessage": {
+                  "type": "type must be string with possible values: default , step , smoothstep  or straight"
+                }
+              },
+              "zIndex": {
+                "type": "number",
+                "description": "Controls the stacking order of the edge. For more information, go to the [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/z-index).",
+                "errorMessage": {
+                  "type": "zIndex must be number"
+                }
+              },
+              "markerStart": {
+                "type": "object",
+                "title": "Arrowhead schema",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "arrow",
+                      "arrowclosed"
+                    ],
+                    "errorMessage": "Type of arrow must be string with possible values: arrow  or arrowclosed"
+                  },
+                  "orient": {
+                    "type": [
+                      "string",
+                      "number"
+                    ],
+                    "errorMessage": "Orient of arrow must be number or string"
+                  },
+                  "color": {
+                    "type": "string",
+                    "errorMessage": "Color of arrow must be string"
+                  }
+                }
+              },
+              "markerEnd": {
+                "type": "object",
+                "title": "Arrowhead schema",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "arrow",
+                      "arrowclosed"
+                    ],
+                    "errorMessage": "Type of arrow must be string with possible values: arrow  or arrowclosed"
+                  },
+                  "orient": {
+                    "type": [
+                      "string",
+                      "number"
+                    ],
+                    "errorMessage": "Orient of arrow must be number or string"
+                  },
+                  "color": {
+                    "type": "string",
+                    "errorMessage": "Color of arrow must be string"
+                  }
+                }
+              }
             }
           }
         }

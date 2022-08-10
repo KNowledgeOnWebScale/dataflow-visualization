@@ -206,6 +206,7 @@ function initGlobalDefaultsSchema() {
 
     globalDefaultSchema.properties[NODE].properties[KEY_VALUES[NODE].PRESETS.id] =  {
         type: "object",
+        description: KEY_VALUES[NODE].PRESETS.description,
         additionalProperties: nestedNodesSchema
     }
 
@@ -219,6 +220,7 @@ function initGlobalDefaultsSchema() {
     nestedEdgesSchema["$id"] = "presetNestedEdge"
     globalDefaultSchema.properties[EDGE].properties[KEY_VALUES[EDGE].PRESETS.id] =  {
         type: "object",
+        description: KEY_VALUES[EDGE].PRESETS.description,
         additionalProperties: nestedEdgesSchema
     }
 

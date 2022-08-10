@@ -105,6 +105,12 @@ Type: `object`
 			 - Type: `number`
 			 - <i id="globalDefaultsNode/properties/zIndex">path: #globalDefaultsNode/properties/zIndex</i>
 			 - Default: `0`
+		 - <b id="#globalDefaultsNode/properties/presets">presets</b>
+			 - _Create node presets._
+			 - Type: `object`
+			 - <i id="globalDefaultsNode/properties/presets">path: #globalDefaultsNode/properties/presets</i>
+			 - This schema accepts additional properties.
+			 - **_Properties_**
  - <b id="#globalDefaultSchema/properties/edge">edge</b>
 	 - ### edge
 	 - _edge in global defaults_
@@ -214,5 +220,11 @@ Type: `object`
 				 - <b id="#globalDefaultsEdge/properties/markerEnd/properties/color">color</b>
 					 - Type: `string`
 					 - <i id="globalDefaultsEdge/properties/markerEnd/properties/color">path: #globalDefaultsEdge/properties/markerEnd/properties/color</i>
+		 - <b id="#globalDefaultsEdge/properties/presets">presets</b>
+			 - _Create edge presets._
+			 - Type: `object`
+			 - <i id="globalDefaultsEdge/properties/presets">path: #globalDefaultsEdge/properties/presets</i>
+			 - This schema accepts additional properties.
+			 - **_Properties_**
 
 _Generated with [json-schema-md-doc](https://brianwendt.github.io/json-schema-md-doc/)_

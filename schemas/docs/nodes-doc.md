@@ -47,6 +47,10 @@ Type: `array`
 		 - _The parent of other nodes. If you want to add a node inside another node, you have to set `parentNode` in the child as the ID of the parent._
 		 - Type: `string`
 		 - <i id="nodeSchema/items/properties/parentNode">path: #nodeSchema/items/properties/parentNode</i>
+	 - <b id="#nodeSchema/items/properties/preset">preset</b>
+		 - _Refer to a preset defined in the config of the global defaults. If you use this, you will overwrite all that is defined in this node with the values of the preset._
+		 - Type: `string`
+		 - <i id="nodeSchema/items/properties/preset">path: #nodeSchema/items/properties/preset</i>
 	 - <b id="#nodeSchema/items/properties/shape">shape</b>
 		 - _The shape of the node._
 		 - Type: `string`
