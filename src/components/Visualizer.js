@@ -31,7 +31,8 @@ const Visualizer = () => {
 
         <ExampleComponent language={language} setData={setData}/>
         <ControlsComponent language={language} setLanguage={setLanguage} globalDefaults={globalDefaults}
-                           nodesData={nodesData} setNodesData={setNodesData} edgesData={edgesData} setData={setData} nodes={nodes}/>
+                           nodesData={nodesData} setNodesData={setNodesData} edgesData={edgesData} setData={setData}
+                           nodes={nodes} edges={edges}/>
 
         <table style={{width: "100%", marginLeft: "5px", marginRight: "5px"}}>
             <tr>
