@@ -83,6 +83,16 @@ export const KEY_VALUES = {
         POSITION: {id: "position", "canBeGlobal": false, type: "object", description: "The position of the node."},
 
 
+        // TODO: die mustBeGlobal ondersteunen (mss als musBeGlobal, dan canBeGlobal weglaten)
+        PRESETS: {id: "presets", canBeGlobal: true, mustBeGlobal: true, type: "object", description: "Create presets"},
+
+        PRESET: {
+            id: "preset",
+            canBeGlobal: false,
+            type: "string",
+            description: "Refer to a preset defined in the config of the global defaults. If you use this, you will overwrite all that is defined in this node with the values of the preset."
+        },
+
         //TODO in DEVELOPMENT.md uitleggen dat je ook het pattern moet aanpassen
         "SHAPE": {
             id: "shape",
@@ -327,6 +337,13 @@ export function parseNodes(globalDefaults, nodes) {
         let data = {};
 
         const NODE_KEYS = KEY_VALUES[NODE]
+
+        if (node.hasOwnProperty(NODE_KEYS.PRESET.id)) {
+            let presetInGlobalDefaults = globalDefaults[NODE][NODE_KEYS.PRESETS.id][node[NODE_KEYS.PRESET.id]];
+            for (let key of Object.keys(presetInGlobalDefaults)) {
+                node[key] = presetInGlobalDefaults[key];
+            }
+        }
 
         if (node.hasOwnProperty(NODE_KEYS.IMAGE.id) && !node.hasOwnProperty(NODE_KEYS.STROKE.id)) {
             // Standard behaviour is no border around image
