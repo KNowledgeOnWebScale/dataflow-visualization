@@ -133,7 +133,7 @@ export const KEY_VALUES = {
         },
         TITLE: {
             id: "title",
-            "canBeGlobal": false,
+            "canBeGlobal": true,
             type: "string",
             description: "The title of a node. E.g. useful to name a parentNode. " +
                 "Notice that this is not the same as an ID. If you give a node a title, that title will show up not in the middle of the node, but at the top."

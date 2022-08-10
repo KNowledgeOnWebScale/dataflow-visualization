@@ -136,6 +136,13 @@
             "type": "strokeWidth must be number"
           }
         },
+        "title": {
+          "type": "string",
+          "description": "The title of a node. E.g. useful to name a parentNode. Notice that this is not the same as an ID. If you give a node a title, that title will show up not in the middle of the node, but at the top.",
+          "errorMessage": {
+            "type": "title must be string"
+          }
+        },
         "zIndex": {
           "type": "number",
           "description": "Controls the stacking order of the nodes.",
@@ -249,6 +256,13 @@
                 "default": 1,
                 "errorMessage": {
                   "type": "strokeWidth must be number"
+                }
+              },
+              "title": {
+                "type": "string",
+                "description": "The title of a node. E.g. useful to name a parentNode. Notice that this is not the same as an ID. If you give a node a title, that title will show up not in the middle of the node, but at the top.",
+                "errorMessage": {
+                  "type": "title must be string"
                 }
               },
               "zIndex": {
