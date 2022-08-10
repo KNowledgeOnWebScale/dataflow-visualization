@@ -38,8 +38,8 @@ First ever release. You can make flows from JSON or YAML.
 
 ### Fixes
 
-- Issue 40: If you changed the color of an edge, all the markers with no color specified, changed to that color.
--
+- Issue #40: If you changed the color of an edge, all the markers with no color specified, changed to that color.
+- Issue #69: Title and label in a node that was no parent, did not work.
 
 Kept [README] up to date with all the new changes and additions.
 
