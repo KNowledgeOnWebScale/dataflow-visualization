@@ -1,21 +1,28 @@
 import React from 'react';
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import Visualizer from "./components/Visualizer";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import BaseApp from "./BaseApp";
+import BaseFromUrl from "./BaseAppFromUrl";
 
 
 const EdgesFlow = () => {
+return (
+    <>
+
+        <BrowserRouter>
+            <Routes>
+                <Route path="/">
+                    <Route index element={<BaseApp/>}/>
+                    <Route path="dataflow-visualization" element={<BaseApp/>}/>
+                    <Route path="data" element={<BaseFromUrl/>}/>
+                </Route>
+            </Routes>
+        </BrowserRouter>
 
 
-    return (
-        <>
 
-            <Header/>
-            <Visualizer/>
-            <Footer/>
-
-        </>
-    );
-};
+    </>
+);
+}
+;
 
 export default EdgesFlow;
