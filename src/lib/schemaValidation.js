@@ -199,8 +199,13 @@ function initGlobalDefaultsSchema() {
         globalDefaultNestedKey(key)
     }
 
-    //TODO: moet beter
-    // Fix diegenen met type object ook op automatische manier
+    const nestedNodesSchema = {...globalDefaultSchema.properties[NODE]}
+    nestedNodesSchema["$id"] = "presetNestedNode"
+    globalDefaultSchema.properties[NODE].properties[KEY_VALUES[NODE].PRESETS.id] =  {
+        type: "object",
+        additionalProperties: nestedNodesSchema
+    }
+
     globalDefaultSchema.properties[EDGE]["properties"][KEY_VALUES[EDGE].MARKER_START.id] = arrowSchema
     globalDefaultSchema.properties[EDGE]["properties"][KEY_VALUES[EDGE].MARKER_END.id] = arrowSchema
 }
