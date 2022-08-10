@@ -80,11 +80,19 @@ export const KEY_VALUES = {
             type: "string",
             description: "The parent of other nodes. If you want to add a node inside another node, you have to set `parentNode` in the child as the ID of the parent."
         },
-        POSITION: {id: "position", "canBeGlobal": false, type: "object", description: "The position of the node."},
+        POSITION: {
+            id: "position",
+            "canBeGlobal": false,
+            type: "object",
+            description: "The position of the node."
+        },
 
-
-        // TODO: die mustBeGlobal ondersteunen (mss als musBeGlobal, dan canBeGlobal weglaten)
-        PRESETS: {id: "presets", canBeGlobal: true, mustBeGlobal: true, type: "object", description: "Create presets"},
+        PRESETS: {
+            id: "presets",
+            canBeGlobal: true,
+            type: "object",
+            description: "Create node presets."
+        },
 
         PRESET: {
             id: "preset",
@@ -186,7 +194,22 @@ export const KEY_VALUES = {
             value: {},
             type: "object",
             description: "The arrowhead at the beginning of the edge. Notice that there are two options for `type`. `arrow` is a shallow arrow and `arrowclosed` will be filled. If you do not specify `color`, the color of the edge will also be the color of the arrow."
-        }, //TODO  hoe object fixen ivm intellisense (nu hardcoded in schemaValidation.js)?       // Marker at beginning of the edge
+        },
+
+        PRESETS: {
+            id: "presets",
+            canBeGlobal: true,
+            type: "object",
+            description: "Create edge presets."
+        },
+
+        PRESET: {
+            id: "preset",
+            canBeGlobal: false,
+            type: "string",
+            description: "Refer to a preset defined in the config of the global defaults. If you use this, you will overwrite all that is defined in this edge with the values of the preset."
+        },
+
         "THICKNESS": {
             id: "thickness",
             "canBeGlobal": true,
@@ -273,16 +296,6 @@ export function parseGlobalDefaults(globalDefaults) {
         }
     }
 
-    /*   OUDE CODE
-
-    for (let key in GLOBAL_DEFAULT_KEY_VALUES) {
-        let valueObject = GLOBAL_DEFAULT_KEY_VALUES[key];
-        if (!globalDefaults.hasOwnProperty(valueObject.id)) {
-            globalDefaults[valueObject.id] = valueObject.value;
-        }
-    }
-
-    return globalDefaults;*/
     return globalDefaults;
 }
 
@@ -397,6 +410,12 @@ export function parseEdges(globalDefaults, edges, nodes) {
 
         const EDGE_KEYS = KEY_VALUES[EDGE];
 
+        if (edge.hasOwnProperty(EDGE_KEYS.PRESET.id)) {
+            let presetInGlobalDefaults = globalDefaults[EDGE][EDGE_KEYS.PRESETS.id][edge[EDGE_KEYS.PRESET.id]];
+            for (let key of Object.keys(presetInGlobalDefaults)) {
+                edge[key] = presetInGlobalDefaults[key];
+            }
+        }
 
         // This loop fixes
         // TODO loop over values en niet over keys

@@ -199,15 +199,30 @@ function initGlobalDefaultsSchema() {
         globalDefaultNestedKey(key)
     }
 
-    const nestedNodesSchema = {...globalDefaultSchema.properties[NODE]}
+    const nestedNodesSchema = JSON.parse(JSON.stringify(globalDefaultSchema.properties[NODE]));
     nestedNodesSchema["$id"] = "presetNestedNode"
+
+    //console.log(nestedNodesSchema)
+
     globalDefaultSchema.properties[NODE].properties[KEY_VALUES[NODE].PRESETS.id] =  {
         type: "object",
         additionalProperties: nestedNodesSchema
     }
 
+    //console.log(globalDefaultSchema)
+
     globalDefaultSchema.properties[EDGE]["properties"][KEY_VALUES[EDGE].MARKER_START.id] = arrowSchema
     globalDefaultSchema.properties[EDGE]["properties"][KEY_VALUES[EDGE].MARKER_END.id] = arrowSchema
+
+
+    const nestedEdgesSchema = JSON.parse(JSON.stringify(globalDefaultSchema.properties[EDGE]));
+    nestedEdgesSchema["$id"] = "presetNestedEdge"
+    globalDefaultSchema.properties[EDGE].properties[KEY_VALUES[EDGE].PRESETS.id] =  {
+        type: "object",
+        additionalProperties: nestedEdgesSchema
+    }
+
+
 }
 
 
