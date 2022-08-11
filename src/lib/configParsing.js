@@ -1,4 +1,4 @@
-import {fix_sourceHandle_targetHandle, fixHgroups, fixNodeGroups, fixVgroups} from "./nodeAutoPositioning";
+import {fix_sourceHandle_targetHandle, fixNodeGroups} from "./nodeAutoPositioning";
 
 export const GRAPH = "graph";
 export const NODE = "node";

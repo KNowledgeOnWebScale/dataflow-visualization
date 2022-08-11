@@ -131,7 +131,7 @@ export function autoLayout(dagreGraph, globalDefaults, nodes, edges) {
 
 
     //return getLayoutedElementsDagre(dagreGraphedges, globalDefaults, nodes, edges)
-    const [nodes1, edges1] =  getLayoutedElementsDagre(dagreGraph, globalDefaults, nodesCopy, edgesCopy);
+    const [nodes1, edges1] = getLayoutedElementsDagre(dagreGraph, globalDefaults, nodesCopy, edgesCopy);
 
     // De fake edges en nodes terug verwijderen
 
@@ -144,19 +144,19 @@ export function autoLayout(dagreGraph, globalDefaults, nodes, edges) {
                 i++;
             }
             let position = nodes1[i].position
-          //  positions[type][nodes1[i].id] = nodes1[i].position
+            //  positions[type][nodes1[i].id] = nodes1[i].position
             nodes1.splice(i, 1);
 
             // Remove all edges from edges1 with id as source or target
             i = edges1.length;
             while (i--) {
                 let edge = edges1[i];
-                if (edge.source === id || edge.target === id ) {
+                if (edge.source === id || edge.target === id) {
                     edges1.splice(i, 1);
                 }
             }
 
-            object.nodes[object.nodes.length-1].position = position
+            object.nodes[object.nodes.length - 1].position = position
 
 
             // Add the old nodes and edges back
@@ -168,10 +168,10 @@ export function autoLayout(dagreGraph, globalDefaults, nodes, edges) {
         }
     }
 
-  /*  for (const [key, pos] of Object.entries(positions["hgroups"])) {
+    /*  for (const [key, pos] of Object.entries(positions["hgroups"])) {
 
 
-    }*/
+      }*/
     fixNodeGroups(nodes1)
 
     // Finally, fix the source and target handles
@@ -180,7 +180,6 @@ export function autoLayout(dagreGraph, globalDefaults, nodes, edges) {
     }
 
     console.log(edges1)
-
 
 
     return [nodes1, edges1]
@@ -393,7 +392,6 @@ export function fixHgroups(allNodes, hgroupId) {
 }
 
 
-
 export function fixNodeGroups(nodes) {
 
     const vgroupID = KEY_VALUES[NODE].VGROUP.id;
@@ -468,7 +466,7 @@ export function fix_sourceHandle_targetHandle(globalDefaults, edge, nodes) {
     let check;
 
 
-    if (sourceNode.hasOwnProperty("hgroup") && targetNode.hasOwnProperty("hgroup") && sourceNode["hgroup"] === targetNode["hgroup"] ) {
+    if (sourceNode.hasOwnProperty("hgroup") && targetNode.hasOwnProperty("hgroup") && sourceNode["hgroup"] === targetNode["hgroup"]) {
         check = hashmap["horizontal"];
     } else if (sourceNode.hasOwnProperty("vgroup") && targetNode.hasOwnProperty("vgroup") && sourceNode["vgroup"] === targetNode["vgroup"]) {
         check = hashmap["vertical"];
