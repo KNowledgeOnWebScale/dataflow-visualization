@@ -108,6 +108,17 @@ the button and the new positions will be filled in into the node config.
 There are two languages supported in which you can describe your flow: [JSON] and [YAML]. Use this dropdown button to
 pick the language of your preference.
 
+#### Permalink button
+
+If you click on that button, a link is copied to the clipboard. If you paste this link into your favorite search engine,
+the flow will show up in full screen. This is useful if you want to embed the flow into your website. 
+
+If you have a link, you can create an iframe like this:
+
+```html
+<iframe width=600 height=600 src="<permalink>"></iframe>
+```
+
 ## License
 
 This project is licensed under the terms of the MIT License. See [LICENSE.md](LICENSE.md) for details.
