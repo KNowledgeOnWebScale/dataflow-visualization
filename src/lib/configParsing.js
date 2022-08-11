@@ -1,3 +1,5 @@
+import {fix_sourceHandle_targetHandle, fixHgroups, fixNodeGroups, fixVgroups} from "./nodeAutoPositioning";
+
 export const GRAPH = "graph";
 export const NODE = "node";
 export const EDGE = "edge";
@@ -504,186 +506,18 @@ export function parseEdges(globalDefaults, edges, nodes) {
     return edges;
 }
 
-function fix_sourceHandle_targetHandle(globalDefaults, edge, nodes) {
-    // Although there are more source and target handles in the nodes, react flow does not choose them wisely
-    // So let's fix that, e.g. if target is left from the source, the sourceHandle should be right and the targetHandle should be left
-    // This code below checks the different possibilities
-
-
-    const [sourceNode, targetNode] = getSourceNode_targetNode_fromId(edge, nodes);
-    //const sourceNode = nodes.find(n => n.id === edge["source"]);
-    //const targetNode = nodes.find(n => n.id === edge["target"]);
-
-    let sourceNodePos = {...sourceNode.position};
-    let targetNodePos = {...targetNode.position};
-
-    // You can't just compare coordinates, because source and/or target could be in a parent
-    // If a node is in a parent, its x and y are relative to the parent
-    if (sourceNode.hasOwnProperty("parentNode")) {
-        let parent = nodes.find(n => n.id === sourceNode["parentNode"]);
-        sourceNodePos.x += parent.position.x;
-        sourceNodePos.y += parent.position.y;
-    }
-    if (targetNode.hasOwnProperty("parentNode")) {
-        let parent = nodes.find(n => n.id === targetNode["parentNode"]);
-        targetNodePos.x += parent.position.x;
-        targetNodePos.y += parent.position.y;
-    }
-
-    const verticalCheck = [
-        [sourceNodePos.y <= targetNodePos.y, "bottom", "top"],
-        [sourceNodePos.y >= targetNodePos.y, "top", "bottom"]
-    ];
-
-    const horizontalCheck = [
-        [sourceNodePos.x <= targetNodePos.x, "right", "left"],
-        [sourceNodePos.x >= targetNodePos.x, "left", "right"]
-    ];
-
-    const check = {
-        "vertical": [...verticalCheck, ...horizontalCheck],
-        "horizontal": [...horizontalCheck, ...verticalCheck]
-    }[globalDefaults[GRAPH][KEY_VALUES[GRAPH].ORIENTATION.id]];
-
-    //console.log(KEY_VALUES[GRAPH].ORIENTATION.id)
-
-    let i = 0;
-    while (i < check.length && !check[i][0]) {
-        i++;
-    }
-
-    if (i < check.length) {
-        if (!edge.hasOwnProperty("sourceHandle")) {
-            edge["sourceHandle"] = check[i][1];
-        }
-        if (!edge.hasOwnProperty("targetHandle")) {
-            edge["targetHandle"] = check[i][2];
-        }
-    }
-
+export function getSourceNodeFromId(edge, nodes) {
+    return nodes.find(n => n.id === edge["source"]);
 }
 
-function getSourceNode_targetNode_fromId(edge, nodes) {
-    const sourceNode = nodes.find(n => n.id === edge["source"]);
-    const targetNode = nodes.find(n => n.id === edge["target"]);
-    return [sourceNode, targetNode];
+export function getTargetNodeFromId(edge, nodes) {
+    return nodes.find(n => n.id === edge["target"]);
+}
+
+export function getSourceNode_targetNode_fromId(edge, nodes) {
+    return [getSourceNodeFromId(edge, nodes), getTargetNodeFromId(edge, nodes)];
 }
 
 
-function fixNodeGroups(nodes) {
-
-    const vgroupID = KEY_VALUES[NODE].VGROUP.id;
-    const hgroupId = KEY_VALUES[NODE].HGROUP.id;
-
-    let groupsHash = new Set();
-    let groups = [];
-
-    for (let n of nodes) {
-        if (n.hasOwnProperty(vgroupID) && !groupsHash.has(n[vgroupID])) {
-            groups.push([vgroupID, n[vgroupID]]);
-            groupsHash.add(n[vgroupID])
-        }
-        if (n.hasOwnProperty(hgroupId) && !groupsHash.has(n[hgroupId])) {
-            groups.push([hgroupId, n[hgroupId]]);
-            groupsHash.add(n[hgroupId]);
-        }
-    }
-
-    for (let g of groups) {
-        if (g[0] === vgroupID) {
-            fixVgroups(nodes, g[1]);
-        } else {
-            fixHgroups(nodes, g[1])
-        }
-    }
-
-}
-
-function fixVgroups(allNodes, vgroupId) {
-    // search all nodes within that vgroup
-    let nodes = allNodes.filter(n => n.vgroup === vgroupId);
-
-    // Look for reference position
-    let pos = {x: 0, y: 0};
-    let i = 0;
-    while (i < nodes.length && nodes[i].position.x === 0 && nodes[i].position.y === 0) {
-        i++;
-    }
-    if (i < nodes.length) {
-        pos.x = nodes[i].position.x;
-        pos.y = nodes[i].position.y;
-    }
-
-    // Look for highest node height, the vertical space between the nodes will be this value
-    let maxHeight = Math.max(...nodes.map(n => n.data.height))
 
 
-    i = 0;
-    while (nodes[i].position.x !== pos.x && nodes[i].position.y !== pos.y) {
-        i++;
-    }
-
-    let referenceNode = nodes.slice(i, 1)[0];
-
-    // TODO mss als de orientatie horizontaal is, beetje dichter en als de orientatie verticaal is, wat verder
-    //  mss gwn algemeen een manier vinden om de spacing te definiëren
-
-    let deltaY = maxHeight / 2;
-    let previousY = pos.y;
-    let previousHeight = referenceNode.data.height;
-    let previousWidth = referenceNode.data.width;
-
-    for (let n of nodes.filter((_, index) => index !== i)) {
-        n.position.x = pos.x + (previousWidth - n.data.width) / 2;
-        n.position.y = previousY + previousHeight + deltaY;
-        previousY = n.position.y
-        previousWidth = n.data.width;
-        previousHeight = n.data.height;
-    }
-
-}
-
-function fixHgroups(allNodes, hgroupId) {
-    // search all nodes within that vgroup
-    let nodes = allNodes.filter(n => n.hgroup === hgroupId);
-
-
-    // Look for reference position
-    let pos = {x: 0, y: 0};
-    let i = 0;
-    while (i < nodes.length && nodes[i].position.x === 0 && nodes[i].position.y === 0) {
-        i++;
-    }
-    if (i < nodes.length) {
-        pos.x = nodes[i].position.x;
-        pos.y = nodes[i].position.y;
-    }
-
-
-    // Look for highest node height, the vertical space between the nodes will be this value
-    let maxWidth = Math.max(...nodes.map(n => n.data.width))
-
-
-    i = 0;
-    while (nodes[i].position.x !== pos.x && nodes[i].position.y !== pos.y) {
-        i++;
-    }
-
-
-    let referenceNode = nodes.slice(i, 1)[0];
-
-    let deltaX = maxWidth / 2;  //TODO mss als de orientatie horizontaal is, beetje dichter en als de orientatie verticaal is, wat verder
-    let previousX = pos.x;
-    let previousHeight = referenceNode.data.height;
-    let previousWidth = referenceNode.data.width;
-
-    for (let n of nodes.filter((_, index) => index !== i)) {
-        n.position.y = pos.y + (previousHeight - n.data.height) / 2;
-        n.position.x = previousX + previousWidth + deltaX;
-        previousX = n.position.x
-        previousWidth = n.data.width;
-        previousHeight = n.data.height;
-    }
-
-
-}

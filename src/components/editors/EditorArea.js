@@ -3,7 +3,7 @@ import dagre from "dagre";
 import {useState} from "react";
 
 import {GRAPH, parseEdges, parseGlobalDefaults, parseNodes} from "../../lib/configParsing";
-import {getLayoutedElementsDagre} from "../../lib/nodeAutoPositioning";
+import {autoLayout, getLayoutedElementsDagre} from "../../lib/nodeAutoPositioning";
 import {edgeSchema, globalDefaultSchema, nodeSchema, validateJSON} from "../../lib/schemaValidation";
 import CodeEditor from "./CodeEditor";
 import ErrorModal from "../ErrorModal";
@@ -92,7 +92,7 @@ const EditorArea = ({
         if (defaults[GRAPH]["autoLayout"]) {
             const dagreGraph = new dagre.graphlib.Graph();
             dagreGraph.setDefaultEdgeLabel(() => ({}));
-            [nodes, edges] = getLayoutedElementsDagre(dagreGraph, nodes, edges, defaults);
+            [nodes, edges] = autoLayout(dagreGraph, defaults, nodes, edges);
         }
 
         setNodes(nodes);
