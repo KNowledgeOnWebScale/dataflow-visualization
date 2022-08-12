@@ -7,8 +7,13 @@ This document is aimed at developers.
 In [index.js](src/index.js) set the variable `download` to `true`. Rerun the application and set the variable to `false`
 again. You will notice there were three JSON files downloaded. Paste the contents of these files in the accompanying
 files in the directory [schemas/schemas](schemas/schemas). Open your terminal, `cd` to `/schemas` and
-run `node JSONSchemaMarkdown.js`. The new markdowns will be generated. [README.md](README.md) already links to these
+run `node JSONSchemaMarkdown.js`. The new markdowns will be generated, [README.md](README.md) already links to these
 files.
+
+You might ask why not introduce a command, e.g. `npm build docs` that launches a separate script. The reason is that
+React can't write to files and the separate script would need the schemas being built
+in [schemaValidation.js](src/lib/schemaValidation.js). In order for that script to import a JavaScript file used in 
+React, someone should mess with webpack. To the person who will do this, good luck!
 
 ### How to add shapes/images
 
@@ -35,9 +40,9 @@ your example will automatically show up if you restart the application.
 There is a button to get a link to your flow. There are two formats for a link.
 
 1) `https://knowledgeonwebscale.github.io/dataflow-visualization/#/customdata?globaldefaults=...&nodes=...&edges=...`
-    * The query paremeters are the URI-encoded values of what's inside the editors.
+    * The query parameters are the URI-encoded values of what's inside the editors.
 2) `https://knowledgeonwebscale.github.io/dataflow-visualization/#/rawdata?nodes=...&edges=...`
-    * The query parameters are the URI-encoded values of the raw data of the flow. Remember there is a button to export
+    * The query parameters are the URI-encoded values of the raw data of the flow. Remember, there is a button to export
       the raw data.
 
 If you press the button to copy the permalink to your clipboard, you get whichever link is shortest. 
