@@ -104,6 +104,8 @@ const EditorArea = ({
 
         <div className="edit-area" /*style={{width: "49%", display: "inline-block"}}*/>
 
+            <Button variant="primary" onClick={e => handleConvert(e)}>Convert</Button>
+
             <div className="small-editor-div"/*className="node-edge-editor"*/>
                 <h5>Global defaults editor</h5>
                 <CodeEditor language={language} data={globalDefaults} setData={setGlobalDefaults}
@@ -122,7 +124,6 @@ const EditorArea = ({
                             schema={edgeSchema}/>
             </div>
 
-            <Button variant="primary" onClick={e => handleConvert(e)}>Convert</Button>
 
         </div>
     </>
