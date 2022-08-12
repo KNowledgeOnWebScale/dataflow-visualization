@@ -133,6 +133,13 @@
           "type": "title must be string"
         }
       },
+      "topText": {
+        "type": "string",
+        "description": "Set on top of the node.",
+        "errorMessage": {
+          "type": "topText must be string"
+        }
+      },
       "zIndex": {
         "type": "number",
         "description": "Controls the stacking order of the nodes.",

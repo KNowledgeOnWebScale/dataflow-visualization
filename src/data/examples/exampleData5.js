@@ -33,6 +33,7 @@ export const nodesJSON = [
     },
     {
         image: "solid",
+        topText: "Solid",
         stroke: "#fff",
         position: {x:-50, y:225}
     },

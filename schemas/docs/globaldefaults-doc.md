@@ -104,6 +104,10 @@ Type: `object`
 			 - _The title of a node. E.g. useful to name a parentNode. Notice that this is not the same as an ID. If you give a node a title, that title will show up not in the middle of the node, but at the top._
 			 - Type: `string`
 			 - <i id="globalDefaultsNode/properties/title">path: #globalDefaultsNode/properties/title</i>
+		 - <b id="#globalDefaultsNode/properties/topText">topText</b>
+			 - _Set on top of the node._
+			 - Type: `string`
+			 - <i id="globalDefaultsNode/properties/topText">path: #globalDefaultsNode/properties/topText</i>
 		 - <b id="#globalDefaultsNode/properties/zIndex">zIndex</b>
 			 - _Controls the stacking order of the nodes._
 			 - Type: `number`

@@ -140,6 +140,12 @@ export const KEY_VALUES = {
             description: "The title of a node. E.g. useful to name a parentNode. " +
                 "Notice that this is not the same as an ID. If you give a node a title, that title will show up not in the middle of the node, but at the top."
         },
+        TOP_TEXT: {
+            id: "topText",
+            "canBeGlobal": true,
+            type: "string",
+            description: "Set on top of the node."
+        },
         Z_INDEX: {
             id: "zIndex",
             "canBeGlobal": true,
