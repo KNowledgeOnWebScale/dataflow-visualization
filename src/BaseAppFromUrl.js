@@ -2,7 +2,7 @@ import {useSearchParams} from "react-router-dom";
 import ReactFlow, {addEdge, Controls, useEdgesState, useNodesState} from "react-flow-renderer";
 import Node from "./components/node/Node";
 import {useCallback, useEffect, useState} from "react";
-import {parseEdges, parseGlobalDefaults, parseNodes} from "./lib/configParsing";
+import {setFlowData} from "./lib/setFlowData";
 
 
 const nodeTypes = {
@@ -47,12 +47,7 @@ const Base = ({raw}) => {
             nodes2json = JSON.parse(searchParams.get("nodes"));
             edges2json = JSON.parse(searchParams.get("edges"));
 
-            const parsedGlobalDefaults = parseGlobalDefaults(globalDefaults2json);
-            const parsedNodes = parseNodes(parsedGlobalDefaults, nodes2json);
-            const parsedEdges = parseEdges(parsedGlobalDefaults, edges2json, parsedNodes);
-
-            setNodes(parsedNodes);
-            setEdges(parsedEdges);
+            setFlowData(globalDefaults2json, nodes2json, edges2json, setNodes, setEdges);
         }
 
 

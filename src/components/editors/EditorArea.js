@@ -1,14 +1,11 @@
 import {Button} from "react-bootstrap";
-import dagre from "dagre";
 import {useState} from "react";
-
-import {GRAPH, parseEdges, parseGlobalDefaults, parseNodes} from "../../lib/configParsing";
-import {autoLayout} from "../../lib/autoLayout/autoLayout";
 import {edgeSchema, globalDefaultSchema, nodeSchema, validateJSON} from "../../lib/schemaValidation";
 import CodeEditor from "./CodeEditor";
 import ErrorModal from "../ErrorModal";
 import LanguageSwitcher from "../LanguageSwitcher";
 import {yaml2json} from "../../lib/jsonYamlConversionUtil";
+import {setFlowData} from "../../lib/setFlowData";
 
 
 const EditorArea = ({
@@ -80,23 +77,12 @@ const EditorArea = ({
             return;
         }
 
-        // TODO: ookal is syntaxis alles juist, ook nog eens checken op de semantische correctheid
+        // TODO: ookal is syntaxisch alles juist, ook nog eens checken op de semantische correctheid
         //  bv als naar een id verwezen wordt, bestaat die ID wel
 
 
-        let defaults = parseGlobalDefaults(parsedGd);
-        let nodes = parseNodes(defaults, parsedNd);
-        let edges = parseEdges(defaults, parsedEd, nodes);
+        setFlowData(parsedGd, parsedNd, parsedEd, setNodes, setEdges);
 
-        //TODO met keys uit hashmap werken
-        if (defaults[GRAPH]["autoLayout"]) {
-            const dagreGraph = new dagre.graphlib.Graph();
-            dagreGraph.setDefaultEdgeLabel(() => ({}));
-            [nodes, edges] = autoLayout(dagreGraph, defaults, nodes, edges);
-        }
-
-        setNodes(nodes);
-        setEdges(edges);
     }
 
 
