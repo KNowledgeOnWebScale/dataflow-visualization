@@ -13,11 +13,15 @@ const Visualizer = () => {
     const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
 
     const [language, setLanguage] = useState("json");
+    const [snapToGrid, setSnapToGrid] = useState(true);
 
     const [globalDefaults, setGlobalDefaults] = useState(JSON.stringify({"graph": {}, "node": {}, "edge": {}}));
     const [nodesData, setNodesData] = useState(JSON.stringify([]));
     const [edgesData, setEdgesData] = useState(JSON.stringify([]));
 
+    function changeSnapToGrid() {
+        setSnapToGrid(!snapToGrid);
+    }
 
     function setData(newGlobalDefaults, newNodes, newEdges) {
         setGlobalDefaults(newGlobalDefaults);
@@ -30,7 +34,8 @@ const Visualizer = () => {
     return <>
 
         <ExampleComponent language={language} setData={setData}/>
-        <ControlsComponent language={language} setLanguage={setLanguage} globalDefaults={globalDefaults}
+        <ControlsComponent language={language} setLanguage={setLanguage} changeSnapToGrid={changeSnapToGrid}
+                           globalDefaults={globalDefaults}
                            nodesData={nodesData} setNodesData={setNodesData} edgesData={edgesData} setData={setData}
                            nodes={nodes} edges={edges}/>
 
@@ -46,7 +51,7 @@ const Visualizer = () => {
                 <td>
                     <ReactFlowComponent nodes={nodes} edges={edges} onNodesChange={onNodesChange}
                                         onEdgesChange={onEdgesChange}
-                                        onConnect={onConnect}/>
+                                        onConnect={onConnect} snapToGrid={snapToGrid}/>
                 </td>
             </tr>
         </table>

@@ -20,6 +20,7 @@ First ever release. You can make flows from JSON or YAML.
 - Issue #59: There is a button to export the raw ReactFlow config.
 - Issue #73: Support for adding encoding data in the URL. If you encode data in the URL, the flow shows up in full
   screen, so you can embed the flow in an `iframe`.
+- Issue #79: There is a switch to snap the nodes to the grid.
 
 ### Changed
 

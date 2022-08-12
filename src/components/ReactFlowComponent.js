@@ -5,7 +5,7 @@ const nodeTypes = {
     custom: Node
 }
 
-const ReactFlowComponent = ({nodes, edges, onNodesChange, onEdgesChange, onConnect}) => {
+const ReactFlowComponent = ({nodes, edges, onNodesChange, onEdgesChange, onConnect, snapToGrid}) => {
 
     return <>
 
@@ -27,7 +27,7 @@ const ReactFlowComponent = ({nodes, edges, onNodesChange, onEdgesChange, onConne
                 onNodesChange={onNodesChange}
                 onEdgesChange={onEdgesChange}
                 onConnect={onConnect}
-                snapToGrid={true}
+                snapToGrid={snapToGrid}
                 // edgeTypes={edgeTypes}
                 nodeTypes={nodeTypes}
                 fitView

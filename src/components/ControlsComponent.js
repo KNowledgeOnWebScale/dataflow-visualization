@@ -1,4 +1,4 @@
-import {Button} from "react-bootstrap";
+import {Button, Form} from "react-bootstrap";
 import {json2yaml, yaml2json} from "../lib/jsonYamlConversionUtil";
 import {useRef, useState} from "react";
 import ErrorModal from "./ErrorModal";
@@ -7,6 +7,7 @@ import {downloadJSONFile} from "../lib/downloadFileUtil";
 const ControlsComponent = ({
                                language,
                                setLanguage,
+                               changeSnapToGrid,
                                globalDefaults,
                                nodesData,
                                setNodesData,
@@ -229,6 +230,16 @@ const ControlsComponent = ({
         <Button variant={"info"} onClick={setPositions}>Fill in positions into node config</Button>
 
         <Button variant={"secondary"} onClick={handleCopyPermaLink}>{isCopied ? "Copied!" : "Copy permalink"}</Button>
+
+        <Form style={{margin: "5px 5px"}}>
+            <Form.Check
+                type="switch"
+                id="custom-switch"
+                label="Snap to grid"
+                defaultChecked={true}
+                onChange={changeSnapToGrid}
+            />
+        </Form>
     </>
 }
 

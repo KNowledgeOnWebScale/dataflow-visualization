@@ -123,6 +123,11 @@ If you have a link, you can create an iframe like this:
 
 See [DEVELOPMENT.md](DEVELOPMENT.md#permalink) for more information about the structure of the link.
 
+#### Snap to grid button
+
+If this switch is toggled, the nodes will be snapped to the grid. If this switch is not toggled, you can move the nodes
+more freely.
+
 ## License
 
 This project is licensed under the terms of the MIT License. See [LICENSE.md](LICENSE.md) for details.
