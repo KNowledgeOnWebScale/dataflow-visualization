@@ -111,13 +111,17 @@ pick the language of your preference.
 #### Permalink button
 
 If you click on that button, a link is copied to the clipboard. If you paste this link into your favorite search engine,
-the flow will show up in full screen. This is useful if you want to embed the flow into your website. 
+the flow will show up in full screen. This is useful if you want to embed the flow into your website.
 
 If you have a link, you can create an iframe like this:
 
 ```html
+
 <iframe width=600 height=600 src="<permalink>"></iframe>
+
 ```
+
+See [DEVELOPMENT.md](DEVELOPMENT.md#permalink) for more information about the structure of the link.
 
 ## License
 

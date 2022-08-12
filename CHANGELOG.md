@@ -10,6 +10,7 @@ First ever release. You can make flows from JSON or YAML.
 
 ### Added
 
+- Issue #10: There is support for vgroups and hgroups in combination with `autoLayout`.
 - Issue #11: Created a file [DEVELOPMENT.md] to keep [README.md] end-user-friendly.
 - Issue #12: You can set the contents of the example buttons via the configs.
 - Issue #19: You can import and export figure configurations.
@@ -38,12 +39,14 @@ First ever release. You can make flows from JSON or YAML.
 
 ### Removed
 
+- /
+
 ### Fixes
 
 - Issue #40: If you changed the color of an edge, all the markers with no color specified, changed to that color.
 - Issue #69: Title and label in a node that was no parent, did not work.
 
-Kept [README] up to date with all the new changes and additions.
+Kept [README] en [DEVELOPMENT] up to date with all the new changes and additions.
 
 
 [DEVELOPMENT.md]: DEVELOPMENT.md
