@@ -123,6 +123,10 @@ If you have a link, you can create an iframe like this:
 
 See [DEVELOPMENT.md](DEVELOPMENT.md#permalink) for more information about the structure of the link.
 
+#### Autosync button
+
+If this switch is toggled on, the flow will render automatically if the config has been changed and is valid.
+
 #### Snap to grid button
 
 If this switch is toggled, the nodes will be snapped to the grid. If this switch is not toggled, you can move the nodes
