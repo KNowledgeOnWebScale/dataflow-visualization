@@ -204,14 +204,14 @@ export const KEY_VALUES = {
             "canBeGlobal": true,
             value: {},
             type: "object",
-            description: "The arrowhead at the end of the edge. Notice that there are two options for `type`. `arrow` is a shallow arrow and `arrowclosed` will be filled. If you do not specify `color`, the color of the edge will also be the color of the arrow."
+            description: "The arrowhead at the end of the edge."
         },
         "MARKER_START": {
             id: "markerStart",
             "canBeGlobal": true,
             value: {},
             type: "object",
-            description: "The arrowhead at the beginning of the edge. Notice that there are two options for `type`. `arrow` is a shallow arrow and `arrowclosed` will be filled. If you do not specify `color`, the color of the edge will also be the color of the arrow."
+            description: "The arrowhead at the beginning of the edge."
         },
 
         PRESETS: {
@@ -482,6 +482,17 @@ export function parseEdges(globalDefaults, edges, nodes) {
         }
         if (!edge[EDGE_KEYS.MARKER_START.id].hasOwnProperty("color")) {
             edge[EDGE_KEYS.MARKER_START.id]["color"] = edge["style"]["stroke"];
+        }
+
+        for (let id of [EDGE_KEYS.MARKER_START.id, EDGE_KEYS.MARKER_END.id]) {
+            if (edge[id].hasOwnProperty("size")) {
+                edge[id]["height"] = edge[id]["size"]; // The library works with width and height, but only specifying e.g. width and no height doesn't do anything
+                edge[id]["width"] = edge[id]["size"];  // So just a key 'size' makes more sense
+            }
+        }
+        if (edge[EDGE_KEYS.MARKER_START.id].hasOwnProperty("size")) {
+            edge[EDGE_KEYS.MARKER_START.id]["height"] = edge[EDGE_KEYS.MARKER_START.id]["size"];
+            edge[EDGE_KEYS.MARKER_START.id]["width"] = edge[EDGE_KEYS.MARKER_START.id]["size"];
         }
 
         // the key animated is something that is supported by the library, but it is overwritten by the standard value of strokeDasharray

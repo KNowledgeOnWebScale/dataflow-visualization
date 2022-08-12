@@ -137,6 +137,7 @@
               "arrow",
               "arrowclosed"
             ],
+            "description": "Set the type of the arrowhead.",
             "errorMessage": "Type of arrow must be string with possible values: arrow  or arrowclosed"
           },
           "orient": {
@@ -144,11 +145,18 @@
               "string",
               "number"
             ],
+            "description": "Set the orient of the arrowhead. See [the MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/orient) for more information.",
             "errorMessage": "Orient of arrow must be number or string"
           },
           "color": {
             "type": "string",
+            "description": "Set the color of the arrowhead. If you do not specify a color, the color of the arrowhead will be the same as the color of the edge.",
             "errorMessage": "Color of arrow must be string"
+          },
+          "size": {
+            "type": "number",
+            "description": "Set the size of the arrowhead.",
+            "errorMessage": "Width of arrow must be integer"
           }
         }
       },
@@ -162,6 +170,7 @@
               "arrow",
               "arrowclosed"
             ],
+            "description": "Set the type of the arrowhead.",
             "errorMessage": "Type of arrow must be string with possible values: arrow  or arrowclosed"
           },
           "orient": {
@@ -169,11 +178,18 @@
               "string",
               "number"
             ],
+            "description": "Set the orient of the arrowhead. See [the MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/orient) for more information.",
             "errorMessage": "Orient of arrow must be number or string"
           },
           "color": {
             "type": "string",
+            "description": "Set the color of the arrowhead. If you do not specify a color, the color of the arrowhead will be the same as the color of the edge.",
             "errorMessage": "Color of arrow must be string"
+          },
+          "size": {
+            "type": "number",
+            "description": "Set the size of the arrowhead.",
+            "errorMessage": "Width of arrow must be integer"
           }
         }
       }

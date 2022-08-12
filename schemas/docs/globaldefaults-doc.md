@@ -208,34 +208,48 @@ Type: `object`
 			 - <i id="globalDefaultsEdge/properties/markerStart">path: #globalDefaultsEdge/properties/markerStart</i>
 			 - **_Properties_**
 				 - <b id="#globalDefaultsEdge/properties/markerStart/properties/type">type</b>
+					 - _Set the type of the arrowhead._
 					 - Type: `string`
 					 - <i id="globalDefaultsEdge/properties/markerStart/properties/type">path: #globalDefaultsEdge/properties/markerStart/properties/type</i>
 					 - The value is restricted to the following: 
 						 1. _"arrow"_
 						 2. _"arrowclosed"_
 				 - <b id="#globalDefaultsEdge/properties/markerStart/properties/orient">orient</b>
+					 - _Set the orient of the arrowhead. See [the MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/orient) for more information._
 					 - Types: `string`, `number`
 					 - <i id="globalDefaultsEdge/properties/markerStart/properties/orient">path: #globalDefaultsEdge/properties/markerStart/properties/orient</i>
 				 - <b id="#globalDefaultsEdge/properties/markerStart/properties/color">color</b>
+					 - _Set the color of the arrowhead. If you do not specify a color, the color of the arrowhead will be the same as the color of the edge._
 					 - Type: `string`
 					 - <i id="globalDefaultsEdge/properties/markerStart/properties/color">path: #globalDefaultsEdge/properties/markerStart/properties/color</i>
+				 - <b id="#globalDefaultsEdge/properties/markerStart/properties/size">size</b>
+					 - _Set the size of the arrowhead._
+					 - Type: `number`
+					 - <i id="globalDefaultsEdge/properties/markerStart/properties/size">path: #globalDefaultsEdge/properties/markerStart/properties/size</i>
 		 - <b id="#globalDefaultsEdge/properties/markerEnd">markerEnd</b>
 			 - ##### Arrowhead schema
 			 - Type: `object`
 			 - <i id="globalDefaultsEdge/properties/markerEnd">path: #globalDefaultsEdge/properties/markerEnd</i>
 			 - **_Properties_**
 				 - <b id="#globalDefaultsEdge/properties/markerEnd/properties/type">type</b>
+					 - _Set the type of the arrowhead._
 					 - Type: `string`
 					 - <i id="globalDefaultsEdge/properties/markerEnd/properties/type">path: #globalDefaultsEdge/properties/markerEnd/properties/type</i>
 					 - The value is restricted to the following: 
 						 1. _"arrow"_
 						 2. _"arrowclosed"_
 				 - <b id="#globalDefaultsEdge/properties/markerEnd/properties/orient">orient</b>
+					 - _Set the orient of the arrowhead. See [the MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/orient) for more information._
 					 - Types: `string`, `number`
 					 - <i id="globalDefaultsEdge/properties/markerEnd/properties/orient">path: #globalDefaultsEdge/properties/markerEnd/properties/orient</i>
 				 - <b id="#globalDefaultsEdge/properties/markerEnd/properties/color">color</b>
+					 - _Set the color of the arrowhead. If you do not specify a color, the color of the arrowhead will be the same as the color of the edge._
 					 - Type: `string`
 					 - <i id="globalDefaultsEdge/properties/markerEnd/properties/color">path: #globalDefaultsEdge/properties/markerEnd/properties/color</i>
+				 - <b id="#globalDefaultsEdge/properties/markerEnd/properties/size">size</b>
+					 - _Set the size of the arrowhead._
+					 - Type: `number`
+					 - <i id="globalDefaultsEdge/properties/markerEnd/properties/size">path: #globalDefaultsEdge/properties/markerEnd/properties/size</i>
 		 - <b id="#globalDefaultsEdge/properties/presets">presets</b>
 			 - _Create edge presets._
 			 - Type: `object`
