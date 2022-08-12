@@ -6,7 +6,7 @@ Dates are DD-MM-YYYY
 
 First ever release. You can make flows from JSON or YAML.
 
-## Unreleased
+## [1.0.0] - 12-08-2022
 
 ### Added
 
@@ -40,10 +40,6 @@ First ever release. You can make flows from JSON or YAML.
   is https://knowledgeonwebscale.github.io/dataflow-visualization/.
 -
 
-### Removed
-
-- /
-
 ### Fixes
 
 - Issue #40: If you changed the color of an edge, all the markers with no color specified, changed to that color.
@@ -51,6 +47,9 @@ First ever release. You can make flows from JSON or YAML.
 
 Kept [README] en [DEVELOPMENT] up to date with all the new changes and additions.
 
+## Unreleased
+
+* /
 
 [DEVELOPMENT.md]: DEVELOPMENT.md
 
