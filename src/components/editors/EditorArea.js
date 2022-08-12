@@ -19,7 +19,8 @@ const EditorArea = ({
                         nodesData,
                         setNodesData,
                         edgesData,
-                        setEdgesData
+                        setEdgesData,
+                        convertButtonEnabled
                     }) => {
 
 
@@ -102,9 +103,10 @@ const EditorArea = ({
         <LanguageSwitcher language={language} setLanguage={setLanguage} setData={setData}
                           globalDefaults={globalDefaults} nodesData={nodesData} edgesData={edgesData}/>
 
-        <div className="edit-area" /*style={{width: "49%", display: "inline-block"}}*/>
+        <Button style={{margin: "15px 3px"}} variant="primary" onClick={e => handleConvert(e)}
+                hidden={!convertButtonEnabled}>Convert</Button>
 
-            <Button style={{margin: "15px 3px"}} variant="primary" onClick={e => handleConvert(e)}>Convert</Button>
+        <div className="edit-area" /*style={{width: "49%", display: "inline-block"}}*/>
 
             <div className="small-editor-div"/*className="node-edge-editor"*/>
                 <h5>Global defaults editor</h5>
@@ -124,6 +126,8 @@ const EditorArea = ({
                             schema={edgeSchema}/>
             </div>
 
+            <Button style={{margin: "15px 3px"}} variant="primary" onClick={e => handleConvert(e)}
+                    hidden={!convertButtonEnabled}>Convert</Button>
 
         </div>
     </>

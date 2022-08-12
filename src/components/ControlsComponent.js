@@ -8,6 +8,7 @@ const ControlsComponent = ({
                                language,
                                setLanguage,
                                changeSnapToGrid,
+                               changeAutoSync,
                                globalDefaults,
                                nodesData,
                                setNodesData,
@@ -33,13 +34,6 @@ const ControlsComponent = ({
     function handleRawExport(e) {
         e.preventDefault();
 
-        console.log(nodes)
-
-
-        // let rawNodesConfig = JSON.parse(nodes);
-        //let rawEdgesConfig = JSON.parse(edges);
-
-
         const out = {"rawNodesConfig": nodes, "rawEdgesConfig": edges};
 
         downloadJSONFile("rawconfig.json", out);
@@ -51,7 +45,6 @@ const ControlsComponent = ({
 
         //TODO: check syntax first
         // If invalid, pop up the errorModal
-        // Do this when issue 30 is implemented
 
         let globalDefaultsConfig = JSON.parse(language === "json" ? globalDefaults : yaml2json(globalDefaults));
         let nodesConfig = JSON.parse(language === "json" ? nodesData : yaml2json(nodesData));
@@ -66,9 +59,6 @@ const ControlsComponent = ({
     function handleImport(e) {
         e.preventDefault();
         inputFile.current.click();
-
-        //console.log(inputFile)
-
     }
 
     function handleFileChange(e) {
@@ -231,12 +221,21 @@ const ControlsComponent = ({
 
         <Button variant={"secondary"} onClick={handleCopyPermaLink}>{isCopied ? "Copied!" : "Copy permalink"}</Button>
 
-        <Form style={{margin: "5px 5px"}}>
+        <Form style={{margin: "10px 5px"}}>
             <Form.Check
                 type="switch"
-                id="custom-switch"
+                id="auto-sync-switch"
+                label="Autosync"
+                defaultChecked={true}
+                inline={true}
+                onChange={changeAutoSync}
+            />
+            <Form.Check
+                type="switch"
+                id="snap-to-grid-switch"
                 label="Snap to grid"
                 defaultChecked={true}
+                inline={true}
                 onChange={changeSnapToGrid}
             />
         </Form>

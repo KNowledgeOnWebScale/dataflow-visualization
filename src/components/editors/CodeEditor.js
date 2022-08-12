@@ -1,7 +1,7 @@
 import Editor from "@monaco-editor/react";
 import {useState} from "react";
 
-const CodeEditor = ({language, data, setData, modelName, schema}) => {
+const CodeEditor = ({language, data, setData, modelName, schema, updateCB}) => {
 
     const [editorInstance, setEditorInstance] = useState(null);
     const [monacoInstance, setMonacoInstance] = useState(null);
@@ -20,7 +20,7 @@ const CodeEditor = ({language, data, setData, modelName, schema}) => {
         setModelUriInstance(modelUri)
 
         monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
-            validate: true,
+            //validate: true,
             schemas: [
                 {
                     // uri: "http://nodes-schema.json",
@@ -39,7 +39,7 @@ const CodeEditor = ({language, data, setData, modelName, schema}) => {
     // In this function, I just overwrite it again when you click with you mouse on the editor
     function initAgain() {
         monacoInstance.languages.json.jsonDefaults.setDiagnosticsOptions({
-            validate: true,
+            //validate: true,
             schemas: [
                 {
                     // uri: "http://.....-schema.json",
@@ -59,7 +59,10 @@ const CodeEditor = ({language, data, setData, modelName, schema}) => {
                 onMount={editorDidMountNodes}
                 language={language}
                 value={data}
-                onChange={content => setData(content)}
+                onChange={content => {
+                    setData(content);
+                    updateCB()
+                }}
                 theme="vs-dark"
                 style={{
                     width: "100%",
