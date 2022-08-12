@@ -13,6 +13,7 @@ First ever release. You can make flows from JSON or YAML.
 - Issue #10: There is support for vgroups and hgroups in combination with `autoLayout`.
 - Issue #11: Created a file [DEVELOPMENT.md] to keep [README.md] end-user-friendly.
 - Issue #12: You can set the contents of the example buttons via the configs.
+- Issue #18: Set the size of an arrowhead.
 - Issue #19: You can import and export figure configurations.
 - Issue #22: There is a button to import the positions of all nodes of the flow.
 - Issue #30: There is a switch button to auto-sync all the changes you make in the editors.
