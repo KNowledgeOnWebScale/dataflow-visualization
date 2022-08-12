@@ -25,7 +25,8 @@ export function fixVgroups(allNodes, vgroupId) {
         i++;
     }
 
-    let referenceNode = nodes.slice(i, 1)[0];
+    let referenceNode = nodes[i]
+
 
     // TODO mss als de orientatie horizontaal is, beetje dichter en als de orientatie verticaal is, wat verder
     //  mss gwn algemeen een manier vinden om de spacing te definiëren
