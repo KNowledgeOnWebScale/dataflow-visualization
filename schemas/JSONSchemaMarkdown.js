@@ -1,7 +1,7 @@
 const fs = require('fs');
-const globalDefaultsJSON = require("./schemas/globalDefaults.schema.json");
-const nodesJSON = require("./schemas/nodes.schema.json");
-const edgesJSON = require("./schemas/edges.schema.json");
+const globalDefaultsJSON = require("./schemas/.globalDefaults.schema.json");
+const nodesJSON = require("./schemas/.nodes.schema.json");
+const edgesJSON = require("./schemas/.edges.schema.json");
 
 
 /**
