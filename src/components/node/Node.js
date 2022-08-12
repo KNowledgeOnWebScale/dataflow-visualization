@@ -21,23 +21,9 @@ export default memo(({data, isConnectable}) => {
 
     return (
         <>
-
-
-            {/*
-
-            https://www.geeksforgeeks.org/how-to-import-a-svg-file-in-javascript/
-
-            <object type="image/svg+xml" data={cylinder} className="logo" style={{width: width, height: height, fill: "green", stroke: "blue", strokeWidth: 2}}>
-                Logo
-            </object>
-            */}
-
-            {/*
-                 <img src={cylinder} alt="some file"  height='50'
-                    width='50' style={{width: width, height: height, fill: "green", stroke: "blue", strokeWidth: 2}}
-                   />
-                 */}
-
+            {data[KEY_VALUES[NODE].TOP_TEXT.id] &&
+                <p style={{margin: 0, padding: 0, textAlign: "center", fontSize: fontsize-1}}>{data[KEY_VALUES[NODE].TOP_TEXT.id]}</p>
+            }
             <svg style={{width: width, height: height}}>
 
                 <svg style={{width: width}} key={Math.random()}>
@@ -46,7 +32,7 @@ export default memo(({data, isConnectable}) => {
                     }
                 </svg>
 
-                <svg viewBox={`0 0 ${width} ${height}`} width={width} height={height}>
+                <svg /*viewBox={`0 ${s} ${width} ${height}`}*/ width={width} height={height}>
                     {data[KEY_VALUES[NODE].IMAGE.id] &&
                         (getShape(data[KEY_VALUES[NODE].IMAGE.id]) ||
                             <image key={Math.random()} href={data[KEY_VALUES[NODE].IMAGE.id]}
@@ -58,7 +44,8 @@ export default memo(({data, isConnectable}) => {
 
                 <text fontSize={fontsize}>
                     {data[KEY_VALUES[NODE].TITLE.id] &&
-                        <tspan key={Math.random()} x="50%" y={(data[KEY_VALUES[NODE].STROKE_WIDTH.id] || 1) + fontsize}
+                        <tspan key={Math.random()} x="50%"
+                               y={(data[KEY_VALUES[NODE].STROKE_WIDTH.id] || 1) + fontsize}
                                dominantBaseline="middle" textAnchor="middle">{data.title}</tspan>
                     }
                     {data[KEY_VALUES[NODE].LABEL.id] &&
@@ -74,7 +61,6 @@ export default memo(({data, isConnectable}) => {
                         })}
 
                 </text>
-
             </svg>
 
             {
@@ -82,10 +68,10 @@ export default memo(({data, isConnectable}) => {
                 //  dus hergebruiken!!!
 
                 // type, position, id
-               /* [["source", "right", "right-source"], ["source", "bottom", "bottom-source"],
-                    ["target", "left", "left-target"], ["target", "top", "top-target"],
-                    ["source", "top", "top-source"], ["source", "left", "left-source"],
-                    ["target", "bottom", "bottom-target"], ["target", "right", "right-target"]*/
+                /* [["source", "right", "right-source"], ["source", "bottom", "bottom-source"],
+                     ["target", "left", "left-target"], ["target", "top", "top-target"],
+                     ["source", "top", "top-source"], ["source", "left", "left-source"],
+                     ["target", "bottom", "bottom-target"], ["target", "right", "right-target"]*/
                 [["source", "right", "right"], ["source", "bottom", "bottom"],
                     ["target", "left", "left"], ["target", "top", "top"],
                     ["source", "top", "top"], ["source", "left", "left"],
