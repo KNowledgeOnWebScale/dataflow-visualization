@@ -1,4 +1,4 @@
-import {fix_sourceHandle_targetHandle, fixNodeGroups} from "./nodeAutoPositioning";
+import {fix_sourceHandle_targetHandle, fixNodeGroups} from "./autoLayout/layoutUtils";
 
 export const GRAPH = "graph";
 export const NODE = "node";

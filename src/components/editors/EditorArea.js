@@ -3,7 +3,7 @@ import dagre from "dagre";
 import {useState} from "react";
 
 import {GRAPH, parseEdges, parseGlobalDefaults, parseNodes} from "../../lib/configParsing";
-import {autoLayout, getLayoutedElementsDagre} from "../../lib/nodeAutoPositioning";
+import {autoLayout} from "../../lib/autoLayout/autoLayout";
 import {edgeSchema, globalDefaultSchema, nodeSchema, validateJSON} from "../../lib/schemaValidation";
 import CodeEditor from "./CodeEditor";
 import ErrorModal from "../ErrorModal";
