@@ -56,39 +56,45 @@ const Base = ({raw}) => {
 
     return <>
         <div style={{
-            height: window.innerHeight * 0.9,
-            width: window.innerWidth * 0.9,
-            margin: "auto",
+            width: window.innerWidth,
+            height: window.innerHeight,
+            display: "flex"
         }}>
-            {!isError && Array.isArray(nodes) && nodes.length > 0
-                ? <ReactFlow
-                    nodes={nodes}
-                    edges={edges}
-                    onNodesChange={onNodesChange}
-                    onEdgesChange={onEdgesChange}
-                    onConnect={onConnect}
-                    snapToGrid={true}
-                    nodeTypes={nodeTypes}
-                    fitView
-                    attributionPosition="top-right"
-                >
-                    <Controls/>
-                </ReactFlow>
-                : <div style={{
-                    width: "fit-content",
-                    height: "fit-content",
-                    position: "absolute",
-                    top: 0,
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    margin: "auto",
-                    textAlign: "center",
-                    fontSize: "1.5em"
-                }}>ERROR: Could not load diagram</div>
-            }
+            <div style={{
+                height: window.innerHeight * 0.95,
+                width: window.innerWidth * 0.95,
+                justifyContent: "center",
+                alignContent: "center",
+                margin: "auto",
+            }}>
+                {!isError && Array.isArray(nodes) && nodes.length > 0
+                    ? <ReactFlow
+                        nodes={nodes}
+                        edges={edges}
+                        onNodesChange={onNodesChange}
+                        onEdgesChange={onEdgesChange}
+                        onConnect={onConnect}
+                        snapToGrid={true}
+                        nodeTypes={nodeTypes}
+                        fitView
+                        attributionPosition="top-right"
+                    >
+                    </ReactFlow>
+                    : <div style={{
+                        width: "fit-content",
+                        height: "fit-content",
+                        position: "absolute",
+                        top: 0,
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        margin: "auto",
+                        textAlign: "center",
+                        fontSize: "1.5em"
+                    }}>ERROR: Could not load diagram</div>
+                }
+            </div>
         </div>
-
     </>
 }
 
