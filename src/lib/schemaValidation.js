@@ -1,34 +1,42 @@
 import Ajv from "ajv";
 //import {} from "ajv-errors";
-import {
-    EDGE_KEYS,
-    GLOBAL_DEFAULT_KEY_VALUES,
-    NODE_KEYS
-} from "./editorUtil";
+import {EDGE, KEY_VALUES, NODE} from "./configParsing";
 
 const ajv = new Ajv({allErrors: true});
 require("ajv-errors")(ajv, /*{keepErrors: false}*/);
 
 const arrowSchema = {
     type: "object",
+    title: "Arrowhead schema",
+    /*$id: "arrowSchema",*/
     properties: {
         "type": {
             type: "string", enum: ["arrow", "arrowclosed"],
+            description: "Set the type of the arrowhead.",
             errorMessage: createClearErrorMessage("Type of arrow", "string", ["arrow", "arrowclosed"])
         },
         "orient": {
             type: ["string", "number"],
+            description: "Set the orient of the arrowhead. See [the MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/orient) for more information.",
             errorMessage: createClearErrorMessage("Orient of arrow", ["number", "string"])
         },
         "color": {
             type: "string",
+            description: "Set the color of the arrowhead. If you do not specify a color, the color of the arrowhead will be the same as the color of the edge.",
             errorMessage: createClearErrorMessage("Color of arrow", "string")
+        },
+        "size": {
+            type: "number",
+            description: "Set the size of the arrowhead.",
+            errorMessage: createClearErrorMessage("Width of arrow", "integer")
         }
     }
 }
 
 const positionSchema = {
     type: "object",
+    title: "Position schema",
+    $id: "positionSchema",
     properties: {
         "x": {
             type: "number",
@@ -73,6 +81,9 @@ function createClearErrorMessage(id, type, patternEnum) {
 
 export const globalDefaultSchema = {
     type: "object",
+    title: "Global defaults",
+    description: "This schema is to define the properties inside the global defaults config.",
+    $id: "globalDefaultSchema",
     properties: {},
     errorMessage: {
         properties: {},
@@ -83,9 +94,13 @@ export const globalDefaultSchema = {
 
 export const nodeSchema = {
     type: "array",
+    title: "Array of nodes",
+    $id: "nodeSchema",
     items:
         {
             type: "object",
+            title: "Node",
+            required: [],
             properties: {},
             errorMessage: {
                 type: "Each node should be an object",
@@ -100,9 +115,12 @@ export const nodeSchema = {
 
 export const edgeSchema = {
     type: "array",
+    title: "Array of edges",
+    $id: "edgeSchema",
     items:
         {
             type: "object",
+            title: "Edge",
             required: [],
             properties: {},
             errorMessage: {
@@ -117,6 +135,7 @@ export const edgeSchema = {
 
 // This function is called once, in index.js
 export function initSchemas() {
+
     initGlobalDefaultsSchema();
     initNodesSchema();
     initEdgesSchema();
@@ -149,42 +168,89 @@ export function initSchemas() {
 }*/
 
 
-function initGlobalDefaultsSchema() {
-    for (let value of Object.values(GLOBAL_DEFAULT_KEY_VALUES)) {
+function globalDefaultNestedKey(key) {
+    const nestedObj = {
+        type: "object",
+        title: key,
+        description: key + " in global defaults",
+        $id: "globalDefaults" + key.charAt(0).toUpperCase() + key.toLowerCase().slice(1),
+        properties: {}
+    }
 
-        if (value.type === "object") {
+    for (let value of Object.values(KEY_VALUES[key])) {
+
+        if (value.type === "object" || !value.canBeGlobal) {
             continue;
         }
 
-        globalDefaultSchema.properties[value.id] = {
+        nestedObj["properties"][value.id] = {
             type: value.type,
             enum: value.enum,
-
-            //errorMessage: {
-            // type: createClearErrorMessage(value.id, value.type, value.pattern)
-            //}
+            description: value.description,
+            default: value.value,
+            errorMessage: {
+                type: createClearErrorMessage(value.id, value.type, value.enum)
+            }
         }
-
-        globalDefaultSchema.errorMessage.properties[value.id] = createClearErrorMessage(value.id, value.type, value.enum);
-
     }
 
-    //TODO: moet beter
-    globalDefaultSchema.properties[GLOBAL_DEFAULT_KEY_VALUES.MARKER_START.id] = arrowSchema;
-    globalDefaultSchema.properties[GLOBAL_DEFAULT_KEY_VALUES.MARKER_END.id] = arrowSchema;
+    globalDefaultSchema.properties[key] = nestedObj;
 }
 
+
+function initGlobalDefaultsSchema() {
+
+    for (let key in KEY_VALUES) {
+        globalDefaultNestedKey(key)
+    }
+
+    const nestedNodesSchema = JSON.parse(JSON.stringify(globalDefaultSchema.properties[NODE]));
+    nestedNodesSchema["$id"] = "presetNestedNode"
+
+    //console.log(nestedNodesSchema)
+
+    globalDefaultSchema.properties[NODE].properties[KEY_VALUES[NODE].PRESETS.id] = {
+        type: "object",
+        description: KEY_VALUES[NODE].PRESETS.description,
+        additionalProperties: nestedNodesSchema
+    }
+
+    //console.log(globalDefaultSchema)
+
+    globalDefaultSchema.properties[EDGE]["properties"][KEY_VALUES[EDGE].MARKER_START.id] = arrowSchema
+    globalDefaultSchema.properties[EDGE]["properties"][KEY_VALUES[EDGE].MARKER_END.id] = arrowSchema
+
+
+    const nestedEdgesSchema = JSON.parse(JSON.stringify(globalDefaultSchema.properties[EDGE]));
+    nestedEdgesSchema["$id"] = "presetNestedEdge"
+    globalDefaultSchema.properties[EDGE].properties[KEY_VALUES[EDGE].PRESETS.id] = {
+        type: "object",
+        description: KEY_VALUES[EDGE].PRESETS.description,
+        additionalProperties: nestedEdgesSchema
+    }
+
+
+}
+
+
 function initNodesSchema() {
+    const NODE_KEYS = KEY_VALUES[NODE];
+
     for (let value of Object.values(NODE_KEYS)) {
 
         if (value.type === "object") {
             continue;
         }
 
+        if (value.required) {
+            nodeSchema.items.required.push(value.id);
+        }
+
         nodeSchema.items.properties[value.id] = {
             type: value.type,
-
             enum: value.enum,
+            description: value.description,
+            default: value.value,
 
             // In global defaults, the errorMessages are not put inside properties
             // But here it must be inside properties in order to work
@@ -205,8 +271,11 @@ function initNodesSchema() {
 
 }
 
+
 function initEdgesSchema() {
-    for (let value of [Object.values(EDGE_KEYS)]) {
+    const EDGE_KEYS = KEY_VALUES[EDGE];
+
+    for (let value of Object.values(EDGE_KEYS)) {
 
         if (value.required) {
             edgeSchema.items.required.push(value.id);
@@ -219,8 +288,9 @@ function initEdgesSchema() {
 
         edgeSchema.items.properties[value.id] = {
             type: value.type,
-
             enum: value.enum,
+            description: value.description,
+            default: value.value,
 
             // In global defaults, the errorMessages are not put inside properties
             // But here it must be inside properties in order to work
@@ -235,8 +305,8 @@ function initEdgesSchema() {
         // edgeSchema.items.errorMessage.properties[value.id] = createClearErrorMessage(value.id, value.type, value.pattern);
         // edgeSchema.errorMessage.properties[value.id] = createClearErrorMessage(value.id, value.type, value.pattern);
     }
-    edgeSchema.items.properties[GLOBAL_DEFAULT_KEY_VALUES.MARKER_START.id] = arrowSchema;
-    edgeSchema.items.properties[GLOBAL_DEFAULT_KEY_VALUES.MARKER_END.id] = arrowSchema;
+    edgeSchema.items.properties[KEY_VALUES[EDGE].MARKER_START.id] = arrowSchema;
+    edgeSchema.items.properties[KEY_VALUES[EDGE].MARKER_END.id] = arrowSchema;
 
 }
 

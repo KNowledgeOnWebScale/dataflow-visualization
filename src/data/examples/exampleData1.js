@@ -1,11 +1,18 @@
+export const title = "autoLayout example"
 
 export const globalDefaultsJSON = {
-    autoLayout: true,
-    orientation: "vertical",
-    fill: "royalblue",
-    edgeColor: "darkgray",
-    markerEnd: {type: "arrowclosed"},
-    markerStart: {type: "arrowclosed"}
+    graph: {
+        autoLayout: true,
+        orientation: "vertical",
+    },
+    node: {
+        fill: "royalblue",
+    },
+    edge: {
+        color: "darkgray",
+        markerEnd: {type: "arrowclosed"},
+        markerStart: {type: "arrowclosed"}
+    }
 };
 
 export const nodesJSON = [

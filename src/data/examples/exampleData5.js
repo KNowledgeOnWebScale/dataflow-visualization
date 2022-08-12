@@ -1,9 +1,17 @@
 
 export const globalDefaultsJSON = {
-    orientation: "vertical",
-    strokeDasharray: "6 5",
-    animated: true,
-    type: "straight"
+    graph: {
+        orientation: "vertical",
+    },
+    node: {
+
+    },
+    edge: {
+        strokeDasharray: "6 5",
+        animated: true,
+        type: "straight"
+    }
+
 };
 
 export const nodesJSON = [
@@ -25,6 +33,7 @@ export const nodesJSON = [
     },
     {
         image: "solid",
+        topText: "Solid",
         stroke: "#fff",
         position: {x:-50, y:225}
     },
@@ -80,7 +89,7 @@ export const edgesJSON = [
     { source: 'comunica', target: 'RDF-1' },
     { source: 'comunica', target: 'RDF-2'},
     { source: 'comunica', target: 'RDF-3' },
-    { source: 'comunica', target: 'RDF-4', type: "step", sourceHandle:"right-source", markerEnd: {type: "arrowclosed"} },
+    { source: 'comunica', target: 'RDF-4', type: "step", sourceHandle:"right", markerEnd: {type: "arrowclosed"} },
 
     { source: 'RDF-1', target: 'rmlio', zIndex:1 },
     { source: 'RDF-2', target: 'rmlio', zIndex:1 },

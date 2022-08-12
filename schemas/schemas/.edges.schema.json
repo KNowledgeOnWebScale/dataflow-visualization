@@ -1,0 +1,205 @@
+{
+  "type": "array",
+  "title": "Array of edges",
+  "$id": "edgeSchema",
+  "items": {
+    "type": "object",
+    "title": "Edge",
+    "required": [
+      "source",
+      "target"
+    ],
+    "properties": {
+      "animated": {
+        "type": "boolean",
+        "description": "Set a default animation for the edge. See also [Animations](https://github.com/KNowledgeOnWebScale/dataflow-visualization/tree/main#animations).",
+        "default": false,
+        "errorMessage": {
+          "type": "animated must be boolean"
+        }
+      },
+      "animation": {
+        "type": "string",
+        "description": "See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/animation) for more information about animation.",
+        "errorMessage": {
+          "type": "animation must be string"
+        }
+      },
+      "color": {
+        "type": "string",
+        "description": "The color of the edge.",
+        "default": "black",
+        "errorMessage": {
+          "type": "color must be string"
+        }
+      },
+      "label": {
+        "type": "string",
+        "description": "Set the label of the edge.",
+        "errorMessage": {
+          "type": "label must be string"
+        }
+      },
+      "preset": {
+        "type": "string",
+        "description": "Refer to a preset defined in the config of the global defaults. If you use this, you will overwrite all that is defined in this edge with the values of the preset.",
+        "errorMessage": {
+          "type": "preset must be string"
+        }
+      },
+      "thickness": {
+        "type": "number",
+        "description": "The thickness of the edge.",
+        "default": 1.2,
+        "errorMessage": {
+          "type": "thickness must be number"
+        }
+      },
+      "strokeDasharray": {
+        "type": [
+          "number",
+          "string"
+        ],
+        "description": "The pattern of dashes of the edges. See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray#example) for more information.",
+        "default": 0,
+        "errorMessage": {
+          "type": "strokeDasharray must be number or string"
+        }
+      },
+      "source": {
+        "type": "string",
+        "description": "ID of the source node.",
+        "errorMessage": {
+          "type": "source must be string"
+        }
+      },
+      "target": {
+        "type": "string",
+        "description": "ID of the target node.",
+        "errorMessage": {
+          "type": "target must be string"
+        }
+      },
+      "sourceHandle": {
+        "type": "string",
+        "enum": [
+          "left",
+          "right",
+          "top",
+          "bottom"
+        ],
+        "description": "Set where the edge should attach to the source node.",
+        "errorMessage": {
+          "type": "sourceHandle must be string with possible values: left , right , top  or bottom"
+        }
+      },
+      "targetHandle": {
+        "type": "string",
+        "enum": [
+          "left",
+          "right",
+          "top",
+          "bottom"
+        ],
+        "description": "Set where the edge should attach to the target node.",
+        "errorMessage": {
+          "type": "targetHandle must be string with possible values: left , right , top  or bottom"
+        }
+      },
+      "type": {
+        "type": "string",
+        "enum": [
+          "default",
+          "step",
+          "smoothstep",
+          "straight"
+        ],
+        "description": "Set how the edge should look like (straight line, curve ...). `default` = [Bézier curve](https://en.wikipedia.org/wiki/B%C3%A9zier_curve).",
+        "default": "default",
+        "errorMessage": {
+          "type": "type must be string with possible values: default , step , smoothstep  or straight"
+        }
+      },
+      "zIndex": {
+        "type": "number",
+        "description": "Controls the stacking order of the edge. For more information, go to the [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/z-index).",
+        "errorMessage": {
+          "type": "zIndex must be number"
+        }
+      },
+      "markerStart": {
+        "type": "object",
+        "title": "Arrowhead schema",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "arrow",
+              "arrowclosed"
+            ],
+            "description": "Set the type of the arrowhead.",
+            "errorMessage": "Type of arrow must be string with possible values: arrow  or arrowclosed"
+          },
+          "orient": {
+            "type": [
+              "string",
+              "number"
+            ],
+            "description": "Set the orient of the arrowhead. See [the MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/orient) for more information.",
+            "errorMessage": "Orient of arrow must be number or string"
+          },
+          "color": {
+            "type": "string",
+            "description": "Set the color of the arrowhead. If you do not specify a color, the color of the arrowhead will be the same as the color of the edge.",
+            "errorMessage": "Color of arrow must be string"
+          },
+          "size": {
+            "type": "number",
+            "description": "Set the size of the arrowhead.",
+            "errorMessage": "Width of arrow must be integer"
+          }
+        }
+      },
+      "markerEnd": {
+        "type": "object",
+        "title": "Arrowhead schema",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "arrow",
+              "arrowclosed"
+            ],
+            "description": "Set the type of the arrowhead.",
+            "errorMessage": "Type of arrow must be string with possible values: arrow  or arrowclosed"
+          },
+          "orient": {
+            "type": [
+              "string",
+              "number"
+            ],
+            "description": "Set the orient of the arrowhead. See [the MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/orient) for more information.",
+            "errorMessage": "Orient of arrow must be number or string"
+          },
+          "color": {
+            "type": "string",
+            "description": "Set the color of the arrowhead. If you do not specify a color, the color of the arrowhead will be the same as the color of the edge.",
+            "errorMessage": "Color of arrow must be string"
+          },
+          "size": {
+            "type": "number",
+            "description": "Set the size of the arrowhead.",
+            "errorMessage": "Width of arrow must be integer"
+          }
+        }
+      }
+    },
+    "errorMessage": {
+      "type": "Each edge should be an object",
+      "properties": {}
+    }
+  },
+  "errorMessage": {
+    "type": "Edges are expected to be objects in an array"
+  }
+}

@@ -1,12 +1,12 @@
 import Editor from "@monaco-editor/react";
 import {useState} from "react";
 
-const MyEditor = ({language, data, setData, modelName, schema}) => {
+const CodeEditor = ({language, data, setData, modelName, schema, updateCB}) => {
 
-    const [myEditor, setMyEditor] = useState(null);
-    const [myMonaco, setMyMonaco] = useState(null);
-    const [myModel, setMyModel] = useState(null)
-    const [myModelUri, setMyModelUri] = useState(null)
+    const [editorInstance, setEditorInstance] = useState(null);
+    const [monacoInstance, setMonacoInstance] = useState(null);
+    const [modelInstance, setModelInstance] = useState(null)
+    const [modelUriInstance, setModelUriInstance] = useState(null)
 
     function editorDidMountNodes(editor, monaco) {
         // https://microsoft.github.io/monaco-editor/playground.html#extending-language-services-configure-json-defaults
@@ -14,13 +14,13 @@ const MyEditor = ({language, data, setData, modelName, schema}) => {
         const modelUri = monaco.Uri.parse(modelName + ".json"); // a made up unique URI for our model
         const model = monaco.editor.createModel(data, 'json', modelUri);
 
-        setMyEditor(editor);
-        setMyMonaco(monaco);
-        setMyModel(model);
-        setMyModelUri(modelUri)
+        setEditorInstance(editor);
+        setMonacoInstance(monaco);
+        setModelInstance(model);
+        setModelUriInstance(modelUri)
 
         monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
-            validate: true,
+            //validate: true,
             schemas: [
                 {
                     // uri: "http://nodes-schema.json",
@@ -38,35 +38,39 @@ const MyEditor = ({language, data, setData, modelName, schema}) => {
     // This component gets created multiple times and the changes you do on monaco or editor are probably overwritten
     // In this function, I just overwrite it again when you click with you mouse on the editor
     function initAgain() {
-        myMonaco.languages.json.jsonDefaults.setDiagnosticsOptions({
-            validate: true,
+        monacoInstance.languages.json.jsonDefaults.setDiagnosticsOptions({
+            //validate: true,
             schemas: [
                 {
                     // uri: "http://.....-schema.json",
-                    fileMatch: [myModelUri.toString()],
+                    fileMatch: [modelUriInstance.toString()],
                     schema: schema
                 }
             ]
         })
 
-        myEditor.setModel(myModel);
+        editorInstance.setModel(modelInstance);
     }
 
 
     return <>
-        <div onClick={initAgain} style={{height: "100%"}}>
+        <div className="editor" onClick={initAgain}>
             <Editor
                 onMount={editorDidMountNodes}
                 language={language}
                 value={data}
-                onChange={content => setData(content)}
+                onChange={content => {
+                    setData(content);
+                    updateCB()
+                }}
                 theme="vs-dark"
                 style={{
-                    width: "100%"
+                    width: "100%",
+                    height: "100%"
                 }}
             />
         </div>
     </>
 }
 
-export default MyEditor;
+export default CodeEditor;
