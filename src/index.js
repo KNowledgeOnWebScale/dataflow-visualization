@@ -16,12 +16,7 @@ const download = false;
 if (download) {
     function write(title, data) {
 
-        // https://github.com/adobe/jsonschema2md
-
-        // run:
-        //     jsonschema2md -d schemas/schemas -o schemas/docs -h false
-        // To auto generate the docs
-
+        // This code is here to autogenerate the docs. See DEVELOPMENT.md for more information.
 
         const jsonString = `data:text/json;charset=utf-8,${encodeURIComponent(
             JSON.stringify(data)

@@ -89,33 +89,47 @@ Type: `array`
 		 - <i id="edgeSchema/items/properties/markerStart">path: #edgeSchema/items/properties/markerStart</i>
 		 - **_Properties_**
 			 - <b id="#edgeSchema/items/properties/markerStart/properties/type">type</b>
+				 - _Set the type of the arrowhead._
 				 - Type: `string`
 				 - <i id="edgeSchema/items/properties/markerStart/properties/type">path: #edgeSchema/items/properties/markerStart/properties/type</i>
 				 - The value is restricted to the following: 
 					 1. _"arrow"_
 					 2. _"arrowclosed"_
 			 - <b id="#edgeSchema/items/properties/markerStart/properties/orient">orient</b>
+				 - _Set the orient of the arrowhead. See [the MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/orient) for more information._
 				 - Types: `string`, `number`
 				 - <i id="edgeSchema/items/properties/markerStart/properties/orient">path: #edgeSchema/items/properties/markerStart/properties/orient</i>
 			 - <b id="#edgeSchema/items/properties/markerStart/properties/color">color</b>
+				 - _Set the color of the arrowhead. If you do not specify a color, the color of the arrowhead will be the same as the color of the edge._
 				 - Type: `string`
 				 - <i id="edgeSchema/items/properties/markerStart/properties/color">path: #edgeSchema/items/properties/markerStart/properties/color</i>
+			 - <b id="#edgeSchema/items/properties/markerStart/properties/size">size</b>
+				 - _Set the size of the arrowhead._
+				 - Type: `number`
+				 - <i id="edgeSchema/items/properties/markerStart/properties/size">path: #edgeSchema/items/properties/markerStart/properties/size</i>
 	 - <b id="#edgeSchema/items/properties/markerEnd">markerEnd</b>
 		 - #### Arrowhead schema
 		 - Type: `object`
 		 - <i id="edgeSchema/items/properties/markerEnd">path: #edgeSchema/items/properties/markerEnd</i>
 		 - **_Properties_**
 			 - <b id="#edgeSchema/items/properties/markerEnd/properties/type">type</b>
+				 - _Set the type of the arrowhead._
 				 - Type: `string`
 				 - <i id="edgeSchema/items/properties/markerEnd/properties/type">path: #edgeSchema/items/properties/markerEnd/properties/type</i>
 				 - The value is restricted to the following: 
 					 1. _"arrow"_
 					 2. _"arrowclosed"_
 			 - <b id="#edgeSchema/items/properties/markerEnd/properties/orient">orient</b>
+				 - _Set the orient of the arrowhead. See [the MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/orient) for more information._
 				 - Types: `string`, `number`
 				 - <i id="edgeSchema/items/properties/markerEnd/properties/orient">path: #edgeSchema/items/properties/markerEnd/properties/orient</i>
 			 - <b id="#edgeSchema/items/properties/markerEnd/properties/color">color</b>
+				 - _Set the color of the arrowhead. If you do not specify a color, the color of the arrowhead will be the same as the color of the edge._
 				 - Type: `string`
 				 - <i id="edgeSchema/items/properties/markerEnd/properties/color">path: #edgeSchema/items/properties/markerEnd/properties/color</i>
+			 - <b id="#edgeSchema/items/properties/markerEnd/properties/size">size</b>
+				 - _Set the size of the arrowhead._
+				 - Type: `number`
+				 - <i id="edgeSchema/items/properties/markerEnd/properties/size">path: #edgeSchema/items/properties/markerEnd/properties/size</i>
 
 _Generated with [json-schema-md-doc](https://brianwendt.github.io/json-schema-md-doc/)_

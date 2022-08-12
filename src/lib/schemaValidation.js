@@ -1,9 +1,6 @@
 import Ajv from "ajv";
 //import {} from "ajv-errors";
-import {
-    EDGE,
-    KEY_VALUES, NODE
-} from "./configParsing";
+import {EDGE, KEY_VALUES, NODE} from "./configParsing";
 
 const ajv = new Ajv({allErrors: true});
 require("ajv-errors")(ajv, /*{keepErrors: false}*/);
@@ -15,15 +12,23 @@ const arrowSchema = {
     properties: {
         "type": {
             type: "string", enum: ["arrow", "arrowclosed"],
+            description: "Set the type of the arrowhead.",
             errorMessage: createClearErrorMessage("Type of arrow", "string", ["arrow", "arrowclosed"])
         },
         "orient": {
             type: ["string", "number"],
+            description: "Set the orient of the arrowhead. See [the MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/orient) for more information.",
             errorMessage: createClearErrorMessage("Orient of arrow", ["number", "string"])
         },
         "color": {
             type: "string",
+            description: "Set the color of the arrowhead. If you do not specify a color, the color of the arrowhead will be the same as the color of the edge.",
             errorMessage: createClearErrorMessage("Color of arrow", "string")
+        },
+        "size": {
+            type: "number",
+            description: "Set the size of the arrowhead.",
+            errorMessage: createClearErrorMessage("Width of arrow", "integer")
         }
     }
 }
@@ -168,7 +173,7 @@ function globalDefaultNestedKey(key) {
         type: "object",
         title: key,
         description: key + " in global defaults",
-        $id: "globalDefaults" +  key.charAt(0).toUpperCase() + key.toLowerCase().slice(1),
+        $id: "globalDefaults" + key.charAt(0).toUpperCase() + key.toLowerCase().slice(1),
         properties: {}
     }
 
@@ -204,7 +209,7 @@ function initGlobalDefaultsSchema() {
 
     //console.log(nestedNodesSchema)
 
-    globalDefaultSchema.properties[NODE].properties[KEY_VALUES[NODE].PRESETS.id] =  {
+    globalDefaultSchema.properties[NODE].properties[KEY_VALUES[NODE].PRESETS.id] = {
         type: "object",
         description: KEY_VALUES[NODE].PRESETS.description,
         additionalProperties: nestedNodesSchema
@@ -218,7 +223,7 @@ function initGlobalDefaultsSchema() {
 
     const nestedEdgesSchema = JSON.parse(JSON.stringify(globalDefaultSchema.properties[EDGE]));
     nestedEdgesSchema["$id"] = "presetNestedEdge"
-    globalDefaultSchema.properties[EDGE].properties[KEY_VALUES[EDGE].PRESETS.id] =  {
+    globalDefaultSchema.properties[EDGE].properties[KEY_VALUES[EDGE].PRESETS.id] = {
         type: "object",
         description: KEY_VALUES[EDGE].PRESETS.description,
         additionalProperties: nestedEdgesSchema
@@ -265,7 +270,6 @@ function initNodesSchema() {
     nodeSchema.items.properties[NODE_KEYS.POSITION.id] = positionSchema;
 
 }
-
 
 
 function initEdgesSchema() {
