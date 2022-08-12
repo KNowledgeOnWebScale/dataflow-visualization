@@ -30,4 +30,15 @@ of the buttons don't have to be `example x`). If your file is ready, import ever
 in [examples.js](./src/data/examples.js) and add your imports to the array `examples`. A button to load in
 your example will automatically show up if you restart the application.
 
+### Permalink
+
+There is a button to get a link to your flow. There are two formats for a link.
+
+1) `https://knowledgeonwebscale.github.io/dataflow-visualization/#/customdata?globaldefaults=...&nodes=...&edges=...`
+    * The query paremeters are the URI-encoded values of what's inside the editors.
+2) `https://knowledgeonwebscale.github.io/dataflow-visualization/#/rawdata?nodes=...&edges=...`
+    * The query parameters are the URI-encoded values of the raw data of the flow. Remember there is a button to export
+      the raw data.
+
+If you press the button to copy the permalink to your clipboard, you get whichever link is shortest. 
 
