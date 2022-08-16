@@ -1,3 +1,4 @@
+<!-- omit in toc -->
 # Flow Visualization
 
 This is a [React] application to generate flow graphs from [JSON] or [YAML].
@@ -5,10 +6,10 @@ It is built on top of [ReactFlow].
 
 - [How to run](#how-to-run)
 - [Documentation](#documentation)
-    - [Global defaults](#global-defaults)
-    - [Nodes](#nodes)
-    - [Edges](#edges)
-    - [Buttons](#buttons)
+  - [Global defaults](#global-defaults)
+  - [Nodes](#nodes)
+  - [Edges](#edges)
+  - [Buttons](#buttons)
 - [License](#license)
 
 ## How to run

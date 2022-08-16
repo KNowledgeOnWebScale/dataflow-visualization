@@ -523,16 +523,16 @@ export function parseEdges(globalDefaults, edges, nodes) {
     return edges;
 }
 
-export function getSourceNodeFromId(edge, nodes) {
-    return nodes.find(n => n.id === edge["source"]);
-}
-
-export function getTargetNodeFromId(edge, nodes) {
-    return nodes.find(n => n.id === edge["target"]);
+export function getNodeFromEdgeId(edgeId, nodes) {
+    const n = nodes.find(n => n.id === edgeId);
+    if (!n) {
+        throw new Error(`No node with ID ${edgeId} found!`)
+    }
+    return n;
 }
 
 export function getSourceNode_targetNode_fromId(edge, nodes) {
-    return [getSourceNodeFromId(edge, nodes), getTargetNodeFromId(edge, nodes)];
+    return [getNodeFromEdgeId(edge[KEY_VALUES.edge.SOURCE.id], nodes), getNodeFromEdgeId(edge[KEY_VALUES.edge.TARGET.id], nodes)];
 }
 
 
