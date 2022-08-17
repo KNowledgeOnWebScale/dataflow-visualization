@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Controls and MiniMaps everywhere
+- updates schemas and docs via test script
 
 ### Fixed
 

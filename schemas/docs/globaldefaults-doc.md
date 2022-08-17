@@ -84,6 +84,7 @@ Type: `object`
 				 12. _"comunica"_
 				 13. _"rmlio"_
 				 14. _"solid"_
+				 15. _"Details"_
 			 - Default: _"square"_
 		 - <b id="#globalDefaultsNode/properties/stroke">stroke</b>
 			 - _The color of the stroke of the node._
