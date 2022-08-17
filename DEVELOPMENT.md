@@ -22,6 +22,11 @@ predefined
 image, edit the hashmap `SHAPES` in the file [nodeUtil.js](./src/components/node/nodeUtil.js). Pull requests are always
 welcome.
 
+### How to add a custom React component
+
+Add your custom React component under the [custom](./src/components/custom/) folder and add an entry to [index.js](./src/components/custom/index.js).
+See the `Details` component for an example
+
 ### How to add examples
 
 When using this application, you'll notice there are buttons to load examples. These buttons load in the

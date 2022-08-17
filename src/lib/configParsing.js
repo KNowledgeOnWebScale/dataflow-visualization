@@ -1,8 +1,14 @@
 import {fix_sourceHandle_targetHandle, fixNodeGroups} from "./autoLayout/layoutUtils";
 
+import customComponents from '../components/custom';
+
 export const GRAPH = "graph";
 export const NODE = "node";
 export const EDGE = "edge";
+
+const customComponentNames = Object.keys(customComponents);
+let shapes = ["8-star", "big-star", "circle", "cylinder", "diamond", "hexagon", "note", "rectangle", "square", "star", "triangle", "comunica", "rmlio", "solid"]
+shapes = shapes.concat(customComponentNames);
 
 // These are the keys that can be used in globalDefaults
 // These keys are not standard supported by the library, that's why they are in a dict
@@ -109,7 +115,7 @@ export const KEY_VALUES = {
             "canBeGlobal": true,
             value: "square",
             type: "string",
-            enum: ["8-star", "big-star", "circle", "cylinder", "diamond", "hexagon", "note", "rectangle", "square", "star", "triangle", "comunica", "rmlio", "solid"],
+            enum: shapes,
             description: "The shape of the node."
         },
         "STROKE": {
@@ -305,6 +311,10 @@ export function parseGlobalDefaults(globalDefaults) {
             //console.log(key)
             //console.log(globalDefaults)
             //console.log(globalDefaults[key])
+
+            if (!globalDefaults[key]) {
+                throw new Error(`Expected key ${key} in the global defaults!`)
+            }
 
             if (!globalDefaults[key].hasOwnProperty(valueObject.id)) {
                 if (KEY_VALUES[key][nestedKey].hasOwnProperty("value")) {
