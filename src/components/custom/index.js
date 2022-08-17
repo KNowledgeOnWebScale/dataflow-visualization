@@ -1,5 +1,7 @@
 import Details from "./Details"
 
-export default {
+const index = {
     Details
 }
+
+export default index;
