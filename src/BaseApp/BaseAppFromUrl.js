@@ -1,13 +1,8 @@
 import {useSearchParams} from "react-router-dom";
-import ReactFlow, {addEdge, useEdgesState, useNodesState, Controls, MiniMap} from "react-flow-renderer";
-import Node from "../components/node/Node";
+import {addEdge, useEdgesState, useNodesState} from "react-flow-renderer";
 import {useCallback, useEffect, useState} from "react";
 import {setFlowData} from "../lib/setFlowData";
-
-
-const nodeTypes = {
-    custom: Node
-}
+import BaseAppUrlFLowComponent from "./BaseAppUrlFLowComponent";
 
 
 const Base = ({raw}) => {
@@ -21,15 +16,12 @@ const Base = ({raw}) => {
 
     const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
 
-    //console.log(searchParams.get("nodes"))
-
 
     useEffect(() => {
         let globalDefaults2json;
         let nodes2json;
         let edges2json;
 
-        // Why raw or custom data? -> return the shortest link, because links can get very long
         if (raw) {
             try {
                 nodes2json = JSON.parse(searchParams.get("nodes"));
@@ -55,49 +47,10 @@ const Base = ({raw}) => {
 
 
     return <>
-        <div style={{
-            width: window.innerWidth,
-            height: window.innerHeight,
-            display: "flex"
-        }}>
-            <div style={{
-                height: window.innerHeight * 0.95,
-                width: window.innerWidth * 0.95,
-                justifyContent: "center",
-                alignContent: "center",
-                margin: "auto",
-            }}>
-                {!isError && Array.isArray(nodes) && nodes.length > 0
-                    ? <ReactFlow
-                        nodes={nodes}
-                        edges={edges}
-                        onNodesChange={onNodesChange}
-                        onEdgesChange={onEdgesChange}
-                        onConnect={onConnect}
-                        snapToGrid={true}
-                        nodeTypes={nodeTypes}
-                        fitView
-                        attributionPosition="top-right"
-                    >
-                        <Controls />
-                        <MiniMap />
-                    </ReactFlow>
-                    : <div style={{
-                        width: "fit-content",
-                        height: "fit-content",
-                        position: "absolute",
-                        top: 0,
-                        bottom: 0,
-                        left: 0,
-                        right: 0,
-                        margin: "auto",
-                        textAlign: "center",
-                        fontSize: "1.5em"
-                    }}>ERROR: Could not load diagram</div>
-                }
-            </div>
-        </div>
+        <BaseAppUrlFLowComponent isError={isError} nodes={nodes} edges={edges} onNodesChange={onNodesChange}
+                                 onEdgesChange={onEdgesChange} onConnect={onConnect}/>
     </>
+
 }
 
 export default Base;
