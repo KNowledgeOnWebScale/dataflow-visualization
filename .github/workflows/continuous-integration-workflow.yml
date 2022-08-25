@@ -1,5 +1,9 @@
 name: GitHub Pages CI
-on: push
+on:
+  push:
+    branches:
+      - development
+      - main
 
 jobs:
   build-test-deploy:
