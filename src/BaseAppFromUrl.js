@@ -1,5 +1,5 @@
 import {useSearchParams} from "react-router-dom";
-import ReactFlow, {addEdge, useEdgesState, useNodesState} from "react-flow-renderer";
+import ReactFlow, {addEdge, useEdgesState, useNodesState, Controls, MiniMap} from "react-flow-renderer";
 import Node from "./components/node/Node";
 import {useCallback, useEffect, useState} from "react";
 import {setFlowData} from "./lib/setFlowData";
@@ -79,6 +79,8 @@ const Base = ({raw}) => {
                         fitView
                         attributionPosition="top-right"
                     >
+                        <Controls />
+                        <MiniMap />
                     </ReactFlow>
                     : <div style={{
                         width: "fit-content",

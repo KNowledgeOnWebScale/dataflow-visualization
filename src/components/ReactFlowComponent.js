@@ -1,4 +1,4 @@
-import ReactFlow, {Controls} from "react-flow-renderer";
+import ReactFlow, {Controls, MiniMap} from "react-flow-renderer";
 import Node from "./node/Node";
 
 const nodeTypes = {
@@ -35,6 +35,7 @@ const ReactFlowComponent = ({nodes, edges, onNodesChange, onEdgesChange, onConne
             >
                 <Controls/>
                 {/*<Background/>*/}
+                <MiniMap/>
             </ReactFlow>
         </div>
 

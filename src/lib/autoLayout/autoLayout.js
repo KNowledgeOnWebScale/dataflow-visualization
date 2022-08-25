@@ -1,6 +1,16 @@
-import {EDGE, getSourceNodeFromId, getTargetNodeFromId, GRAPH, KEY_VALUES, NODE} from "../configParsing";
+import {EDGE, getNodeFromEdgeId, GRAPH, KEY_VALUES, NODE} from "../configParsing";
 import dagre from "dagre";
 import {fix_sourceHandle_targetHandle, fixNodeGroups} from "./layoutUtils";
+
+function reverseDirection(direction) {
+    if (direction === KEY_VALUES.edge.SOURCE.id) {
+        return KEY_VALUES.edge.TARGET.id;
+    }
+    if (direction === KEY_VALUES.edge.TARGET.id) {
+        return KEY_VALUES.edge.SOURCE.id;
+    }
+    return null;
+}
 
 /*
 Algorithm if groups are used in combination with autoLayout:
@@ -113,10 +123,10 @@ function groupNodes(groups, nodesCopy, edgesCopy) {
             groups.vgroups[node[vgroupId]].nodes.push(JSON.parse(JSON.stringify(node)));
 
             // All edges with node as source:
-            fixEdges(node, "source", edgesCopy, nodesCopy, groups, "vgroups", vgroupId, getTargetNodeFromId)
+            fixEdges(node, KEY_VALUES.edge.SOURCE.id, edgesCopy, nodesCopy, groups, "vgroups", vgroupId)
 
             // All edges with node as target:
-            fixEdges(node, "target", edgesCopy, nodesCopy, groups, "vgroups", vgroupId, getSourceNodeFromId)
+            fixEdges(node, KEY_VALUES.edge.TARGET.id, edgesCopy, nodesCopy, groups, "vgroups", vgroupId)
 
 
             nodesCopy.splice(i, 1)
@@ -130,11 +140,11 @@ function groupNodes(groups, nodesCopy, edgesCopy) {
 
 
             // All edges with node as source:
-            fixEdges(node, "source", edgesCopy, nodesCopy, groups, "hgroups", hgroupId, getTargetNodeFromId)
+            fixEdges(node, KEY_VALUES.edge.SOURCE.id, edgesCopy, nodesCopy, groups, "hgroups", hgroupId)
 
 
             // All edges with node as target:
-            fixEdges(node, "target", edgesCopy, nodesCopy, groups, "hgroups", hgroupId, getSourceNodeFromId)
+            fixEdges(node, KEY_VALUES.edge.TARGET.id, edgesCopy, nodesCopy, groups, "hgroups", hgroupId)
 
             nodesCopy.splice(i, 1)
         }
@@ -144,15 +154,23 @@ function groupNodes(groups, nodesCopy, edgesCopy) {
 
 }
 
-
-// Remove edge if it has a node from a group as source or target, and  maybe add a new edge where the temporary big node is the source or target
-function fixEdges(node, key, edgess, nodess, groups, groupType, groupId, getNode) {
-    const edgesWithNodeAsKey = findAllWithIdAsKey(node.id, key, edgess); // key is source of target
+/**
+ * Remove edge if it has a node from a group as source or target, and  maybe add a new edge where the temporary big node is the source or target
+ * @param {*} node 
+ * @param {*} direction 'source' or 'target'
+ * @param {*} edgess 
+ * @param {*} nodess 
+ * @param {*} groups 
+ * @param {*} groupType 
+ * @param {*} groupId 
+ */
+function fixEdges(node, direction, edgess, nodess, groups, groupType, groupId) {
+    const edgesWithNodeAsKey = findAllWithIdAsKey(node.id, direction, edgess); // key is source of target
 
     for (let edge of edgesWithNodeAsKey) {
 
 
-        let otherNode = getNode(edge, nodess); // TODO: findAllWithIdAsKey
+        let otherNode = getNodeFromEdgeId(edge[reverseDirection(direction)], nodess); // TODO: findAllWithIdAsKey
 
         if (otherNode[groupId] && otherNode[groupId] === node[groupId]) {
             //groups[groupType][node[groupId]].edges.push(JSON.parse(JSON.stringify(edge)));
@@ -164,7 +182,7 @@ function fixEdges(node, key, edgess, nodess, groups, groupType, groupId, getNode
 
             //groups[groupType][node[groupId]].edges.push(JSON.parse(JSON.stringify(edge)));
 
-            temporaryEdge[key] = node[groupId];
+            temporaryEdge[direction] = node[groupId];
 
             groups[groupType][node[groupId]].addedEdges.push(temporaryEdge);
         }

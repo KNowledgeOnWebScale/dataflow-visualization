@@ -91,12 +91,13 @@
           "triangle",
           "comunica",
           "rmlio",
-          "solid"
+          "solid",
+          "Details"
         ],
         "description": "The shape of the node.",
         "default": "square",
         "errorMessage": {
-          "type": "shape must be string with possible values: 8-star , big-star , circle , cylinder , diamond , hexagon , note , rectangle , square , star , triangle , comunica , rmlio  or solid"
+          "type": "shape must be string with possible values: 8-star , big-star , circle , cylinder , diamond , hexagon , note , rectangle , square , star , triangle , comunica , rmlio , solid  or Details"
         }
       },
       "stroke": {

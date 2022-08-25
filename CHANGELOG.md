@@ -1,12 +1,25 @@
 # Changelog
+All notable changes to this project will be documented in this file.
 
-Dates are DD-MM-YYYY
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.1.0] - 04-08-2022
+## Unreleased
 
-First ever release. You can make flows from JSON or YAML.
+### Added
 
-## [1.0.0] - 12-08-2022
+- Details custom React component
+
+### Changed
+
+- Controls and MiniMaps everywhere
+- updates schemas and docs via test script
+
+### Fixed
+
+- Changelog formatting
+
+## [1.0.0] - 2022-08-12
 
 ### Added
 
@@ -45,17 +58,11 @@ First ever release. You can make flows from JSON or YAML.
 
 - Issue #40: If you changed the color of an edge, all the markers with no color specified, changed to that color.
 - Issue #69: Title and label in a node that was no parent, did not work.
+- Kept [README.md] en [DEVELOPMENT.md] up to date with all the new changes and additions.
 
-Kept [README] en [DEVELOPMENT] up to date with all the new changes and additions.
+## [0.1.0] - 2022-08-04
 
-## Unreleased
-
-* /
+First ever release. You can make flows from JSON or YAML.
 
 [DEVELOPMENT.md]: DEVELOPMENT.md
-
-[DEVELOPMENT]: DEVELOPMENT.md
-
 [README.md]: README.md
-
-[README]: README.md

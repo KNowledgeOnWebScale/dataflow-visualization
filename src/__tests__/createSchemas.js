@@ -1,7 +1,7 @@
-const fs = require('fs');
-const globalDefaultsJSON = require("./schemas/.globalDefaults.schema.json");
-const nodesJSON = require("./schemas/.nodes.schema.json");
-const edgesJSON = require("./schemas/.edges.schema.json");
+import fs from 'fs';
+import path from 'path';
+
+import { edgeSchema, globalDefaultSchema, initSchemas, nodeSchema } from "../lib/schemaValidation";
 
 
 /**
@@ -9,7 +9,7 @@ const edgesJSON = require("./schemas/.edges.schema.json");
  * @link https://github.com/BrianWendt/json-schema-md-doc
  */
 
-class JSONSchemaMarkdown {
+ class JSONSchemaMarkdown {
     constructor() {
         /**
          * Object containing the schema
@@ -785,35 +785,18 @@ class JSONSchemaMarkdown {
     }
 }
 
+it('can create schemas and update the docs without fail', () => {
+    const schemaBasePath = path.resolve(__dirname, '../../schemas');
 
-/**
- * Export JSONSchemaMarkdown as a module for Node
- */
-if (typeof module !== "undefined") {
-    module.exports.JSONSchemaMarkdown = JSONSchemaMarkdown;
-}
+    initSchemas();   // Initialize JSON validation schemas once
 
+    fs.writeFileSync(path.resolve(schemaBasePath, 'schemas/.globalDefaults.schema.json'), JSON.stringify(globalDefaultSchema, null, '  '));
+    fs.writeFileSync(path.resolve(schemaBasePath, 'schemas/.nodes.schema.json'), JSON.stringify(nodeSchema, null, '  '));
+    fs.writeFileSync(path.resolve(schemaBasePath, 'schemas/.edges.schema.json'), JSON.stringify(edgeSchema, null, '  '));
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    fs.writeFileSync(path.resolve(schemaBasePath, 'docs/globaldefaults-doc.md'), JSONSchemaMarkdown.doc(globalDefaultSchema));
+    fs.writeFileSync(path.resolve(schemaBasePath, 'docs/nodes-doc.md'), JSONSchemaMarkdown.doc(nodeSchema));
+    fs.writeFileSync(path.resolve(schemaBasePath, 'docs/edges-doc.md'), JSONSchemaMarkdown.doc(edgeSchema));
 
-
-const docsGlobalDefaults = JSONSchemaMarkdown.doc(globalDefaultsJSON);
-const docsNodes = JSONSchemaMarkdown.doc(nodesJSON);
-const docsEdges = JSONSchemaMarkdown.doc(edgesJSON);
-
-
-function write(data, path) {
-    try {
-        fs.writeFileSync(path, data);
-    } catch (e) {
-        console.log("Error:")
-        console.log(e)
-    }
-}
-
-[
-    [docsGlobalDefaults, "./docs/globaldefaults-doc.md"],
-    [docsNodes, "./docs/nodes-doc.md"],
-    [docsEdges, "./docs/edges-doc.md"]
-].forEach(e => write(e[0], e[1]))
-
+    expect(true).toEqual(true);
+});

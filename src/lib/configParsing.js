@@ -1,8 +1,14 @@
 import {fix_sourceHandle_targetHandle, fixNodeGroups} from "./autoLayout/layoutUtils";
 
+import customComponents from '../components/custom';
+
 export const GRAPH = "graph";
 export const NODE = "node";
 export const EDGE = "edge";
+
+const customComponentNames = Object.keys(customComponents);
+let shapes = ["8-star", "big-star", "circle", "cylinder", "diamond", "hexagon", "note", "rectangle", "square", "star", "triangle", "comunica", "rmlio", "solid"]
+shapes = shapes.concat(customComponentNames);
 
 // These are the keys that can be used in globalDefaults
 // These keys are not standard supported by the library, that's why they are in a dict
@@ -109,7 +115,7 @@ export const KEY_VALUES = {
             "canBeGlobal": true,
             value: "square",
             type: "string",
-            enum: ["8-star", "big-star", "circle", "cylinder", "diamond", "hexagon", "note", "rectangle", "square", "star", "triangle", "comunica", "rmlio", "solid"],
+            enum: shapes,
             description: "The shape of the node."
         },
         "STROKE": {
@@ -305,6 +311,10 @@ export function parseGlobalDefaults(globalDefaults) {
             //console.log(key)
             //console.log(globalDefaults)
             //console.log(globalDefaults[key])
+
+            if (!globalDefaults[key]) {
+                throw new Error(`Expected key ${key} in the global defaults!`)
+            }
 
             if (!globalDefaults[key].hasOwnProperty(valueObject.id)) {
                 if (KEY_VALUES[key][nestedKey].hasOwnProperty("value")) {
@@ -523,16 +533,16 @@ export function parseEdges(globalDefaults, edges, nodes) {
     return edges;
 }
 
-export function getSourceNodeFromId(edge, nodes) {
-    return nodes.find(n => n.id === edge["source"]);
-}
-
-export function getTargetNodeFromId(edge, nodes) {
-    return nodes.find(n => n.id === edge["target"]);
+export function getNodeFromEdgeId(edgeId, nodes) {
+    const n = nodes.find(n => n.id === edgeId);
+    if (!n) {
+        throw new Error(`No node with ID ${edgeId} found!`)
+    }
+    return n;
 }
 
 export function getSourceNode_targetNode_fromId(edge, nodes) {
-    return [getSourceNodeFromId(edge, nodes), getTargetNodeFromId(edge, nodes)];
+    return [getNodeFromEdgeId(edge[KEY_VALUES.edge.SOURCE.id], nodes), getNodeFromEdgeId(edge[KEY_VALUES.edge.TARGET.id], nodes)];
 }
 
 

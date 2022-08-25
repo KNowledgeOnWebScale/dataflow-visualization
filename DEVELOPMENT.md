@@ -4,16 +4,11 @@ This document is aimed at developers.
 
 ### How to autogenerate the documentation
 
-In [index.js](src/index.js) set the variable `download` to `true`. Rerun the application and set the variable to `false`
-again. You will notice there were three JSON files downloaded. Paste the contents of these files in the accompanying
-files in the directory [schemas/schemas](schemas/schemas). Open your terminal, `cd` to `/schemas` and
-run `node JSONSchemaMarkdown.js`. The new markdowns will be generated, [README.md](README.md) already links to these
+Run `npm run build:docs`. This uses the Jest runner to re-create the schemas and their documentation,
+and stores them in the accompanying
+files in the directory [schemas/schemas](schemas/schemas).
+The new markdowns will be generated, [README.md](README.md) already links to these
 files.
-
-You might ask why not introduce a command, e.g. `npm build docs` that launches a separate script. The reason is that
-React can't write to files and the separate script would need the schemas being built
-in [schemaValidation.js](src/lib/schemaValidation.js). In order for that script to import a JavaScript file used in 
-React, someone should mess with webpack. To the person who will do this, good luck!
 
 ### How to add shapes/images
 
@@ -21,6 +16,11 @@ As mentioned in the documentation, the value of `image` can be a predefined valu
 predefined
 image, edit the hashmap `SHAPES` in the file [nodeUtil.js](./src/components/node/nodeUtil.js). Pull requests are always
 welcome.
+
+### How to add a custom React component
+
+Add your custom React component under the [custom](./src/components/custom/) folder and add an entry to [index.js](./src/components/custom/index.js).
+See the `Details` component for an example
 
 ### How to add examples
 

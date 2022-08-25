@@ -67,7 +67,6 @@ const Visualizer = () => {
 
         if (error === "") {
             setFlowData(parsedGd, parsedNd, parsedEd, setNodes, setEdges);
-
         }
     }, [globalDefaults, nodesData, edgesData, language, setNodes, setEdges]);
 
