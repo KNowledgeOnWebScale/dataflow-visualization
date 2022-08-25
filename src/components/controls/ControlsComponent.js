@@ -17,7 +17,9 @@ const ControlsComponent = ({
                                edgesData,
                                setData,
                                nodes,
-                               edges
+                               setNodes,
+                               edges,
+                               setEdges
                            }) => {
 
     const [errorTitle, setErrorTitle] = useState("");
@@ -48,9 +50,11 @@ const ControlsComponent = ({
         <CopyPermalink nodes={nodes} edges={edges} globalDefaults={globalDefaults} nodesData={nodesData}
                        edgesData={edgesData} language={language}/>
 
-        <ImportLink/>
+        <ImportLink language={language} setData={setData} setNodes={setNodes} setEdges={setEdges}
+                    changeAutoSync={changeAutoSync}/>
 
-        <ToggleButtons changeAutoSync={changeAutoSync} changeSnapToGrid={changeSnapToGrid}/>
+        <ToggleButtons changeAutoSync={changeAutoSync}
+                       changeSnapToGrid={changeSnapToGrid}/>
     </>
 }
 
