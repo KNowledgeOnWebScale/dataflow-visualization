@@ -1,8 +1,7 @@
 import {useSearchParams} from "react-router-dom";
-import {useEffect, useState} from "react";
+import {useCallback, useEffect} from "react";
 import {setFlowData} from "../lib/setFlowData";
 import ReactFlow, {addEdge, Controls, MiniMap, useEdgesState, useNodesState} from "react-flow-renderer";
-import {useCallback} from "react";
 import Node from "../components/node/Node";
 
 
@@ -14,17 +13,12 @@ const nodeTypes = {
 
 const BaseAppFromOnlineLocation = () => {
 
-    const [loading, setLoading] = useState(false);
-
     const [searchParams] = useSearchParams();
-
 
     const [nodes, setNodes, onNodesChange] = useNodesState([]);
     const [edges, setEdges, onEdgesChange] = useEdgesState([]);
 
     const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
-
-
 
 
     useEffect(() => {
@@ -43,11 +37,7 @@ const BaseAppFromOnlineLocation = () => {
 
         });
 
-
-
-
     }, [searchParams, setEdges, setNodes])
-
 
 
 //TODO: zelfde als BaseAppFromUrl, dus werken met aparte component
@@ -76,8 +66,8 @@ const BaseAppFromOnlineLocation = () => {
                         fitView
                         attributionPosition="top-right"
                     >
-                        <Controls />
-                        <MiniMap />
+                        <Controls/>
+                        <MiniMap/>
                     </ReactFlow>
                     : <div style={{
                         width: "fit-content",
