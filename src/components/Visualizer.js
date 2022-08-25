@@ -2,7 +2,7 @@ import {addEdge, useEdgesState, useNodesState} from "react-flow-renderer";
 import EditorArea from "./editors/EditorArea";
 import {useCallback, useEffect, useState} from "react";
 import ExampleComponent from "./ExamplesComponent";
-import ControlsComponent from "./ControlsComponent";
+import ControlsComponent from "./controls/ControlsComponent";
 import ReactFlowComponent from "./ReactFlowComponent";
 import {yaml2json} from "../lib/jsonYamlConversionUtil";
 import {edgeSchema, globalDefaultSchema, nodeSchema, validateJSON} from "../lib/schemaValidation";
