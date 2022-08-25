@@ -1,4 +1,5 @@
 <!-- omit in toc -->
+
 # Flow Visualization
 
 This is a [React] application to generate flow graphs from [JSON] or [YAML].
@@ -6,10 +7,10 @@ It is built on top of [ReactFlow].
 
 - [How to run](#how-to-run)
 - [Documentation](#documentation)
-  - [Global defaults](#global-defaults)
-  - [Nodes](#nodes)
-  - [Edges](#edges)
-  - [Buttons](#buttons)
+    - [Global defaults](#global-defaults)
+    - [Nodes](#nodes)
+    - [Edges](#edges)
+    - [Buttons](#buttons)
 - [License](#license)
 
 ## How to run
@@ -81,7 +82,7 @@ the [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/animation). 
 no `strokeDasharray`, `strokeDasharray` is set to a value of `5`. If you use a custom `animation`, the `animated` key
 has no effect anymore.
 
-### Buttons
+### Controls
 
 When running this application, you'll see that there are a few buttons visible.
 
@@ -132,6 +133,12 @@ If this switch is toggled on, the flow will render automatically if the config h
 
 If this switch is toggled, the nodes will be snapped to the grid. If this switch is not toggled, you can move the nodes
 more freely.
+
+#### Enter permalink input field
+
+If you have a link `https://knowledgeonwebscale.github.io/dataflow-visualization/#/customdata?...`, you can enter that
+link in the text input field. The configs encoded in that URL will be filled in into the editors, so you can edit and
+create a new permalink.
 
 ## License
 
