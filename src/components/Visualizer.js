@@ -2,7 +2,7 @@ import {addEdge, useEdgesState, useNodesState} from "react-flow-renderer";
 import EditorArea from "./editors/EditorArea";
 import {useCallback, useEffect, useState} from "react";
 import ExampleComponent from "./ExamplesComponent";
-import ControlsComponent from "./ControlsComponent";
+import ControlsComponent from "./controls/ControlsComponent";
 import ReactFlowComponent from "./ReactFlowComponent";
 import {yaml2json} from "../lib/jsonYamlConversionUtil";
 import {edgeSchema, globalDefaultSchema, nodeSchema, validateJSON} from "../lib/schemaValidation";
@@ -85,7 +85,7 @@ const Visualizer = () => {
         <ControlsComponent language={language} setLanguage={setLanguage} changeSnapToGrid={changeSnapToGrid}
                            changeAutoSync={changeAutoSync} globalDefaults={globalDefaults}
                            nodesData={nodesData} setNodesData={setNodesData} edgesData={edgesData} setData={setData}
-                           nodes={nodes} edges={edges}/>
+                           nodes={nodes} setNodes={setNodes} edges={edges} setEdges={setEdges}/>
 
         <table style={{width: "100%", marginLeft: "5px", marginRight: "5px"}}>
             <tr>
