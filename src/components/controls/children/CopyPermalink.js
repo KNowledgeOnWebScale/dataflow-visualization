@@ -7,7 +7,7 @@ const CopyPermalink = ({nodes, edges, globalDefaults, nodesData, edgesData, lang
     const [isCopied, setIsCopied] = useState(false);
 
     function getPermaLink() {
-        let rawLink = [window.location.href]
+        /*let rawLink = [window.location.href]
 
         if (nodes.length > 0) {
             if (rawLink[0].slice(-1) !== "/") {
@@ -19,7 +19,7 @@ const CopyPermalink = ({nodes, edges, globalDefaults, nodesData, edgesData, lang
             rawLink.push(encodeURIComponent(JSON.stringify(edges)));
 
             rawLink = rawLink.join("");
-        }
+        }*/
 
         let customLink = [window.location.href]
 
@@ -34,12 +34,12 @@ const CopyPermalink = ({nodes, edges, globalDefaults, nodesData, edgesData, lang
         customLink.push("&edges=");
         customLink.push(encodeURIComponent(language === "yaml" ? JSON.stringify(JSON.parse(yaml2json(edgesData))) : JSON.stringify(JSON.parse(edgesData))));
 
-        customLink = customLink.join("")
+        customLink = customLink.join("");
 
-        if ((customLink.length < rawLink.length) || rawLink.length === 1) {
+       // if ((customLink.length < rawLink.length) || rawLink.length === 1) {
             return customLink;
-        }
-        return rawLink;
+        //}
+        //return rawLink;
 
     }
 
