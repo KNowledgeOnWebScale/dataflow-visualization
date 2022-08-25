@@ -1,4 +1,5 @@
 # Changelog
+
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
@@ -9,11 +10,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Details custom React component
+- Support to embed a link to an online JSON file in a permalink
+- Input field to enter a permalink
+
 
 ### Changed
 
 - Controls and MiniMaps everywhere
 - updates schemas and docs via test script
+- Clicking on the button to get the permalink, will always return the link where the custom data is encoded. Never a
+  link with raw data.
 
 ### Fixed
 
@@ -65,4 +71,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 First ever release. You can make flows from JSON or YAML.
 
 [DEVELOPMENT.md]: DEVELOPMENT.md
+
 [README.md]: README.md
