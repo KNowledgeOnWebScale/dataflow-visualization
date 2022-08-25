@@ -19,7 +19,8 @@ welcome.
 
 ### How to add a custom React component
 
-Add your custom React component under the [custom](./src/components/custom/) folder and add an entry to [index.js](./src/components/custom/index.js).
+Add your custom React component under the [custom](./src/components/custom/) folder and add an entry
+to [index.js](./src/components/custom/index.js).
 See the `Details` component for an example
 
 ### How to add examples
@@ -44,6 +45,9 @@ There is a button to get a link to your flow. There are two formats for a link.
 2) `https://knowledgeonwebscale.github.io/dataflow-visualization/#/rawdata?nodes=...&edges=...`
     * The query parameters are the URI-encoded values of the raw data of the flow. Remember, there is a button to export
       the raw data.
+3) `https://knowledgeonwebscale.github.io/dataflow-visualization/#/online?location=...`
+    * The query parameter is a URL to an online JSON file. The structure of that file should be the same as the
+      structure when you export your config.
 
-If you press the button to copy the permalink to your clipboard, you get whichever link is shortest. 
+If you press the button to copy the permalink to your clipboard, you get the first link (`customdata`). 
 
