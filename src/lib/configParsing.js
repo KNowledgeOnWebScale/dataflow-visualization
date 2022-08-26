@@ -30,7 +30,9 @@ export const KEY_VALUES = {
         },
         "SPACING": {
             id: "spacing", canBeGlobal: true, value: 1, type: "number",
-            description: "Set the spacing between nodes when vgroups or hgroups are used. The default is the width/2 for hgroups or the height/2 for vgroups devided by 2. If you want that larger or smaller, you can set this key to any number. The spacing will be the default times the factor."
+            description: "Set the spacing between nodes when autolayout, vgroups or hgroups are used." +
+                "The default spacing for groups is the width/2 for hgroups or the height/2 for vgroups devided by 2. If you want that larger or smaller, you can set this key to any number. The spacing will be the default times the factor." +
+                "When 'autolayout' is used, spacing has only effect on the vertical distance between nodes, when the orientation is set to 'vertical'. Vice versa for 'horizontal'."
         }
 
     },
