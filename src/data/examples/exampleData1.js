@@ -4,6 +4,7 @@ export const globalDefaultsJSON = {
     graph: {
         autoLayout: true,
         orientation: "vertical",
+        spacing: 1.9
     },
     node: {
         fill: "royalblue",

@@ -156,13 +156,13 @@ function groupNodes(groups, nodesCopy, edgesCopy) {
 
 /**
  * Remove edge if it has a node from a group as source or target, and  maybe add a new edge where the temporary big node is the source or target
- * @param {*} node 
+ * @param {*} node
  * @param {*} direction 'source' or 'target'
- * @param {*} edgess 
- * @param {*} nodess 
- * @param {*} groups 
- * @param {*} groupType 
- * @param {*} groupId 
+ * @param {*} edgess
+ * @param {*} nodess
+ * @param {*} groups
+ * @param {*} groupType
+ * @param {*} groupId
  */
 function fixEdges(node, direction, edgess, nodess, groups, groupType, groupId) {
     const edgesWithNodeAsKey = findAllWithIdAsKey(node.id, direction, edgess); // key is source of target
@@ -202,12 +202,15 @@ function getLayoutedElementsDagre(dagreGraph, globalDefaults, nodes, edges) {
     const widthId = KEY_VALUES[NODE].WIDTH.id;
     const heightId = KEY_VALUES[NODE].HEIGHT.id;
 
-    dagreGraph.setGraph({rankdir: globalDefaults[GRAPH][KEY_VALUES[GRAPH].ORIENTATION.id] === "horizontal" ? "LR" : "TB"});
+    let isHorizontal = globalDefaults[GRAPH][KEY_VALUES[GRAPH].ORIENTATION.id] === "horizontal";
+    const spacing = globalDefaults[GRAPH][KEY_VALUES[GRAPH].SPACING.id];
+
+    dagreGraph.setGraph({rankdir: isHorizontal ? "LR" : "TB"});
 
     nodes.forEach((node) => {
         dagreGraph.setNode(node.id, {
-            width: node[widthId] || globalDefaults[NODE][widthId],
-            height: node[heightId] || globalDefaults[NODE][heightId]
+            width: isHorizontal ? node[widthId] * spacing : node[widthId] || isHorizontal ? globalDefaults[NODE][widthId] * spacing : globalDefaults[NODE][widthId],
+            height: isHorizontal ? node[heightId] : node[heightId] * spacing || isHorizontal ? globalDefaults[NODE][heightId] : globalDefaults[NODE][heightId] * spacing
         });
     });
 
