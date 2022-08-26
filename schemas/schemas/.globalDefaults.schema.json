@@ -96,6 +96,7 @@
         "shape": {
           "type": "string",
           "enum": [
+            "icon",
             "8-star",
             "big-star",
             "circle",
@@ -115,7 +116,14 @@
           "description": "The shape of the node.",
           "default": "square",
           "errorMessage": {
-            "type": "shape must be string with possible values: 8-star , big-star , circle , cylinder , diamond , hexagon , note , rectangle , square , star , triangle , comunica , rmlio , solid  or Details"
+            "type": "shape must be string with possible values: icon , 8-star , big-star , circle , cylinder , diamond , hexagon , note , rectangle , square , star , triangle , comunica , rmlio , solid  or Details"
+          }
+        },
+        "iconName": {
+          "type": "string",
+          "description": "When 'shape' is set to 'icon', you can set 'iconName' to anything you find in [react-icons](https://react-icons.github.io/react-icons/).",
+          "errorMessage": {
+            "type": "iconName must be string"
           }
         },
         "stroke": {
@@ -240,6 +248,7 @@
               "shape": {
                 "type": "string",
                 "enum": [
+                  "icon",
                   "8-star",
                   "big-star",
                   "circle",
@@ -259,7 +268,14 @@
                 "description": "The shape of the node.",
                 "default": "square",
                 "errorMessage": {
-                  "type": "shape must be string with possible values: 8-star , big-star , circle , cylinder , diamond , hexagon , note , rectangle , square , star , triangle , comunica , rmlio , solid  or Details"
+                  "type": "shape must be string with possible values: icon , 8-star , big-star , circle , cylinder , diamond , hexagon , note , rectangle , square , star , triangle , comunica , rmlio , solid  or Details"
+                }
+              },
+              "iconName": {
+                "type": "string",
+                "description": "When 'shape' is set to 'icon', you can set 'iconName' to anything you find in [react-icons](https://react-icons.github.io/react-icons/).",
+                "errorMessage": {
+                  "type": "iconName must be string"
                 }
               },
               "stroke": {

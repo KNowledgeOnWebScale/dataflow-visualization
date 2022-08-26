@@ -6,6 +6,7 @@
   "private": true,
   "homepage": "https://tibostr.github.io/dataflow-visualization",
   "dependencies": {
+    "@loadable/component": "^5.15.2",
     "@monaco-editor/react": "^4.4.5",
     "ajv": "^8.11.0",
     "ajv-errors": "^3.0.0",
@@ -16,6 +17,7 @@
     "react-bootstrap": "^2.5.0",
     "react-dom": "^18.2.0",
     "react-flow-renderer": "^10.3.12",
+    "react-icons": "^4.4.0",
     "react-router-dom": "^6.2.2",
     "react-screen-capture": "^1.0.1",
     "react-scripts": "5.0.1",
@@ -51,6 +53,7 @@
   },
   "devDependencies": {
     "gh-pages": "^4.0.0",
-    "husky": "^8.0.1"
+    "husky": "^8.0.1",
+    "string-to-react": "^1.0.2"
   }
 }

@@ -7,7 +7,7 @@ export const NODE = "node";
 export const EDGE = "edge";
 
 const customComponentNames = Object.keys(customComponents);
-let shapes = ["8-star", "big-star", "circle", "cylinder", "diamond", "hexagon", "note", "rectangle", "square", "star", "triangle", "comunica", "rmlio", "solid"]
+let shapes = ["icon", "8-star", "big-star", "circle", "cylinder", "diamond", "hexagon", "note", "rectangle", "square", "star", "triangle", "comunica", "rmlio", "solid"]
 shapes = shapes.concat(customComponentNames);
 
 // These are the keys that can be used in globalDefaults
@@ -123,6 +123,12 @@ export const KEY_VALUES = {
             type: "string",
             enum: shapes,
             description: "The shape of the node."
+        },
+        ICON_NAME: {
+            id: "iconName",
+            canBeGlobal: "true",
+            type: "string",
+            description: "When 'shape' is set to 'icon', you can set 'iconName' to anything you find in [react-icons](https://react-icons.github.io/react-icons/)."
         },
         "STROKE": {
             id: "stroke",
