@@ -12,7 +12,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Details custom React component
 - Support to embed a link to an online JSON file in a permalink
 - Input field to enter a permalink
-
+- You can set spacing for autoLayout, hgroup and vgroups
+-
 
 ### Changed
 

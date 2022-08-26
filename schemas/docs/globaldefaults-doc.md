@@ -30,6 +30,11 @@ Type: `object`
 				 1. _"vertical"_
 				 2. _"horizontal"_
 			 - Default: _"horizontal"_
+		 - <b id="#globalDefaultsGraph/properties/spacing">spacing</b>
+			 - _Set the spacing between nodes when autolayout, vgroups or hgroups are used.The default spacing for groups is the width/2 for hgroups or the height/2 for vgroups devided by 2. If you want that larger or smaller, you can set this key to any number. The spacing will be the default times the factor.When 'autolayout' is used, spacing has only effect on the vertical distance between nodes, when the orientation is set to 'vertical'. Vice versa for 'horizontal'._
+			 - Type: `number`
+			 - <i id="globalDefaultsGraph/properties/spacing">path: #globalDefaultsGraph/properties/spacing</i>
+			 - Default: `1`
  - <b id="#globalDefaultSchema/properties/node">node</b>
 	 - ### node
 	 - _node in global defaults_
