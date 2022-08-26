@@ -28,7 +28,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test --passWithNoTests",
     "eject": "react-scripts eject",
-    "build:docs": "npm test -- createSchemas.js --watchAll=false"
+    "build:docs": "npm test -- createSchemas.js --watchAll=false",
+    "prepare": "husky install"
   },
   "eslintConfig": {
     "extends": [
@@ -49,6 +50,7 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^4.0.0"
+    "gh-pages": "^4.0.0",
+    "husky": "^8.0.1"
   }
 }
