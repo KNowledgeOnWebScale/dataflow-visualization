@@ -90,7 +90,7 @@ export function autoLayout(dagreGraph, globalDefaults, nodes, edges) {
     // Remove the temporary nodes and edges and add the old one again
     removeTemporaryNodesAndEdgesAndAddTheOldOnesAgain(groups, nodes1, edges1)
 
-    fixNodeGroups(nodes1)
+    fixNodeGroups(globalDefaults, nodes1)
 
     // Finally, fix the source and target handles
     for (let edge of edges1) {
