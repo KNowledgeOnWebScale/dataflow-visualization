@@ -1,8 +1,9 @@
 import {Button, OverlayTrigger, Tooltip} from "react-bootstrap";
 import {BsPlusLg} from "react-icons/bs";
 import {useState} from "react";
-import CodeEditor from "./editors/CodeEditor";
-import {edgeSchema, globalDefaultSchema, nodeSchema} from "../lib/schemaValidation";
+import CodeEditor from "../editors/CodeEditor";
+import {edgeSchema, globalDefaultSchema, nodeSchema} from "../../lib/schemaValidation";
+import {useNavigate} from "react-router-dom";
 
 
 function addConfig(globalDefaults, setGlobalDefaults, nodesData, setNodesData, edgesData, setEdgesData) {
@@ -20,18 +21,6 @@ function addConfig(globalDefaults, setGlobalDefaults, nodesData, setNodesData, e
 }
 
 function createEditorArea(count, language, globalDefaults, setGlobalDefaults, nodesData, setNodesData, edgesData, setEdgesData) {
-    // Andere functie
-    /* let newGlobalDefaultsData = [...globalDefaults];
-     newGlobalDefaultsData.push(JSON.stringify({"graph": {}, "node": {}, "edge": {}}));
-     setGlobalDefaults(newGlobalDefaultsData);
-
-     let newNodesData = [...nodesData];
-     newNodesData.push(JSON.stringify([]));
-     setNodesData(newNodesData);
-
-     let newEdgesData = [...edgesData];
-     newEdgesData.push(JSON.stringify([]));
-     setEdgesData(newEdgesData);*/
 
     function setGlobalDefaultsDataFunction(newData) {
         let newGlobalDefaultsData = [...globalDefaults];
@@ -62,22 +51,22 @@ function createEditorArea(count, language, globalDefaults, setGlobalDefaults, no
             margin: 5,
             border: "1px solid black"
         }}>
-            <div className="edit-area" /*style={{width: "49%", display: "inline-block"}}*/>
+            <div className="edit-area">
                 <h4>{`Editor #${count}`}</h4>
-                <div className="small-editor-div"/*className="node-edge-editor"*/>
+                <div className="small-editor-div">
                     <h6>Global defaults editor</h6>
                     <CodeEditor language={language} data={globalDefaults[count]} setData={setGlobalDefaultsDataFunction}
                                 modelName={"global-defaults-model-" + count}
                                 schema={globalDefaultSchema}/>
                 </div>
 
-                <div className="editor-div"/*className="node-edge-editor"*/>
+                <div className="editor-div">
                     <h6>Node editor</h6>
                     <CodeEditor language={language} data={nodesData[count]} setData={setNodesDataFunction}
                                 modelName={"nodes-model-" + count}
                                 schema={nodeSchema}/>
                 </div>
-                <div className="editor-div" /*className="node-edge-editor"*/>
+                <div className="editor-div">
                     <h6>Edge editor</h6>
                     <CodeEditor language={language} data={edgesData[count]} setData={setEdgesDataFunction}
                                 modelName={"edges-model-" + count}
@@ -90,11 +79,9 @@ function createEditorArea(count, language, globalDefaults, setGlobalDefaults, no
 }
 
 
-const SimulationHomePage = () => {
+const SimulationMaker = () => {
 
-    // const [nodes, setNodes, onNodesChange] = useNodesState([]);
-    // const [edges, setEdges, onEdgesChange] = useEdgesState([]);
-    // const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
+    let navigate = useNavigate();
 
     const [count, setCount] = useState(1);
 
@@ -140,7 +127,16 @@ const SimulationHomePage = () => {
                 </Button>
             </OverlayTrigger>
 
-            <Button variant={"warning"} style={{marginTop: "15px", fontSize: "1.2em"}} onClick={e => alert("does not work yet")}>Convert</Button>
+            <Button variant={"warning"} style={{marginTop: "15px", fontSize: "1.2em"}} onClick={e => {
+                e.preventDefault();
+                navigate("/simulation-view", {
+                    state: {
+                        globalDefaultsList: globalDefaults,
+                        nodesDataList: nodesData,
+                        edgesDataList: edgesData
+                    }
+                })
+            }}>Convert</Button>
         </div>
 
         {/* Editors */}
@@ -153,4 +149,4 @@ const SimulationHomePage = () => {
     </>
 }
 
-export default SimulationHomePage;
+export default SimulationMaker;
