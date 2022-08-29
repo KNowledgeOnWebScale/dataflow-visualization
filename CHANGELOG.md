@@ -25,6 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Changelog formatting
+- Auto layout with horizontal layout was broken
 
 ## [1.0.0] - 2022-08-12
 

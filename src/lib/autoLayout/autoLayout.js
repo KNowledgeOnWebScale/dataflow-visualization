@@ -208,9 +208,11 @@ function getLayoutedElementsDagre(dagreGraph, globalDefaults, nodes, edges) {
     dagreGraph.setGraph({rankdir: isHorizontal ? "LR" : "TB"});
 
     nodes.forEach((node) => {
+        let w = node[widthId] || node["data"][widthId];
+        let h = node[heightId] || node["data"][heightId];
         dagreGraph.setNode(node.id, {
-            width: isHorizontal ? node[widthId] * spacing : node[widthId] || isHorizontal ? globalDefaults[NODE][widthId] * spacing : globalDefaults[NODE][widthId],
-            height: isHorizontal ? node[heightId] : node[heightId] * spacing || isHorizontal ? globalDefaults[NODE][heightId] : globalDefaults[NODE][heightId] * spacing
+            width: isHorizontal ? w * spacing : w,
+            height: isHorizontal ? h : h * spacing
         });
     });
 
@@ -218,7 +220,7 @@ function getLayoutedElementsDagre(dagreGraph, globalDefaults, nodes, edges) {
         dagreGraph.setEdge(edge[KEY_VALUES[EDGE].SOURCE.id], edge[KEY_VALUES[EDGE].TARGET.id]);
     });
 
-    dagre.layout(dagreGraph);
+    dagre.layout(dagreGraph, {});
 
     nodes.forEach((node) => {
         const nodeWithPosition = dagreGraph.node(node[KEY_VALUES[NODE].ID.id]);
