@@ -56,22 +56,27 @@ Type: `array`
 		 - Type: `string`
 		 - <i id="nodeSchema/items/properties/shape">path: #nodeSchema/items/properties/shape</i>
 		 - The value is restricted to the following: 
-			 1. _"8-star"_
-			 2. _"big-star"_
-			 3. _"circle"_
-			 4. _"cylinder"_
-			 5. _"diamond"_
-			 6. _"hexagon"_
-			 7. _"note"_
-			 8. _"rectangle"_
-			 9. _"square"_
-			 10. _"star"_
-			 11. _"triangle"_
-			 12. _"comunica"_
-			 13. _"rmlio"_
-			 14. _"solid"_
-			 15. _"Details"_
+			 1. _"icon"_
+			 2. _"8-star"_
+			 3. _"big-star"_
+			 4. _"circle"_
+			 5. _"cylinder"_
+			 6. _"diamond"_
+			 7. _"hexagon"_
+			 8. _"note"_
+			 9. _"rectangle"_
+			 10. _"square"_
+			 11. _"star"_
+			 12. _"triangle"_
+			 13. _"comunica"_
+			 14. _"rmlio"_
+			 15. _"solid"_
+			 16. _"Details"_
 		 - Default: _"square"_
+	 - <b id="#nodeSchema/items/properties/iconName">iconName</b>
+		 - _When 'shape' is set to 'icon', you can set 'iconName' to anything you find in [react-icons](https://react-icons.github.io/react-icons/). Since this is a third-party library, not all styling will work. Only `fill`, `strokeWidth`, `width` and `height` will have effect._
+		 - Type: `string`
+		 - <i id="nodeSchema/items/properties/iconName">path: #nodeSchema/items/properties/iconName</i>
 	 - <b id="#nodeSchema/items/properties/stroke">stroke</b>
 		 - _The color of the stroke of the node._
 		 - Type: `string`

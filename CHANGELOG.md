@@ -10,10 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Details custom React component
-- Support to embed a link to an online JSON file in a permalink
+- Support to embed a link to an online JSON file in a permalink.
 - Input field to enter a permalink
-- You can set spacing for autoLayout, hgroup and vgroups
--
+- You can set spacing for autoLayout, hgroup and vgroups.
+- The shape of a node can be anything defined in [react-icons](https://react-icons.github.io/react-icons).
 
 ### Changed
 
