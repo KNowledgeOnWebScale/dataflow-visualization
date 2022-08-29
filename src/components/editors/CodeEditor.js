@@ -1,7 +1,13 @@
 import Editor from "@monaco-editor/react";
-import { useState } from "react";
+import {useState} from "react";
 
-const CodeEditor = ({ language, data, setData, modelName, schema }) => {
+const CodeEditor = ({
+                        language,
+                        data,
+                        setData,
+                        modelName,
+                        schema
+                    }) => {
 
     const [editorInstance, setEditorInstance] = useState(null);
     const [monacoInstance, setMonacoInstance] = useState(null);
