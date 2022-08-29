@@ -151,7 +151,7 @@ Type: `object`
 			 - <i id="globalDefaultsEdge/properties/animated">path: #globalDefaultsEdge/properties/animated</i>
 			 - Default: _false_
 		 - <b id="#globalDefaultsEdge/properties/animation">animation</b>
-			 - _See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/animation) for more information about animation._
+			 - _See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/animation) for more information about animation. An example is e.g. `dashdraw .2s linear infinite`._
 			 - Type: `string`
 			 - <i id="globalDefaultsEdge/properties/animation">path: #globalDefaultsEdge/properties/animation</i>
 		 - <b id="#globalDefaultsEdge/properties/color">color</b>

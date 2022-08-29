@@ -17,7 +17,7 @@ Type: `array`
 		 - <i id="edgeSchema/items/properties/animated">path: #edgeSchema/items/properties/animated</i>
 		 - Default: _false_
 	 - <b id="#edgeSchema/items/properties/animation">animation</b>
-		 - _See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/animation) for more information about animation._
+		 - _See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/animation) for more information about animation. An example is e.g. `dashdraw .2s linear infinite`._
 		 - Type: `string`
 		 - <i id="edgeSchema/items/properties/animation">path: #edgeSchema/items/properties/animation</i>
 	 - <b id="#edgeSchema/items/properties/color">color</b>

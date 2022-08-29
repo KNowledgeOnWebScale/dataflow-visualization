@@ -362,7 +362,7 @@
         },
         "animation": {
           "type": "string",
-          "description": "See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/animation) for more information about animation.",
+          "description": "See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/animation) for more information about animation. An example is e.g. `dashdraw .2s linear infinite`.",
           "errorMessage": {
             "type": "animation must be string"
           }
@@ -547,7 +547,7 @@
               },
               "animation": {
                 "type": "string",
-                "description": "See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/animation) for more information about animation.",
+                "description": "See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/animation) for more information about animation. An example is e.g. `dashdraw .2s linear infinite`.",
                 "errorMessage": {
                   "type": "animation must be string"
                 }

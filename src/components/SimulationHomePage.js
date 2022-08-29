@@ -111,10 +111,15 @@ const SimulationHomePage = () => {
 
     return <>
 
-        <h1>does not work yet</h1>
-
         {/* Button to add an editor area  */}
-        <div style={{marginLeft: "95%", marginRight: "15px", position: "fixed", top: "15px"}}>
+        <div style={{
+            marginLeft: "93%",
+            marginRight: "15px",
+            position: "fixed",
+            top: "15px",
+            display: "flex",
+            flexDirection: "column"
+        }}>
             <OverlayTrigger
                 placement="left"
                 delay={{show: 250, hide: 400}}
@@ -134,6 +139,8 @@ const SimulationHomePage = () => {
                     <BsPlusLg style={{width: 40, height: 40}}/>
                 </Button>
             </OverlayTrigger>
+
+            <Button variant={"warning"} style={{marginTop: "15px", fontSize: "1.2em"}} onClick={e => alert("does not work yet")}>Convert</Button>
         </div>
 
         {/* Editors */}
@@ -142,8 +149,6 @@ const SimulationHomePage = () => {
                 return createEditorArea(n, language, globalDefaults, setGlobalDefaults, nodesData, setNodesData, edgesData, setEdgesData);
             })
         }
-        {/* {createEditorArea(0, language, globalDefaults, setGlobalDefaults, nodesData, setNodesData, edgesData, setEdgesData)} */}
-
 
     </>
 }
