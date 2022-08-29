@@ -208,10 +208,10 @@ function getLayoutedElementsDagre(dagreGraph, globalDefaults, nodes, edges) {
     dagreGraph.setGraph({rankdir: isHorizontal ? "LR" : "TB"});
 
     nodes.forEach((node) => {
-        let w = node["data"][widthId] || node[widthId];
-        let h = node["data"][heightId] || node[heightId];
+        let w = node[widthId] || node["data"][widthId];
+        let h = node[heightId] || node["data"][heightId];
         dagreGraph.setNode(node.id, {
-            width: isHorizontal ? w * spacing : w ,
+            width: isHorizontal ? w * spacing : w,
             height: isHorizontal ? h : h * spacing
         });
     });
