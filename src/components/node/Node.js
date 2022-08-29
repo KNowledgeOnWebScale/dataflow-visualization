@@ -54,10 +54,27 @@ function shape({
 
         prefixes = prefixes.map(p => p[iconName]).filter(e => e);
 
+
+        const style_label = {
+            fontSize: fontSize,
+            position: "absolute",
+            top: topText ? "45%" : "33%",  // Not the best way, determined with trial and error
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+        }
+
         if (prefixes.length > 0) {
             return <div style={{
-                fontSize: Math.min(width, height) * 0.65, color: fill, strokeDasharray: strokeDashArray
-            }}> {React.createElement(prefixes[0])} </div>;
+                fontSize: Math.max(width, height) * 0.65,
+                color: fill,
+                strokeDasharray: strokeDashArray,
+                position: "relative",
+                textAlign: "center"
+            }}>
+                <div style={{fontSize: fontSize}}>{topText}</div>
+                <div style={{}}>{React.createElement(prefixes[0])}</div>
+                <span style={style_label}>{label}</span>
+            </div>;
         }
 
         return <p className="icon-not-found" hidden style={{fontSize: 10}}>Icon Not Found</p>
