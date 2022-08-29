@@ -200,7 +200,7 @@ export const KEY_VALUES = {
             "canBeGlobal": true,
             type: "string",
             "cssProperty": "animation",
-            description: "See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/animation) for more information about animation."
+            description: "See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/animation) for more information about animation. An example is e.g. `dashdraw .2s linear infinite`."
         },
         "COLOR": {
             id: "color",
