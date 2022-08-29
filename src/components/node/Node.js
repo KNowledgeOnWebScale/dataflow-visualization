@@ -61,6 +61,7 @@ function shape({
             top: topText ? "45%" : "33%",  // Not the best way, determined with trial and error
             left: "50%",
             transform: "translate(-50%, -50%)",
+            color: "black"
         }
 
         if (prefixes.length > 0) {
@@ -71,7 +72,7 @@ function shape({
                 position: "relative",
                 textAlign: "center"
             }}>
-                <div style={{fontSize: fontSize}}>{topText}</div>
+                <div style={{fontSize: fontSize, color: "black"}}>{topText}</div>
                 <div style={{}}>{React.createElement(prefixes[0])}</div>
                 <span style={style_label}>{label}</span>
             </div>;
