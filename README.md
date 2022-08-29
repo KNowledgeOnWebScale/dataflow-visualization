@@ -140,7 +140,7 @@ If you have a link `https://knowledgeonwebscale.github.io/dataflow-visualization
 link in the text input field. The configs encoded in that URL will be filled in into the editors, so you can edit and
 create a new permalink.
 
-## Faq
+## FAQ
 
 #### I have an animated edge. How do I change the direction of this animation without messing up my layout?
 
