@@ -140,6 +140,14 @@ If you have a link `https://knowledgeonwebscale.github.io/dataflow-visualization
 link in the text input field. The configs encoded in that URL will be filled in into the editors, so you can edit and
 create a new permalink.
 
+## FAQ
+
+#### I have an animated edge. How do I change the direction of this animation without messing up my layout?
+
+You could of course switch `source` and `target`. But when using `autoLayout`, this may mess up your layout a bit. A
+solution could be to use the `animation` key. If you have `animation` set to e.g. `dashdraw .6s linear infinite`, you
+can just change this to `dashdraw .6s linear infinite reverse` and your problem is solved.
+
 ## License
 
 This project is licensed under the terms of the MIT License. See [LICENSE.md](LICENSE.md) for details.

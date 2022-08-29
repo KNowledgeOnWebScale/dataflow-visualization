@@ -14,6 +14,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Input field to enter a permalink
 - You can set spacing for autoLayout, hgroup and vgroups.
 - The shape of a node can be anything defined in [react-icons](https://react-icons.github.io/react-icons).
+- Added FAQ section to README
+
 
 ### Changed
 
