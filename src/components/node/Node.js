@@ -6,14 +6,29 @@ import {KEY_VALUES, NODE} from "../../lib/configParsing";
 import {getShape} from "./nodeUtil";
 import customComponents from '../custom';
 
-import loadable from '@loadable/component'
-
 //import * as icons from 'react-icons/all'
-
 import * as Ai from "react-icons/ai";
 import * as Bi from "react-icons/bi";
+import * as Bs from "react-icons/bs";
+import * as Cg from "react-icons/cg";
+import * as Di from "react-icons/di";
 import * as Fa from "react-icons/fa";
-
+import * as Fc from "react-icons/fc";
+import * as Fi from "react-icons/fi";
+import * as Gi from "react-icons/gi";
+import * as Go from "react-icons/go";
+import * as Gr from "react-icons/gr";
+import * as Hi from "react-icons/hi";
+import * as Im from "react-icons/im";
+import * as Io from "react-icons/io";
+import * as Io5 from "react-icons/io5";
+import * as Md from "react-icons/md";
+import * as Ri from "react-icons/ri";
+import * as Si from "react-icons/si";
+import * as Tb from "react-icons/tb";
+import * as Ti from "react-icons/ti";
+import * as Vsc from "react-icons/vsc";
+import * as Wi from "react-icons/wi";
 
 
 function shape({
@@ -33,117 +48,18 @@ function shape({
                }) {
     if (shape === "icon" && iconName) {
 
-        iconName = "Fa/Bee";
-
-        /* // Credits: https://github.com/react-icons/react-icons/issues/364#issuecomment-688817589
-        const getDynamicIcon = (iconName = 'fa/FaFileExcel') => {
-            const [library, iconComponent] = iconName.split('/')
-            // console.log({ library, iconComponent })
-            if (!library || !iconComponent) return
-
-            const lib = library.toLowerCase()
-            let ReactIcons = loadable.lib(() => import(`react-icons/ai`))
-            if (lib === 'bs') {
-                ReactIcons = loadable.lib(() => import(`react-icons/bs`))
-            } else if (lib === 'bi') {
-                ReactIcons = loadable.lib(() => import(`react-icons/bi`))
-            } else if (lib === 'di') {
-                ReactIcons = loadable.lib(() => import(`react-icons/di`))
-            } else if (lib === 'fi') {
-                ReactIcons = loadable.lib(() => import(`react-icons/fi`))
-            } else if (lib === 'fc') {
-                ReactIcons = loadable.lib(() => import(`react-icons/fc`))
-            } else if (lib === 'fa') {
-                ReactIcons = loadable.lib(() => import(`react-icons/fa`))
-            } else if (lib === 'gi') {
-                ReactIcons = loadable.lib(() => import(`react-icons/gi`))
-            } else if (lib === 'go') {
-                ReactIcons = loadable.lib(() => import(`react-icons/go`))
-            } else if (lib === 'gr') {
-                ReactIcons = loadable.lib(() => import(`react-icons/gr`))
-            } else if (lib === 'hi') {
-                ReactIcons = loadable.lib(() => import(`react-icons/hi`))
-            } else if (lib === 'im') {
-                ReactIcons = loadable.lib(() => import(`react-icons/im`))
-            } else if (lib === 'io') {
-                ReactIcons = loadable.lib(() => import(`react-icons/io`))
-            } else if (lib === 'md') {
-                ReactIcons = loadable.lib(() => import(`react-icons/md`))
-            } else if (lib === 'ri') {
-                ReactIcons = loadable.lib(() => import(`react-icons/ri`))
-            } else if (lib === 'si') {
-                ReactIcons = loadable.lib(() => import(`react-icons/si`))
-            } else if (lib === 'ti') {
-                ReactIcons = loadable.lib(() => import(`react-icons/ti`))
-            } else if (lib === 'vsc') {
-                ReactIcons = loadable.lib(() => import(`react-icons/vsc`))
-            } else if (lib === 'wi') {
-                ReactIcons = loadable.lib(() => import(`react-icons/wi`))
-            } else if (lib === 'cg') {
-                ReactIcons = loadable.lib(() => import(`react-icons/cg`))
-            }
+        // Credits: https://github.com/react-icons/react-icons/issues/364#issuecomment-688817589
 
 
-            return (
-                <ReactIcons>
-                    {({ [iconComponent]: Icon }) => {
-                        return <Icon style={{ fontSize: 15, marginRight: 5 }} />
-                    }}
-                </ReactIcons>
-            )
+        let prefixes = [Ai, Bi, Bs, Cg, Di, Fa, Fc, Fi, Gi, Go, Gr, Hi, Im, Io, Io5, Md, Ri, Si, Tb, Ti, Tb, Vsc, Wi];
 
+        prefixes = prefixes.map(p => p[iconName]).filter(e => e);
+
+        if (prefixes.length > 0) {
+            return React.createElement(prefixes[0]);
         }
 
-        let icon = getDynamicIcon(iconName);
-
-        //console.log(icon.type)
-       // console.log(icon)
-
-        return icon || <p>no</p>;*/
-
-        let comp;
-
-        let target = "FaBeer"
-
-        /*try {
-            console.log("ai")
-            comp = Ai[target];
-        } catch (e) {
-            try {
-                console.log("bi")
-                comp = Bi[target];
-            } catch (e) {
-                try {
-                    console.log("fa")
-                    comp = Fa[target];  // should be this
-                } catch (e) {
-                    console.log("not found")
-                    comp = <p>not found</p>
-                }
-            }
-        }*/
-
-       // console.log(Ai[target])
-
-        if (Ai[target]) {
-            // console.log("ai")
-            comp = Ai[target];
-        } else if (Bi[target]) {
-            // console.log("bi")
-            comp = Bi[target];
-        } else if (Fa[target]) {
-            // console.log("fa")
-            comp = Fa[target]
-        } else {
-            // console.log("niet gevonden")
-            comp = <p>not found</p>
-        }
-
-
-        // https://codesandbox.io/s/o715x22m4z?file=/src/index.js:365-426
-
-        //console.log(comp)
-        return React.createElement(comp)
+        return <p>element not found</p>
     }
 
 
