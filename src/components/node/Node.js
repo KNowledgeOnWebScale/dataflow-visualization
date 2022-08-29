@@ -64,6 +64,15 @@ function shape({
             color: "black"
         }
 
+        const style_title = {
+            position: "absolute",
+            fontSize: fontSize,
+            color: "black",
+            width: "100%",
+            textAlign: "center",
+            top: topText ? fontSize + 3 : "0px",
+        }
+
         if (prefixes.length > 0) {
             return <div style={{
                 fontSize: Math.max(width, height) * 0.65,
@@ -74,6 +83,7 @@ function shape({
             }}>
                 <div style={{fontSize: fontSize, color: "black"}}>{topText}</div>
                 <div style={{}}>{React.createElement(prefixes[0])}</div>
+                <div style={style_title}>{title}</div>
                 <span style={style_label}>{label}</span>
             </div>;
         }
