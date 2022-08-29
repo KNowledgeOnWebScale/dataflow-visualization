@@ -93,7 +93,7 @@ Type: `object`
 				 16. _"Details"_
 			 - Default: _"square"_
 		 - <b id="#globalDefaultsNode/properties/iconName">iconName</b>
-			 - _When 'shape' is set to 'icon', you can set 'iconName' to anything you find in [react-icons](https://react-icons.github.io/react-icons/)._
+			 - _When 'shape' is set to 'icon', you can set 'iconName' to anything you find in [react-icons](https://react-icons.github.io/react-icons/). Since this is a third-party library, not all styling will work. Only `fill`, `strokeWidth`, `width` and `height` will have effect._
 			 - Type: `string`
 			 - <i id="globalDefaultsNode/properties/iconName">path: #globalDefaultsNode/properties/iconName</i>
 		 - <b id="#globalDefaultsNode/properties/stroke">stroke</b>

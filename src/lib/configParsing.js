@@ -115,7 +115,6 @@ export const KEY_VALUES = {
             description: "Refer to a preset defined in the config of the global defaults. If you use this, you will overwrite all that is defined in this node with the values of the preset."
         },
 
-        //TODO in DEVELOPMENT.md uitleggen dat je ook het pattern moet aanpassen
         "SHAPE": {
             id: "shape",
             "canBeGlobal": true,
@@ -128,7 +127,7 @@ export const KEY_VALUES = {
             id: "iconName",
             canBeGlobal: "true",
             type: "string",
-            description: "When 'shape' is set to 'icon', you can set 'iconName' to anything you find in [react-icons](https://react-icons.github.io/react-icons/)."
+            description: "When 'shape' is set to 'icon', you can set 'iconName' to anything you find in [react-icons](https://react-icons.github.io/react-icons/). Since this is a third-party library, not all styling will work. Only `fill`, `strokeWidth`, `width` and `height` will have effect."
         },
         "STROKE": {
             id: "stroke",

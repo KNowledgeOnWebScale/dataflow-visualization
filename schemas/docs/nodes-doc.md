@@ -74,7 +74,7 @@ Type: `array`
 			 16. _"Details"_
 		 - Default: _"square"_
 	 - <b id="#nodeSchema/items/properties/iconName">iconName</b>
-		 - _When 'shape' is set to 'icon', you can set 'iconName' to anything you find in [react-icons](https://react-icons.github.io/react-icons/)._
+		 - _When 'shape' is set to 'icon', you can set 'iconName' to anything you find in [react-icons](https://react-icons.github.io/react-icons/). Since this is a third-party library, not all styling will work. Only `fill`, `strokeWidth`, `width` and `height` will have effect._
 		 - Type: `string`
 		 - <i id="nodeSchema/items/properties/iconName">path: #nodeSchema/items/properties/iconName</i>
 	 - <b id="#nodeSchema/items/properties/stroke">stroke</b>

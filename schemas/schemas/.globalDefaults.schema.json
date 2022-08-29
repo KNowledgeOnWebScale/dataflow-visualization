@@ -121,7 +121,7 @@
         },
         "iconName": {
           "type": "string",
-          "description": "When 'shape' is set to 'icon', you can set 'iconName' to anything you find in [react-icons](https://react-icons.github.io/react-icons/).",
+          "description": "When 'shape' is set to 'icon', you can set 'iconName' to anything you find in [react-icons](https://react-icons.github.io/react-icons/). Since this is a third-party library, not all styling will work. Only `fill`, `strokeWidth`, `width` and `height` will have effect.",
           "errorMessage": {
             "type": "iconName must be string"
           }
@@ -273,7 +273,7 @@
               },
               "iconName": {
                 "type": "string",
-                "description": "When 'shape' is set to 'icon', you can set 'iconName' to anything you find in [react-icons](https://react-icons.github.io/react-icons/).",
+                "description": "When 'shape' is set to 'icon', you can set 'iconName' to anything you find in [react-icons](https://react-icons.github.io/react-icons/). Since this is a third-party library, not all styling will work. Only `fill`, `strokeWidth`, `width` and `height` will have effect.",
                 "errorMessage": {
                   "type": "iconName must be string"
                 }
