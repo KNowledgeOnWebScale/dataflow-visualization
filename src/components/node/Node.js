@@ -6,7 +6,6 @@ import {KEY_VALUES, NODE} from "../../lib/configParsing";
 import {getShape} from "./nodeUtil";
 import customComponents from '../custom';
 
-//import * as icons from 'react-icons/all'
 import * as Ai from "react-icons/ai";
 import * as Bi from "react-icons/bi";
 import * as Bs from "react-icons/bs";
@@ -49,17 +48,19 @@ function shape({
     if (shape === "icon" && iconName) {
 
         // Credits: https://github.com/react-icons/react-icons/issues/364#issuecomment-688817589
-
+        // https://codesandbox.io/s/o715x22m4z?file=/src/index.js
 
         let prefixes = [Ai, Bi, Bs, Cg, Di, Fa, Fc, Fi, Gi, Go, Gr, Hi, Im, Io, Io5, Md, Ri, Si, Tb, Ti, Tb, Vsc, Wi];
 
         prefixes = prefixes.map(p => p[iconName]).filter(e => e);
 
         if (prefixes.length > 0) {
-            return React.createElement(prefixes[0]);
+            return <div style={{
+                fontSize: Math.min(width, height) * 0.65, color: fill, strokeDasharray: strokeDashArray
+            }}> {React.createElement(prefixes[0])} </div>;
         }
 
-        return <p>element not found</p>
+        return <p className="icon-not-found" hidden style={{fontSize: 10}}>Icon Not Found</p>
     }
 
 
