@@ -31,14 +31,14 @@ See the `Details` component for an example.
 ### How to add examples
 
 When using this application, you'll notice there are buttons to load examples. These buttons load in the
-files [exampleData1.js](./src/data/examples/exampleData1.js), [exampleData2.js](./src/data/examples/exampleData2.js) ...
+files [exampleData1.js](src/data/single-flow/examples/exampleData1.js), [exampleData2.js](src/data/single-flow/examples/exampleData2.js) ...
 So if you want to
 add
 an example, just create another file. In this file, you should have a JSON object for the global defaults, an array of
 nodes
 and an array of edges. Optionally, you can set a title as well. This will be the text inside the button (so the contents
 of the buttons don't have to be `example x`). If your file is ready, import everything
-in [examples.js](./src/data/examples.js) and add your imports to the array `examples`. A button to load in
+in [examples.js](src/data/single-flow/examples.js) and add your imports to the array `examples`. A button to load in
 your example will automatically show up if you restart the application.
 
 ### Permalink

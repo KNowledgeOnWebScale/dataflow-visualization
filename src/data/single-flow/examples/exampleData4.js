@@ -1,6 +1,26 @@
 export const globalDefaultsJSON = {
     graph: {},
-    node: {},
+    node: {
+        presets: {
+            "cylinder-1": {
+                shape: "cylinder",
+                vgroup: "vgroup1"
+            },
+            "RML-Translator-preset": {
+                label: "RML\nTranslator",
+                shape: "8-star",
+                fill: "dodgerblue",
+                width: 60,
+                vgroup: "vgroup2"
+            },
+            "RDF": {
+                shape: "cylinder",
+                label: "RDF",
+                height: 30,
+                fill: "lightgreen",
+            }
+        }
+    },
     edge: {
         type: "straight",
         markerEnd: {
@@ -11,99 +31,62 @@ export const globalDefaultsJSON = {
 };
 
 export const nodesJSON = [
-    {label: 'CSV', shape: "cylinder", fill: "indianred", position: {x: 0, y: -30}, vgroup: "vgroup1"},
-    {label: "JSON", shape: "cylinder", fill: "lightcoral", vgroup: "vgroup1",},
-    {label: "XML", shape: "cylinder", fill: "sandybrown", vgroup: "vgroup1"},
-    {label: "MySQL", shape: "cylinder", fill: "khaki", vgroup: "vgroup1"},
-    {label: "API", shape: "square", fill: "darkseagreen", vgroup: "vgroup1"},
+    {label: 'CSV', preset: "cylinder-1", fill: "indianred", position: {x: 0, y: -30}},
+    {label: "JSON", preset: "cylinder-1", fill: "lightcoral"},
+    {label: "XML", preset: "cylinder-1", fill: "sandybrown"},
+    {label: "MySQL", preset: "cylinder-1", fill: "khaki"},
+    {label: "API", preset: "cylinder-1", fill: "darkseagreen"},
 
     {
         id: "RML-CSV",
-        type: "custom",
-        label: "RML\nTranslator",
-        shape: "8-star",
-        fill: "dodgerblue",
+        preset: "RML-Translator-preset",
         position: {x: 80, y: -30},
-        width: 60,
-        vgroup: "vgroup2",
         hgroup: "RDF-CSV"
     },
     {
         id: "RML-JSON",
-        type: "custom",
-        label: "RML\nTranslator",
-        shape: "8-star",
-        fill: "dodgerblue",
-        vgroup: "vgroup2",
-        width: 60,
+        preset: "RML-Translator-preset",
         hgroup: "RDF-JSON"
     },
     {
         id: "RML-XML",
-        type: "custom",
-        label: "RML\nTranslator",
-        shape: "8-star",
-        fill: "dodgerblue",
-        vgroup: "vgroup2",
-        width: 60,
+        preset: "RML-Translator-preset",
         hgroup: "RDF-XML"
     },
     {
         id: "RML-MySQL",
-        type: "custom",
-        label: "RML\nTranslator",
-        shape: "8-star",
-        fill: "dodgerblue",
-        vgroup: "vgroup2",
-        width: 60,
+        preset: "RML-Translator-preset",
         hgroup: "RDF-MySQL"
     },
     {
         id: "RML-API",
-        type: "custom",
-        label: "RML\nTranslator",
-        shape: "8-star",
-        fill: "dodgerblue",
-        vgroup: "vgroup2",
+        preset: "RML-Translator-preset",
         hgroup: "RDF-API",
-        width: 60
     },
 
     {
         id: "RDF-CSV",
-        type: "custom",
-        label: "RDF",
-        shape: "cylinder",
-        height: 30,
-        fill: "lightgreen",
+        preset: "RDF",
         hgroup: "RDF-CSV",
     },
     {
         id: "RDF-JSON",
-        type: "custom",
-        label: "RDF",
-        shape: "cylinder",
-        height: 30,
-        fill: "lightgreen",
+        preset: "RDF",
         hgroup: "RDF-JSON"
     },
-    {id: "RDF-XML", type: "custom", label: "RDF", shape: "cylinder", height: 30, fill: "lightgreen", hgroup: "RDF-XML"},
+    {
+        id: "RDF-XML",
+        preset: "RDF",
+        hgroup: "RDF-XML"
+    },
     {
         id: "RDF-MySQL",
-        type: "custom",
-        label: "RDF",
-        shape: "cylinder",
-        height: 30,
-        fill: "lightgreen",
+        preset: "RDF",
         hgroup: "RDF-MySQL"
     },
     {
         id: "RDF-API",
-        type: "custom",
-        label: "RDF",
-        shape: "cylinder",
-        height: 30,
-        fill: "lightgreen",
+        preset: "RDF",
         hgroup: "RDF-API",
     },
 
@@ -122,7 +105,7 @@ export const nodesJSON = [
         fill: "lightyellow",
         strokeWidth: 0.1,
         stroke: "khaki",
-        position: {x: 200, y: -100}
+        position: {x: 250, y: -100}
     },
     {
         id: "note2",

@@ -1,5 +1,5 @@
 import {edgeSchema, globalDefaultSchema, initSchemas, nodeSchema} from "../lib/schemaValidation";
-import {examples} from "../data/examples";
+import {examples} from "../data/single-flow/examples";
 
 import Ajv from "ajv";
 
