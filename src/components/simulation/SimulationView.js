@@ -4,6 +4,8 @@ import {useLocation} from "react-router-dom";
 import {addEdge, useEdgesState, useNodesState} from "react-flow-renderer";
 import {setFlowData} from "../../lib/setFlowData";
 import ReactFlowComponent from "../ReactFlowComponent";
+import SnapToGridSwitchButton from "../controls/children/toggleButtons/SnapToGridSwitchButton";
+import ExportSimulationConfig from "./ExportSimulationConfig";
 
 const SimulationView = (/*{
                             globalDefaultsList,
@@ -15,6 +17,7 @@ const SimulationView = (/*{
     const [edges, setEdges, onEdgesChange] = useEdgesState([]);
     const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
 
+    const [snapToGrid, setSnapToGrid] = useState(true);
 
     const [loadingMessage, setLoadingMessage] = useState("")
 
@@ -35,12 +38,11 @@ const SimulationView = (/*{
         else {
             setLoadingMessage("");
         }
-    }, [location])
+    }, [location]);
 
 
     function loadInConfig(e, step) {
         e.preventDefault();
-        console.log(location.state.globalDefaultsList[step])
         setFlowData(JSON.parse(location.state.globalDefaultsList[step]), JSON.parse(location.state.nodesDataList[step]), JSON.parse(location.state.edgesDataList[step]), setNodes, setEdges);
     }
 
@@ -53,23 +55,30 @@ const SimulationView = (/*{
         {!loadingMessage &&
             <>
 
-                {(!location || !location.state || !location.state.globalDefaultsList.length) && <p>Invalid props</p>}
-
-
-                {location && location.state && location.state.globalDefaultsList.length &&
-                    <ButtonGroup size="lg" className="mb-2">
-                        {
-                            [...Array(location.state.globalDefaultsList.length).keys()].map(s => {
-                                    return <Button onClick={e => loadInConfig(e, s)}>{"Step " + s}</Button>
-                                }
-                            )
-                        }
-                    </ButtonGroup>
-                }
+                <div style={{width: "100%", display: "flex"}}>
+                    <ExportSimulationConfig language={"json"} globalDefaultsDataList={location.state.globalDefaultsList}
+                                            nodesDataList={location.state.nodesDataList}
+                                            edgesDataList={location.state.edgesDataList}/>
+                    &nbsp;
+                    &nbsp;
+                    <SnapToGridSwitchButton changeSnapToGrid={() => setSnapToGrid(!snapToGrid)}/>
+                </div>
+                <div style={{width: "100%", display: "flex", justifyContent: "center"}}>
+                    {location && location.state && location.state.globalDefaultsList.length &&
+                        <ButtonGroup size="lg" className="mb-2">
+                            {
+                                [...Array(location.state.globalDefaultsList.length).keys()].map(s => {
+                                        return <Button onClick={e => loadInConfig(e, s)}>{"Step " + s}</Button>
+                                    }
+                                )
+                            }
+                        </ButtonGroup>
+                    }
+                </div>
 
                 <ReactFlowComponent nodes={nodes} edges={edges} onNodesChange={onNodesChange}
                                     onEdgesChange={onEdgesChange}
-                                    onConnect={onConnect} snapToGrid={true /*TODO*/} showControls={true}/>
+                                    onConnect={onConnect} snapToGrid={snapToGrid} showControls={true}/>
             </>
         }
     </>

@@ -3,7 +3,7 @@ import ErrorModal from "../ErrorModal";
 import ImportExport from "./children/ImportExport";
 import FillInPositions from "./children/FillInPositions";
 import CopyPermalink from "./children/CopyPermalink";
-import ToggleButtons from "./children/ToggleButtons";
+import ToggleButtons from "./children/toggleButtons/ToggleButtons";
 import ImportLink from "./children/ImportLink";
 
 const ControlsComponent = ({
