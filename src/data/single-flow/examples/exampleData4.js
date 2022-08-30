@@ -154,7 +154,6 @@ export const edgesJSON = [
     {
         source: "comunica",
         target: "RML-JSON",
-        type: "straight",
     },
     {
         source: "comunica",
