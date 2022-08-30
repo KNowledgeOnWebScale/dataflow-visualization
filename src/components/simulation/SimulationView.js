@@ -48,6 +48,11 @@ const SimulationView = (/*{
     function loadInConfig(e, step) {
         e.preventDefault();
         setFlowData(JSON.parse(location.state.globalDefaultsList[step]), JSON.parse(location.state.nodesDataList[step]), JSON.parse(location.state.edgesDataList[step]), setNodes, setEdges);
+        e.target.style.opacity = 0.9;
+        setTimeout(() => {
+            console.log("remove")
+            e.target.style.opacity = 1;
+        }, 80)
     }
 
     function setData(globalDefaultsConfigs, nodesConfigs, edgesConfigs) {
