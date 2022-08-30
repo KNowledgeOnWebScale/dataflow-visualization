@@ -73,7 +73,6 @@ const ImportExport = ({
                 console.warn(e);
                 return;
             }
-            console.log(fileAsJson);
 
             setData(
                 JSON.stringify(fileAsJson[globalDefaultsID], null, 4),
