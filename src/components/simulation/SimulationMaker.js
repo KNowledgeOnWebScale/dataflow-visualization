@@ -7,6 +7,7 @@ import {useNavigate} from "react-router-dom";
 import ExportSimulationConfig from "./ExportSimulationConfig";
 import ImportSimulationConfig from "./ImportSimulationConfig";
 import IndividualImport from "./IndividualImport";
+import SimulationExamplesComponent from "./SimulationExamplesComponent";
 
 
 function addConfig(globalDefaults, setGlobalDefaults, nodesData, setNodesData, edgesData, setEdgesData) {
@@ -174,6 +175,8 @@ const SimulationMaker = () => {
                 })
             }}>Convert</Button>
         </div>
+
+        <SimulationExamplesComponent setData={setData}/>
 
         <div style={{display: "flex"}}>
             <ExportSimulationConfig language={language} globalDefaultsDataList={globalDefaults}

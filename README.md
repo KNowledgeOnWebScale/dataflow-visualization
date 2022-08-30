@@ -75,8 +75,8 @@ very efficient to set all nodes manually. There are three mechanisms to make the
 
 There is a key `animated`, which you can set to `true`. But if you want custom animations, you should use
 the `animation` property. An example of the standard `animated` key can be found
-in [example 2](/src/data/examples/exampleData2.js). Custom animations can be
-found in [example 6](/src/data/examples/exampleData6.js). For more information about the `animation` property, please
+in [example 2](/src/data/single-flow/examples/exampleData2.js). Custom animations can be
+found in [example 6](/src/data/single-flow/examples/exampleData6.js). For more information about the `animation` property, please
 check out
 the [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/animation). If you use `animated` with
 no `strokeDasharray`, `strokeDasharray` is set to a value of `5`. If you use a custom `animation`, the `animated` key

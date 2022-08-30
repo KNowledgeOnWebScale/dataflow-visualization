@@ -1,4 +1,4 @@
-import {examples} from "../data/examples"
+import {examples} from "../data/single-flow/examples"
 import {Button} from "react-bootstrap";
 import {json2yaml} from "../lib/jsonYamlConversionUtil";
 
