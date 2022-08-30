@@ -5,7 +5,15 @@ const nodeTypes = {
     custom: Node
 }
 
-const ReactFlowComponent = ({nodes, edges, onNodesChange, onEdgesChange, onConnect, snapToGrid}) => {
+const ReactFlowComponent = ({
+                                nodes,
+                                edges,
+                                onNodesChange,
+                                onEdgesChange,
+                                onConnect,
+                                snapToGrid,
+                                showControls = true
+                            }) => {
 
     return <>
 
@@ -33,9 +41,12 @@ const ReactFlowComponent = ({nodes, edges, onNodesChange, onEdgesChange, onConne
                 fitView
                 attributionPosition="top-right"
             >
-                <Controls/>
-                {/*<Background/>*/}
-                <MiniMap/>
+                {showControls &&
+                    <>
+                        <Controls/>
+                        <MiniMap/>
+                    </>
+                }
             </ReactFlow>
         </div>
 
