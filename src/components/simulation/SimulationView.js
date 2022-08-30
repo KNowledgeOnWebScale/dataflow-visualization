@@ -6,6 +6,7 @@ import {setFlowData} from "../../lib/setFlowData";
 import ReactFlowComponent from "../ReactFlowComponent";
 import SnapToGridSwitchButton from "../controls/children/toggleButtons/SnapToGridSwitchButton";
 import ExportSimulationConfig from "./ExportSimulationConfig";
+import ImportSimulationConfig from "./ImportSimulationConfig";
 
 const SimulationView = (/*{
                             globalDefaultsList,
@@ -46,19 +47,26 @@ const SimulationView = (/*{
         setFlowData(JSON.parse(location.state.globalDefaultsList[step]), JSON.parse(location.state.nodesDataList[step]), JSON.parse(location.state.edgesDataList[step]), setNodes, setEdges);
     }
 
+    function setData(globalDefaultsConfigs, nodesConfigs, edgesConfigs) {
+        location.state.globalDefaultsList = globalDefaultsConfigs.map(config => JSON.stringify(config));
+        location.state.nodesDataList = nodesConfigs.map(config => JSON.stringify(config));
+        location.state.edgesDataList = edgesConfigs.map(config => JSON.stringify(config));
+    }
+
     return <>
 
         {loadingMessage &&
             <h3>{loadingMessage}</h3>
         }
 
-        {!loadingMessage &&
+        {!loadingMessage && location && location.state &&
             <>
 
                 <div style={{width: "100%", display: "flex"}}>
                     <ExportSimulationConfig language={"json"} globalDefaultsDataList={location.state.globalDefaultsList}
                                             nodesDataList={location.state.nodesDataList}
                                             edgesDataList={location.state.edgesDataList}/>
+                    <ImportSimulationConfig setData={setData} setLanguage={() => undefined}/>
                     &nbsp;
                     &nbsp;
                     <SnapToGridSwitchButton changeSnapToGrid={() => setSnapToGrid(!snapToGrid)}/>
@@ -79,10 +87,11 @@ const SimulationView = (/*{
                 <ReactFlowComponent nodes={nodes} edges={edges} onNodesChange={onNodesChange}
                                     onEdgesChange={onEdgesChange}
                                     onConnect={onConnect} snapToGrid={snapToGrid} showControls={true}/>
+
             </>
         }
-    </>
 
+    </>
 
 }
 

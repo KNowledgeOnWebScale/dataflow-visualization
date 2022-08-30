@@ -30,7 +30,7 @@ const ExportSimulationConfig = ({language, globalDefaultsDataList, nodesDataList
     }
 
     return <>
-        <Button onClick={handleExport}>Export</Button>
+        <Button variant={"warning"} onClick={handleExport}>Export</Button>
     </>
 
 }
