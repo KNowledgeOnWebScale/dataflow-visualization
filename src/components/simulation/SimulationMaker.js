@@ -6,6 +6,7 @@ import {edgeSchema, globalDefaultSchema, nodeSchema} from "../../lib/schemaValid
 import {useNavigate} from "react-router-dom";
 import ExportSimulationConfig from "./ExportSimulationConfig";
 import ImportSimulationConfig from "./ImportSimulationConfig";
+import IndividualImport from "./IndividualImport";
 
 
 function addConfig(globalDefaults, setGlobalDefaults, nodesData, setNodesData, edgesData, setEdgesData) {
@@ -87,10 +88,8 @@ const SimulationMaker = () => {
 
     const [count, setCount] = useState(1);
 
-    //TODO al die controls is voor later
     const [language, setLanguage] = useState("json");
-    //const [snapToGrid, setSnapToGrid] = useState(true);
-    //const [autoSync, setAutoSync] = useState(true);
+
 
     // nu moet dat allemaal in een array zitten, cuz meerdere editors --> meerdere configs
     const [globalDefaults, setGlobalDefaults] = useState([JSON.stringify({"graph": {}, "node": {}, "edge": {}})]);
@@ -98,45 +97,22 @@ const SimulationMaker = () => {
     const [edgesData, setEdgesData] = useState([JSON.stringify([])]);
 
 
-
- /*   const setData = useCallback((index, globalDefaultsConfig, nodesConfig, edgesConfig) => {
-
-        console.log("index is " + index)
-
-        let newGlobalDefaults = JSON.parse(JSON.stringify(globalDefaults))
+    function setIndividualData(index, globalDefaultsConfig, nodesConfig, edgesConfig) {
+        let newGlobalDefaults = JSON.parse(JSON.stringify(globalDefaults)); // Change reference
         let newNodes = JSON.parse(JSON.stringify(nodesData));
         let newEdges = JSON.parse(JSON.stringify(edgesData));
 
-
-        if (count <= index) {
-            setCount(index+1);
-            // newGlobalDefaults.push(JSON.stringify({}));
-            // newNodes.push(JSON.stringify([]));
-            // newEdges.push(JSON.stringify([]));
-
-            console.log("count is " + count)
-        }
-
-        //console.log(globalDefaultsConfig)
-
-        newGlobalDefaults[index] =globalDefaultsConfig
-
-        newNodes[index] = nodesConfig
-
-        newEdges[index] = edgesConfig
+        newGlobalDefaults[index] = JSON.stringify(globalDefaultsConfig, null, 4);
+        newNodes[index] = JSON.stringify(nodesConfig, null, 4);
+        newEdges[index] = JSON.stringify(edgesConfig, null, 4);
 
         setGlobalDefaults(newGlobalDefaults);
         setNodesData(newNodes);
         setEdgesData(newEdges);
-
-
-        console.log(newGlobalDefaults)
-
-    } , )*/
+    }
 
 
     function setData(globalDefaultsConfigs, nodesConfigs, edgesConfigs) {
-
 
         let newGlobalDefaults = JSON.parse(JSON.stringify(globalDefaults)); // Change reference
         let newNodes = JSON.parse(JSON.stringify(nodesData));
@@ -203,6 +179,10 @@ const SimulationMaker = () => {
             <ExportSimulationConfig language={language} globalDefaultsDataList={globalDefaults}
                                     nodesDataList={nodesData} edgesDataList={edgesData}/>
             <ImportSimulationConfig setData={setData} setLanguage={setLanguage}/>
+        </div>
+
+        <div>
+            <IndividualImport maxNumber={count} setData={setIndividualData} setLanguage={setLanguage}/>
         </div>
 
         {/* Editors */}

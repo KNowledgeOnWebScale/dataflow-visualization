@@ -1,11 +1,13 @@
 import {useCallback, useEffect, useState} from "react";
-import {Button, ButtonGroup} from "react-bootstrap";
+import {Button, ButtonGroup, Col, Form, Row} from "react-bootstrap";
 import {useLocation} from "react-router-dom";
 import {addEdge, useEdgesState, useNodesState} from "react-flow-renderer";
 import {setFlowData} from "../../lib/setFlowData";
 import ReactFlowComponent from "../ReactFlowComponent";
 import SnapToGridSwitchButton from "../controls/children/toggleButtons/SnapToGridSwitchButton";
 import ExportSimulationConfig from "./ExportSimulationConfig";
+import ImportSimulationConfig from "./ImportSimulationConfig";
+import {FaPlay} from "react-icons/fa";
 
 const SimulationView = (/*{
                             globalDefaultsList,
@@ -20,6 +22,8 @@ const SimulationView = (/*{
     const [snapToGrid, setSnapToGrid] = useState(true);
 
     const [loadingMessage, setLoadingMessage] = useState("")
+
+    const [delay, setDelay] = useState(3000);
 
     const location = useLocation();
 
@@ -46,29 +50,73 @@ const SimulationView = (/*{
         setFlowData(JSON.parse(location.state.globalDefaultsList[step]), JSON.parse(location.state.nodesDataList[step]), JSON.parse(location.state.edgesDataList[step]), setNodes, setEdges);
     }
 
+    function setData(globalDefaultsConfigs, nodesConfigs, edgesConfigs) {
+        location.state.globalDefaultsList = globalDefaultsConfigs.map(config => JSON.stringify(config));
+        location.state.nodesDataList = nodesConfigs.map(config => JSON.stringify(config));
+        location.state.edgesDataList = edgesConfigs.map(config => JSON.stringify(config));
+    }
+
+
+    function playAnimation(e) {
+        e.preventDefault();
+
+        for (let i = 0; i < location.state.globalDefaultsList.length; i++) {
+            setTimeout(function () {
+                // console.log('count ', i);
+                document.getElementById("button-" + i).click();
+            }, delay * (i));
+        }
+
+    }
+
     return <>
 
         {loadingMessage &&
             <h3>{loadingMessage}</h3>
         }
 
-        {!loadingMessage &&
+        {!loadingMessage && location && location.state &&
             <>
 
-                <div style={{width: "100%", display: "flex"}}>
-                    <ExportSimulationConfig language={"json"} globalDefaultsDataList={location.state.globalDefaultsList}
-                                            nodesDataList={location.state.nodesDataList}
-                                            edgesDataList={location.state.edgesDataList}/>
-                    &nbsp;
-                    &nbsp;
-                    <SnapToGridSwitchButton changeSnapToGrid={() => setSnapToGrid(!snapToGrid)}/>
+                <div style={{display: "flex", justifyContent: "end"}}>
+
+                    <div style={{marginRight: "auto", display: "flex"}}>
+                        <ExportSimulationConfig language={"json"}
+                                                globalDefaultsDataList={location.state.globalDefaultsList}
+                                                nodesDataList={location.state.nodesDataList}
+                                                edgesDataList={location.state.edgesDataList}/>
+
+                        <ImportSimulationConfig setData={setData} setLanguage={() => undefined /*TODO*/}/>
+
+                        &nbsp;
+                        &nbsp;
+                        <SnapToGridSwitchButton changeSnapToGrid={() => setSnapToGrid(!snapToGrid)}/>
+                    </div>
+
+                    <div style={{display: "flex"}}>
+                        <Form onSubmit={playAnimation}>
+                            <Form.Group as={Row} className={"justify-content-end"}>
+                                <Form.Label column sm={2}>Delay</Form.Label>
+                                <Col sm={5}>
+                                    <Form.Control type={"number"} step={1} min={100} value={delay}
+                                                  onChange={e => setDelay(parseInt(e.target.value))}
+                                    />
+                                </Col>
+                            </Form.Group>
+                        </Form>
+                        <Button className={"rounded-circle"} style={{width: 60, height: 60}} onClick={playAnimation}>
+                            <FaPlay style={{width: 30, height: 30}}/>
+                        </Button>
+                    </div>
                 </div>
+
                 <div style={{width: "100%", display: "flex", justifyContent: "center"}}>
                     {location && location.state && location.state.globalDefaultsList.length &&
                         <ButtonGroup size="lg" className="mb-2">
                             {
                                 [...Array(location.state.globalDefaultsList.length).keys()].map(s => {
-                                        return <Button onClick={e => loadInConfig(e, s)}>{"Step " + s}</Button>
+                                        return <Button id={"button-" + s}
+                                                       onClick={e => loadInConfig(e, s)}>{"Step " + s}</Button>
                                     }
                                 )
                             }
@@ -79,10 +127,11 @@ const SimulationView = (/*{
                 <ReactFlowComponent nodes={nodes} edges={edges} onNodesChange={onNodesChange}
                                     onEdgesChange={onEdgesChange}
                                     onConnect={onConnect} snapToGrid={snapToGrid} showControls={true}/>
+
             </>
         }
-    </>
 
+    </>
 
 }
 
