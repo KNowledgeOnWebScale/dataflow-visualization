@@ -352,17 +352,14 @@
       "description": "edge in global defaults",
       "$id": "globalDefaultsEdge",
       "properties": {
-        "animated": {
-          "type": "boolean",
-          "description": "Set a default animation for the edge. See also [Animations](https://github.com/KNowledgeOnWebScale/dataflow-visualization/tree/main#animations).",
-          "default": false,
-          "errorMessage": {
-            "type": "animated must be boolean"
-          }
-        },
         "animation": {
           "type": "string",
-          "description": "See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/animation) for more information about animation. An example is e.g. `dashdraw .2s linear infinite`.",
+          "examples": [
+            "none",
+            "default",
+            "reverse"
+          ],
+          "description": "See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/animation) for more information about animation. An example is e.g. `dashdraw .2s linear infinite` (has to start with 'dashdraw'). Note that you can just the value to `default` or `reverse`. The animation will then fall back to `dashdraw .45s linear infinite`. If the value is `reverse`, the fall back value will be `dashdraw .45s linear infinite reverse`. The strokeDashArray (if none is specified) will fall back to `6 4`. When set to `none`, no animation will be shown.",
           "errorMessage": {
             "type": "animation must be string"
           }
@@ -537,17 +534,14 @@
             "description": "edge in global defaults",
             "$id": "presetNestedEdge",
             "properties": {
-              "animated": {
-                "type": "boolean",
-                "description": "Set a default animation for the edge. See also [Animations](https://github.com/KNowledgeOnWebScale/dataflow-visualization/tree/main#animations).",
-                "default": false,
-                "errorMessage": {
-                  "type": "animated must be boolean"
-                }
-              },
               "animation": {
                 "type": "string",
-                "description": "See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/animation) for more information about animation. An example is e.g. `dashdraw .2s linear infinite`.",
+                "examples": [
+                  "none",
+                  "default",
+                  "reverse"
+                ],
+                "description": "See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/animation) for more information about animation. An example is e.g. `dashdraw .2s linear infinite` (has to start with 'dashdraw'). Note that you can just the value to `default` or `reverse`. The animation will then fall back to `dashdraw .45s linear infinite`. If the value is `reverse`, the fall back value will be `dashdraw .45s linear infinite reverse`. The strokeDashArray (if none is specified) will fall back to `6 4`. When set to `none`, no animation will be shown.",
                 "errorMessage": {
                   "type": "animation must be string"
                 }
