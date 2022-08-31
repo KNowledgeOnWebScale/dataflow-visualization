@@ -32,6 +32,10 @@ const ImportSimulationConfig = ({setData}) => {
                 return;
             }
 
+            if (!Object.hasOwnProperty("globalDefaultsConfigs") || !Object.hasOwnProperty("nodesConfigs") || !Object.hasOwnProperty("edgesConfigs")) {
+                alert("The file you import needs to be in JSON format with keys: 'globalDefaultsConfigs', 'nodesConfigs' and 'edgesConfigs'.")
+            }
+
             setData(fileAsJson["globalDefaultsConfigs"], fileAsJson["nodesConfigs"], fileAsJson["edgesConfigs"]);
 
         }

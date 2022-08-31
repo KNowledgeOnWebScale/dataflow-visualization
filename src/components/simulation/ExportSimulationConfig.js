@@ -7,10 +7,19 @@ const ExportSimulationConfig = ({globalDefaultsDataList, nodesDataList, edgesDat
     function handleExport(e) {
         e.preventDefault();
 
-        const gdAsJSON = globalDefaultsDataList.map(config => language === "yaml" ? JSON.parse(yaml2json(config)) : JSON.parse(config));
-        const nodesAsJSON = nodesDataList.map(config => language === "yaml" ? JSON.parse(yaml2json(config)) : JSON.parse(config));
-        const edgesAsJSON = edgesDataList.map(config => language === "yaml" ? JSON.parse(yaml2json(config)) : JSON.parse(config));
+        let gdAsJSON;
+        let nodesAsJSON;
+        let edgesAsJSON;
 
+        try {
+            gdAsJSON = globalDefaultsDataList.map(config => language === "yaml" ? JSON.parse(yaml2json(config)) : JSON.parse(config));
+            nodesAsJSON = nodesDataList.map(config => language === "yaml" ? JSON.parse(yaml2json(config)) : JSON.parse(config));
+            edgesAsJSON = edgesDataList.map(config => language === "yaml" ? JSON.parse(yaml2json(config)) : JSON.parse(config));
+        } catch (e) {
+            console.warn(e);
+            alert("Could not parse contents of editors as JSON.");
+            return;
+        }
 
         const out = {
             "globalDefaultsConfigs": gdAsJSON,
