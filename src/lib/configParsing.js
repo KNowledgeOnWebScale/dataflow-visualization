@@ -10,12 +10,35 @@ const customComponentNames = Object.keys(customComponents);
 let shapes = ["icon", "8-star", "big-star", "circle", "cylinder", "diamond", "hexagon", "note", "rectangle", "square", "star", "triangle", "comunica", "rmlio", "solid"]
 shapes = shapes.concat(customComponentNames);
 
-const animationFallBacks = {
-    "default": "dashdraw .45s linear infinite",
-    "reverse": "dashdraw .45s linear infinite reverse"
+
+const strokeDashArrayFallBacks = {
+    "solid": "0",
+    "dashed": "6 4",
+    "dotted": "1 3",
+    "varied": "5 2 1 2",
+    "dashed-wide-gaps": "4 8"
 }
 
-const strokeDashArrayDefaultFallBack = "6 4"; // TODO: ook echt 'default' toelaten (alsook wat andere dingen (dat is een issue))
+const strokeDasharrayDescription = "See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray#example) for more information." +
+    " The default value `solid` will fall back to the CSS value `" + strokeDashArrayFallBacks.solid +
+    "`, `dashed` to `" + strokeDashArrayFallBacks.dashed +
+    ", `dotted` to `" + strokeDashArrayFallBacks.dotted +
+    "`, `varied` to `" + strokeDashArrayFallBacks.varied +
+    "` and dashed-wide-gaps will fall back to `" + strokeDashArrayFallBacks["dashed-wide-gaps"] + "`."
+
+const animationFallBacks = {
+    "default": "dashdraw .45s linear infinite",
+    "reverse": "dashdraw .45s linear infinite reverse",
+    "none": "none",
+}
+
+const animationDescription = "See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/animation) for more information about animation. " +
+    "An example is e.g. `dashdraw .2s linear infinite` (has to start with 'dashdraw'). " +
+    "Note that you can just the value to `default`. The animation will then fall back to `" + animationFallBacks.default +
+    "`. If the value is `reverse`, the fall back value will be `" + animationFallBacks.reverse +
+    "`. The strokeDashArray (if none is specified) will fall back to `" + strokeDashArrayFallBacks.dashed +
+    "`. When set to `none`, no animation will be shown."
+
 
 // These are the keys that you can use in the configs. Stuff like 'enum', 'description' ... is for the schema validation
 export const KEY_VALUES = {
@@ -144,9 +167,10 @@ export const KEY_VALUES = {
         "STROKE_DASHARRAY": {
             id: "strokeDasharray",
             "canBeGlobal": true,
-            value: 0,
+            value: "solid",
+            examples: Object.keys(strokeDashArrayFallBacks),
             type: ["number", "string"],
-            description: "The dash pattern of the node."
+            description: "The dash pattern of the node. " + strokeDasharrayDescription
         },
         "STROKE_WIDTH": {
             id: "strokeWidth",
@@ -198,8 +222,8 @@ export const KEY_VALUES = {
             "canBeGlobal": true,
             type: "string",
             "cssProperty": "animation",
-            examples: ["none", "default", "reverse"],
-            description: "See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/animation) for more information about animation. An example is e.g. `dashdraw .2s linear infinite` (has to start with 'dashdraw'). Note that you can just the value to `default` or `reverse`. The animation will then fall back to `" + animationFallBacks.default + "`. If the value is `reverse`, the fall back value will be `" + animationFallBacks.reverse + "`. The strokeDashArray (if none is specified) will fall back to `" + strokeDashArrayDefaultFallBack + "`. When set to `none`, no animation will be shown."
+            examples: Object.keys(animationFallBacks),
+            description: animationDescription
         },
         "COLOR": {
             id: "color",
@@ -255,10 +279,11 @@ export const KEY_VALUES = {
         "STROKE_DASHARRAY": {
             id: "strokeDasharray",
             "canBeGlobal": true,
-            value: 0,
+            value: "solid",
+            examples: Object.keys(strokeDashArrayFallBacks),
             type: ["number", "string"],
             "cssProperty": "strokeDasharray",
-            description: "The pattern of dashes of the edges. See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray#example) for more information."
+            description: "The pattern of dashes of the edges. " + strokeDasharrayDescription
         },
         "SOURCE": {
             id: "source",
@@ -418,6 +443,11 @@ export function parseNodes(globalDefaults, nodes) {
             }
         }
 
+        // There are some sensible defaults defined for 'strokeDasharray'
+        if (strokeDashArrayFallBacks.hasOwnProperty(data[KEY_VALUES[NODE].STROKE_DASHARRAY.id])) {
+            data[KEY_VALUES[NODE].STROKE_DASHARRAY.id] = strokeDashArrayFallBacks[data[KEY_VALUES[NODE].STROKE_DASHARRAY.id]];
+        }
+
         node["data"] = data;
 
         // There must be a position with keys x and y
@@ -520,8 +550,12 @@ export function parseEdges(globalDefaults, edges, nodes) {
         if (animationFallBacks.hasOwnProperty(edge["style"]["animation"])) {
             edge["style"]["animation"] = animationFallBacks[edge["style"]["animation"]];
             if (edge["style"]["strokeDasharray"] === EDGE_KEYS.STROKE_DASHARRAY.value) {
-                edge["style"]["strokeDasharray"] = "6 4";
+                edge["style"]["strokeDasharray"] = strokeDashArrayFallBacks.dashed;
             }
+        }
+
+        if (strokeDashArrayFallBacks.hasOwnProperty(edge["style"]["strokeDasharray"])) {
+            edge["style"]["strokeDasharray"] = strokeDashArrayFallBacks[edge["style"]["strokeDasharray"]];
         }
 
         // If the edge has no zIndex and connects 2 nodes that are in the same parent, set the zIndex of the edge to 1

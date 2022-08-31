@@ -83,10 +83,16 @@ Type: `array`
 		 - <i id="nodeSchema/items/properties/stroke">path: #nodeSchema/items/properties/stroke</i>
 		 - Default: _"black"_
 	 - <b id="#nodeSchema/items/properties/strokeDasharray">strokeDasharray</b>
-		 - _The dash pattern of the node._
+		 - _The dash pattern of the node. See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray#example) for more information. The default value `solid` will fall back to the CSS value `0`, `dashed` to `6 4, `dotted` to `1 3`, `varied` to `5 2 1 2` and dashed-wide-gaps will fall back to `4 8`._
 		 - Types: `number`, `string`
 		 - <i id="nodeSchema/items/properties/strokeDasharray">path: #nodeSchema/items/properties/strokeDasharray</i>
-		 - Default: `0`
+		 - Example values: 
+			 1. _"solid"_
+			 2. _"dashed"_
+			 3. _"dotted"_
+			 4. _"varied"_
+			 5. _"dashed-wide-gaps"_
+		 - Default: _"solid"_
 	 - <b id="#nodeSchema/items/properties/strokeWidth">strokeWidth</b>
 		 - _The thickness of the stroke of the nodes._
 		 - Type: `number`

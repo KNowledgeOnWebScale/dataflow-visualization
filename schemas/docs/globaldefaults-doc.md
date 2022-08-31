@@ -102,10 +102,16 @@ Type: `object`
 			 - <i id="globalDefaultsNode/properties/stroke">path: #globalDefaultsNode/properties/stroke</i>
 			 - Default: _"black"_
 		 - <b id="#globalDefaultsNode/properties/strokeDasharray">strokeDasharray</b>
-			 - _The dash pattern of the node._
+			 - _The dash pattern of the node. See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray#example) for more information. The default value `solid` will fall back to the CSS value `0`, `dashed` to `6 4, `dotted` to `1 3`, `varied` to `5 2 1 2` and dashed-wide-gaps will fall back to `4 8`._
 			 - Types: `number`, `string`
 			 - <i id="globalDefaultsNode/properties/strokeDasharray">path: #globalDefaultsNode/properties/strokeDasharray</i>
-			 - Default: `0`
+			 - Example values: 
+				 1. _"solid"_
+				 2. _"dashed"_
+				 3. _"dotted"_
+				 4. _"varied"_
+				 5. _"dashed-wide-gaps"_
+			 - Default: _"solid"_
 		 - <b id="#globalDefaultsNode/properties/strokeWidth">strokeWidth</b>
 			 - _The thickness of the stroke of the nodes._
 			 - Type: `number`
@@ -146,13 +152,13 @@ Type: `object`
 	 - <b id="globaldefaultsedge">&#36;id: globalDefaultsEdge</b>
 	 - **_Properties_**
 		 - <b id="#globalDefaultsEdge/properties/animation">animation</b>
-			 - _See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/animation) for more information about animation. An example is e.g. `dashdraw .2s linear infinite` (has to start with 'dashdraw'). Note that you can just the value to `default` or `reverse`. The animation will then fall back to `dashdraw .45s linear infinite`. If the value is `reverse`, the fall back value will be `dashdraw .45s linear infinite reverse`. The strokeDashArray (if none is specified) will fall back to `6 4`. When set to `none`, no animation will be shown._
+			 - _See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/animation) for more information about animation. An example is e.g. `dashdraw .2s linear infinite` (has to start with 'dashdraw'). Note that you can just the value to `default`. The animation will then fall back to `dashdraw .45s linear infinite`. If the value is `reverse`, the fall back value will be `dashdraw .45s linear infinite reverse`. The strokeDashArray (if none is specified) will fall back to `6 4`. When set to `none`, no animation will be shown._
 			 - Type: `string`
 			 - <i id="globalDefaultsEdge/properties/animation">path: #globalDefaultsEdge/properties/animation</i>
 			 - Example values: 
-				 1. _"none"_
-				 2. _"default"_
-				 3. _"reverse"_
+				 1. _"default"_
+				 2. _"reverse"_
+				 3. _"none"_
 		 - <b id="#globalDefaultsEdge/properties/color">color</b>
 			 - _The color of the edge._
 			 - Type: `string`
@@ -168,10 +174,16 @@ Type: `object`
 			 - <i id="globalDefaultsEdge/properties/thickness">path: #globalDefaultsEdge/properties/thickness</i>
 			 - Default: `1.2`
 		 - <b id="#globalDefaultsEdge/properties/strokeDasharray">strokeDasharray</b>
-			 - _The pattern of dashes of the edges. See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray#example) for more information._
+			 - _The pattern of dashes of the edges. See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray#example) for more information. The default value `solid` will fall back to the CSS value `0`, `dashed` to `6 4, `dotted` to `1 3`, `varied` to `5 2 1 2` and dashed-wide-gaps will fall back to `4 8`._
 			 - Types: `number`, `string`
 			 - <i id="globalDefaultsEdge/properties/strokeDasharray">path: #globalDefaultsEdge/properties/strokeDasharray</i>
-			 - Default: `0`
+			 - Example values: 
+				 1. _"solid"_
+				 2. _"dashed"_
+				 3. _"dotted"_
+				 4. _"varied"_
+				 5. _"dashed-wide-gaps"_
+			 - Default: _"solid"_
 		 - <b id="#globalDefaultsEdge/properties/source">source</b>
 			 - _ID of the source node._
 			 - Type: `string`
