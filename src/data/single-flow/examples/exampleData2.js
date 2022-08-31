@@ -1,24 +1,35 @@
 export const globalDefaultsJSON = {
     graph: {},
     node: {
+        presets: {
+            "data-preset": {
+                vgroup: "vgroup1",
+                shape: "cylinder"
+            }
+        },
         stroke: "darkgray",
         fill: "lightyellow",
         fontsize: 10,
         strokeWidth: 0.2,
     },
     edge: {
-        animation: "default",
-        markerEnd: {type: "arrowclosed", size: 25},
+        presets: {
+            "data-preset": {
+                animation: "default",
+                markerEnd: {type: "arrowclosed", size: 25},
+                strokeDasharray: "varied"
+            }
+        }
     }
 
 };
 
 export const nodesJSON = [
-    {vgroup: "vgroup1", label: 'CSV', shape: "cylinder", position: {y: -85},},
-    {vgroup: "vgroup1", label: 'JSON', shape: "cylinder"},
-    {vgroup: "vgroup1", label: 'XML', shape: "cylinder"},
-    {vgroup: "vgroup1", label: 'MySQL', shape: "cylinder"},
-    {vgroup: "vgroup1", label: 'API', shape: "circle"},
+    {preset: "data-preset", label: 'CSV', position: {y: -85},},
+    {preset: "data-preset", label: 'JSON'},
+    {preset: "data-preset", label: 'XML'},
+    {preset: "data-preset", label: 'MySQL'},
+    {preset: "data-preset", label: 'API', shape: "circle"},
 
     {
         id: 'RML',
@@ -61,27 +72,27 @@ export const edgesJSON = [
     {
         source: 'CSV',
         target: 'RDF',
-        strokeDasharray: "5 2 2 2"
+        preset: "data-preset"
     },
     {
         source: 'JSON',
         target: 'RDF',
-        strokeDasharray: "5 2 2 2",
+        preset: "data-preset"
     },
     {
         source: 'XML',
         target: 'RDF',
-        strokeDasharray: "5 2 2 2",
+        preset: "data-preset"
     },
     {
         source: 'MySQL',
         target: 'RDF',
-        strokeDasharray: "5 2 2 2",
+        preset: "data-preset"
     },
     {
         source: 'API',
         target: 'RDF',
-        strokeDasharray: "5 2 2 2",
+        preset: "data-preset"
     },
     {
         source: "RML",
@@ -90,8 +101,6 @@ export const edgesJSON = [
         sourceHandle: "bottom",
         targetHandle: "top",
         strokeDasharray: 3,
-        markerEnd: {},
-        animation: "none"
     },
     {
         source: "SPARQL-END",
@@ -99,7 +108,6 @@ export const edgesJSON = [
         type: "straight",
         markerStart: {type: "arrowclosed"},
         markerEnd: {type: "arrowclosed"},
-        animation: "none"
     },
     {
         id: "Comunica to SPARQL",
@@ -109,8 +117,6 @@ export const edgesJSON = [
         sourceHandle: "bottom",
         targetHandle: "top",
         strokeDasharray: 3,
-        markerEnd: {},
-        animation: "none"
     }
 
 ];
