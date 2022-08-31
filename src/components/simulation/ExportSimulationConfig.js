@@ -1,28 +1,21 @@
 import {Button} from "react-bootstrap";
 import {downloadJSONFile} from "../../lib/downloadFileUtil";
+import {yaml2json} from "../../lib/jsonYamlConversionUtil";
 
-const ExportSimulationConfig = ({language, globalDefaultsDataList, nodesDataList, edgesDataList}) => {
+const ExportSimulationConfig = ({globalDefaultsDataList, nodesDataList, edgesDataList, language = "json"}) => {
 
     function handleExport(e) {
         e.preventDefault();
 
-        console.log(globalDefaultsDataList)
+        const gdAsJSON = globalDefaultsDataList.map(config => language === "yaml" ? JSON.parse(yaml2json(config)) : JSON.parse(config));
+        const nodesAsJSON = nodesDataList.map(config => language === "yaml" ? JSON.parse(yaml2json(config)) : JSON.parse(config));
+        const edgesAsJSON = edgesDataList.map(config => language === "yaml" ? JSON.parse(yaml2json(config)) : JSON.parse(config));
 
-        const gdAsJSON = globalDefaultsDataList.map(config => JSON.parse(config));
-        const nodesAsJSON = nodesDataList.map(config => JSON.parse(config));
-        const edgesAsJSON = edgesDataList.map(config => JSON.parse(config));
-
-        console.log(JSON.stringify(gdAsJSON))
-
-
-        let globalDefaultsConfig = gdAsJSON //JSON.parse(language === "json" ? gdAsJSON : yaml2json(gdAsJSON));
-        let nodesConfig = nodesAsJSON //JSON.parse(language === "json" ? nodesAsJSON : yaml2json(nodesAsJSON));
-        let edgesConfig = edgesAsJSON //JSON.parse(language === "json" ? edgesAsJSON : yaml2json(edgesAsJSON));
 
         const out = {
-            "globalDefaultsConfigs": globalDefaultsConfig,
-            "nodesConfigs": nodesConfig,
-            "edgesConfigs": edgesConfig
+            "globalDefaultsConfigs": gdAsJSON,
+            "nodesConfigs": nodesAsJSON,
+            "edgesConfigs": edgesAsJSON
         };
 
         downloadJSONFile("simulationConfig.json", out);

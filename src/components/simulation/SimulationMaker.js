@@ -1,6 +1,6 @@
 import {Button, OverlayTrigger, Tooltip} from "react-bootstrap";
 import {BsPlusLg} from "react-icons/bs";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import CodeEditor from "../editors/CodeEditor";
 import {edgeSchema, globalDefaultSchema, nodeSchema} from "../../lib/schemaValidation";
 import {useNavigate} from "react-router-dom";
@@ -8,19 +8,25 @@ import ExportSimulationConfig from "./ExportSimulationConfig";
 import ImportSimulationConfig from "./ImportSimulationConfig";
 import IndividualImport from "./IndividualImport";
 import SimulationExamplesComponent from "./SimulationExamplesComponent";
+import LanguageSwitcher from "../LanguageSwitcher";
+import {json2yaml, yaml2json} from "../../lib/jsonYamlConversionUtil";
 
 
-function addConfig(globalDefaults, setGlobalDefaults, nodesData, setNodesData, edgesData, setEdgesData) {
+function addConfig(language, globalDefaults, setGlobalDefaults, nodesData, setNodesData, edgesData, setEdgesData) {
+    const globalDefaultsInitJSON = JSON.stringify({"graph": {}, "node": {}, "edge": {}}, null, 4)
+    const nodesInitJSON = JSON.stringify([]);
+    const edgesInitJSON = JSON.stringify([]);
+
     let newGlobalDefaultsData = [...globalDefaults];
-    newGlobalDefaultsData.push(JSON.stringify({"graph": {}, "node": {}, "edge": {}}));
+    newGlobalDefaultsData.push(language === "yaml" ? json2yaml(globalDefaultsInitJSON) : globalDefaultsInitJSON);
     setGlobalDefaults(newGlobalDefaultsData);
 
     let newNodesData = [...nodesData];
-    newNodesData.push(JSON.stringify([]));
+    newNodesData.push(language === "yaml" ? json2yaml(nodesInitJSON) : nodesInitJSON);
     setNodesData(newNodesData);
 
     let newEdgesData = [...edgesData];
-    newEdgesData.push(JSON.stringify([]));
+    newEdgesData.push(language === "yaml" ? json2yaml(edgesInitJSON) : edgesInitJSON);
     setEdgesData(newEdgesData);
 }
 
@@ -60,20 +66,20 @@ function createEditorArea(count, language, globalDefaults, setGlobalDefaults, no
                 <div className="small-editor-div">
                     <h6>Global defaults editor</h6>
                     <CodeEditor language={language} data={globalDefaults[count]} setData={setGlobalDefaultsDataFunction}
-                                modelName={"global-defaults-model-" + count}
+                                modelName={"global-defaults-simulation-model-" + count}
                                 schema={globalDefaultSchema}/>
                 </div>
 
                 <div className="editor-div">
                     <h6>Node editor</h6>
                     <CodeEditor language={language} data={nodesData[count]} setData={setNodesDataFunction}
-                                modelName={"nodes-model-" + count}
+                                modelName={"nodes-simulation-model-" + count}
                                 schema={nodeSchema}/>
                 </div>
                 <div className="editor-div">
                     <h6>Edge editor</h6>
                     <CodeEditor language={language} data={edgesData[count]} setData={setEdgesDataFunction}
-                                modelName={"edges-model-" + count}
+                                modelName={"edges-simulation-model-" + count}
                                 schema={edgeSchema}/>
                 </div>
             </div>
@@ -98,14 +104,56 @@ const SimulationMaker = () => {
     const [edgesData, setEdgesData] = useState([JSON.stringify([])]);
 
 
-    function setIndividualData(index, globalDefaultsConfig, nodesConfig, edgesConfig) {
-        let newGlobalDefaults = JSON.parse(JSON.stringify(globalDefaults)); // Change reference
-        let newNodes = JSON.parse(JSON.stringify(nodesData));
-        let newEdges = JSON.parse(JSON.stringify(edgesData));
+    useEffect(() => {
+        switchLanguage();
 
-        newGlobalDefaults[index] = JSON.stringify(globalDefaultsConfig, null, 4);
-        newNodes[index] = JSON.stringify(nodesConfig, null, 4);
-        newEdges[index] = JSON.stringify(edgesConfig, null, 4);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [language])
+
+
+    const switchLanguage = () => {
+
+        let newGlobalDefaults = [];
+        let newNodes = [];
+        let newEdges = [];
+
+        if (language === "json") {
+            for (let i = 0; i < globalDefaults.length; i += 1) {
+                newGlobalDefaults.push(yaml2json(globalDefaults[i]));
+                newNodes.push(yaml2json(nodesData[i]));
+                newEdges.push(yaml2json(edgesData[i]));
+            }
+            setGlobalDefaults(newGlobalDefaults);
+            setNodesData(newNodes);
+            setEdgesData(newEdges);
+
+        } else if (language === "yaml") {
+            for (let i = 0; i < globalDefaults.length; i += 1) {
+                newGlobalDefaults.push(json2yaml(globalDefaults[i]));
+                newNodes.push(json2yaml(nodesData[i]));
+                newEdges.push(json2yaml(edgesData[i]));
+            }
+            setGlobalDefaults(newGlobalDefaults);
+            setNodesData(newNodes);
+            setEdgesData(newEdges);
+        }
+    }
+
+
+    function setIndividualData(index, globalDefaultsConfig, nodesConfig, edgesConfig) {
+        // Gets called when importing JSON file, so input is JSON
+
+        let newGlobalDefaults = [];
+        let newNodes = [];
+        let newEdges = [];
+
+        const globalDefaultsJSON = JSON.stringify(globalDefaultsConfig, null, 4);
+        const nodesJSON = JSON.stringify(nodesConfig, null, 4);
+        const edgesJSON = JSON.stringify(edgesConfig, null, 4);
+
+        newGlobalDefaults.push(language === "yaml" ? json2yaml(globalDefaultsJSON) : globalDefaultsJSON);
+        newNodes.push(language === "yaml" ? json2yaml(nodesJSON) : nodesJSON);
+        newEdges.push(language === "yaml" ? json2yaml(edgesJSON) : edgesJSON);
 
         setGlobalDefaults(newGlobalDefaults);
         setNodesData(newNodes);
@@ -114,23 +162,39 @@ const SimulationMaker = () => {
 
 
     function setData(globalDefaultsConfigs, nodesConfigs, edgesConfigs) {
+        // Input is JSON
 
-        let newGlobalDefaults = JSON.parse(JSON.stringify(globalDefaults)); // Change reference
-        let newNodes = JSON.parse(JSON.stringify(nodesData));
-        let newEdges = JSON.parse(JSON.stringify(edgesData));
+        let newGlobalDefaults = []; // Change reference needed, so created new array
+        let newNodes = [];
+        let newEdges = [];
 
         setCount(globalDefaultsConfigs.length);
 
         for (let i = 0; i < globalDefaultsConfigs.length; i++) {
-            newGlobalDefaults[i] = JSON.stringify(globalDefaultsConfigs[i], null, 4);
-            newNodes[i] = JSON.stringify(nodesConfigs[i], null, 4);
-            newEdges[i] = JSON.stringify(edgesConfigs[i], null, 4);
+            let globalDefaultsJSON = JSON.stringify(globalDefaultsConfigs[i], null, 4);
+            let nodesJSON = JSON.stringify(nodesConfigs[i], null, 4);
+            let edgesJSON = JSON.stringify(edgesConfigs[i], null, 4)
+
+            newGlobalDefaults.push(language === "yaml" ? json2yaml(globalDefaultsJSON) : globalDefaultsJSON);
+            newNodes.push(language === "yaml" ? json2yaml(nodesJSON) : nodesJSON);
+            newEdges.push(language === "yaml" ? json2yaml(edgesJSON) : edgesJSON);
 
         }
 
         setGlobalDefaults(newGlobalDefaults);
         setNodesData(newNodes);
         setEdgesData(newEdges);
+    }
+
+    function toJSON(arr) {
+        if (language === "yaml") {
+            let newArr = [];
+            for (let el of arr) {
+                newArr.push(yaml2json(el));
+            }
+            return newArr;
+        }
+        return arr;
     }
 
     return <>
@@ -142,7 +206,8 @@ const SimulationMaker = () => {
             position: "fixed",
             top: "15px",
             display: "flex",
-            flexDirection: "column"
+            flexDirection: "column",
+            zIndex: 1
         }}>
             <OverlayTrigger
                 placement="left"
@@ -154,7 +219,7 @@ const SimulationMaker = () => {
                         onClick={
                             e => {
                                 e.preventDefault();
-                                addConfig(globalDefaults, setGlobalDefaults, nodesData, setNodesData, edgesData, setEdgesData);
+                                addConfig(language, globalDefaults, setGlobalDefaults, nodesData, setNodesData, edgesData, setEdgesData);
                                 setCount(count + 1);
                                 createEditorArea(count, language, globalDefaults, setGlobalDefaults, nodesData, setNodesData, edgesData, setEdgesData);
                             }
@@ -168,14 +233,15 @@ const SimulationMaker = () => {
                 e.preventDefault();
                 navigate("/simulation-view", {
                     state: {
-                        globalDefaultsList: globalDefaults,
-                        nodesDataList: nodesData,
-                        edgesDataList: edgesData
+                        globalDefaultsList: toJSON(globalDefaults),
+                        nodesDataList: toJSON(nodesData),
+                        edgesDataList: toJSON(edgesData)
                     }
                 })
             }}>Convert</Button>
         </div>
 
+        {/*Other buttons*/}
         <SimulationExamplesComponent setData={setData}/>
 
         <div style={{display: "flex"}}>
@@ -187,6 +253,9 @@ const SimulationMaker = () => {
         <div>
             <IndividualImport maxNumber={count} setData={setIndividualData} setLanguage={setLanguage}/>
         </div>
+
+        <LanguageSwitcher language={language} setLanguage={setLanguage} setData={() => undefined}
+                          globalDefaults={globalDefaults} nodesData={nodesData} edgesData={edgesData}/>
 
         {/* Editors */}
         {

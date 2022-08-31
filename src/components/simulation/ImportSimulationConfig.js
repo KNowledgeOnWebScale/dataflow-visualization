@@ -1,7 +1,7 @@
 import {Button} from "react-bootstrap";
 import {useRef} from "react";
 
-const ImportSimulationConfig = ({setData, setLanguage}) => {
+const ImportSimulationConfig = ({setData}) => {
 
     const inputFile = useRef(null)
 
@@ -34,21 +34,6 @@ const ImportSimulationConfig = ({setData, setLanguage}) => {
 
             setData(fileAsJson["globalDefaultsConfigs"], fileAsJson["nodesConfigs"], fileAsJson["edgesConfigs"]);
 
-            /*
-            can't do that because setState is asynchronous
-
-             for (let i = 0; i < fileAsJson["globalDefaultsConfigs"].length; i++) {
-                // alert(JSON.stringify(fileAsJson["globalDefaultsConfigs"][i]))
-                 setData(
-                     i,
-                     JSON.stringify(fileAsJson["globalDefaultsConfigs"][i], null, 4),
-                     JSON.stringify(fileAsJson["nodesConfigs"][i], null, 4),
-                     JSON.stringify(fileAsJson["edgesConfigs"][i], null, 4)
-                 )
-             }*/
-
-            //TODO: gwn naar yaml omzetten
-            setLanguage("json");
         }
 
 
