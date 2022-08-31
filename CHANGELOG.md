@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - You can set spacing for autoLayout, hgroup and vgroups.
 - The shape of a node can be anything defined in [react-icons](https://react-icons.github.io/react-icons).
 - Added FAQ section to README
+- You can make 'simulations' (= flow in multiple steps)
 
 
 ### Changed

@@ -30,8 +30,11 @@ See the `Details` component for an example.
 
 ### How to add examples
 
+#### Single-config flow
+
 When using this application, you'll notice there are buttons to load examples. These buttons load in the
-files [exampleData1.js](src/data/single-flow/examples/exampleData1.js), [exampleData2.js](src/data/single-flow/examples/exampleData2.js) ...
+files [exampleData1.js](src/data/single-flow/examples/exampleData1.js)
+, [exampleData2.js](src/data/single-flow/examples/exampleData2.js) ...
 So if you want to
 add
 an example, just create another file. In this file, you should have a JSON object for the global defaults, an array of
@@ -40,6 +43,17 @@ and an array of edges. Optionally, you can set a title as well. This will be the
 of the buttons don't have to be `example x`). If your file is ready, import everything
 in [examples.js](src/data/single-flow/examples.js) and add your imports to the array `examples`. A button to load in
 your example will automatically show up if you restart the application.
+
+#### Multi-config flow
+
+The buttons to load in multi-config flows are shown on the page where you build your simulation.
+There is already an example provided. See e.g. [example1/](src/data/simulation-flow/examples). To make your own example,
+make a new folder where you put every step in a different file. As with the single-config examples, you should have a
+JSON object for the global defaults, an array for the nodes and an array for the edges. When you created your configs,
+import it
+in [examples.js](src/data/simulation-flow/examples.js). Next add your imports to the hashmap `examples` the same way
+this is done by the other examples. The keys of the hashmap (e.g. `example 1`) will be the text on the buttons (that
+once again will show up automatically). However, you can't deviate from the keys `step0`, `step1`, `...` .
 
 ### Permalink
 
