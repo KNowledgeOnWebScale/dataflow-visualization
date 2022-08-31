@@ -30,7 +30,7 @@ const ReactFlowComponent = ({
 
     const {setCenter} = useReactFlow();
     const {zoomTo} = useReactFlow();
-    const [, , ts] = store.getState().transform;
+    const [tx, , ts] = store.getState().transform;
 
 
     useEffect(() => {
@@ -50,7 +50,7 @@ const ReactFlowComponent = ({
                 })
 
                 const nodeIndex = Math.round(y / (rect.bottom - rect.top) * nodes.length);
-                setCenter(sortedNodes[nodeIndex].position.x, sortedNodes[nodeIndex].position.y, ts);
+                setCenter(tx/*sortedNodes[nodeIndex].position.x*/, sortedNodes[nodeIndex].position.y, ts);
                 zoomTo(ts);
             }
         }
