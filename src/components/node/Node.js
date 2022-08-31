@@ -171,7 +171,7 @@ export default memo(({data, isConnectable}) => {
     // TODO refactor this: should be either a shape OR a custom component
     return (
         <>
-            {myShape || <button></button>}
+            {myShape}
 
             {myCustomComponent}
 
