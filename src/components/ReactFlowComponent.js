@@ -17,18 +17,10 @@ const ReactFlowComponent = ({
 
     return <>
 
-        <div style={{
+        <div className="disable-scroll" id={"flow-diagram"} style={{
             height: window.innerHeight * 0.85,
             border: "solid 1px black", width: "98%"
-        }}
-
-            /*style={{
-            width: window.innerWidth * 0.48,
-            height: window.innerHeight * 0.96,
-            border: "solid 1px black",
-            margin: "10px auto 10px auto",
-            display: "inline-block"
-        }}*/>
+        }}>
             <ReactFlow
                 nodes={nodes}
                 edges={edges}
@@ -38,8 +30,28 @@ const ReactFlowComponent = ({
                 snapToGrid={snapToGrid}
                 // edgeTypes={edgeTypes}
                 nodeTypes={nodeTypes}
+
                 fitView
                 attributionPosition="top-right"
+
+
+                style={{
+                    height: "100%",
+                    width: "100%",
+                    overflow: "scroll",
+                    //overflow: "auto",
+                    //overscrollBehavior: "none"
+                }}
+
+                /*paneMoveable={false}
+                panOnScroll={true}
+
+                onlyRenderVisibleElements={false}
+                zoomOnDoubleClick={false}
+                zoomOnScroll={false}
+                preventScrolling={false}
+                zoomOnPinch={false}*/
+
             >
                 {showControls &&
                     <>
