@@ -8,6 +8,7 @@ import SnapToGridSwitchButton from "../controls/children/toggleButtons/SnapToGri
 import ExportSimulationConfig from "./ExportSimulationConfig";
 import ImportSimulationConfig from "./ImportSimulationConfig";
 import {FaPlay} from "react-icons/fa";
+import {edgeSchema, globalDefaultSchema, nodeSchema, validateJSON} from "../../lib/schemaValidation";
 
 const SimulationView = (/*{
                             globalDefaultsList,
@@ -47,10 +48,25 @@ const SimulationView = (/*{
 
     function loadInConfig(e, step) {
         e.preventDefault();
-        setFlowData(JSON.parse(location.state.globalDefaultsList[step]), JSON.parse(location.state.nodesDataList[step]), JSON.parse(location.state.edgesDataList[step]), setNodes, setEdges);
+
+        let error = "";
+
+        let parsedGlobalDefaults = JSON.parse(location.state.globalDefaultsList[step]);
+        let parsedNodes = JSON.parse(location.state.nodesDataList[step]);
+        let parsedEdges = JSON.parse(location.state.edgesDataList[step]);
+
+        validateJSON(parsedEdges, edgeSchema, e => error = e);
+        validateJSON(parsedNodes, nodeSchema, e => error = e)
+        validateJSON(parsedGlobalDefaults, globalDefaultSchema, e => error = e);
+
+        if (error === "") {
+            setFlowData(parsedGlobalDefaults, parsedNodes, parsedEdges, setNodes, setEdges);
+        } else {
+            alert("step " + step + ": " + error)
+        }
+
         e.target.style.opacity = 0.9;
         setTimeout(() => {
-            console.log("remove")
             e.target.style.opacity = 1;
         }, 80)
     }
