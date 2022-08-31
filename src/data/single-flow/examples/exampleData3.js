@@ -1,21 +1,23 @@
 export const globalDefaultsJSON = {
     "graph": {},
-    "node": {},
+    "node": {
+        shape: "cylinder"
+    },
     "edge": {
         type: "straight",
         animated: true,
         markerEnd: {type: "arrowclosed"},
-        strokeDasharray: "5 2 2 2"
+        strokeDasharray: "varied",
     }
 
 };
 
 export const nodesJSON = [
-    {label: 'RDF', shape: "cylinder", vgroup: "group1"},
-    {label: "RDF'", shape: "cylinder", vgroup: "group1"},
-    {label: "RDF''", shape: "cylinder", vgroup: "group1"},
-    {label: "RDF'''", shape: "cylinder", vgroup: "group1"},
-    {label: "RDF''''", shape: "cylinder", vgroup: "group1"},
+    {label: 'RDF', vgroup: "group1"},
+    {label: "RDF'", vgroup: "group1"},
+    {label: "RDF''", vgroup: "group1"},
+    {label: "RDF'''", vgroup: "group1"},
+    {label: "RDF''''", vgroup: "group1"},
 
 
     {shape: "comunica", position: {x: 600, y: 90}, vgroup: "group2"},
