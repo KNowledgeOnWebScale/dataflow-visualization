@@ -186,6 +186,7 @@ function globalDefaultNestedKey(key) {
         nestedObj["properties"][value.id] = {
             type: value.type,
             enum: value.enum,
+            examples: value.examples,
             description: value.description,
             default: value.value,
             errorMessage: {
@@ -249,6 +250,7 @@ function initNodesSchema() {
         nodeSchema.items.properties[value.id] = {
             type: value.type,
             enum: value.enum,
+            examples:value.examples,
             description: value.description,
             default: value.value,
 
@@ -289,6 +291,7 @@ function initEdgesSchema() {
         edgeSchema.items.properties[value.id] = {
             type: value.type,
             enum: value.enum,
+            examples: value.examples,
             description: value.description,
             default: value.value,
 

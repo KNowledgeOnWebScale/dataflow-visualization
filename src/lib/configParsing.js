@@ -10,9 +10,14 @@ const customComponentNames = Object.keys(customComponents);
 let shapes = ["icon", "8-star", "big-star", "circle", "cylinder", "diamond", "hexagon", "note", "rectangle", "square", "star", "triangle", "comunica", "rmlio", "solid"]
 shapes = shapes.concat(customComponentNames);
 
-// These are the keys that can be used in globalDefaults
-// These keys are not standard supported by the library, that's why they are in a dict
-// The values of this dict should be used in the JSON representation
+const animationFallBacks = {
+    "default": "dashdraw .45s linear infinite",
+    "reverse": "dashdraw .45s linear infinite reverse"
+}
+
+const strokeDashArrayDefaultFallBack = "6 4"; // TODO: ook echt 'default' toelaten (alsook wat andere dingen (dat is een issue))
+
+// These are the keys that you can use in the configs. Stuff like 'enum', 'description' ... is for the schema validation
 export const KEY_VALUES = {
 
     [GRAPH]: {
@@ -188,19 +193,13 @@ export const KEY_VALUES = {
 
     // Keys that can be used in the JSON/YAML representation of edges
     [EDGE]: {
-        "ANIMATED": {
-            id: "animated",
-            "canBeGlobal": true,
-            value: false,
-            type: "boolean",
-            description: "Set a default animation for the edge. See also [Animations](https://github.com/KNowledgeOnWebScale/dataflow-visualization/tree/main#animations)."
-        },
         "ANIMATION": {
             id: "animation",
             "canBeGlobal": true,
             type: "string",
             "cssProperty": "animation",
-            description: "See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/animation) for more information about animation. An example is e.g. `dashdraw .2s linear infinite`."
+            examples: ["none", "default", "reverse"],
+            description: "See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/animation) for more information about animation. An example is e.g. `dashdraw .2s linear infinite` (has to start with 'dashdraw'). Note that you can just the value to `default` or `reverse`. The animation will then fall back to `" + animationFallBacks.default + "`. If the value is `reverse`, the fall back value will be `" + animationFallBacks.reverse + "`. The strokeDashArray (if none is specified) will fall back to `" + strokeDashArrayDefaultFallBack + "`. When set to `none`, no animation will be shown."
         },
         "COLOR": {
             id: "color",
@@ -516,15 +515,16 @@ export function parseEdges(globalDefaults, edges, nodes) {
             edge[EDGE_KEYS.MARKER_START.id]["width"] = edge[EDGE_KEYS.MARKER_START.id]["size"];
         }
 
-        // the key animated is something that is supported by the library, but it is overwritten by the standard value of strokeDasharray
-        // If the user sets animated to true, but sets no strokDasharray, the edge should still be animated
-        if (edge.hasOwnProperty("animated") && edge["animated"] === true && edge["style"]["strokeDasharray"] === EDGE_KEYS.STROKE_DASHARRAY.value) {
-            edge["style"]["strokeDasharray"] = "5";
+        // If the value of animation is 'default', use a fallback value for animation (and maybe for strokeDashArray if it does not have one)
+
+        if (animationFallBacks.hasOwnProperty(edge["style"]["animation"])) {
+            edge["style"]["animation"] = animationFallBacks[edge["style"]["animation"]];
+            if (edge["style"]["strokeDasharray"] === EDGE_KEYS.STROKE_DASHARRAY.value) {
+                edge["style"]["strokeDasharray"] = "6 4";
+            }
         }
 
-
         // If the edge has no zIndex and connects 2 nodes that are in the same parent, set the zIndex of the edge to 1
-        // TODO: dit is wrs niet meer nodig als standaard value op 1 staat
         if (!edge.hasOwnProperty("zIndex")) {
             const [srcNode, targetNode] = getSourceNode_targetNode_fromId(edge, nodes);
             if (

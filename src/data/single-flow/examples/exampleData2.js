@@ -7,7 +7,7 @@ export const globalDefaultsJSON = {
         strokeWidth: 0.2,
     },
     edge: {
-        animated: true,
+        animation: "default",
         markerEnd: {type: "arrowclosed", size: 25},
     }
 
@@ -91,7 +91,7 @@ export const edgesJSON = [
         targetHandle: "top",
         strokeDasharray: 3,
         markerEnd: {},
-        animated: false
+        animation: "none"
     },
     {
         source: "SPARQL-END",
@@ -99,7 +99,7 @@ export const edgesJSON = [
         type: "straight",
         markerStart: {type: "arrowclosed"},
         markerEnd: {type: "arrowclosed"},
-        animated: false
+        animation: "none"
     },
     {
         id: "Comunica to SPARQL",
@@ -110,7 +110,7 @@ export const edgesJSON = [
         targetHandle: "top",
         strokeDasharray: 3,
         markerEnd: {},
-        animated: false
+        animation: "none"
     }
 
 ];

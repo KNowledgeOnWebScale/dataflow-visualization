@@ -11,15 +11,14 @@ Type: `array`
  - Type: `object`
  - <i id="edgeSchema/items">path: #edgeSchema/items</i>
  - **_Properties_**
-	 - <b id="#edgeSchema/items/properties/animated">animated</b>
-		 - _Set a default animation for the edge. See also [Animations](https://github.com/KNowledgeOnWebScale/dataflow-visualization/tree/main#animations)._
-		 - Type: `boolean`
-		 - <i id="edgeSchema/items/properties/animated">path: #edgeSchema/items/properties/animated</i>
-		 - Default: _false_
 	 - <b id="#edgeSchema/items/properties/animation">animation</b>
-		 - _See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/animation) for more information about animation. An example is e.g. `dashdraw .2s linear infinite`._
+		 - _See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/animation) for more information about animation. An example is e.g. `dashdraw .2s linear infinite` (has to start with 'dashdraw'). Note that you can just the value to `default` or `reverse`. The animation will then fall back to `dashdraw .45s linear infinite`. If the value is `reverse`, the fall back value will be `dashdraw .45s linear infinite reverse`. The strokeDashArray (if none is specified) will fall back to `6 4`. When set to `none`, no animation will be shown._
 		 - Type: `string`
 		 - <i id="edgeSchema/items/properties/animation">path: #edgeSchema/items/properties/animation</i>
+		 - Example values: 
+			 1. _"none"_
+			 2. _"default"_
+			 3. _"reverse"_
 	 - <b id="#edgeSchema/items/properties/color">color</b>
 		 - _The color of the edge._
 		 - Type: `string`
