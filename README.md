@@ -134,6 +134,16 @@ create a new permalink.
 When clicking on this button, you'll be redirected to a new page. On that page you can create multiple configs. When
 clicking 'convert' you'll be able to animate the flow by visualizing one config after the other.
 
+#### Navigation bar
+
+Next to the window where your flow is shown, you see a gray bar. This is some sort of "jump bar". Depending on where
+you click on the bar, a different node will be centered. If you click somewhere at the very top of the bar, the most
+upper node of your flow will be centered. The lower you click, the lower the node that will be centered. If you click
+somewhere at the bottom of the bar, the last node will be centered.
+
+This navigation bar is very useful when you want to quickly navigate in a very large network of (vertical oriented)
+nodes.
+
 ## FAQ
 
 #### I have an animated edge. How do I change the direction of this animation without messing up my layout?
