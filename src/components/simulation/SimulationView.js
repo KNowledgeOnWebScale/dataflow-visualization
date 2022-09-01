@@ -24,6 +24,8 @@ const SimulationView = (/*{
 
     const [loadingMessage, setLoadingMessage] = useState("")
 
+    const [numberOfSteps, setNumberOfSteps] = useState(0);
+
     const [delay, setDelay] = useState(3000);
 
     const location = useLocation();
@@ -42,7 +44,9 @@ const SimulationView = (/*{
 
         else {
             setLoadingMessage("");
+            setNumberOfSteps(location.state.globalDefaultsList.length);
         }
+
     }, [location]);
 
 
@@ -135,7 +139,7 @@ const SimulationView = (/*{
                     {location && location.state && location.state.globalDefaultsList.length &&
                         <ButtonGroup size="lg" className="mb-2">
                             {
-                                [...Array(location.state.globalDefaultsList.length).keys()].map(s => {
+                                [...Array(numberOfSteps).keys()].map(s => {
                                         return <Button id={"button-" + s}
                                                        onClick={e => loadInConfig(e, s)}>{"Step " + s}</Button>
                                     }
