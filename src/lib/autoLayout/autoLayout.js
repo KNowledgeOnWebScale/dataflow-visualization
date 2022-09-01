@@ -19,7 +19,7 @@ Algorithm if groups are used in combination with autoLayout:
     * If a node is inside vgroup/hgroup, take all the nodes from that group apart and add a temporary node the size of the entire group.
     * Remove the nodes you took apart.
     * Remove all the edges that have a node from a group as source or target.
-    * (Store all of that in a object)
+    * (Store all of that in an object)
 * Step 2:
     * Build with dagre.
 
@@ -120,6 +120,7 @@ function groupNodes(groups, nodesCopy, edgesCopy) {
                     "nodes": [], "edges": [], "addedEdges": []
                 }
             }
+
             groups.vgroups[node[vgroupId]].nodes.push(JSON.parse(JSON.stringify(node)));
 
             // All edges with node as source:
