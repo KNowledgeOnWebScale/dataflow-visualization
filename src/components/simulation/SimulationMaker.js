@@ -2,7 +2,7 @@ import {Button, OverlayTrigger, Tooltip} from "react-bootstrap";
 import {BsPlusLg} from "react-icons/bs";
 import {useEffect, useState} from "react";
 import CodeEditor from "../editors/CodeEditor";
-import {edgeSchema, globalDefaultSchema, nodeSchema} from "../../lib/schemaValidation";
+import {edgeSchema, globalDefaultSchema, nodeSchema, validateJSON} from "../../lib/schemaValidation";
 import {useNavigate} from "react-router-dom";
 import ExportSimulationConfig from "./ExportSimulationConfig";
 import ImportSimulationConfig from "./ImportSimulationConfig";
@@ -197,6 +197,41 @@ const SimulationMaker = () => {
         return arr;
     }
 
+    function validateAndShow(e) {
+        e.preventDefault();
+
+        const finalGlobalDefaultJSONConfigs = toJSON(globalDefaults);
+        const finalNodesJSONConfigs = toJSON(nodesData);
+        const finalEdgesJSONConfigs = toJSON(edgesData);
+
+        for (let i = 0; i < finalGlobalDefaultJSONConfigs.length; i += 1) {
+            let error = ""
+
+            try {
+                validateJSON(JSON.parse(finalGlobalDefaultJSONConfigs[i]), globalDefaultSchema, () => error += `Global default config of editor ${i} is incorrect`)
+                validateJSON(JSON.parse(finalNodesJSONConfigs[i]), nodeSchema, () => error += `\nNode config of editor ${i} is incorrect`)
+                validateJSON(JSON.parse(finalEdgesJSONConfigs[i]), edgeSchema, () => error += `\nEdge config of editor ${i} is incorrect`)
+            } catch(e) {
+                alert("Incorrect syntax. Check editor " + i + ".");
+                return;
+            }
+            if (error !== "") {
+                alert(error)
+                return;
+            }
+
+        }
+
+        navigate("/simulation-view", {
+            state: {
+                globalDefaultsList: toJSON(globalDefaults),
+                nodesDataList: toJSON(nodesData),
+                edgesDataList: toJSON(edgesData)
+            }
+        })
+    }
+
+
     return <>
 
         {/* Button to add an editor area  */}
@@ -229,16 +264,9 @@ const SimulationMaker = () => {
                 </Button>
             </OverlayTrigger>
 
-            <Button variant={"warning"} style={{marginTop: "15px", fontSize: "1.2em"}} onClick={e => {
-                e.preventDefault();
-                navigate("/simulation-view", {
-                    state: {
-                        globalDefaultsList: toJSON(globalDefaults),
-                        nodesDataList: toJSON(nodesData),
-                        edgesDataList: toJSON(edgesData)
-                    }
-                })
-            }}>Convert</Button>
+            <Button variant={"warning"} style={{marginTop: "15px", fontSize: "1.2em"}} onClick={validateAndShow}>
+                Convert
+            </Button>
         </div>
 
         {/*Other buttons*/}

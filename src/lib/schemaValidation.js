@@ -305,7 +305,7 @@ export function validateJSON(data, schema, setError) {
     const validate = ajv.compile(schema);
     const valid = validate(data);
     if (!valid) {
-        //console.log(validate.errors)
+        console.log(validate.errors)
         let errMsg = validate.errors.map(e => e["message"] || JSON.stringify(e, null, 2))
         if (errMsg) {
             setError(errMsg);
