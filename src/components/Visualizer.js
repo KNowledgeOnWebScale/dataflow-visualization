@@ -88,6 +88,7 @@ const Visualizer = () => {
                            nodes={nodes} setNodes={setNodes} edges={edges} setEdges={setEdges}/>
 
         <table style={{width: "100%", marginLeft: "5px", marginRight: "5px"}}>
+            <tbody>
             <tr>
                 <td style={{width: "30%"/*border: "5px solid green"*/}}>
                     <EditorArea setNodes={setNodes} setEdges={setEdges} language={language} setLanguage={setLanguage}
@@ -102,6 +103,7 @@ const Visualizer = () => {
                                         onConnect={onConnect} snapToGrid={snapToGrid}/>
                 </td>
             </tr>
+            </tbody>
         </table>
 
     </>
