@@ -7,7 +7,7 @@ export const NODE = "node";
 export const EDGE = "edge";
 
 const customComponentNames = Object.keys(customComponents);
-let shapes = ["icon", "8-star", "big-star", "circle", "cylinder", "diamond", "hexagon", "note", "rectangle", "square", "star", "triangle", "comunica", "rmlio", "solid"]
+let shapes = ["icon", "8-star", "big-star", "circle", "cylinder", "diamond", "ellipse", "hexagon", "note", "rectangle", "square", "star", "triangle", "comunica", "rmlio", "solid"]
 shapes = shapes.concat(customComponentNames);
 
 

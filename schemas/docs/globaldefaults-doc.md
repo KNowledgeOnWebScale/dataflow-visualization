@@ -81,16 +81,17 @@ Type: `object`
 				 4. _"circle"_
 				 5. _"cylinder"_
 				 6. _"diamond"_
-				 7. _"hexagon"_
-				 8. _"note"_
-				 9. _"rectangle"_
-				 10. _"square"_
-				 11. _"star"_
-				 12. _"triangle"_
-				 13. _"comunica"_
-				 14. _"rmlio"_
-				 15. _"solid"_
-				 16. _"Details"_
+				 7. _"ellipse"_
+				 8. _"hexagon"_
+				 9. _"note"_
+				 10. _"rectangle"_
+				 11. _"square"_
+				 12. _"star"_
+				 13. _"triangle"_
+				 14. _"comunica"_
+				 15. _"rmlio"_
+				 16. _"solid"_
+				 17. _"Details"_
 			 - Default: _"square"_
 		 - <b id="#globalDefaultsNode/properties/iconName">iconName</b>
 			 - _When 'shape' is set to 'icon', you can set 'iconName' to anything you find in [react-icons](https://react-icons.github.io/react-icons/). Since this is a third-party library, not all styling will work. Only `fill`, `strokeWidth`, `width` and `height` will have effect._
