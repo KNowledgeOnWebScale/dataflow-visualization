@@ -8,8 +8,9 @@ Run `npm run build:docs`. This uses the Jest runner to re-create the schemas and
 and stores them in the accompanying
 files in the directory [schemas/schemas](schemas/schemas).
 The new markdowns will be generated, [README.md](README.md) already links to these
-files. Note that there is a pre-commit hook ([see .husky](.husky)) that regenerates the docs, so you actually never have
-to run this command yourself.
+files. 
+
+Note that there is a pre-commit hook (see [.husky](.husky)) that regenerates the docs.
 
 ### How to add shapes/images
 

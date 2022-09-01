@@ -10,6 +10,10 @@ const customComponentNames = Object.keys(customComponents);
 let shapes = ["icon", "8-star", "big-star", "circle", "cylinder", "diamond", "ellipse", "hexagon", "note", "rectangle", "square", "star", "triangle", "comunica", "rmlio", "solid"]
 shapes = shapes.concat(customComponentNames);
 
+const presetDescription = "Refer to a preset defined in the config of the global defaults. " +
+    "If you haven't used a key in your config (but that key is used in your preset), the key from the preset is taken as a key in your individual config." +
+    " You can refer to multiple presets: the first preset has priority on the second, the second on the third, ... " +
+    "In general, the priority of the keys is: local > first preset > second preset > ... > keys in global default.";
 
 const strokeDashArrayFallBacks = {
     "solid": "0",
@@ -140,7 +144,7 @@ export const KEY_VALUES = {
             id: "preset",
             canBeGlobal: false,
             type: "array",
-            description: "Refer to a preset defined in the config of the global defaults. If you use this, you will overwrite all that is defined in this node with the values of the preset."
+            description: presetDescription
         },
 
         "SHAPE": {
@@ -265,7 +269,7 @@ export const KEY_VALUES = {
             id: "preset",
             canBeGlobal: false,
             type: "array",
-            description: "Refer to a preset defined in the config of the global defaults. If you use this, you will overwrite all that is defined in this edge with the values of the preset."
+            description: presetDescription
         },
 
         "THICKNESS": {
