@@ -34,7 +34,7 @@ export function fixVgroups(globalDefaults, allNodes, vgroupId) {
     //  mss gwn algemeen een manier vinden om de spacing te definiëren
 
     let deltaY = (maxHeight / 2) * spacing;
-    let previousY = pos.y;
+    let previousY = nodes[i].position.y;
     let previousHeight = referenceNode.data.height;
     let previousWidth = referenceNode.data.width;
 
@@ -80,7 +80,7 @@ export function fixHgroups(globalDefaults, allNodes, hgroupId) {
     let referenceNode = nodes.slice(i, 1)[0];
 
     let deltaX = (maxWidth / 2) * spacing;
-    let previousX = pos.x;
+    let previousX = nodes[i].position.x;
     let previousHeight = referenceNode.data.height;
     let previousWidth = referenceNode.data.width;
 
