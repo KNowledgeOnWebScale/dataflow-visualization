@@ -70,93 +70,93 @@ export const nodesJSON = [
     {
         id: "hd-1",
         parentNode: "Client 1",
-        preset: "data",
+        preset: ["data"],
         position: {x: 0, y: 10}
     },
     {
         id: "rml-rules-1",
         parentNode: "Client 1",
-        preset: "RML-hex",
+        preset: ["RML-hex"],
         position: {x: 0, y: 100}
     },
     {
         id: "rml-1",
         parentNode: "Client 1",
-        preset: "RML-mapper",
+        preset: ["RML-mapper"],
         position: {x: 120, y: 60}
     },
     {
         id: "rdf-1",
         parentNode: "Client 1",
-        preset: "RDF",
+        preset: ["RDF"],
         position: {x: 240, y: 50}
     },
     {
         id: "sparql-1",
         parentNode: "Client 1",
-        preset: "SPARQL-end",
+        preset: ["SPARQL-end"],
         position: {x: 360, y: 60}
     },
 
     {
         id: "hd-2",
         parentNode: "Client 2",
-        preset: "data",
+        preset: ["data"],
         position: {x: 0, y: 10}
     },
     {
         id: "rml-rules-2",
         parentNode: "Client 2",
-        preset: "RML-hex",
+        preset: ["RML-hex"],
         position: {x: 0, y: 100}
     },
     {
         id: "rml-2",
         parentNode: "Client 2",
-        preset: "RML-mapper",
+        preset: ["RML-mapper"],
         position: {x: 120, y: 60}
     },
     {
         id: "rdf-2",
         parentNode: "Client 2",
-        preset: "RDF",
+        preset: ["RDF"],
         position: {x: 240, y: 50}
     },
     {
         id: "sparql-2",
         parentNode: "Client 2",
-        preset: "SPARQL-end",
+        preset: ["SPARQL-end"],
         position: {x: 360, y: 60}
     },
 
     {
         id: "hd-3",
         parentNode: "Client 3",
-        preset: "data",
+        preset: ["data"],
         position: {x: 0, y: 10}
     },
     {
         id: "rml-rules-3",
         parentNode: "Client 3",
-        preset: "RML-hex",
+        preset: ["RML-hex"],
         position: {x: 0, y: 100}
     },
     {
         id: "rml-3",
         parentNode: "Client 3",
-        preset: "RML-mapper",
+        preset: ["RML-mapper"],
         position: {x: 120, y: 60}
     },
     {
         id: "rdf-3",
         parentNode: "Client 3",
-        preset: "RDF",
+        preset: ["RDF"],
         position: {x: 240, y: 50}
     },
     {
         id: "sparql-3",
         parentNode: "Client 3",
-        preset: "SPARQL-end",
+        preset: ["SPARQL-end"],
         position: {x: 360, y: 60}
     },
 

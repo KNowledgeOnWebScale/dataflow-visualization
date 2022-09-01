@@ -130,7 +130,7 @@ export const KEY_VALUES = {
         },
 
         PRESETS: {
-            id: "presets",
+            id: "presets",  // You might ask why this is in the JSON schema only for globalDefaults --> type objects are being treated differently in the construction of the validation schema
             canBeGlobal: true,
             type: "object",
             description: "Create node presets."
@@ -139,7 +139,7 @@ export const KEY_VALUES = {
         PRESET: {
             id: "preset",
             canBeGlobal: false,
-            type: "string",
+            type: "array",
             description: "Refer to a preset defined in the config of the global defaults. If you use this, you will overwrite all that is defined in this node with the values of the preset."
         },
 
@@ -264,7 +264,7 @@ export const KEY_VALUES = {
         PRESET: {
             id: "preset",
             canBeGlobal: false,
-            type: "string",
+            type: "array",
             description: "Refer to a preset defined in the config of the global defaults. If you use this, you will overwrite all that is defined in this edge with the values of the preset."
         },
 
@@ -362,6 +362,26 @@ export function parseGlobalDefaults(globalDefaults) {
     return globalDefaults;
 }
 
+function loadInPresets(presets, presetId, individual, globalDefaultEdgeNode  /*globalDefaults[NODE] or globalDefaults[EDGE]*/) {
+
+    for (let preset of presets) {
+        let presetInGlobalDefaults = globalDefaultEdgeNode[presetId][preset];
+
+        if (!presetInGlobalDefaults) {
+            console.warn(`Preset with id ${preset} not found in globalDefaults`);
+            continue;
+        }
+
+        for (let key of Object.keys(presetInGlobalDefaults)) {
+            if (!individual.hasOwnProperty(key)) {
+                individual[key] = presetInGlobalDefaults[key];
+            }
+        }
+
+    }
+
+}
+
 
 export function parseNodes(globalDefaults, nodes) {
     // TODO: errorfallback meegeven en kijken of alle opgegeven ID's wel uniek zijn
@@ -414,11 +434,36 @@ export function parseNodes(globalDefaults, nodes) {
 
         const NODE_KEYS = KEY_VALUES[NODE]
 
+
+        // Load presets
+        // If key does not exist yet: copy from preset
+        // So if the first preset of the array has e.g. fill and the second has that as well,
+        // the fill of the first preset is picked
+
+        //if (node.hasOwnProperty(NODE_KEYS.PRESET.id)) {
+        //   let presetInGlobalDefaults = globalDefaults[NODE][NODE_KEYS.PRESETS.id][node[NODE_KEYS.PRESET.id]];
+        //   for (let key of Object.keys(presetInGlobalDefaults)) {
+        //       node[key] = presetInGlobalDefaults[key];
+        //   }
+        //}
+
         if (node.hasOwnProperty(NODE_KEYS.PRESET.id)) {
-            let presetInGlobalDefaults = globalDefaults[NODE][NODE_KEYS.PRESETS.id][node[NODE_KEYS.PRESET.id]];
-            for (let key of Object.keys(presetInGlobalDefaults)) {
-                node[key] = presetInGlobalDefaults[key];
-            }
+            loadInPresets(node[NODE_KEYS.PRESET.id], NODE_KEYS.PRESETS.id, node, globalDefaults[NODE])
+            /*for (let preset of node[NODE_KEYS.PRESET.id]) {
+                let presetInGlobalDefaults = globalDefaults[NODE][NODE_KEYS.PRESETS.id][preset];
+
+                if (!presetInGlobalDefaults) {
+                    console.warn(`Preset with id ${preset} not found in globalDefaults`);
+                    continue;
+                }
+
+                for (let key of Object.keys(presetInGlobalDefaults)) {
+                    if (!node.hasOwnProperty(key)) {
+                        node[key] = presetInGlobalDefaults[key];
+                    }
+                }
+
+            }*/
         }
 
         if (node.hasOwnProperty(NODE_KEYS.IMAGE.id) && !node.hasOwnProperty(NODE_KEYS.STROKE.id)) {
@@ -478,11 +523,15 @@ export function parseEdges(globalDefaults, edges, nodes) {
 
         const EDGE_KEYS = KEY_VALUES[EDGE];
 
+
+        //TODO
         if (edge.hasOwnProperty(EDGE_KEYS.PRESET.id)) {
-            let presetInGlobalDefaults = globalDefaults[EDGE][EDGE_KEYS.PRESETS.id][edge[EDGE_KEYS.PRESET.id]];
-            for (let key of Object.keys(presetInGlobalDefaults)) {
-                edge[key] = presetInGlobalDefaults[key];
-            }
+            loadInPresets(edge[EDGE_KEYS.PRESET.id], EDGE_KEYS.PRESETS.id, edge, globalDefaults[EDGE]);
+
+            //let presetInGlobalDefaults = globalDefaults[EDGE][EDGE_KEYS.PRESETS.id][edge[EDGE_KEYS.PRESET.id]];
+            //for (let key of Object.keys(presetInGlobalDefaults)) {
+            //    edge[key] = presetInGlobalDefaults[key];
+            // }
         }
 
         // This loop fixes

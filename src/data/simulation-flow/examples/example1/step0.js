@@ -29,7 +29,7 @@ export const globalDefaultsJSON = {
 export const nodesJSON = [
     {
         "label": "CSV",
-        "preset": "cylinder-1",
+        "preset": ["cylinder-1"],
         "fill": "indianred",
         "position": {
             "x": 0,
@@ -38,27 +38,27 @@ export const nodesJSON = [
     },
     {
         "label": "JSON",
-        "preset": "cylinder-1",
+        "preset": ["cylinder-1"],
         "fill": "lightcoral"
     },
     {
         "label": "XML",
-        "preset": "cylinder-1",
+        "preset": ["cylinder-1"],
         "fill": "sandybrown"
     },
     {
         "label": "MySQL",
-        "preset": "cylinder-1",
+        "preset": ["cylinder-1"],
         "fill": "khaki"
     },
     {
         "label": "API",
-        "preset": "cylinder-1",
+        "preset": ["cylinder-1"],
         "fill": "darkseagreen"
     },
     {
         "id": "RML-CSV",
-        "preset": "RML-Translator-preset",
+        "preset": ["RML-Translator-preset"],
         "position": {
             "x": 80,
             "y": -30
@@ -67,22 +67,22 @@ export const nodesJSON = [
     },
     {
         "id": "RML-JSON",
-        "preset": "RML-Translator-preset",
+        "preset": ["RML-Translator-preset"],
         "hgroup": "RDF-JSON"
     },
     {
         "id": "RML-XML",
-        "preset": "RML-Translator-preset",
+        "preset": ["RML-Translator-preset"],
         "hgroup": "RDF-XML"
     },
     {
         "id": "RML-MySQL",
-        "preset": "RML-Translator-preset",
+        "preset": ["RML-Translator-preset"],
         "hgroup": "RDF-MySQL"
     },
     {
         "id": "RML-API",
-        "preset": "RML-Translator-preset",
+        "preset": ["RML-Translator-preset"],
         "hgroup": "RDF-API"
     },
     {
