@@ -26,24 +26,24 @@ export const globalDefaultsJSON = {
 
 export const nodesJSON = [
     {
-        preset: ["data-preset"],
+        preset: "data-preset",
         label: 'CSV',
         position: {y: -85},
     },
     {
-        preset: ["data-preset"],
+        preset: "data-preset",
         label: 'JSON'
     },
     {
-        preset: ["data-preset"],
+        preset: "data-preset",
         label: 'XML'
     },
     {
-        preset: ["data-preset"],
+        preset: "data-preset",
         label: 'MySQL'
     },
     {
-        preset: ["data-preset"],
+        preset: "data-preset",
         label: 'API',
         shape: "circle"
     },
@@ -89,27 +89,27 @@ export const edgesJSON = [
     {
         source: 'CSV',
         target: 'RDF',
-        preset: ["data-preset"]
+        preset: "data-preset"
     },
     {
         source: 'JSON',
         target: 'RDF',
-        preset: ["data-preset"]
+        preset: "data-preset"
     },
     {
         source: 'XML',
         target: 'RDF',
-        preset: ["data-preset"]
+        preset: "data-preset"
     },
     {
         source: 'MySQL',
         target: 'RDF',
-        preset: ["data-preset"]
+        preset: "data-preset"
     },
     {
         source: 'API',
         target: 'RDF',
-        preset: ["data-preset"]
+        preset: "data-preset"
     },
     {
         source: "RML",

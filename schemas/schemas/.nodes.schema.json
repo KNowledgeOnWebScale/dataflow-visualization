@@ -69,11 +69,14 @@
         }
       },
       "preset": {
-        "type": "array",
-        "items": {
-          "type": "string"
-        },
-        "description": "Refer to a preset defined in the config of the global defaults. If you haven't used a key in your config (but that key is used in your preset), the key from the preset is taken as a key in your individual config. You can refer to multiple presets: the first preset has priority on the second, the second on the third, ... In general, the priority of the keys is: local > first preset > second preset > ... > keys in global default."
+        "type": [
+          "array",
+          "string"
+        ],
+        "description": "Refer to a preset defined in the config of the global defaults. If you haven't used a key in your config (but that key is used in your preset), the key from the preset is taken as a key in your individual config. You can refer to multiple presets: the first preset has priority on the second, the second on the third, ... In general, the priority of the keys is: local > first preset > second preset > ... > keys in global default.",
+        "errorMessage": {
+          "type": "preset must be array or string"
+        }
       },
       "shape": {
         "type": "string",
