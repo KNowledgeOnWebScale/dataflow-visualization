@@ -49,8 +49,11 @@ Type: `array`
 		 - <i id="nodeSchema/items/properties/parentNode">path: #nodeSchema/items/properties/parentNode</i>
 	 - <b id="#nodeSchema/items/properties/preset">preset</b>
 		 - _Refer to a preset defined in the config of the global defaults. If you use this, you will overwrite all that is defined in this node with the values of the preset._
-		 - Type: `string`
+		 - Type: `array`
 		 - <i id="nodeSchema/items/properties/preset">path: #nodeSchema/items/properties/preset</i>
+			 - **_Items_**
+			 - Type: `string`
+			 - <i id="nodeSchema/items/properties/preset/items">path: #nodeSchema/items/properties/preset/items</i>
 	 - <b id="#nodeSchema/items/properties/shape">shape</b>
 		 - _The shape of the node._
 		 - Type: `string`
