@@ -8,7 +8,7 @@ import solid from "../../assets/solid.svg";
 export function getShape(shapeId, fill, stroke, strokeWidth, strokeDashArray) {
     const SHAPES = {
         "8-star":
-            <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
+            <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio={"none"}>
                 <path style={{
                     fill: fill,
                     fillRule: "evenodd",
@@ -22,7 +22,7 @@ export function getShape(shapeId, fill, stroke, strokeWidth, strokeDashArray) {
             </svg>,
 
         "big-star":
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" preserveAspectRatio={"none"}>
                 <path style={{
                     fill: fill,
                     fillRule: "evenodd",
@@ -50,7 +50,8 @@ export function getShape(shapeId, fill, stroke, strokeWidth, strokeDashArray) {
             </svg>,
 
         "cylinder":
-            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 50 50">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 50 50"
+                 preserveAspectRatio="none">
                 <g>
                     <path style={{
                         fill: fill,/* TODO: opacity:0.8,*/
@@ -71,7 +72,7 @@ export function getShape(shapeId, fill, stroke, strokeWidth, strokeDashArray) {
             </svg>,
 
         "diamond":
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" preserveAspectRatio={"none"}>
                 <path style={{
                     fill: fill,
                     fillRule: "evenodd",
@@ -83,8 +84,9 @@ export function getShape(shapeId, fill, stroke, strokeWidth, strokeDashArray) {
             </svg>,
 
         "ellipse":
-            <svg viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+            <svg viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
                 <ellipse style={{
+                    minWidth: "100%",
                     fill: fill,
                     fillRule: "evenodd",
                     stroke: stroke,
@@ -98,7 +100,7 @@ export function getShape(shapeId, fill, stroke, strokeWidth, strokeDashArray) {
             </svg>,
 
         "hexagon":
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" preserveAspectRatio={"none"}>
                 <path style={{
                     fill: fill,
                     fillRule: "evenodd",
@@ -113,7 +115,7 @@ export function getShape(shapeId, fill, stroke, strokeWidth, strokeDashArray) {
 
         "note":
         // Eerste fill op none laten, want dat is background
-            <svg viewBox="6.579 6.579 50 50" xmlns="http://www.w3.org/2000/svg">
+            <svg viewBox="6.579 6.579 50 50" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio={"none"}>
                 <path fill="none" d="M0 0h63.158v63.158H0z"/>
                 <path style={{stroke: stroke, fill: fill, strokeWidth: strokeWidth, strokeDasharray: strokeDashArray}}
                       d="M55.263 42.105l-13.166 13.158H10.521A2.621 2.621 0 0 1 7.895 52.65V10.508C7.895 9.066 9.066 7.895 10.508 7.895h42.142c1.442 0 2.613 1.176 2.613 2.629V42.105z"/>
@@ -139,7 +141,7 @@ export function getShape(shapeId, fill, stroke, strokeWidth, strokeDashArray) {
             </svg>,
 
         "star":
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" preserveAspectRatio={"none"}>
                 <path style={{
                     fill: fill,
                     fillRule: "evenodd",
@@ -153,7 +155,7 @@ export function getShape(shapeId, fill, stroke, strokeWidth, strokeDashArray) {
             </svg>,
 
         "triangle":
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" preserveAspectRatio={"none"}>
                 <path style={{
                     fill: fill,
                     fillRule: "evenodd",
