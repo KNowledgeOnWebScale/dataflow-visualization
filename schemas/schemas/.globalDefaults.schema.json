@@ -102,6 +102,7 @@
             "circle",
             "cylinder",
             "diamond",
+            "ellipse",
             "hexagon",
             "note",
             "rectangle",
@@ -116,7 +117,7 @@
           "description": "The shape of the node.",
           "default": "square",
           "errorMessage": {
-            "type": "shape must be string with possible values: icon , 8-star , big-star , circle , cylinder , diamond , hexagon , note , rectangle , square , star , triangle , comunica , rmlio , solid  or Details"
+            "type": "shape must be string with possible values: icon , 8-star , big-star , circle , cylinder , diamond , ellipse , hexagon , note , rectangle , square , star , triangle , comunica , rmlio , solid  or Details"
           }
         },
         "iconName": {
@@ -261,6 +262,7 @@
                   "circle",
                   "cylinder",
                   "diamond",
+                  "ellipse",
                   "hexagon",
                   "note",
                   "rectangle",
@@ -275,7 +277,7 @@
                 "description": "The shape of the node.",
                 "default": "square",
                 "errorMessage": {
-                  "type": "shape must be string with possible values: icon , 8-star , big-star , circle , cylinder , diamond , hexagon , note , rectangle , square , star , triangle , comunica , rmlio , solid  or Details"
+                  "type": "shape must be string with possible values: icon , 8-star , big-star , circle , cylinder , diamond , ellipse , hexagon , note , rectangle , square , star , triangle , comunica , rmlio , solid  or Details"
                 }
               },
               "iconName": {

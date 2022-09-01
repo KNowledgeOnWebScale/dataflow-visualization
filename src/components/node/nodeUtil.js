@@ -23,7 +23,13 @@ export function getShape(shapeId, fill, stroke, strokeWidth, strokeDashArray) {
 
         "big-star":
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
-                <path style={{fill: fill, fillRule: "evenodd", stroke: stroke, strokeDasharray:strokeDashArray, paintOrder: "markers fill stroke"}}
+                <path style={{
+                    fill: fill,
+                    fillRule: "evenodd",
+                    stroke: stroke,
+                    strokeDasharray: strokeDashArray,
+                    paintOrder: "markers fill stroke"
+                }}
                       d="m20.048 19.912-7.264-3.291-1.742 7.783-2.81-7.464-6.735 4.272 3.292-7.265-7.783-1.742 7.464-2.81L.198 2.662l7.265 3.291L9.204-1.83l2.81 7.464 6.735-4.272-3.291 7.265 7.783 1.742-7.465 2.81z"
                       transform="matrix(1.7695 -.4742 .47414 1.76976 1.41 9.952)"/>
             </svg>,
@@ -46,12 +52,21 @@ export function getShape(shapeId, fill, stroke, strokeWidth, strokeDashArray) {
         "cylinder":
             <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 50 50">
                 <g>
-                    <path style={{fill: fill,/* TODO: opacity:0.8,*/ stroke: stroke, strokeWidth: strokeWidth, strokeDasharray: strokeDashArray}}
+                    <path style={{
+                        fill: fill,/* TODO: opacity:0.8,*/
+                        stroke: stroke,
+                        strokeWidth: strokeWidth,
+                        strokeDasharray: strokeDashArray
+                    }}
                           d="M25 6.897C11.669 6.897 0.862 5.353 0.862 3.448v43.103c0 1.904 10.807 3.448 24.138 3.448s24.138 -1.544 24.138 -3.448V3.448C49.138 5.353 38.331 6.897 25 6.897z"/>
-                    <path style={{stroke: stroke, fill: fill, strokeWidth: strokeWidth, strokeDasharray: strokeDashArray}} cx="29" cy="4" rx="28" ry="4"
-                          d="M49.138 3.448A24.138 3.448 0 0 1 25 6.897A24.138 3.448 0 0 1 0.862 3.448A24.138 3.448 0 0 1 49.138 3.448z"/>
-                    <path style={{fill: fill, stroke: stroke, strokeWidth: strokeWidth, strokeDasharray: strokeDashArray}} cx="29" cy="54" rx="28" ry="4"
-                          d="M49.138 46.552A24.138 3.448 0 0 1 25 50A24.138 3.448 0 0 1 0.862 46.552A24.138 3.448 0 0 1 49.138 46.552z"/>
+                    <path
+                        style={{stroke: stroke, fill: fill, strokeWidth: strokeWidth, strokeDasharray: strokeDashArray}}
+                        cx="29" cy="4" rx="28" ry="4"
+                        d="M49.138 3.448A24.138 3.448 0 0 1 25 6.897A24.138 3.448 0 0 1 0.862 3.448A24.138 3.448 0 0 1 49.138 3.448z"/>
+                    <path
+                        style={{fill: fill, stroke: stroke, strokeWidth: strokeWidth, strokeDasharray: strokeDashArray}}
+                        cx="29" cy="54" rx="28" ry="4"
+                        d="M49.138 46.552A24.138 3.448 0 0 1 25 50A24.138 3.448 0 0 1 0.862 46.552A24.138 3.448 0 0 1 49.138 46.552z"/>
                 </g>
             </svg>,
 
@@ -65,6 +80,21 @@ export function getShape(shapeId, fill, stroke, strokeWidth, strokeDashArray) {
                     strokeDasharray: strokeDashArray,
                     paintOrder: "markers fill stroke"
                 }} transform="rotate(44.999)" d="M18.025-17.331h34.663v34.663H18.025z"/>
+            </svg>,
+
+        "ellipse":
+            <svg viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+                <ellipse style={{
+                    fill: fill,
+                    fillRule: "evenodd",
+                    stroke: stroke,
+                    strokeWidth: strokeWidth,
+                    strokeLinecap: "round",
+                    strokeLinejoin: "round",
+                    strokeMiterlimit: 0.4,
+                    strokeDasharray: strokeDashArray,
+                    paintOrder: "markers fill stroke"
+                }} cx="100" cy="50" rx="99" ry="50"/>
             </svg>,
 
         "hexagon":
@@ -85,12 +115,13 @@ export function getShape(shapeId, fill, stroke, strokeWidth, strokeDashArray) {
         // Eerste fill op none laten, want dat is background
             <svg viewBox="6.579 6.579 50 50" xmlns="http://www.w3.org/2000/svg">
                 <path fill="none" d="M0 0h63.158v63.158H0z"/>
-                <path style={{stroke: stroke, fill: fill, strokeWidth: strokeWidth, strokeDasharray:strokeDashArray}}
+                <path style={{stroke: stroke, fill: fill, strokeWidth: strokeWidth, strokeDasharray: strokeDashArray}}
                       d="M55.263 42.105l-13.166 13.158H10.521A2.621 2.621 0 0 1 7.895 52.65V10.508C7.895 9.066 9.066 7.895 10.508 7.895h42.142c1.442 0 2.613 1.176 2.613 2.629V42.105z"/>
             </svg>,
 
         "rectangle":
-            <rect style={{fill: fill, stroke: stroke, strokeWidth: strokeWidth, strokeDasharray: strokeDashArray}} width="100%" height="100%" rx="3"/>,
+            <rect style={{fill: fill, stroke: stroke, strokeWidth: strokeWidth, strokeDasharray: strokeDashArray}}
+                  width="100%" height="100%" rx="3"/>,
 
         "square":
             <svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
