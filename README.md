@@ -44,6 +44,16 @@ nodes or edges.
 
 * More info: [nodes](schemas/docs/nodes-doc.md)
 
+#### ID
+
+IDs are used by the edges to refer to a node. But IDs are not mandatory. If no ID is specified:
+
+* If the node has a unique `title`, the title becomes the ID.
+* If the node as a unique `label`, that label becomes the ID.
+* If the node has a unique `shape`, that shape becomes the ID.
+* If the node has a unique `image`, that image becomes the ID.
+* Otherwise, there is no way (as the end user) to refer to that node.
+
 #### Node positioning
 
 [As seen before](#nodes), you can set the positions of all nodes individually with the `position` key. But it is not

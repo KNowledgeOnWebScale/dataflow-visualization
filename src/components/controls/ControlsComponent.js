@@ -43,7 +43,8 @@ const ControlsComponent = ({
                       setErrorModalVisible={setErrorModalVisible}/>
 
 
-        <FillInPositions nodes={nodes} nodesData={nodesData} setNodesData={setNodesData} language={language}
+        <FillInPositions nodes={nodes} globalDefaultsData={globalDefaults} nodesData={nodesData}
+                         setNodesData={setNodesData} language={language}
                          setError={setError}/>
 
 
