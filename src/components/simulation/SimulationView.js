@@ -38,20 +38,18 @@ const SimulationView = (/*{
             setLoadingMessage("There is no data to show (invalid props).");
         } else if (!(location.state.globalDefaultsList.length === location.state.nodesDataList.length && location.state.nodesDataList.length === location.state.edgesDataList.length)) {
             setLoadingMessage("Unable to show data, because the data is incorrect.");
-        }
-
-        // TODO: Nog kijken of de schema's juist zijn
-
-        else {
+        } else {
             setLoadingMessage("");
             setNumberOfSteps(location.state.globalDefaultsList.length);
         }
 
-    }, [location]);
+    }, [loadingMessage, location, setNumberOfSteps, numberOfSteps]);
 
 
     function loadInConfig(e, step) {
         e.preventDefault();
+
+        setNumberOfSteps(location.state.globalDefaultsList.length); // Issue #138
 
         let error = "";
 
