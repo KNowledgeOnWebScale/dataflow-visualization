@@ -150,7 +150,18 @@ nodes.
 
 You could of course switch `source` and `target`. But when using `autoLayout`, this may mess up your layout a bit. A
 solution could be to use the `animation` key. If you have `animation` set to e.g. `dashdraw .6s linear infinite`, you
-can just change this to `dashdraw .6s linear infinite reverse` and your problem is solved.
+can just change this to `dashdraw .6s linear infinite reverse` and your problem is solved. If you're satisfied with the
+default animations, there is also an option to set `animation` to `reverse`.
+
+#### The sizing of some nodes don't seem to work. Why?
+
+Some shapes are only defined by an aspect ratio. So changing that ratio simply makes it another shape. For example,
+setting a
+different width and height for the shapes `square`
+, `cirle` ... does not make sense.
+
+If you do set e.g. a `square` to a width of e.g. 50 and a height of e.g. 100. Then the largest possible square will be
+drawn inside a box of 50 by 100 (so in this case, you can expect a height of 50).
 
 ## License
 

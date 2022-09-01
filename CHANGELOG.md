@@ -30,7 +30,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Changelog formatting
-- Auto layout with horizontal layout was broken
+- Auto layout with horizontal layout was broken.
+- Some shapes showed unexpected behaviour when height and width were not the same.
 
 ## [1.0.0] - 2022-08-12
 
