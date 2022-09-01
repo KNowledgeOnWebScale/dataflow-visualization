@@ -143,7 +143,7 @@ export const KEY_VALUES = {
         PRESET: {
             id: "preset",
             canBeGlobal: false,
-            type: "array",
+            type: ["array", "string"],
             description: presetDescription
         },
 
@@ -268,7 +268,7 @@ export const KEY_VALUES = {
         PRESET: {
             id: "preset",
             canBeGlobal: false,
-            type: "array",
+            type: ["array", "string"],
             description: presetDescription
         },
 
@@ -444,15 +444,8 @@ export function parseNodes(globalDefaults, nodes) {
         // So if the first preset of the array has e.g. fill and the second has that as well,
         // the fill of the first preset is picked
 
-        //if (node.hasOwnProperty(NODE_KEYS.PRESET.id)) {
-        //   let presetInGlobalDefaults = globalDefaults[NODE][NODE_KEYS.PRESETS.id][node[NODE_KEYS.PRESET.id]];
-        //   for (let key of Object.keys(presetInGlobalDefaults)) {
-        //       node[key] = presetInGlobalDefaults[key];
-        //   }
-        //}
-
         if (node.hasOwnProperty(NODE_KEYS.PRESET.id)) {
-            loadInPresets(node[NODE_KEYS.PRESET.id], NODE_KEYS.PRESETS.id, node, globalDefaults[NODE])
+            loadInPresets(typeof node[NODE_KEYS.PRESET.id] === "string" ? [node[NODE_KEYS.PRESET.id]] : node[NODE_KEYS.PRESET.id], NODE_KEYS.PRESETS.id, node, globalDefaults[NODE])
             /*for (let preset of node[NODE_KEYS.PRESET.id]) {
                 let presetInGlobalDefaults = globalDefaults[NODE][NODE_KEYS.PRESETS.id][preset];
 
@@ -528,17 +521,10 @@ export function parseEdges(globalDefaults, edges, nodes) {
         const EDGE_KEYS = KEY_VALUES[EDGE];
 
 
-        //TODO
         if (edge.hasOwnProperty(EDGE_KEYS.PRESET.id)) {
-            loadInPresets(edge[EDGE_KEYS.PRESET.id], EDGE_KEYS.PRESETS.id, edge, globalDefaults[EDGE]);
-
-            //let presetInGlobalDefaults = globalDefaults[EDGE][EDGE_KEYS.PRESETS.id][edge[EDGE_KEYS.PRESET.id]];
-            //for (let key of Object.keys(presetInGlobalDefaults)) {
-            //    edge[key] = presetInGlobalDefaults[key];
-            // }
+            loadInPresets(typeof edge[EDGE_KEYS.PRESET.id] === "string" ? [edge[EDGE_KEYS.PRESET.id]] : edge[EDGE_KEYS.PRESET.id], EDGE_KEYS.PRESETS.id, edge, globalDefaults[EDGE]);
         }
 
-        // This loop fixes
         // TODO loop over values en niet over keys
         for (let key in EDGE_KEYS) {
             // TODO: mss beter way dan die if

@@ -30,11 +30,8 @@ Type: `array`
 		 - <i id="edgeSchema/items/properties/label">path: #edgeSchema/items/properties/label</i>
 	 - <b id="#edgeSchema/items/properties/preset">preset</b>
 		 - _Refer to a preset defined in the config of the global defaults. If you haven't used a key in your config (but that key is used in your preset), the key from the preset is taken as a key in your individual config. You can refer to multiple presets: the first preset has priority on the second, the second on the third, ... In general, the priority of the keys is: local > first preset > second preset > ... > keys in global default._
-		 - Type: `array`
+		 - Types: `array`, `string`
 		 - <i id="edgeSchema/items/properties/preset">path: #edgeSchema/items/properties/preset</i>
-			 - **_Items_**
-			 - Type: `string`
-			 - <i id="edgeSchema/items/properties/preset/items">path: #edgeSchema/items/properties/preset/items</i>
 	 - <b id="#edgeSchema/items/properties/thickness">thickness</b>
 		 - _The thickness of the edge._
 		 - Type: `number`
