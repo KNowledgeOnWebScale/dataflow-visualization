@@ -17,6 +17,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added FAQ section to README
 - You can make 'simulations' (= flow in multiple steps)
 - Navigation bar, so you can quickly navigate a large network of nodes.
+- You can use an ellipse as shape for a node.
+- You can refer to multiple presets.
 
 ### Changed
 
