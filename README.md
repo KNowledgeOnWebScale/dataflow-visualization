@@ -190,6 +190,11 @@ If you do set, e.g., a `square` to a width of, e.g., 50 and a height of, e.g., 1
 will be
 drawn inside a box of 50 by 100 (so in this case, you can expect a height of 50).
 
+#### In the simulation creation page, when loading example 1 and clicking convert, I just see a button 'Step 0'. Shouldn't I see more buttons (one per configuration)?
+
+Yes, you should see more buttons (you should see a button for step 0 to step 4). Some people reported this bug, this
+is an unresolved issue ([#138](https://github.com/KNowledgeOnWebScale/dataflow-visualization/issues/138)).
+
 ## License
 
 This project is licensed under the terms of the MIT License. See [LICENSE.md](LICENSE.md) for details.
