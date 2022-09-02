@@ -11,6 +11,7 @@ It is built on top of [ReactFlow].
     - [Nodes](#nodes)
     - [Edges](#edges)
     - [Buttons](#buttons)
+- [FAQ](#faq)
 - [License](#license)
 
 ## How to run
@@ -24,8 +25,8 @@ and open http://localhost:3000/.
 If you [run the application](#how-to-run), you'll see that there are three editors. One to
 set [global defaults](#global-defaults), one to describe the [nodes](#nodes) and one for the [connections](#edges)
 between these nodes (edges). The editors you see are the same editors used
-by [Visual Studio Code](https://code.visualstudio.com/),
-this means that you can use shortcuts like `ctrl+shift+i` for indentation or `ctrl+z` to undo your last change. You can
+by [Visual Studio Code](https://code.visualstudio.com/).
+This means that you can use shortcuts like `ctrl+shift+i` for indentation or `ctrl+z` to undo your last change. You can
 also open the command palette by hitting the `F1`-key.
 
 Note when reading this documentation: this is a [React] application, so all ID's/properties are
@@ -49,7 +50,7 @@ nodes or edges.
 IDs are used by the edges to refer to a node. But IDs are not mandatory. If no ID is specified:
 
 * If the node has a unique `title`, the title becomes the ID.
-* If the node as a unique `label`, that label becomes the ID.
+* If the node has a unique `label`, that label becomes the ID.
 * If the node has a unique `shape`, that shape becomes the ID.
 * If the node has a unique `image`, that image becomes the ID.
 * Otherwise, there is no way (as the end user) to refer to that node.
@@ -87,12 +88,12 @@ When running this application, you'll see that there are a few buttons visible.
 
 #### Example buttons
 
-These buttons on are for loading in examples.
+These buttons are for loading examples.
 
 #### Import/export buttons
 
 These buttons are to import and export entire configs (format is JSON). This feature is useful if you want to save
-configs for later.
+configurations for later.
 
 There is also a button to export the raw data. This is the data needed for [ReactFlow] to draw up a flow.
 
@@ -138,6 +139,20 @@ more freely.
 If you have a link `https://knowledgeonwebscale.github.io/dataflow-visualization/#/customdata?...`, you can enter that
 link in the text input field. The configs encoded in that URL will be filled in into the editors, so you can edit and
 create a new permalink.
+
+#### Undo/redo buttons
+
+With undo, you can go to a previous (valid) configuration, and with redo, you can move forward.
+
+*Autosync enabled*  
+The state of the configs is saved if there has been more than two seconds elapsed since the latest change in one of
+the editors.
+
+If you click on e.g. redo you load in the previous config. That configuration will, of course, not be saved again (
+unless you make a change).
+
+*Autsync disabled*  
+The state of the configs will be saved every time you press 'convert' and your configs are valid.
 
 #### Create simulation button
 
