@@ -40,7 +40,7 @@ Type: `array`
 		 - Type: `string`
 		 - <i id="nodeSchema/items/properties/image">path: #nodeSchema/items/properties/image</i>
 	 - <b id="#nodeSchema/items/properties/label">label</b>
-		 - _The text inside a node._
+		 - _The text inside a node. If you want a newline in your text, you should manually put '\n' in your string. If the label does not fit the node in which it appears, `fontsize` will be made smaller so label fits its node (the minimum value to which `fontsize` will be reduced, is the defined `fontsize` divided by two)._
 		 - Type: `string`
 		 - <i id="nodeSchema/items/properties/label">path: #nodeSchema/items/properties/label</i>
 	 - <b id="#nodeSchema/items/properties/parentNode">parentNode</b>
@@ -100,7 +100,7 @@ Type: `array`
 		 - <i id="nodeSchema/items/properties/strokeWidth">path: #nodeSchema/items/properties/strokeWidth</i>
 		 - Default: `1`
 	 - <b id="#nodeSchema/items/properties/title">title</b>
-		 - _The title of a node. E.g. useful to name a parentNode. Notice that this is not the same as an ID. If you give a node a title, that title will show up not in the middle of the node, but at the top._
+		 - _The title of a node. E.g. useful to name a parentNode. Notice that this is not the same as an ID. If you give a node a title, that title will show up not in the middle of the node, but at the top. If the title does not fit the node in which it appears, `fontsize` will be made smaller to fit the node (the minimum value to which `fontsize` will be reduced, is the defined `fontsize` divided by two)._
 		 - Type: `string`
 		 - <i id="nodeSchema/items/properties/title">path: #nodeSchema/items/properties/title</i>
 	 - <b id="#nodeSchema/items/properties/topText">topText</b>
