@@ -4,7 +4,7 @@ import {edgeSchema, globalDefaultSchema, nodeSchema, validateJSON} from "../../l
 import CodeEditor from "./CodeEditor";
 import ErrorModal from "../ErrorModal";
 import LanguageSwitcher from "../LanguageSwitcher";
-import {json2yaml, yaml2json} from "../../lib/jsonYamlConversionUtil";
+import {yaml2json} from "../../lib/jsonYamlConversionUtil";
 import {setFlowData} from "../../lib/setFlowData";
 
 
