@@ -5,6 +5,7 @@ import FillInPositions from "./children/FillInPositions";
 import CopyPermalink from "./children/CopyPermalink";
 import ToggleButtons from "./children/toggleButtons/ToggleButtons";
 import ImportLink from "./children/ImportLink";
+import UndoRedo from "./children/UndoRedo";
 
 const ControlsComponent = ({
                                language,
@@ -19,7 +20,8 @@ const ControlsComponent = ({
                                nodes,
                                setNodes,
                                edges,
-                               setEdges
+                               setEdges,
+                               undoRedoModel
                            }) => {
 
     const [errorTitle, setErrorTitle] = useState("");
@@ -50,6 +52,8 @@ const ControlsComponent = ({
 
         <CopyPermalink nodes={nodes} edges={edges} globalDefaults={globalDefaults} nodesData={nodesData}
                        edgesData={edgesData} language={language}/>
+
+        <UndoRedo UndoRedoModel={undoRedoModel} setData={setData} language={language}/>
 
         <ImportLink language={language} setData={setData} setNodes={setNodes} setEdges={setEdges}
                     changeAutoSync={changeAutoSync}/>
