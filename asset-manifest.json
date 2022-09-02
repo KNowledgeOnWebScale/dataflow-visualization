@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/dataflow-visualization/static/css/main.c7d01257.css",
+    "main.js": "/dataflow-visualization/static/js/main.e7a86835.js",
+    "static/media/rmlio.png": "/dataflow-visualization/static/media/rmlio.859bf1ae940ec1adc300.png",
+    "static/media/comunica.svg": "/dataflow-visualization/static/media/comunica.273048f85711071b81289050f3fe05b5.svg",
+    "static/media/solid.svg": "/dataflow-visualization/static/media/solid.a1e6ec7c34310abf76c8239e197d822e.svg",
+    "index.html": "/dataflow-visualization/index.html",
+    "main.c7d01257.css.map": "/dataflow-visualization/static/css/main.c7d01257.css.map",
+    "main.e7a86835.js.map": "/dataflow-visualization/static/js/main.e7a86835.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c7d01257.css",
+    "static/js/main.e7a86835.js"
+  ]
+}
