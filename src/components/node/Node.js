@@ -29,6 +29,8 @@ import * as Ti from "react-icons/ti";
 import * as Vsc from "react-icons/vsc";
 import * as Wi from "react-icons/wi";
 
+import {newFontsizeToFitSize} from "../../lib/utils";
+
 
 function shape({
                    shape,
@@ -45,6 +47,12 @@ function shape({
                    title,
                    label
                }) {
+
+    // The font sizes of title and label should change if the text does not fit the node
+    const titleFontsize = newFontsizeToFitSize(title, fontSize, width, height);
+    const labelFontsize = newFontsizeToFitSize(label, fontSize, width, height);
+
+
     if (shape === "icon" && iconName) {
 
         // Credits: https://github.com/react-icons/react-icons/issues/364#issuecomment-688817589
@@ -56,7 +64,7 @@ function shape({
 
 
         const style_label = {
-            fontSize: fontSize,
+            fontSize: labelFontsize,
             position: "absolute",
             top: topText ? "45%" : "33%",  // Not the best way, determined with trial and error
             left: "50%",
@@ -66,7 +74,7 @@ function shape({
 
         const style_title = {
             position: "absolute",
-            fontSize: fontSize,
+            fontSize: titleFontsize,
             color: "black",
             width: "100%",
             textAlign: "center",
@@ -96,6 +104,8 @@ function shape({
     if (!element) {
         return null;
     }
+
+
     return <>
         {topText &&
             <p style={{margin: 0, padding: 0, textAlign: "center", fontSize: fontSize - 1}}>{topText}</p>
@@ -103,26 +113,27 @@ function shape({
         <svg style={{width: width, height: height}}>
             {element}
 
-            <svg /*viewBox={`0 ${s} ${width} ${height}`}*/ width={width} height={height}>
+            <svg width={width} height={height}>
                 {image &&
                     (getShape(image) || <image key={Math.random()} href={image} width={width} height={height}/>)
                 }
             </svg>
-
-            <text fontSize={fontSize}>
+            <text fontSize={titleFontsize}>
                 {title &&
                     <tspan key={Math.random()} x="50%"
-                           y={(strokeWidth || 1) + fontSize}
+                           y={(strokeWidth || 1) + titleFontsize}
                            dominantBaseline="middle" textAnchor="middle">{title}</tspan>
                 }
+            </text>
+            <text fontSize={labelFontsize}>
                 {label &&
                     label.split("\n").map((e, i) => {
                         if (i !== 0) {
-                            return <tspan key={i} x="50%" dy={fontSize} dominantBaseline="middle"
+                            return <tspan key={i} x="50%" dy={labelFontsize} dominantBaseline="middle"
                                           textAnchor="middle">{e}</tspan>
                         } else {
                             return <tspan key={i} x="50%"
-                                          y={50 - ((label.split("\n").length - 1) * height / fontSize / 2) + "%"}
+                                          y={50 - ((label.split("\n").length - 1) * height / labelFontsize / 2) + "%"}
                                           dominantBaseline="middle" textAnchor="middle">{e}</tspan>
                         }
                     })}
@@ -176,14 +187,7 @@ export default memo(({data, isConnectable}) => {
             {myCustomComponent}
 
             {
-                // TODO: niet hardcoded, deze waarden zijn al eens gedefinieerd in een hashmap
-                //  dus hergebruiken!!!
 
-                // type, position, id
-                /* [["source", "right", "right-source"], ["source", "bottom", "bottom-source"],
-                     ["target", "left", "left-target"], ["target", "top", "top-target"],
-                     ["source", "top", "top-source"], ["source", "left", "left-source"],
-                     ["target", "bottom", "bottom-target"], ["target", "right", "right-target"]*/
                 [["source", "right", "right"], ["source", "bottom", "bottom"],
                     ["target", "left", "left"], ["target", "top", "top"],
                     ["source", "top", "top"], ["source", "left", "left"],

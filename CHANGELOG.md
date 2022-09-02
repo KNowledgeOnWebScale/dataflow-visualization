@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Navigation bar, so you can quickly navigate a large network of nodes.
 - You can use an ellipse as shape for a node.
 - You can refer to multiple presets.
+- Make fontsize smaller of title and label, if it does not fit its node.
 
 ### Changed
 

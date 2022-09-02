@@ -118,7 +118,7 @@ export const KEY_VALUES = {
             "canBeGlobal": true,
             value: "",
             type: "string",
-            description: "The text inside a node."
+            description: "The text inside a node. If you want a newline in your text, you should manually put '\\n' in your string. If the label does not fit the node in which it appears, `fontsize` will be made smaller so label fits its node (the minimum value to which `fontsize` will be reduced, is the defined `fontsize` divided by two)."
         },
         PARENT: {
             id: "parentNode",
@@ -188,7 +188,8 @@ export const KEY_VALUES = {
             "canBeGlobal": true,
             type: "string",
             description: "The title of a node. E.g. useful to name a parentNode. " +
-                "Notice that this is not the same as an ID. If you give a node a title, that title will show up not in the middle of the node, but at the top."
+                "Notice that this is not the same as an ID. If you give a node a title, that title will show up not in the middle of the node, but at the top. " +
+                "If the title does not fit the node in which it appears, `fontsize` will be made smaller to fit the node (the minimum value to which `fontsize` will be reduced, is the defined `fontsize` divided by two)."
         },
         TOP_TEXT: {
             id: "topText",

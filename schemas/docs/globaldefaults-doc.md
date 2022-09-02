@@ -67,7 +67,7 @@ Type: `object`
 			 - Type: `string`
 			 - <i id="globalDefaultsNode/properties/image">path: #globalDefaultsNode/properties/image</i>
 		 - <b id="#globalDefaultsNode/properties/label">label</b>
-			 - _The text inside a node._
+			 - _The text inside a node. If you want a newline in your text, you should manually put '\n' in your string. If the label does not fit the node in which it appears, `fontsize` will be made smaller so label fits its node (the minimum value to which `fontsize` will be reduced, is the defined `fontsize` divided by two)._
 			 - Type: `string`
 			 - <i id="globalDefaultsNode/properties/label">path: #globalDefaultsNode/properties/label</i>
 		 - <b id="#globalDefaultsNode/properties/shape">shape</b>
@@ -119,7 +119,7 @@ Type: `object`
 			 - <i id="globalDefaultsNode/properties/strokeWidth">path: #globalDefaultsNode/properties/strokeWidth</i>
 			 - Default: `1`
 		 - <b id="#globalDefaultsNode/properties/title">title</b>
-			 - _The title of a node. E.g. useful to name a parentNode. Notice that this is not the same as an ID. If you give a node a title, that title will show up not in the middle of the node, but at the top._
+			 - _The title of a node. E.g. useful to name a parentNode. Notice that this is not the same as an ID. If you give a node a title, that title will show up not in the middle of the node, but at the top. If the title does not fit the node in which it appears, `fontsize` will be made smaller to fit the node (the minimum value to which `fontsize` will be reduced, is the defined `fontsize` divided by two)._
 			 - Type: `string`
 			 - <i id="globalDefaultsNode/properties/title">path: #globalDefaultsNode/properties/title</i>
 		 - <b id="#globalDefaultsNode/properties/topText">topText</b>
