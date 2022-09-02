@@ -8,7 +8,7 @@ Run `npm run build:docs`. This uses the Jest runner to re-create the schemas and
 and stores them in the accompanying
 files in the directory [schemas/schemas](schemas/schemas).
 The new markdowns will be generated, [README.md](README.md) already links to these
-files. 
+files.
 
 Note that there is a pre-commit hook (see [.husky](.husky)) that regenerates the docs.
 
@@ -48,11 +48,12 @@ your example will automatically show up if you restart the application.
 #### Multi-config flow
 
 The buttons to load in multi-config flows are shown on the page where you build your simulation.
-There is already an example provided. See e.g. [example1/](src/data/simulation-flow/examples). To make your own example,
+There is already an example provided. See e.g., [example1/](src/data/simulation-flow/examples). To make your own
+example,
 make a new folder where you put every step in a different file. As with the single-config examples, you should have a
-JSON object for the global defaults, an array for the nodes and an array for the edges. When you created your configs,
-import it
-in [examples.js](src/data/simulation-flow/examples.js). Next add your imports to the hashmap `examples` the same way
+JSON object for the global defaults, an array for the nodes, and an array for the edges. When you have created your
+configs, import them in [examples.js](src/data/simulation-flow/examples.js). Next, add your imports to the
+hashmap `examples` the same way
 this is done by the other examples. The keys of the hashmap (e.g. `example 1`) will be the text on the buttons (that
 once again will show up automatically). However, you can't deviate from the keys `step0`, `step1`, `...` .
 
