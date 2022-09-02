@@ -18,6 +18,14 @@ export const globalDefaultsJSON = {
                 animation: "default",
                 markerEnd: {type: "arrowclosed", size: 25},
                 strokeDasharray: "varied"
+            },
+            "double-ended": {
+                markerStart: {
+                    type: "arrowclosed"
+                },
+                markerEnd: {
+                    type: "arrowclosed"
+                }
             }
         }
     }
@@ -123,8 +131,7 @@ export const edgesJSON = [
         source: "SPARQL-END",
         target: "comunica",
         type: "straight",
-        markerStart: {type: "arrowclosed"},
-        markerEnd: {type: "arrowclosed"},
+        preset: "double-ended"
     },
     {
         id: "Comunica to SPARQL",

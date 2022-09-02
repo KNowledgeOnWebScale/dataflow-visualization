@@ -7,12 +7,17 @@ export const globalDefaultsJSON = {
         spacing: 1.9
     },
     node: {
-        fill: "maroon",
-        shape: "icon",
-        iconName: "FaDatabase",
-        topText: "#LD",
-        height: 65,
-        width: 45
+        presets : {
+            "database" : {
+                fill: "maroon",
+                shape: "icon",
+                iconName: "FaDatabase",
+                topText: "#LD",
+                height: 65,
+                width: 45
+            }
+        }
+
     },
     edge: {
         color: "darkgray",
@@ -22,12 +27,12 @@ export const globalDefaultsJSON = {
 };
 
 export const nodesJSON = [
-    {id: "LD1"},
-    {id: "LD2"},
-    {id: "LD3"},
-    {id: "LD4"},
-    {id: "LD5"},
-    {shape: "comunica", topText: ""}
+    {id: "LD1", preset: "database"},
+    {id: "LD2", preset: "database"},
+    {id: "LD3", preset: "database"},
+    {id: "LD4", preset: "database"},
+    {id: "LD5", preset: "database"},
+    {shape: "comunica"}
 ];
 
 

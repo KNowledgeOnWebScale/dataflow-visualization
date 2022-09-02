@@ -25,7 +25,7 @@ const ControlsComponent = ({
                            }) => {
 
     const [errorTitle, setErrorTitle] = useState("");
-    const [errorMessages, setErrorMessages] = useState([]);  // TODO: mss fixen dat dit ook een string kan zijn
+    const [errorMessages, setErrorMessages] = useState([]);
     const [errorModalVisible, setErrorModalVisible] = useState(false);
 
     function setError(title, message, visible) {

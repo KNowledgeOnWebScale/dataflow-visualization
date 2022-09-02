@@ -27,7 +27,7 @@ const Visualizer = () => {
     const [edgesData, setEdgesData] = useState(JSON.stringify([]));
 
     const [undoRedoModel, setUndoRedoModel] = useState(null);
-    const [saveInUndoRedo, setSaveInUndoRedo] = useState(true)
+    const [saveInUndoRedo, setSaveInUndoRedo] = useState(true);
 
     useEffect(() => {
         setUndoRedoModel(new UndoRedoModel());
@@ -36,7 +36,7 @@ const Visualizer = () => {
 
     function performAutoSaveInUndoRedo() {
         // saveInUndoRedo is used, because if you click redo with autosync on, you don't want that config to be saved again
-        if (!autoSync || !saveInUndoRedo) return
+        if (!autoSync || !saveInUndoRedo) return;
 
         let globalDefaultsAsJSON;
         let nodesAsJSON;
@@ -69,7 +69,7 @@ const Visualizer = () => {
 
     function setGlobalDefaultsConfig(globalDefaultsConfig, saveInUndoRedo = true) {
         setSaveInUndoRedo(saveInUndoRedo);
-        setGlobalDefaults(globalDefaultsConfig)
+        setGlobalDefaults(globalDefaultsConfig);
     }
 
     function setNodesConfig(nodesConfig, saveInUndoRedo = true) {
@@ -93,7 +93,7 @@ const Visualizer = () => {
     const autoSyncFlow = useCallback(() => {
         let gd = globalDefaults;
         let nd = nodesData;
-        let ed = edgesData
+        let ed = edgesData;
 
         if (language === "yaml") {
             gd = yaml2json(gd);
@@ -133,7 +133,7 @@ const Visualizer = () => {
     }, [globalDefaults, nodesData, edgesData, autoSync, autoSyncFlow])
 
 
-    //TODO die 100000 argumenten meegeven is niet echt scalable
+    //TODO: maybe a better way needs to be found to pass those arguments, it is not really scalable
     return <>
 
         <ExampleComponent language={language} setData={setData}/>

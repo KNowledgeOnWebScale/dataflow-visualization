@@ -164,7 +164,7 @@ const SimulationMaker = () => {
     function setData(globalDefaultsConfigs, nodesConfigs, edgesConfigs) {
         // Input is JSON
 
-        let newGlobalDefaults = []; // Change reference needed, so created new array
+        let newGlobalDefaults = [];
         let newNodes = [];
         let newEdges = [];
 
@@ -211,7 +211,7 @@ const SimulationMaker = () => {
                 validateJSON(JSON.parse(finalGlobalDefaultJSONConfigs[i]), globalDefaultSchema, () => error += `Global default config of editor ${i} is incorrect`)
                 validateJSON(JSON.parse(finalNodesJSONConfigs[i]), nodeSchema, () => error += `\nNode config of editor ${i} is incorrect`)
                 validateJSON(JSON.parse(finalEdgesJSONConfigs[i]), edgeSchema, () => error += `\nEdge config of editor ${i} is incorrect`)
-            } catch(e) {
+            } catch (e) {
                 alert("Incorrect syntax. Check editor " + i + ".");
                 return;
             }

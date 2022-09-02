@@ -10,7 +10,7 @@ It is built on top of [ReactFlow].
     - [Global defaults](#global-defaults)
     - [Nodes](#nodes)
     - [Edges](#edges)
-    - [Buttons](#buttons)
+    - [Buttons](#controls)
 - [FAQ](#faq)
 - [License](#license)
 
@@ -23,13 +23,13 @@ and open http://localhost:3000/.
 ## Documentation
 
 If you [run the application](#how-to-run), you'll see that there are three editors. One to
-set [global defaults](#global-defaults), one to describe the [nodes](#nodes) and one for the [connections](#edges)
+set [global defaults](#global-defaults), one to describe the [nodes](#nodes), and one for the [connections](#edges)
 between these nodes (edges). The editors you see are the same editors used
 by [Visual Studio Code](https://code.visualstudio.com/).
 This means that you can use shortcuts like `ctrl+shift+i` for indentation or `ctrl+z` to undo your last change. You can
 also open the command palette by hitting the `F1`-key.
 
-Note when reading this documentation: this is a [React] application, so all ID's/properties are
+Note when reading this documentation: this is a [React] application, so all ID's and properties are
 written in [camelCase](https://en.wikipedia.org/wiki/Camel_case).
 
 ### Global defaults
@@ -75,7 +75,7 @@ very efficient to set all nodes manually. There are three mechanisms to make the
 - Use the `autoLayout` key:
     - If set to `true`, [dagre](https://github.com/dagrejs/dagre) is used to position all the nodes. The keys `position`
       , `vgroup` and `hgroup` are ignored. This method works for very simple flows (e.g. example 1). If your flows start
-      to get a little more complex, this method is not recommended, because dagre does not always work very well in
+      to get a little more complex, this method is not recommended because dagre does not always work very well in
       combination with this project.
 
 ### Edges
@@ -127,7 +127,7 @@ See [DEVELOPMENT.md](DEVELOPMENT.md#permalink) for more information about the st
 
 #### Autosync button
 
-If this switch is toggled on, the flow will render automatically if the config has been changed and is valid.
+If this switch is toggled on, the flow will render automatically if the configuration has been changed and is valid.
 
 #### Snap to grid button
 
@@ -145,7 +145,7 @@ create a new permalink.
 With undo, you can go to a previous (valid) configuration, and with redo, you can move forward.
 
 *Autosync enabled*  
-The state of the configs is saved if there has been more than two seconds elapsed since the latest change in one of
+The state of the configs is saved if there has been more than two seconds elapsed since the last change in one of
 the editors.
 
 If you click on e.g. redo you load in the previous config. That configuration will, of course, not be saved again (
@@ -156,37 +156,44 @@ The state of the configs will be saved every time you press 'convert' and your c
 
 #### Create simulation button
 
-When clicking on this button, you'll be redirected to a new page. On that page you can create multiple configs. When
-clicking 'convert' you'll be able to animate the flow by visualizing one config after the other.
+When clicking on this button, you'll be redirected to a new page. On that page, you can create multiple configs. When
+clicking 'convert', you'll be able to animate the flow by visualizing one config after the other.
 
 #### Navigation bar
 
 Next to the window where your flow is shown, you see a gray bar. This is some sort of "jump bar". Depending on where
 you click on the bar, you'll jump to the height of a different node. If you click somewhere at the very top of the bar,
-you'll jump to the height of the most upper node. The lower you click, the lower the node that will be picked as
+you'll jump to the height of the most upper node. The lower you click, the lower the node that will be picked as the
 reference height. If you click somewhere at the bottom of the bar, you'll jump to the y position of the lowest node.
 
-This navigation bar is very useful when you want to quickly navigate in a very large network of (vertical oriented)
+This navigation bar is very useful when you want to quickly navigate through a very large network of (vertically
+oriented)
 nodes.
 
 ## FAQ
 
 #### I have an animated edge. How do I change the direction of this animation without messing up my layout?
 
-You could of course switch `source` and `target`. But when using `autoLayout`, this may mess up your layout a bit. A
+You could, of course, switch `source` and `target`. But when using `autoLayout`, this may mess up your layout a bit. A
 solution could be to use the `animation` key. If you have `animation` set to e.g. `dashdraw .6s linear infinite`, you
 can just change this to `dashdraw .6s linear infinite reverse` and your problem is solved. If you're satisfied with the
 default animations, there is also an option to set `animation` to `reverse`.
 
-#### The sizing of some nodes don't seem to work. Why?
+#### The sizing of some nodes doesn't seem to work. Why?
 
 Some shapes are only defined by an aspect ratio. So changing that ratio simply makes it another shape. For example,
 setting a
 different width and height for the shapes `square`
 , `cirle` ... does not make sense.
 
-If you do set e.g. a `square` to a width of e.g. 50 and a height of e.g. 100. Then the largest possible square will be
+If you do set, e.g., a `square` to a width of, e.g., 50 and a height of, e.g., 100. Then the largest possible square
+will be
 drawn inside a box of 50 by 100 (so in this case, you can expect a height of 50).
+
+#### In the simulation creation page, when loading example 1 and clicking convert, I just see a button 'Step 0'. Shouldn't I see more buttons (one per configuration)?
+
+Yes, you should see more buttons (you should see a button for step 0 to step 4). Some people reported this bug, this
+is an unresolved issue ([#138](https://github.com/KNowledgeOnWebScale/dataflow-visualization/issues/138)).
 
 ## License
 
