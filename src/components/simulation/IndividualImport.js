@@ -1,7 +1,6 @@
 import Dropdown from "react-bootstrap/Dropdown";
-import {useState} from "react";
+import {useRef, useState} from "react";
 import {Button} from "react-bootstrap";
-import {useRef} from "react";
 
 const IndividualImport = ({maxNumber, setData, setLanguage}) => {
 
@@ -40,8 +39,6 @@ const IndividualImport = ({maxNumber, setData, setLanguage}) => {
                 fileAsJson["nodes"],
                 fileAsJson["edges"]);
 
-
-            //TODO: gwn naar yaml omzetten
             setLanguage("json");
         }
 

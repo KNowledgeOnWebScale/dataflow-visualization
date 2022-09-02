@@ -2,7 +2,7 @@ import ReactFlow, {Controls, MiniMap, ReactFlowProvider, useReactFlow, useStoreA
 import Node from "./node/Node";
 import {useEffect, useMemo} from "react";
 
-// These resources helped me a lot:
+// These resources helped me a lot (for the scroll/jump bar):
 
 // https://jsfiddle.net/u3xbhps6/https://jsfiddle.net/u3xbhps6/
 // https://reactflow.dev/docs/guides/troubleshooting/#warning-seems-like-you-have-not-used-zustand-provider-as-an-ancestor
@@ -50,7 +50,7 @@ const ReactFlowComponent = ({
                 })
 
                 const nodeIndex = Math.round(y / (rect.bottom - rect.top) * nodes.length);
-                setCenter(tx/*sortedNodes[nodeIndex].position.x*/, sortedNodes[nodeIndex].position.y, ts);
+                setCenter(tx, sortedNodes[nodeIndex].position.y, ts);
                 zoomTo(ts);
             }
         }

@@ -10,11 +10,7 @@ import ImportSimulationConfig from "./ImportSimulationConfig";
 import {FaPlay} from "react-icons/fa";
 import {edgeSchema, globalDefaultSchema, nodeSchema, validateJSON} from "../../lib/schemaValidation";
 
-const SimulationView = (/*{
-                            globalDefaultsList,
-                            nodesDataList,
-                            edgesDataList
-                        }*/) => {
+const SimulationView = () => {
 
     const [nodes, setNodes, onNodesChange] = useNodesState([]);
     const [edges, setEdges, onEdgesChange] = useEdgesState([]);
@@ -22,7 +18,7 @@ const SimulationView = (/*{
 
     const [snapToGrid, setSnapToGrid] = useState(true);
 
-    const [loadingMessage, setLoadingMessage] = useState("")
+    const [loadingMessage, setLoadingMessage] = useState("");
 
     const [numberOfSteps, setNumberOfSteps] = useState(0);
 
@@ -49,7 +45,7 @@ const SimulationView = (/*{
     function loadInConfig(e, step) {
         e.preventDefault();
 
-        setNumberOfSteps(location.state.globalDefaultsList.length); // Issue #138
+        setNumberOfSteps(location.state.globalDefaultsList.length); // Issue #138 ??
 
         let error = "";
 
@@ -85,7 +81,6 @@ const SimulationView = (/*{
 
         for (let i = 0; i < location.state.globalDefaultsList.length; i++) {
             setTimeout(function () {
-                // console.log('count ', i);
                 document.getElementById("button-" + i).click();
             }, delay * (i));
         }
