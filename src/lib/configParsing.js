@@ -1,12 +1,50 @@
 import {fix_sourceHandle_targetHandle, fixNodeGroups} from "./autoLayout/layoutUtils";
 
+import customComponents from '../components/custom';
+
 export const GRAPH = "graph";
 export const NODE = "node";
 export const EDGE = "edge";
 
-// These are the keys that can be used in globalDefaults
-// These keys are not standard supported by the library, that's why they are in a dict
-// The values of this dict should be used in the JSON representation
+const customComponentNames = Object.keys(customComponents);
+let shapes = ["icon", "8-star", "big-star", "circle", "cylinder", "diamond", "ellipse", "hexagon", "note", "rectangle", "square", "star", "triangle", "comunica", "rmlio", "solid"]
+shapes = shapes.concat(customComponentNames);
+
+const presetDescription = "Refer to a preset defined in the config of the global defaults. " +
+    "If you haven't used a key in your config (but that key is used in your preset), the key from the preset is taken as a key in your individual config." +
+    " You can refer to multiple presets: the first preset has priority on the second, the second on the third, ... " +
+    "In general, the priority of the keys is: local > first preset > second preset > ... > keys in global default.";
+
+const strokeDashArrayFallBacks = {
+    "solid": "0",
+    "dashed": "6 4",
+    "dotted": "1 3",
+    "varied": "5 2 1 2",
+    "dashed-wide-gaps": "4 8"
+}
+
+const strokeDasharrayDescription = "See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray#example) for more information." +
+    " The default value `solid` will fall back to the CSS value `" + strokeDashArrayFallBacks.solid +
+    "`, `dashed` to `" + strokeDashArrayFallBacks.dashed +
+    ", `dotted` to `" + strokeDashArrayFallBacks.dotted +
+    "`, `varied` to `" + strokeDashArrayFallBacks.varied +
+    "` and dashed-wide-gaps will fall back to `" + strokeDashArrayFallBacks["dashed-wide-gaps"] + "`."
+
+const animationFallBacks = {
+    "default": "dashdraw .45s linear infinite",
+    "reverse": "dashdraw .45s linear infinite reverse",
+    "none": "none",
+}
+
+const animationDescription = "See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/animation) for more information about animation. " +
+    "An example is e.g. `dashdraw .2s linear infinite` (has to start with 'dashdraw'). " +
+    "Note that you can just the value to `default`. The animation will then fall back to `" + animationFallBacks.default +
+    "`. If the value is `reverse`, the fall back value will be `" + animationFallBacks.reverse +
+    "`. The strokeDashArray (if none is specified) will fall back to `" + strokeDashArrayFallBacks.dashed +
+    "`. When set to `none`, no animation will be shown."
+
+
+// These are the keys that you can use in the configs. Stuff like 'enum', 'description' ... is for the schema validation
 export const KEY_VALUES = {
 
     [GRAPH]: {
@@ -21,6 +59,12 @@ export const KEY_VALUES = {
             id: "orientation", "canBeGlobal": true, value: "horizontal", type: "string",
             enum: ["vertical", "horizontal"],
             description: "The orientation of the graph. If you want to work from top to bottom or from bottom to top, set `orientation` to `vertical`"
+        },
+        "SPACING": {
+            id: "spacing", canBeGlobal: true, value: 1, type: "number",
+            description: "Set the spacing between nodes when autolayout, vgroups or hgroups are used." +
+                "The default spacing for groups is the width/2 for hgroups or the height/2 for vgroups devided by 2. If you want that larger or smaller, you can set this key to any number. The spacing will be the default times the factor." +
+                "When 'autolayout' is used, spacing has only effect on the vertical distance between nodes, when the orientation is set to 'vertical'. Vice versa for 'horizontal'."
         }
 
     },
@@ -74,7 +118,7 @@ export const KEY_VALUES = {
             "canBeGlobal": true,
             value: "",
             type: "string",
-            description: "The text inside a node."
+            description: "The text inside a node. If you want a newline in your text, you should manually put '\\n' in your string. If the label does not fit the node in which it appears, `fontsize` will be made smaller so label fits its node (the minimum value to which `fontsize` will be reduced, is the defined `fontsize` divided by two)."
         },
         PARENT: {
             id: "parentNode",
@@ -90,7 +134,7 @@ export const KEY_VALUES = {
         },
 
         PRESETS: {
-            id: "presets",
+            id: "presets",  // You might ask why this is in the JSON schema only for globalDefaults --> type objects are being treated differently in the construction of the validation schema
             canBeGlobal: true,
             type: "object",
             description: "Create node presets."
@@ -99,18 +143,23 @@ export const KEY_VALUES = {
         PRESET: {
             id: "preset",
             canBeGlobal: false,
-            type: "string",
-            description: "Refer to a preset defined in the config of the global defaults. If you use this, you will overwrite all that is defined in this node with the values of the preset."
+            type: ["array", "string"],
+            description: presetDescription
         },
 
-        //TODO in DEVELOPMENT.md uitleggen dat je ook het pattern moet aanpassen
         "SHAPE": {
             id: "shape",
             "canBeGlobal": true,
             value: "square",
             type: "string",
-            enum: ["8-star", "big-star", "circle", "cylinder", "diamond", "hexagon", "note", "rectangle", "square", "star", "triangle", "comunica", "rmlio", "solid"],
+            enum: shapes,
             description: "The shape of the node."
+        },
+        ICON_NAME: {
+            id: "iconName",
+            canBeGlobal: "true",
+            type: "string",
+            description: "When 'shape' is set to 'icon', you can set 'iconName' to anything you find in [react-icons](https://react-icons.github.io/react-icons/). Since this is a third-party library, not all styling will work. Only `fill`, `strokeWidth`, `width` and `height` will have effect."
         },
         "STROKE": {
             id: "stroke",
@@ -122,9 +171,10 @@ export const KEY_VALUES = {
         "STROKE_DASHARRAY": {
             id: "strokeDasharray",
             "canBeGlobal": true,
-            value: 0,
+            value: "solid",
+            examples: Object.keys(strokeDashArrayFallBacks),
             type: ["number", "string"],
-            description: "The dash pattern of the node."
+            description: "The dash pattern of the node. " + strokeDasharrayDescription
         },
         "STROKE_WIDTH": {
             id: "strokeWidth",
@@ -138,7 +188,8 @@ export const KEY_VALUES = {
             "canBeGlobal": true,
             type: "string",
             description: "The title of a node. E.g. useful to name a parentNode. " +
-                "Notice that this is not the same as an ID. If you give a node a title, that title will show up not in the middle of the node, but at the top."
+                "Notice that this is not the same as an ID. If you give a node a title, that title will show up not in the middle of the node, but at the top. " +
+                "If the title does not fit the node in which it appears, `fontsize` will be made smaller to fit the node (the minimum value to which `fontsize` will be reduced, is the defined `fontsize` divided by two)."
         },
         TOP_TEXT: {
             id: "topText",
@@ -171,19 +222,13 @@ export const KEY_VALUES = {
 
     // Keys that can be used in the JSON/YAML representation of edges
     [EDGE]: {
-        "ANIMATED": {
-            id: "animated",
-            "canBeGlobal": true,
-            value: false,
-            type: "boolean",
-            description: "Set a default animation for the edge. See also [Animations](https://github.com/KNowledgeOnWebScale/dataflow-visualization/tree/main#animations)."
-        },
         "ANIMATION": {
             id: "animation",
             "canBeGlobal": true,
             type: "string",
             "cssProperty": "animation",
-            description: "See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/animation) for more information about animation."
+            examples: Object.keys(animationFallBacks),
+            description: animationDescription
         },
         "COLOR": {
             id: "color",
@@ -224,8 +269,8 @@ export const KEY_VALUES = {
         PRESET: {
             id: "preset",
             canBeGlobal: false,
-            type: "string",
-            description: "Refer to a preset defined in the config of the global defaults. If you use this, you will overwrite all that is defined in this edge with the values of the preset."
+            type: ["array", "string"],
+            description: presetDescription
         },
 
         "THICKNESS": {
@@ -239,10 +284,11 @@ export const KEY_VALUES = {
         "STROKE_DASHARRAY": {
             id: "strokeDasharray",
             "canBeGlobal": true,
-            value: 0,
+            value: "solid",
+            examples: Object.keys(strokeDashArrayFallBacks),
             type: ["number", "string"],
             "cssProperty": "strokeDasharray",
-            description: "The pattern of dashes of the edges. See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray#example) for more information."
+            description: "The pattern of dashes of the edges. " + strokeDasharrayDescription
         },
         "SOURCE": {
             id: "source",
@@ -306,6 +352,10 @@ export function parseGlobalDefaults(globalDefaults) {
             //console.log(globalDefaults)
             //console.log(globalDefaults[key])
 
+            if (!globalDefaults[key]) {
+                throw new Error(`Expected key ${key} in the global defaults!`)
+            }
+
             if (!globalDefaults[key].hasOwnProperty(valueObject.id)) {
                 if (KEY_VALUES[key][nestedKey].hasOwnProperty("value")) {
                     globalDefaults[key][valueObject.id] = valueObject.value;
@@ -315,6 +365,26 @@ export function parseGlobalDefaults(globalDefaults) {
     }
 
     return globalDefaults;
+}
+
+function loadInPresets(presets, presetId, individual, globalDefaultEdgeNode  /*globalDefaults[NODE] or globalDefaults[EDGE]*/) {
+
+    for (let preset of presets) {
+        let presetInGlobalDefaults = globalDefaultEdgeNode[presetId][preset];
+
+        if (!presetInGlobalDefaults) {
+            console.warn(`Preset with id ${preset} not found in globalDefaults`);
+            continue;
+        }
+
+        for (let key of Object.keys(presetInGlobalDefaults)) {
+            if (!individual.hasOwnProperty(key)) {
+                individual[key] = presetInGlobalDefaults[key];
+            }
+        }
+
+    }
+
 }
 
 
@@ -369,11 +439,29 @@ export function parseNodes(globalDefaults, nodes) {
 
         const NODE_KEYS = KEY_VALUES[NODE]
 
+
+        // Load presets
+        // If key does not exist yet: copy from preset
+        // So if the first preset of the array has e.g. fill and the second has that as well,
+        // the fill of the first preset is picked
+
         if (node.hasOwnProperty(NODE_KEYS.PRESET.id)) {
-            let presetInGlobalDefaults = globalDefaults[NODE][NODE_KEYS.PRESETS.id][node[NODE_KEYS.PRESET.id]];
-            for (let key of Object.keys(presetInGlobalDefaults)) {
-                node[key] = presetInGlobalDefaults[key];
-            }
+            loadInPresets(typeof node[NODE_KEYS.PRESET.id] === "string" ? [node[NODE_KEYS.PRESET.id]] : node[NODE_KEYS.PRESET.id], NODE_KEYS.PRESETS.id, node, globalDefaults[NODE])
+            /*for (let preset of node[NODE_KEYS.PRESET.id]) {
+                let presetInGlobalDefaults = globalDefaults[NODE][NODE_KEYS.PRESETS.id][preset];
+
+                if (!presetInGlobalDefaults) {
+                    console.warn(`Preset with id ${preset} not found in globalDefaults`);
+                    continue;
+                }
+
+                for (let key of Object.keys(presetInGlobalDefaults)) {
+                    if (!node.hasOwnProperty(key)) {
+                        node[key] = presetInGlobalDefaults[key];
+                    }
+                }
+
+            }*/
         }
 
         if (node.hasOwnProperty(NODE_KEYS.IMAGE.id) && !node.hasOwnProperty(NODE_KEYS.STROKE.id)) {
@@ -398,6 +486,11 @@ export function parseNodes(globalDefaults, nodes) {
             }
         }
 
+        // There are some sensible defaults defined for 'strokeDasharray'
+        if (strokeDashArrayFallBacks.hasOwnProperty(data[KEY_VALUES[NODE].STROKE_DASHARRAY.id])) {
+            data[KEY_VALUES[NODE].STROKE_DASHARRAY.id] = strokeDashArrayFallBacks[data[KEY_VALUES[NODE].STROKE_DASHARRAY.id]];
+        }
+
         node["data"] = data;
 
         // There must be a position with keys x and y
@@ -411,7 +504,7 @@ export function parseNodes(globalDefaults, nodes) {
         }
 
     }
-    fixNodeGroups(nodes);
+    fixNodeGroups(globalDefaults, nodes);
 
     return nodes;
 }
@@ -428,14 +521,11 @@ export function parseEdges(globalDefaults, edges, nodes) {
 
         const EDGE_KEYS = KEY_VALUES[EDGE];
 
+
         if (edge.hasOwnProperty(EDGE_KEYS.PRESET.id)) {
-            let presetInGlobalDefaults = globalDefaults[EDGE][EDGE_KEYS.PRESETS.id][edge[EDGE_KEYS.PRESET.id]];
-            for (let key of Object.keys(presetInGlobalDefaults)) {
-                edge[key] = presetInGlobalDefaults[key];
-            }
+            loadInPresets(typeof edge[EDGE_KEYS.PRESET.id] === "string" ? [edge[EDGE_KEYS.PRESET.id]] : edge[EDGE_KEYS.PRESET.id], EDGE_KEYS.PRESETS.id, edge, globalDefaults[EDGE]);
         }
 
-        // This loop fixes
         // TODO loop over values en niet over keys
         for (let key in EDGE_KEYS) {
             // TODO: mss beter way dan die if
@@ -495,15 +585,20 @@ export function parseEdges(globalDefaults, edges, nodes) {
             edge[EDGE_KEYS.MARKER_START.id]["width"] = edge[EDGE_KEYS.MARKER_START.id]["size"];
         }
 
-        // the key animated is something that is supported by the library, but it is overwritten by the standard value of strokeDasharray
-        // If the user sets animated to true, but sets no strokDasharray, the edge should still be animated
-        if (edge.hasOwnProperty("animated") && edge["animated"] === true && edge["style"]["strokeDasharray"] === EDGE_KEYS.STROKE_DASHARRAY.value) {
-            edge["style"]["strokeDasharray"] = "5";
+        // If the value of animation is 'default', use a fallback value for animation (and maybe for strokeDashArray if it does not have one)
+
+        if (animationFallBacks.hasOwnProperty(edge["style"]["animation"])) {
+            edge["style"]["animation"] = animationFallBacks[edge["style"]["animation"]];
+            if (edge["style"]["strokeDasharray"] === EDGE_KEYS.STROKE_DASHARRAY.value) {
+                edge["style"]["strokeDasharray"] = strokeDashArrayFallBacks.dashed;
+            }
         }
 
+        if (strokeDashArrayFallBacks.hasOwnProperty(edge["style"]["strokeDasharray"])) {
+            edge["style"]["strokeDasharray"] = strokeDashArrayFallBacks[edge["style"]["strokeDasharray"]];
+        }
 
         // If the edge has no zIndex and connects 2 nodes that are in the same parent, set the zIndex of the edge to 1
-        // TODO: dit is wrs niet meer nodig als standaard value op 1 staat
         if (!edge.hasOwnProperty("zIndex")) {
             const [srcNode, targetNode] = getSourceNode_targetNode_fromId(edge, nodes);
             if (
@@ -523,16 +618,16 @@ export function parseEdges(globalDefaults, edges, nodes) {
     return edges;
 }
 
-export function getSourceNodeFromId(edge, nodes) {
-    return nodes.find(n => n.id === edge["source"]);
-}
-
-export function getTargetNodeFromId(edge, nodes) {
-    return nodes.find(n => n.id === edge["target"]);
+export function getNodeFromEdgeId(edgeId, nodes) {
+    const n = nodes.find(n => n.id === edgeId);
+    if (!n) {
+        throw new Error(`No node with ID ${edgeId} found!`)
+    }
+    return n;
 }
 
 export function getSourceNode_targetNode_fromId(edge, nodes) {
-    return [getSourceNodeFromId(edge, nodes), getTargetNodeFromId(edge, nodes)];
+    return [getNodeFromEdgeId(edge[KEY_VALUES.edge.SOURCE.id], nodes), getNodeFromEdgeId(edge[KEY_VALUES.edge.TARGET.id], nodes)];
 }
 
 

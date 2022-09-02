@@ -20,7 +20,8 @@ const EditorArea = ({
                         setNodesData,
                         edgesData,
                         setEdgesData,
-                        convertButtonEnabled
+                        convertButtonEnabled,
+                        undoRedoModel
                     }) => {
 
 
@@ -78,10 +79,20 @@ const EditorArea = ({
             return;
         }
 
-        // TODO: ookal is syntaxisch alles juist, ook nog eens checken op de semantische correctheid
-        //  bv als naar een id verwezen wordt, bestaat die ID wel
+        let savedGlobalDefaults;
+        let savedNodes;
+        let savedEdges
 
+        try {
+            savedGlobalDefaults = JSON.parse(language === "yaml" ? yaml2json(globalDefaults) : globalDefaults);
+            savedNodes = JSON.parse(language === "yaml" ? yaml2json(nodesData) : nodesData);
+            savedEdges = JSON.parse(language === "yaml" ? yaml2json(edgesData) : edgesData);
+        } catch (e) {
+            console.warn(e)
+            return;
+        }
 
+        undoRedoModel.addConfigs(savedGlobalDefaults, savedNodes, savedEdges);
         setFlowData(parsedGd, parsedNd, parsedEd, setNodes, setEdges);
 
     }

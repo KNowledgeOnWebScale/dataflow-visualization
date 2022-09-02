@@ -1,21 +1,3 @@
-/*.code-editor {
-    width: 97%;
-    margin: auto;
-    height: 100%;
-    position: relative;
-}
-
-.node-edge-editor {
-    width: 95%;
-    height: 100%;
-    margin: auto auto 5px 5px;
-}
-
-.resizable {
-    resize: vertical;
-    overflow-y: hidden;
-    *border: 1px solid black;
-}*/
 
 table td, table td * {
     vertical-align: top;
@@ -38,6 +20,7 @@ table td, table td * {
     resize: vertical;
     overflow-y: hidden;
 }
+
 .editor-div {
     width: 100%;
     height: 350px;

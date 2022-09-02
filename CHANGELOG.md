@@ -1,12 +1,45 @@
 # Changelog
 
-Dates are DD-MM-YYYY
+All notable changes to this project will be documented in this file.
 
-## [0.1.0] - 04-08-2022
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-First ever release. You can make flows from JSON or YAML.
+## Unreleased
 
-## [1.0.0] - 12-08-2022
+/
+
+## [1.1.0] - 2022-09-02
+
+### Added
+
+- Details custom React component
+- Support to embed a link to an online JSON file in a permalink.
+- Input field to enter a permalink
+- You can set spacing for autoLayout, hgroup and vgroups.
+- The shape of a node can be anything defined in [react-icons](https://react-icons.github.io/react-icons).
+- Added FAQ section to README
+- You can make 'simulations' (= flow in multiple steps)
+- Navigation bar, so you can quickly navigate a large network of nodes.
+- You can use an ellipse as shape for a node.
+- You can refer to multiple presets.
+- Make fontsize smaller of title and label, if it does not fit its node.
+- Undo/redo buttons
+
+### Changed
+
+- Controls and MiniMaps everywhere
+- updates schemas and docs via test script
+- Clicking on the button to get the permalink, will always return the link where the custom data is encoded. Never a
+  link with raw data.
+
+### Fixed
+
+- Changelog formatting
+- Auto layout with horizontal layout was broken.
+- Some shapes showed unexpected behaviour when height and width were not the same.
+
+## [1.0.0] - 2022-08-12
 
 ### Added
 
@@ -45,17 +78,12 @@ First ever release. You can make flows from JSON or YAML.
 
 - Issue #40: If you changed the color of an edge, all the markers with no color specified, changed to that color.
 - Issue #69: Title and label in a node that was no parent, did not work.
+- Kept [README.md] en [DEVELOPMENT.md] up to date with all the new changes and additions.
 
-Kept [README] en [DEVELOPMENT] up to date with all the new changes and additions.
+## [0.1.0] - 2022-08-04
 
-## Unreleased
-
-* /
+First ever release. You can make flows from JSON or YAML.
 
 [DEVELOPMENT.md]: DEVELOPMENT.md
 
-[DEVELOPMENT]: DEVELOPMENT.md
-
 [README.md]: README.md
-
-[README]: README.md

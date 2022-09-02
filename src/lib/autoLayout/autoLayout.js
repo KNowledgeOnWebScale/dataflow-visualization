@@ -1,6 +1,16 @@
-import {EDGE, getSourceNodeFromId, getTargetNodeFromId, GRAPH, KEY_VALUES, NODE} from "../configParsing";
+import {EDGE, getNodeFromEdgeId, GRAPH, KEY_VALUES, NODE} from "../configParsing";
 import dagre from "dagre";
 import {fix_sourceHandle_targetHandle, fixNodeGroups} from "./layoutUtils";
+
+function reverseDirection(direction) {
+    if (direction === KEY_VALUES.edge.SOURCE.id) {
+        return KEY_VALUES.edge.TARGET.id;
+    }
+    if (direction === KEY_VALUES.edge.TARGET.id) {
+        return KEY_VALUES.edge.SOURCE.id;
+    }
+    return null;
+}
 
 /*
 Algorithm if groups are used in combination with autoLayout:
@@ -9,7 +19,7 @@ Algorithm if groups are used in combination with autoLayout:
     * If a node is inside vgroup/hgroup, take all the nodes from that group apart and add a temporary node the size of the entire group.
     * Remove the nodes you took apart.
     * Remove all the edges that have a node from a group as source or target.
-    * (Store all of that in a object)
+    * (Store all of that in an object)
 * Step 2:
     * Build with dagre.
 
@@ -80,7 +90,7 @@ export function autoLayout(dagreGraph, globalDefaults, nodes, edges) {
     // Remove the temporary nodes and edges and add the old one again
     removeTemporaryNodesAndEdgesAndAddTheOldOnesAgain(groups, nodes1, edges1)
 
-    fixNodeGroups(nodes1)
+    fixNodeGroups(globalDefaults, nodes1)
 
     // Finally, fix the source and target handles
     for (let edge of edges1) {
@@ -110,13 +120,14 @@ function groupNodes(groups, nodesCopy, edgesCopy) {
                     "nodes": [], "edges": [], "addedEdges": []
                 }
             }
+
             groups.vgroups[node[vgroupId]].nodes.push(JSON.parse(JSON.stringify(node)));
 
             // All edges with node as source:
-            fixEdges(node, "source", edgesCopy, nodesCopy, groups, "vgroups", vgroupId, getTargetNodeFromId)
+            fixEdges(node, KEY_VALUES.edge.SOURCE.id, edgesCopy, nodesCopy, groups, "vgroups", vgroupId)
 
             // All edges with node as target:
-            fixEdges(node, "target", edgesCopy, nodesCopy, groups, "vgroups", vgroupId, getSourceNodeFromId)
+            fixEdges(node, KEY_VALUES.edge.TARGET.id, edgesCopy, nodesCopy, groups, "vgroups", vgroupId)
 
 
             nodesCopy.splice(i, 1)
@@ -130,11 +141,11 @@ function groupNodes(groups, nodesCopy, edgesCopy) {
 
 
             // All edges with node as source:
-            fixEdges(node, "source", edgesCopy, nodesCopy, groups, "hgroups", hgroupId, getTargetNodeFromId)
+            fixEdges(node, KEY_VALUES.edge.SOURCE.id, edgesCopy, nodesCopy, groups, "hgroups", hgroupId)
 
 
             // All edges with node as target:
-            fixEdges(node, "target", edgesCopy, nodesCopy, groups, "hgroups", hgroupId, getSourceNodeFromId)
+            fixEdges(node, KEY_VALUES.edge.TARGET.id, edgesCopy, nodesCopy, groups, "hgroups", hgroupId)
 
             nodesCopy.splice(i, 1)
         }
@@ -144,15 +155,23 @@ function groupNodes(groups, nodesCopy, edgesCopy) {
 
 }
 
-
-// Remove edge if it has a node from a group as source or target, and  maybe add a new edge where the temporary big node is the source or target
-function fixEdges(node, key, edgess, nodess, groups, groupType, groupId, getNode) {
-    const edgesWithNodeAsKey = findAllWithIdAsKey(node.id, key, edgess); // key is source of target
+/**
+ * Remove edge if it has a node from a group as source or target, and  maybe add a new edge where the temporary big node is the source or target
+ * @param {*} node
+ * @param {*} direction 'source' or 'target'
+ * @param {*} edgess
+ * @param {*} nodess
+ * @param {*} groups
+ * @param {*} groupType
+ * @param {*} groupId
+ */
+function fixEdges(node, direction, edgess, nodess, groups, groupType, groupId) {
+    const edgesWithNodeAsKey = findAllWithIdAsKey(node.id, direction, edgess); // key is source of target
 
     for (let edge of edgesWithNodeAsKey) {
 
 
-        let otherNode = getNode(edge, nodess); // TODO: findAllWithIdAsKey
+        let otherNode = getNodeFromEdgeId(edge[reverseDirection(direction)], nodess); // TODO: findAllWithIdAsKey
 
         if (otherNode[groupId] && otherNode[groupId] === node[groupId]) {
             //groups[groupType][node[groupId]].edges.push(JSON.parse(JSON.stringify(edge)));
@@ -164,7 +183,7 @@ function fixEdges(node, key, edgess, nodess, groups, groupType, groupId, getNode
 
             //groups[groupType][node[groupId]].edges.push(JSON.parse(JSON.stringify(edge)));
 
-            temporaryEdge[key] = node[groupId];
+            temporaryEdge[direction] = node[groupId];
 
             groups[groupType][node[groupId]].addedEdges.push(temporaryEdge);
         }
@@ -184,12 +203,17 @@ function getLayoutedElementsDagre(dagreGraph, globalDefaults, nodes, edges) {
     const widthId = KEY_VALUES[NODE].WIDTH.id;
     const heightId = KEY_VALUES[NODE].HEIGHT.id;
 
-    dagreGraph.setGraph({rankdir: globalDefaults[GRAPH][KEY_VALUES[GRAPH].ORIENTATION.id] === "horizontal" ? "LR" : "TB"});
+    let isHorizontal = globalDefaults[GRAPH][KEY_VALUES[GRAPH].ORIENTATION.id] === "horizontal";
+    const spacing = globalDefaults[GRAPH][KEY_VALUES[GRAPH].SPACING.id];
+
+    dagreGraph.setGraph({rankdir: isHorizontal ? "LR" : "TB"});
 
     nodes.forEach((node) => {
+        let w = node[widthId] || node["data"][widthId];
+        let h = node[heightId] || node["data"][heightId];
         dagreGraph.setNode(node.id, {
-            width: node[widthId] || globalDefaults[NODE][widthId],
-            height: node[heightId] || globalDefaults[NODE][heightId]
+            width: isHorizontal ? w * spacing : w,
+            height: isHorizontal ? h : h * spacing
         });
     });
 
@@ -197,7 +221,7 @@ function getLayoutedElementsDagre(dagreGraph, globalDefaults, nodes, edges) {
         dagreGraph.setEdge(edge[KEY_VALUES[EDGE].SOURCE.id], edge[KEY_VALUES[EDGE].TARGET.id]);
     });
 
-    dagre.layout(dagreGraph);
+    dagre.layout(dagreGraph, {});
 
     nodes.forEach((node) => {
         const nodeWithPosition = dagreGraph.node(node[KEY_VALUES[NODE].ID.id]);

@@ -1,7 +1,13 @@
 import Editor from "@monaco-editor/react";
 import {useState} from "react";
 
-const CodeEditor = ({language, data, setData, modelName, schema, updateCB}) => {
+const CodeEditor = ({
+                        language,
+                        data,
+                        setData,
+                        modelName,
+                        schema
+                    }) => {
 
     const [editorInstance, setEditorInstance] = useState(null);
     const [monacoInstance, setMonacoInstance] = useState(null);
@@ -59,10 +65,7 @@ const CodeEditor = ({language, data, setData, modelName, schema, updateCB}) => {
                 onMount={editorDidMountNodes}
                 language={language}
                 value={data}
-                onChange={content => {
-                    setData(content);
-                    updateCB()
-                }}
+                onChange={setData}
                 theme="vs-dark"
                 style={{
                     width: "100%",

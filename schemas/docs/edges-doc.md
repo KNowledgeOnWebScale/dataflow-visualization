@@ -11,15 +11,14 @@ Type: `array`
  - Type: `object`
  - <i id="edgeSchema/items">path: #edgeSchema/items</i>
  - **_Properties_**
-	 - <b id="#edgeSchema/items/properties/animated">animated</b>
-		 - _Set a default animation for the edge. See also [Animations](https://github.com/KNowledgeOnWebScale/dataflow-visualization/tree/main#animations)._
-		 - Type: `boolean`
-		 - <i id="edgeSchema/items/properties/animated">path: #edgeSchema/items/properties/animated</i>
-		 - Default: _false_
 	 - <b id="#edgeSchema/items/properties/animation">animation</b>
-		 - _See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/animation) for more information about animation._
+		 - _See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/animation) for more information about animation. An example is e.g. `dashdraw .2s linear infinite` (has to start with 'dashdraw'). Note that you can just the value to `default`. The animation will then fall back to `dashdraw .45s linear infinite`. If the value is `reverse`, the fall back value will be `dashdraw .45s linear infinite reverse`. The strokeDashArray (if none is specified) will fall back to `6 4`. When set to `none`, no animation will be shown._
 		 - Type: `string`
 		 - <i id="edgeSchema/items/properties/animation">path: #edgeSchema/items/properties/animation</i>
+		 - Example values: 
+			 1. _"default"_
+			 2. _"reverse"_
+			 3. _"none"_
 	 - <b id="#edgeSchema/items/properties/color">color</b>
 		 - _The color of the edge._
 		 - Type: `string`
@@ -30,8 +29,8 @@ Type: `array`
 		 - Type: `string`
 		 - <i id="edgeSchema/items/properties/label">path: #edgeSchema/items/properties/label</i>
 	 - <b id="#edgeSchema/items/properties/preset">preset</b>
-		 - _Refer to a preset defined in the config of the global defaults. If you use this, you will overwrite all that is defined in this edge with the values of the preset._
-		 - Type: `string`
+		 - _Refer to a preset defined in the config of the global defaults. If you haven't used a key in your config (but that key is used in your preset), the key from the preset is taken as a key in your individual config. You can refer to multiple presets: the first preset has priority on the second, the second on the third, ... In general, the priority of the keys is: local > first preset > second preset > ... > keys in global default._
+		 - Types: `array`, `string`
 		 - <i id="edgeSchema/items/properties/preset">path: #edgeSchema/items/properties/preset</i>
 	 - <b id="#edgeSchema/items/properties/thickness">thickness</b>
 		 - _The thickness of the edge._
@@ -39,10 +38,16 @@ Type: `array`
 		 - <i id="edgeSchema/items/properties/thickness">path: #edgeSchema/items/properties/thickness</i>
 		 - Default: `1.2`
 	 - <b id="#edgeSchema/items/properties/strokeDasharray">strokeDasharray</b>
-		 - _The pattern of dashes of the edges. See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray#example) for more information._
+		 - _The pattern of dashes of the edges. See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray#example) for more information. The default value `solid` will fall back to the CSS value `0`, `dashed` to `6 4, `dotted` to `1 3`, `varied` to `5 2 1 2` and dashed-wide-gaps will fall back to `4 8`._
 		 - Types: `number`, `string`
 		 - <i id="edgeSchema/items/properties/strokeDasharray">path: #edgeSchema/items/properties/strokeDasharray</i>
-		 - Default: `0`
+		 - Example values: 
+			 1. _"solid"_
+			 2. _"dashed"_
+			 3. _"dotted"_
+			 4. _"varied"_
+			 5. _"dashed-wide-gaps"_
+		 - Default: _"solid"_
 	 - <b id="#edgeSchema/items/properties/source">source</b> `required`
 		 - _ID of the source node._
 		 - Type: `string`

@@ -1,5 +1,8 @@
 name: GitHub Pages CI
-on: push
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   build-test-deploy:
@@ -11,8 +14,9 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: "18.x"
-      - run: npm ci
+      - run: npm ci --legacy-peer-deps
       - run: npm run build
+      - run: npm test
       - name: Deploy
         uses: crazy-max/ghaction-github-pages@v1
         with:

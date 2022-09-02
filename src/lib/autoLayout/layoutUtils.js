@@ -1,9 +1,11 @@
 import {getSourceNode_targetNode_fromId, GRAPH, KEY_VALUES, NODE} from "../configParsing";
 
 
-export function fixVgroups(allNodes, vgroupId) {
+export function fixVgroups(globalDefaults, allNodes, vgroupId) {
     // search all nodes within that vgroup
     let nodes = allNodes.filter(n => n.vgroup === vgroupId);
+
+    const spacing = globalDefaults[GRAPH][KEY_VALUES[GRAPH].SPACING.id]
 
     // Look for reference position
     let pos = {x: 0, y: 0};
@@ -31,8 +33,8 @@ export function fixVgroups(allNodes, vgroupId) {
     // TODO mss als de orientatie horizontaal is, beetje dichter en als de orientatie verticaal is, wat verder
     //  mss gwn algemeen een manier vinden om de spacing te definiëren
 
-    let deltaY = maxHeight / 2;
-    let previousY = pos.y;
+    let deltaY = (maxHeight / 2) * spacing;
+    let previousY = nodes[i].position.y;
     let previousHeight = referenceNode.data.height;
     let previousWidth = referenceNode.data.width;
 
@@ -47,10 +49,11 @@ export function fixVgroups(allNodes, vgroupId) {
 }
 
 
-export function fixHgroups(allNodes, hgroupId) {
+export function fixHgroups(globalDefaults, allNodes, hgroupId) {
     // search all nodes within that vgroup
     let nodes = allNodes.filter(n => n.hgroup === hgroupId);
 
+    const spacing = globalDefaults[GRAPH][KEY_VALUES[GRAPH].SPACING.id]
 
     // Look for reference position
     let pos = {x: 0, y: 0};
@@ -76,8 +79,8 @@ export function fixHgroups(allNodes, hgroupId) {
 
     let referenceNode = nodes.slice(i, 1)[0];
 
-    let deltaX = maxWidth / 2;  //TODO: beter manier vinden om spacing te doen, misschien door in global defaults een nieuwe key te introduceren
-    let previousX = pos.x;
+    let deltaX = (maxWidth / 2) * spacing;
+    let previousX = nodes[i].position.x;
     let previousHeight = referenceNode.data.height;
     let previousWidth = referenceNode.data.width;
 
@@ -93,7 +96,7 @@ export function fixHgroups(allNodes, hgroupId) {
 }
 
 
-export function fixNodeGroups(nodes) {
+export function fixNodeGroups(globalDefaults, nodes) {
 
     const vgroupID = KEY_VALUES[NODE].VGROUP.id;
     const hgroupId = KEY_VALUES[NODE].HGROUP.id;
@@ -114,9 +117,9 @@ export function fixNodeGroups(nodes) {
 
     for (let g of groups) {
         if (g[0] === vgroupID) {
-            fixVgroups(nodes, g[1]);
+            fixVgroups(globalDefaults, nodes, g[1]);
         } else {
-            fixHgroups(nodes, g[1])
+            fixHgroups(globalDefaults, nodes, g[1])
         }
     }
 

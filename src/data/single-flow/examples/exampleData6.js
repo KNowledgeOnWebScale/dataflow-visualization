@@ -160,7 +160,15 @@ export const nodesJSON = [
         position: {x: 360, y: 60}
     },
 
-    {id: "sparql", shape: "rectangle", height: 60, label: "SPARQL\nqueries to\nComunica", position: {x: 550, y: 260}}
+    {
+        id: "sparql",
+        shape: "rectangle",
+        strokeDasharray: "dotted",
+        strokeWidth: 7,
+        height: 60,
+        label: "SPARQL\nqueries to\nComunica",
+        position: {x: 550, y: 260}
+    }
 ];
 
 

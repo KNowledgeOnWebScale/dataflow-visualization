@@ -30,6 +30,11 @@ Type: `object`
 				 1. _"vertical"_
 				 2. _"horizontal"_
 			 - Default: _"horizontal"_
+		 - <b id="#globalDefaultsGraph/properties/spacing">spacing</b>
+			 - _Set the spacing between nodes when autolayout, vgroups or hgroups are used.The default spacing for groups is the width/2 for hgroups or the height/2 for vgroups devided by 2. If you want that larger or smaller, you can set this key to any number. The spacing will be the default times the factor.When 'autolayout' is used, spacing has only effect on the vertical distance between nodes, when the orientation is set to 'vertical'. Vice versa for 'horizontal'._
+			 - Type: `number`
+			 - <i id="globalDefaultsGraph/properties/spacing">path: #globalDefaultsGraph/properties/spacing</i>
+			 - Default: `1`
  - <b id="#globalDefaultSchema/properties/node">node</b>
 	 - ### node
 	 - _node in global defaults_
@@ -62,7 +67,7 @@ Type: `object`
 			 - Type: `string`
 			 - <i id="globalDefaultsNode/properties/image">path: #globalDefaultsNode/properties/image</i>
 		 - <b id="#globalDefaultsNode/properties/label">label</b>
-			 - _The text inside a node._
+			 - _The text inside a node. If you want a newline in your text, you should manually put '\n' in your string. If the label does not fit the node in which it appears, `fontsize` will be made smaller so label fits its node (the minimum value to which `fontsize` will be reduced, is the defined `fontsize` divided by two)._
 			 - Type: `string`
 			 - <i id="globalDefaultsNode/properties/label">path: #globalDefaultsNode/properties/label</i>
 		 - <b id="#globalDefaultsNode/properties/shape">shape</b>
@@ -70,38 +75,51 @@ Type: `object`
 			 - Type: `string`
 			 - <i id="globalDefaultsNode/properties/shape">path: #globalDefaultsNode/properties/shape</i>
 			 - The value is restricted to the following: 
-				 1. _"8-star"_
-				 2. _"big-star"_
-				 3. _"circle"_
-				 4. _"cylinder"_
-				 5. _"diamond"_
-				 6. _"hexagon"_
-				 7. _"note"_
-				 8. _"rectangle"_
-				 9. _"square"_
-				 10. _"star"_
-				 11. _"triangle"_
-				 12. _"comunica"_
-				 13. _"rmlio"_
-				 14. _"solid"_
+				 1. _"icon"_
+				 2. _"8-star"_
+				 3. _"big-star"_
+				 4. _"circle"_
+				 5. _"cylinder"_
+				 6. _"diamond"_
+				 7. _"ellipse"_
+				 8. _"hexagon"_
+				 9. _"note"_
+				 10. _"rectangle"_
+				 11. _"square"_
+				 12. _"star"_
+				 13. _"triangle"_
+				 14. _"comunica"_
+				 15. _"rmlio"_
+				 16. _"solid"_
+				 17. _"Details"_
 			 - Default: _"square"_
+		 - <b id="#globalDefaultsNode/properties/iconName">iconName</b>
+			 - _When 'shape' is set to 'icon', you can set 'iconName' to anything you find in [react-icons](https://react-icons.github.io/react-icons/). Since this is a third-party library, not all styling will work. Only `fill`, `strokeWidth`, `width` and `height` will have effect._
+			 - Type: `string`
+			 - <i id="globalDefaultsNode/properties/iconName">path: #globalDefaultsNode/properties/iconName</i>
 		 - <b id="#globalDefaultsNode/properties/stroke">stroke</b>
 			 - _The color of the stroke of the node._
 			 - Type: `string`
 			 - <i id="globalDefaultsNode/properties/stroke">path: #globalDefaultsNode/properties/stroke</i>
 			 - Default: _"black"_
 		 - <b id="#globalDefaultsNode/properties/strokeDasharray">strokeDasharray</b>
-			 - _The dash pattern of the node._
+			 - _The dash pattern of the node. See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray#example) for more information. The default value `solid` will fall back to the CSS value `0`, `dashed` to `6 4, `dotted` to `1 3`, `varied` to `5 2 1 2` and dashed-wide-gaps will fall back to `4 8`._
 			 - Types: `number`, `string`
 			 - <i id="globalDefaultsNode/properties/strokeDasharray">path: #globalDefaultsNode/properties/strokeDasharray</i>
-			 - Default: `0`
+			 - Example values: 
+				 1. _"solid"_
+				 2. _"dashed"_
+				 3. _"dotted"_
+				 4. _"varied"_
+				 5. _"dashed-wide-gaps"_
+			 - Default: _"solid"_
 		 - <b id="#globalDefaultsNode/properties/strokeWidth">strokeWidth</b>
 			 - _The thickness of the stroke of the nodes._
 			 - Type: `number`
 			 - <i id="globalDefaultsNode/properties/strokeWidth">path: #globalDefaultsNode/properties/strokeWidth</i>
 			 - Default: `1`
 		 - <b id="#globalDefaultsNode/properties/title">title</b>
-			 - _The title of a node. E.g. useful to name a parentNode. Notice that this is not the same as an ID. If you give a node a title, that title will show up not in the middle of the node, but at the top._
+			 - _The title of a node. E.g. useful to name a parentNode. Notice that this is not the same as an ID. If you give a node a title, that title will show up not in the middle of the node, but at the top. If the title does not fit the node in which it appears, `fontsize` will be made smaller to fit the node (the minimum value to which `fontsize` will be reduced, is the defined `fontsize` divided by two)._
 			 - Type: `string`
 			 - <i id="globalDefaultsNode/properties/title">path: #globalDefaultsNode/properties/title</i>
 		 - <b id="#globalDefaultsNode/properties/topText">topText</b>
@@ -134,15 +152,14 @@ Type: `object`
 	 - <i id="globalDefaultsEdge">path: #globalDefaultsEdge</i>
 	 - <b id="globaldefaultsedge">&#36;id: globalDefaultsEdge</b>
 	 - **_Properties_**
-		 - <b id="#globalDefaultsEdge/properties/animated">animated</b>
-			 - _Set a default animation for the edge. See also [Animations](https://github.com/KNowledgeOnWebScale/dataflow-visualization/tree/main#animations)._
-			 - Type: `boolean`
-			 - <i id="globalDefaultsEdge/properties/animated">path: #globalDefaultsEdge/properties/animated</i>
-			 - Default: _false_
 		 - <b id="#globalDefaultsEdge/properties/animation">animation</b>
-			 - _See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/animation) for more information about animation._
+			 - _See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/animation) for more information about animation. An example is e.g. `dashdraw .2s linear infinite` (has to start with 'dashdraw'). Note that you can just the value to `default`. The animation will then fall back to `dashdraw .45s linear infinite`. If the value is `reverse`, the fall back value will be `dashdraw .45s linear infinite reverse`. The strokeDashArray (if none is specified) will fall back to `6 4`. When set to `none`, no animation will be shown._
 			 - Type: `string`
 			 - <i id="globalDefaultsEdge/properties/animation">path: #globalDefaultsEdge/properties/animation</i>
+			 - Example values: 
+				 1. _"default"_
+				 2. _"reverse"_
+				 3. _"none"_
 		 - <b id="#globalDefaultsEdge/properties/color">color</b>
 			 - _The color of the edge._
 			 - Type: `string`
@@ -158,10 +175,16 @@ Type: `object`
 			 - <i id="globalDefaultsEdge/properties/thickness">path: #globalDefaultsEdge/properties/thickness</i>
 			 - Default: `1.2`
 		 - <b id="#globalDefaultsEdge/properties/strokeDasharray">strokeDasharray</b>
-			 - _The pattern of dashes of the edges. See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray#example) for more information._
+			 - _The pattern of dashes of the edges. See [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray#example) for more information. The default value `solid` will fall back to the CSS value `0`, `dashed` to `6 4, `dotted` to `1 3`, `varied` to `5 2 1 2` and dashed-wide-gaps will fall back to `4 8`._
 			 - Types: `number`, `string`
 			 - <i id="globalDefaultsEdge/properties/strokeDasharray">path: #globalDefaultsEdge/properties/strokeDasharray</i>
-			 - Default: `0`
+			 - Example values: 
+				 1. _"solid"_
+				 2. _"dashed"_
+				 3. _"dotted"_
+				 4. _"varied"_
+				 5. _"dashed-wide-gaps"_
+			 - Default: _"solid"_
 		 - <b id="#globalDefaultsEdge/properties/source">source</b>
 			 - _ID of the source node._
 			 - Type: `string`
