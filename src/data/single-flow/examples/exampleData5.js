@@ -83,18 +83,54 @@ export const nodesJSON = [
 ];
 
 export const edgesJSON = [
-    {source: 'comunica', target: 'RDF-1'},
-    {source: 'comunica', target: 'RDF-2'},
-    {source: 'comunica', target: 'RDF-3'},
-    {source: 'comunica', target: 'RDF-4', type: "step", sourceHandle: "right", markerEnd: {type: "arrowclosed"}},
+    {
+        source: 'comunica', target: 'RDF-1'
+    },
+    {
+        source: 'comunica', target: 'RDF-2'
+    },
+    {
+        source: 'comunica', target: 'RDF-3'
+    },
+    {
+        source: 'comunica',
+        target: 'RDF-4',
+        type: "step",
+        sourceHandle: "right",
+        markerEnd: {type: "arrowclosed", size: 20}
+    },
 
-    {source: 'RDF-1', target: 'rmlio', zIndex: 1},
-    {source: 'RDF-2', target: 'rmlio', zIndex: 1},
-    {source: 'RDF-3', target: 'rmlio', zIndex: 1},
+    {
+        source: 'RDF-1',
+        target: 'rmlio',
+        zIndex: 1
+    },
+    {
+        source: 'RDF-2',
+        target: 'rmlio',
+        zIndex: 1
+    },
+    {
+        source: 'RDF-3',
+        target: 'rmlio',
+        zIndex: 1
+    },
 
-    {source: 'flickr', target: 'rmlio', animation: "none"},
-    {source: 'imgur', target: 'rmlio', animation: "none"},
-    {source: 'google', target: 'rmlio', animation: "none"},
+    {
+        source: 'flickr',
+        target: 'rmlio',
+        animation: "none"
+    },
+    {
+        source: 'imgur',
+        target: 'rmlio',
+        animation: "none"
+    },
+    {
+        source: 'google',
+        target: 'rmlio',
+        animation: "none"
+    },
 
 
 ];

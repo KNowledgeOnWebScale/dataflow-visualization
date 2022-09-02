@@ -4,24 +4,51 @@ export const globalDefaultsJSON = {
         shape: "cylinder"
     },
     "edge": {
-        type: "straight",
-        animated: true,
-        markerEnd: {type: "arrowclosed"},
-        strokeDasharray: "varied",
+        presets: {
+            "comunica-to-rdf": {
+                type: "straight",
+                animated: true,
+                markerEnd: {type: "arrowclosed"},
+                strokeDasharray: "varied",
+            }
+        }
     }
 
 };
 
 export const nodesJSON = [
-    {label: 'RDF', vgroup: "group1"},
-    {label: "RDF'", vgroup: "group1"},
-    {label: "RDF''", vgroup: "group1"},
-    {label: "RDF'''", vgroup: "group1"},
-    {label: "RDF''''", vgroup: "group1"},
+    {
+        label: 'RDF',
+        vgroup: "group1"
+    },
+    {
+        label: "RDF'",
+        vgroup: "group1"
+    },
+    {
+        label: "RDF''",
+        vgroup: "group1"
+    },
+    {
+        label: "RDF'''",
+        vgroup: "group1"
+    },
+    {
+        label: "RDF''''",
+        vgroup: "group1"
+    },
 
 
-    {shape: "comunica", position: {x: 600, y: 90}, vgroup: "group2"},
-    {label: "SPARQL", shape: "note", vgroup: "group2"},
+    {
+        shape: "comunica",
+        position: {x: 600, y: 90},
+        vgroup: "group2"
+    },
+    {
+        label: "SPARQL",
+        shape: "note",
+        vgroup: "group2"
+    },
 
 
     {
@@ -39,22 +66,27 @@ export const edgesJSON = [
     {
         target: 'RDF',
         source: 'comunica',
+        preset: "comunica-to-rdf"
     },
     {
         target: "RDF'",
         source: 'comunica',
+        preset: "comunica-to-rdf"
     },
     {
         target: "RDF''",
         source: 'comunica',
+        preset: "comunica-to-rdf"
     },
     {
         target: "RDF'''",
         source: 'comunica',
+        preset: "comunica-to-rdf"
     },
     {
         target: "RDF''''",
         source: 'comunica',
+        preset: "comunica-to-rdf"
     },
     {
         source: "comunica",
